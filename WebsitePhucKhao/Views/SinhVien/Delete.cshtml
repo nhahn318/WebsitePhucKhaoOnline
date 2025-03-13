@@ -1,0 +1,11 @@
+﻿@model WebsitePhucKhao.Models.SinhVien
+
+<h2>Xác nhận xóa sinh viên</h2>
+
+<p>Bạn có chắc chắn muốn xóa sinh viên <strong>@Model.HoTen</strong> không?</p>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaSinhVien"  method="post">
+    <input type="hidden" asp-for="MaSinhVien" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

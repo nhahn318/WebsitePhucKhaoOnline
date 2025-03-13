@@ -1,0 +1,16 @@
+﻿@model WebsitePhucKhao.Models.ChuyenNganh
+
+@{
+    ViewData["Title"] = "Xác nhận xóa Chuyên Ngành";
+}
+
+<h2>Xác nhận xóa Chuyên Ngành</h2>
+
+<p>Bạn có chắc chắn muốn xóa Chuyên Ngành <strong>@Model.TenChuyenNganh</strong> không?</p>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaChuyenNganh" method="post">
+    <input type="hidden" asp-for="MaChuyenNganh" />
+
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

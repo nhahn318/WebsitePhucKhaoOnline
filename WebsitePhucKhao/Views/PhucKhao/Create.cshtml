@@ -1,0 +1,121 @@
+﻿@model WebsitePhucKhao.ViewModels.YeuCauPhucKhaoViewModel
+
+@{
+    ViewData["Title"] = "Yêu cầu phúc khảo bài thi";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label asp-for="MaSinhVien"></label>
+                <input asp-for="MaSinhVien" class="form-control" />
+                <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HoTen"></label>
+                <input asp-for="HoTen" class="form-control" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SoDienThoai"></label>
+                <input asp-for="SoDienThoai" class="form-control" />
+                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lop"></label>
+                <input asp-for="Lop" class="form-control" />
+                <span asp-validation-for="Lop" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MonHoc"></label>
+                <input asp-for="MonHoc" class="form-control" />
+                <span asp-validation-for="MonHoc" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiemHienTai"></label>
+                <input asp-for="DiemHienTai" class="form-control" step="0.01" />
+                <span asp-validation-for="DiemHienTai" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiemMongMuon"></label>
+                <input asp-for="DiemMongMuon" class="form-control" step="0.01" />
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label asp-for="HocKy"></label>
+                <input asp-for="HocKy" class="form-control" />
+                <span asp-validation-for="HocKy" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NamHoc"></label>
+                <input asp-for="NamHoc" class="form-control" placeholder="Ví dụ: 2024-2025" />
+                <span asp-validation-for="NamHoc" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NgayThi"></label>
+                <input asp-for="NgayThi" type="date" class="form-control" />
+                <span asp-validation-for="NgayThi" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CaThi"></label>
+                <input asp-for="CaThi" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NhomLop"></label>
+                <input asp-for="NhomLop" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiaDiemThi"></label>
+                <input asp-for="DiaDiemThi" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhongThi"></label>
+                <input asp-for="PhongThi" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="GiangVien"></label>
+                <input asp-for="GiangVien" class="form-control" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LyDo"></label>
+        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="LyDo" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gửi yêu cầu phúc khảo</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

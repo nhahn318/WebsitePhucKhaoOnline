@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.ChuyenNganh>
+
+<h2>Danh sách Chuyên Ngành</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Chuyên Ngành</th>
+            <th>Tên Chuyên Ngành</th>
+            <th>Khoa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var chuyenNganh in Model)
+        {
+            <tr>
+                <td>@chuyenNganh.MaChuyenNganh</td>
+                <td>@chuyenNganh.TenChuyenNganh</td>
+                <td>@chuyenNganh.Khoa.TenKhoa</td> <!-- Hiển thị tên Khoa -->
+                <td>
+                    <a asp-action="Details" asp-route-id="@chuyenNganh.MaChuyenNganh">Xem</a> |
+                    <a asp-action="Update" asp-route-id="@chuyenNganh.MaChuyenNganh">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@chuyenNganh.MaChuyenNganh">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Thêm Chuyên Ngành mới</a>

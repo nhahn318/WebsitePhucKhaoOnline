@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.Khoa>
+
+<h2>Danh sách Khoa</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Khoa</th>
+            <th>Tên Khoa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var khoa in Model)
+        {
+            <tr>
+                <td>@khoa.MaKhoa</td>
+                <td>@khoa.TenKhoa</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@khoa.MaKhoa">Xem</a> |
+                    <a asp-action="Update" asp-route-id="@khoa.MaKhoa">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@khoa.MaKhoa">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Thêm Khoa mới</a>

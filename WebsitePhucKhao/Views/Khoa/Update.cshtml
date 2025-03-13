@@ -1,0 +1,20 @@
+﻿@model WebsitePhucKhao.Models.Khoa
+
+@{
+    ViewData["Title"] = "Cập nhật Khoa";
+}
+
+<h2>Cập nhật thông tin Khoa</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="MaKhoa" />
+
+    <div class="form-group">
+        <label asp-for="TenKhoa"></label>
+        <input asp-for="TenKhoa" class="form-control" required />
+        <span asp-validation-for="TenKhoa" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

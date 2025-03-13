@@ -1,0 +1,26 @@
+﻿@model WebsitePhucKhao.Models.ChuyenNganh
+
+@{
+    ViewData["Title"] = "Thêm Chuyên Ngành";
+}
+
+<h2>Thêm Chuyên Ngành</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="TenChuyenNganh"></label>
+        <input asp-for="TenChuyenNganh" class="form-control" required />
+        <span asp-validation-for="TenChuyenNganh" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MaKhoa">Chọn Khoa</label>
+        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
+            <option value="">-- Chọn Khoa --</option>
+        </select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

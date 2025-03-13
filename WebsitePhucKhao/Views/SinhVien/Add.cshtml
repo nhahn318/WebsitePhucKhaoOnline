@@ -1,0 +1,87 @@
+﻿@model WebsitePhucKhao.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Thêm Sinh Viên";
+}
+
+<h2>Thêm sinh viên mới</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="HoTen"></label>
+        <input asp-for="HoTen" class="form-control" required />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Mã sinh viên</label>
+        <input asp-for="MaSinhVien" class="form-control" required />
+        <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SoDienThoai"></label>
+        <input asp-for="SoDienThoai" class="form-control" required />
+        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Khoa -->
+    <div class="form-group">
+        <label asp-for="MaKhoa">Chọn Khoa</label>
+        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
+            <option value="">-- Chọn Khoa --</option>
+        </select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Chuyên ngành (sẽ tự động cập nhật khi chọn Khoa) -->
+    <div class="form-group">
+        <label asp-for="MaChuyenNganh">Chọn Chuyên Ngành</label>
+        <select asp-for="MaChuyenNganh" class="form-control" asp-items="ViewBag.ChuyenNganhList">
+            <option value="">-- Chọn Chuyên Ngành --</option>
+        </select>
+        <span asp-validation-for="MaChuyenNganh" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lop"></label>
+        <input asp-for="Lop" class="form-control" required />
+        <span asp-validation-for="Lop" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MatKhau"></label>
+        <input asp-for="MatKhau" type="password" class="form-control" required />
+        <span asp-validation-for="MatKhau" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+</form>
+
+<!-- JavaScript để tải Chuyên ngành dựa trên Khoa đã chọn -->
+<script>
+    document.getElementById("MaKhoa").addEventListener("change", function() {
+        var khoaId = this.value;
+        var chuyenNganhDropdown = document.getElementById("MaChuyenNganh");
+
+        // Xóa các tùy chọn hiện có
+        chuyenNganhDropdown.innerHTML = '<option value="">-- Chọn Chuyên Ngành --</option>';
+
+        if (khoaId) {
+            fetch('/SinhVien/GetChuyenNganhByKhoa?maKhoa=' + khoaId)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(function(chuyenNganh) {
+                        var option = new Option(chuyenNganh.tenChuyenNganh, chuyenNganh.maChuyenNganh);
+                        chuyenNganhDropdown.add(option);
+                    });
+                });
+        }
+    });
+</script>
