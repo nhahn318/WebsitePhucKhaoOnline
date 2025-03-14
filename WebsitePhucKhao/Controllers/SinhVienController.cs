@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 
@@ -10,12 +11,14 @@ namespace WebsitePhucKhao.Controllers
         private readonly ISinhVienRepository _sinhVienRepository;
         private readonly IKhoaRepository _khoaRepository;
         private readonly IChuyenNganhRepository _chuyenNganhRepository;
+        private readonly ApplicationDbContext _context;
 
-        public SinhVienController(ISinhVienRepository sinhVienRepository, IKhoaRepository khoaRepository, IChuyenNganhRepository chuyenNganhRepository)
+        public SinhVienController(ISinhVienRepository sinhVienRepository, IKhoaRepository khoaRepository, IChuyenNganhRepository chuyenNganhRepository, ApplicationDbContext context)
         {
             _sinhVienRepository = sinhVienRepository;
             _khoaRepository = khoaRepository;
             _chuyenNganhRepository = chuyenNganhRepository;
+            _context = context;
         }
 
         // Hiển thị danh sách sinh viên
@@ -136,13 +139,27 @@ namespace WebsitePhucKhao.Controllers
             return View(sinhVien);
         }
 
-        // Xử lý xóa sinh viên
         [HttpPost, ActionName("DeleteConfirmed")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _sinhVienRepository.DeleteAsync(id);
+            // Bước 1: Xóa tất cả user liên quan trong AspNetUsers trước
+            var users = _context.Users.Where(u => u.MaSinhVien == id).ToList();
+            if (users.Any())
+            {
+                _context.Users.RemoveRange(users);
+                await _context.SaveChangesAsync(); // Lưu thay đổi trước khi tiếp tục
+            }
+
+            // Bước 2: Xóa sinh viên sau khi đã xóa user
+            var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
+            if (sinhVien != null)
+            {
+                await _sinhVienRepository.DeleteAsync(id);
+            }
+
             return RedirectToAction(nameof(Index));
         }
+
 
 
 

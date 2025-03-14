@@ -27,7 +27,6 @@ namespace WebsitePhucKhao.Models {
 
         public string? Lop { get; set; }
 
-        [Required]
         public string? MatKhau { get; set; }
 
         public ICollection<DonPhucKhao>? DonPhucKhaos { get; set; }

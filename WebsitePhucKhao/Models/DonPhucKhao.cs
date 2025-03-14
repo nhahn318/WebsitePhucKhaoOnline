@@ -26,8 +26,10 @@ namespace WebsitePhucKhao.Models {
         public string? NhomLop { get; set; }
         public string? DiaDiemThi { get; set; }
         public string? PhongThi { get; set; }
-        public string? GiangVien { get; set; }
-
+        public int? MaGiangVien { get; set; }
+        public GiangVien? GiangVien { get; set; }
+        public int? MaNhanVienPhongDaoTao { get; set; }
+        public NhanVienPhongDaoTao? NhanVienPhongDaoTao { get; set; }
         public string TrangThai { get; set; } = "Đang chờ xử lý";
         public DateTime NgayGui { get; set; } = DateTime.Now;
 

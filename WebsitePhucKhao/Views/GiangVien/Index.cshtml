@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.GiangVien>
+
+<h2>Danh sách Giảng Viên</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Giảng Viên</th>
+            <th>Họ Tên</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Khoa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var gv in Model)
+        {
+            <tr>
+                <td>@gv.MaGiangVien</td>
+                <td>@gv.HoTen</td>
+                <td>@gv.Email</td>
+                <td>@gv.SoDienThoai</td>
+                <td>@(gv.Khoa != null ? gv.Khoa.TenKhoa : "Chưa có")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@gv.MaGiangVien">Xem</a> |
+                    <a asp-action="Update" asp-route-id="@gv.MaGiangVien">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@gv.MaGiangVien">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Thêm Giảng Viên</a>

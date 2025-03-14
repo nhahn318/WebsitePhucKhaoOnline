@@ -1,0 +1,41 @@
+﻿@model WebsitePhucKhao.Models.NhanVienPhongDaoTao
+
+@{
+    ViewData["Title"] = "Thêm Nhân Viên Phòng Đào Tạo";
+}
+
+<h2>Thêm Nhân Viên</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="HoTen"></label>
+        <input asp-for="HoTen" class="form-control" required />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Mã nhân viên</label>
+        <input asp-for="MaNhanVienPhongDaoTao" class="form-control" required />
+        <span asp-validation-for="MaNhanVienPhongDaoTao" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SoDienThoai"></label>
+        <input asp-for="SoDienThoai" class="form-control" />
+        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ChucVu"></label>
+        <input asp-for="ChucVu" class="form-control" />
+        <span asp-validation-for="ChucVu" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

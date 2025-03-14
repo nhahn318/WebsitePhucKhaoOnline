@@ -13,13 +13,13 @@ namespace WebsitePhucKhao.ViewModels {
         public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        public string SoDienThoai { get; set; }
+        public string? SoDienThoai { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập lớp")]
         public string Lop { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập môn học")]
-        public string MonHoc { get; set; }
+        public string? MonHoc { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập điểm hiện tại")]
         public float DiemHienTai { get; set; }
@@ -30,18 +30,18 @@ namespace WebsitePhucKhao.ViewModels {
         public int HocKy { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập năm học")]
-        public string NamHoc { get; set; }
+        public string? NamHoc { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập ngày thi")]
         public DateTime NgayThi { get; set; }
 
-        public string CaThi { get; set; }
-        public string NhomLop { get; set; }
-        public string DiaDiemThi { get; set; }
-        public string PhongThi { get; set; }
-        public string GiangVien { get; set; }
+        public string? CaThi { get; set; }
+        public string? NhomLop { get; set; }
+        public string? DiaDiemThi { get; set; }
+        public string? PhongThi { get; set; }
+        public int? MaGiangVien { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập lý do phúc khảo")]
-        public string LyDo { get; set; }
+        public string? LyDo { get; set; }
     }
 }

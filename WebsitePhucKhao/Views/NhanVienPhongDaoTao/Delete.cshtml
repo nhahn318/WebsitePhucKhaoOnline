@@ -1,0 +1,15 @@
+﻿@model WebsitePhucKhao.Models.NhanVienPhongDaoTao
+
+@{
+    ViewData["Title"] = "Xóa Nhân Viên";
+}
+
+<h2>Xác nhận xóa nhân viên</h2>
+
+<p>Bạn có chắc chắn muốn xóa nhân viên <strong>@Model.HoTen</strong> không?</p>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaNhanVienPhongDaoTao" method="post">
+    <input type="hidden" asp-for="MaNhanVienPhongDaoTao" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

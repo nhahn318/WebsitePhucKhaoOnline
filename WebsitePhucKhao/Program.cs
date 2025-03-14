@@ -41,6 +41,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISinhVienRepository, EFSinhVienRepository>();
 builder.Services.AddScoped<IChuyenNganhRepository, EFChuyenNganhRepository>();
 builder.Services.AddScoped<IKhoaRepository, EFKhoaRepository>();
+builder.Services.AddScoped<IGiangVienRepository, EFGiangVienRepository>();
+builder.Services.AddScoped<INhanVienPhongDaoTaoRepository, EFNhanVienPhongDaoTaoRepository>();
 
 
 

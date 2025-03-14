@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.NhanVienPhongDaoTao>
+
+<h2>Danh sách Nhân Viên Phòng Đào Tạo</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Họ Tên</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Chức vụ</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var nv in Model)
+        {
+            <tr>
+                <td>@nv.MaNhanVienPhongDaoTao</td>
+                <td>@nv.HoTen</td>
+                <td>@nv.Email</td>
+                <td>@nv.SoDienThoai</td>
+                <td>@nv.ChucVu</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@nv.MaNhanVienPhongDaoTao">Xem</a> |
+                    <a asp-action="Update" asp-route-id="@nv.MaNhanVienPhongDaoTao">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@nv.MaNhanVienPhongDaoTao">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Add" class="btn btn-primary">Thêm Nhân viên</a>

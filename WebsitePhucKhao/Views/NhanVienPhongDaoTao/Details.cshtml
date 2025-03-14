@@ -1,0 +1,25 @@
+﻿@model WebsitePhucKhao.Models.NhanVienPhongDaoTao
+
+@{
+    ViewData["Title"] = "Thông Tin Nhân Viên";
+}
+
+<h2>Thông Tin Nhân Viên</h2>
+
+<div>
+    <strong>Mã Nhân Viên:</strong> @Model.MaNhanVienPhongDaoTao
+</div>
+<div>
+    <strong>Họ tên:</strong> @Model.HoTen
+</div>
+<div>
+    <strong>Email:</strong> @Model.Email
+</div>
+<div>
+    <strong>Số điện thoại:</strong> @Model.SoDienThoai
+</div>
+<div>
+    <strong>Chức vụ:</strong> @Model.ChucVu
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Trở về</a>

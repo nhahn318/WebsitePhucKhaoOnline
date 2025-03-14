@@ -54,8 +54,8 @@ namespace WebsitePhucKhao.Repositories {
         public async Task<IEnumerable<SinhVien>> GetAllWithDetailsAsync()
         {
             return await _context.SinhViens
-                .Include(sv => sv.Khoa) // ✅ JOIN với bảng Khoa
-                .Include(sv => sv.ChuyenNganh) // ✅ JOIN với bảng Chuyên Ngành
+                .Include(sv => sv.Khoa) 
+                .Include(sv => sv.ChuyenNganh) 
                 .ToListAsync();
         }
 

@@ -42,7 +42,6 @@ namespace WebsitePhucKhao.Controllers {
                     };
                     _context.SinhViens.Add(sinhVien);
                 }
-
                 // Thêm đơn phúc khảo mới
                 var donPhucKhao = new DonPhucKhao
                 {
@@ -57,7 +56,6 @@ namespace WebsitePhucKhao.Controllers {
                     NhomLop = model.NhomLop,
                     DiaDiemThi = model.DiaDiemThi,
                     PhongThi = model.PhongThi,
-                    GiangVien = model.GiangVien,
                     LyDo = model.LyDo,
                     TrangThai = "Chờ xác nhận",
                     NgayGui = DateTime.Now
