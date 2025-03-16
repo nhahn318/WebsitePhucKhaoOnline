@@ -152,6 +152,10 @@ namespace WebsitePhucKhao.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaSinhVien = table.Column<int>(type: "int", nullable: true),
+                    MaGiangVien = table.Column<int>(type: "int", nullable: true),
+                    GiangVienMaGiangVien = table.Column<int>(type: "int", nullable: true),
+                    MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
+                    NhanVienPhongDaoTaoMaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -170,6 +174,16 @@ namespace WebsitePhucKhao.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_GiangViens_GiangVienMaGiangVien",
+                        column: x => x.GiangVienMaGiangVien,
+                        principalTable: "GiangViens",
+                        principalColumn: "MaGiangVien");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_NhanVienPhongDaoTaos_NhanVienPhongDaoTaoMaNhanVienPhongDaoTao",
+                        column: x => x.NhanVienPhongDaoTaoMaNhanVienPhongDaoTao,
+                        principalTable: "NhanVienPhongDaoTaos",
+                        principalColumn: "MaNhanVienPhongDaoTao");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_SinhViens_MaSinhVien",
                         column: x => x.MaSinhVien,
@@ -389,11 +403,21 @@ namespace WebsitePhucKhao.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_GiangVienMaGiangVien",
+                table: "AspNetUsers",
+                column: "GiangVienMaGiangVien");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_MaSinhVien",
                 table: "AspNetUsers",
                 column: "MaSinhVien",
                 unique: true,
                 filter: "[MaSinhVien] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_NhanVienPhongDaoTaoMaNhanVienPhongDaoTao",
+                table: "AspNetUsers",
+                column: "NhanVienPhongDaoTaoMaNhanVienPhongDaoTao");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",

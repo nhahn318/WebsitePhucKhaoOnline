@@ -174,6 +174,9 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("GiangVienMaGiangVien")
+                        .HasColumnType("int");
+
                     b.Property<string>("HoTen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -184,7 +187,16 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int?>("MaGiangVien")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaNhanVienPhongDaoTao")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MaSinhVien")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NhanVienPhongDaoTaoMaNhanVienPhongDaoTao")
                         .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
@@ -216,9 +228,13 @@ namespace WebsitePhucKhao.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GiangVienMaGiangVien");
+
                     b.HasIndex("MaSinhVien")
                         .IsUnique()
                         .HasFilter("[MaSinhVien] IS NOT NULL");
+
+                    b.HasIndex("NhanVienPhongDaoTaoMaNhanVienPhongDaoTao");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -535,9 +551,21 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.ApplicationUser", b =>
                 {
+                    b.HasOne("WebsitePhucKhao.Models.GiangVien", "GiangVien")
+                        .WithMany()
+                        .HasForeignKey("GiangVienMaGiangVien");
+
                     b.HasOne("WebsitePhucKhao.Models.SinhVien", "SinhVien")
                         .WithOne("User")
                         .HasForeignKey("WebsitePhucKhao.Models.ApplicationUser", "MaSinhVien");
+
+                    b.HasOne("WebsitePhucKhao.Models.NhanVienPhongDaoTao", "NhanVienPhongDaoTao")
+                        .WithMany()
+                        .HasForeignKey("NhanVienPhongDaoTaoMaNhanVienPhongDaoTao");
+
+                    b.Navigation("GiangVien");
+
+                    b.Navigation("NhanVienPhongDaoTao");
 
                     b.Navigation("SinhVien");
                 });

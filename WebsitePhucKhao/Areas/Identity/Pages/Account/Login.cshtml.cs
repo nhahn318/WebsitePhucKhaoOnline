@@ -119,11 +119,10 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
 
                 if (user == null)
                 {
-                    // Kiểm tra xem sinh viên có trong database không
+                    // Kiểm tra Sinh viên
                     var sinhVien = await _context.SinhViens.FirstOrDefaultAsync(sv => sv.Email == Input.Email);
                     if (sinhVien != null)
                     {
-                        // Nếu sinh viên có trong database nhưng chưa có tài khoản Identity, tạo tài khoản mới
                         user = new ApplicationUser
                         {
                             UserName = sinhVien.Email,
@@ -131,21 +130,62 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                             MaSinhVien = sinhVien.MaSinhVien
                         };
 
-                        var createResult = await _userManager.CreateAsync(user, sinhVien.MaSinhVien.ToString()); // Mật khẩu là MaSinhVien
+                        var createResult = await _userManager.CreateAsync(user, sinhVien.MaSinhVien.ToString());
                         if (!createResult.Succeeded)
                         {
                             foreach (var error in createResult.Errors)
-                            {
                                 ModelState.AddModelError(string.Empty, error.Description);
-                            }
                             return Page();
                         }
-
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại. Hãy đăng ký trước.");
-                        return Page();
+                        // Kiểm tra Giảng viên
+                        var giangVien = await _context.GiangViens.FirstOrDefaultAsync(gv => gv.Email == Input.Email);
+                        if (giangVien != null)
+                        {
+                            user = new ApplicationUser
+                            {
+                                UserName = giangVien.Email,
+                                Email = giangVien.Email,
+                                MaGiangVien = giangVien.MaGiangVien
+                            };
+
+                            var createResult = await _userManager.CreateAsync(user, giangVien.MaGiangVien.ToString());
+                            if (!createResult.Succeeded)
+                            {
+                                foreach (var error in createResult.Errors)
+                                    ModelState.AddModelError(string.Empty, error.Description);
+                                return Page();
+                            }
+                        }
+                        else
+                        {
+                            // Kiểm tra Nhân viên phòng đào tạo
+                            var nhanVien = await _context.NhanVienPhongDaoTaos.FirstOrDefaultAsync(nv => nv.Email == Input.Email);
+                            if (nhanVien != null)
+                            {
+                                user = new ApplicationUser
+                                {
+                                    UserName = nhanVien.Email,
+                                    Email = nhanVien.Email,
+                                    MaNhanVienPhongDaoTao = nhanVien.MaNhanVienPhongDaoTao
+                                };
+
+                                var createResult = await _userManager.CreateAsync(user, nhanVien.MaNhanVienPhongDaoTao.ToString());
+                                if (!createResult.Succeeded)
+                                {
+                                    foreach (var error in createResult.Errors)
+                                        ModelState.AddModelError(string.Empty, error.Description);
+                                    return Page();
+                                }
+                            }
+                            else
+                            {
+                                ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại. Hãy đăng ký trước.");
+                                return Page();
+                            }
+                        }
                     }
                 }
 
@@ -174,6 +214,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
 
             return Page();
         }
+
 
     }
 }
