@@ -16,7 +16,11 @@ namespace WebsitePhucKhao.Models {
         public DbSet<ChuyenNganh> ChuyenNganhs { get; set; }
         public DbSet<Khoa> Khoas { get; set; }
 
+        public DbSet<Lop> Lops { get; set; }
 
+        public DbSet<HocKy> HocKys { get; set; }
+        public DbSet<MonHoc> MonHocs { get; set; }
+        public DbSet<LichThi> LichThis { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,6 +96,52 @@ namespace WebsitePhucKhao.Models {
                 .WithMany(nv => nv.DonPhucKhaos)
                 .HasForeignKey(d => d.MaNhanVienPhongDaoTao)
                 .OnDelete(DeleteBehavior.SetNull); // Nếu nhân viên bị xóa, đơn vẫn tồn tại
+
+            modelBuilder.Entity<SinhVien>()
+                .HasOne(sv => sv.Lop)
+                .WithMany(l => l.SinhViens)
+                .HasForeignKey(sv => sv.MaLop)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Khoa>()
+                 .HasMany(k => k.Lops)
+                .WithOne(l => l.Khoa)
+                .HasForeignKey(l => l.MaKhoa)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<HocKy>()
+                .HasMany(hk => hk.MonHocs)
+                .WithOne(mh => mh.HocKy)
+                .HasForeignKey(mh => mh.MaHocKy)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<MonHoc>()
+                .HasMany(mh => mh.LichThis)
+                .WithOne(lt => lt.MonHoc)
+                .HasForeignKey(lt => lt.MaMonHoc)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Mối quan hệ giữa DonPhucKhao và MonHoc
+            modelBuilder.Entity<DonPhucKhao>()
+                .HasOne(dp => dp.MonHoc)
+                .WithMany(mh => mh.DonPhucKhaos)
+                .HasForeignKey(dp => dp.MaMonHoc)
+                .OnDelete(DeleteBehavior.Restrict); // Không xóa môn học nếu có đơn phúc khảo
+
+            // (Tuỳ chọn) Mối quan hệ giữa DonPhucKhao và LichThi
+            modelBuilder.Entity<DonPhucKhao>()
+                .HasOne(dp => dp.LichThi)
+                .WithMany(lt => lt.DonPhucKhaos)
+                .HasForeignKey(dp => dp.MaLichThi)
+                .OnDelete(DeleteBehavior.Restrict); // Không xóa lịch thi nếu có đơn phúc khảo
+
+            // Mối quan hệ giữa MonHoc và GiangVien (1:M)
+            modelBuilder.Entity<MonHoc>()
+                .HasOne(mh => mh.GiangVien)
+                .WithMany(gv => gv.MonHocs)
+                .HasForeignKey(mh => mh.MaGiangVien)
+                .OnDelete(DeleteBehavior.SetNull); 
+
         }
 
     }

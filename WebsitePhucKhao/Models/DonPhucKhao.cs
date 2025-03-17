@@ -12,17 +12,12 @@ namespace WebsitePhucKhao.Models {
         [ForeignKey("MaSinhVien")]
         public SinhVien? SinhVien { get; set; }
 
-        [Required]
-        public string? MonHoc { get; set; }
-
         public float DiemHienTai { get; set; }
         public float DiemMongMuon { get; set; }
 
         public int HocKy { get; set; }
         public string? NamHoc { get; set; }
 
-        public DateTime NgayThi { get; set; }
-        public string? CaThi { get; set; }
         public string? NhomLop { get; set; }
         public string? DiaDiemThi { get; set; }
         public string? PhongThi { get; set; }
@@ -39,7 +34,14 @@ namespace WebsitePhucKhao.Models {
         public ICollection<HinhAnhBaiThi>? HinhAnhBaiThis { get; set; }
         public KetQuaPhucKhao? KetQuaPhucKhao { get; set; }
 
-    
+        [ForeignKey("MaLichThi")]
+        public int? MaLichThi { get; set; } // Foreign key for LichThi
+        public LichThi? LichThi { get; set; } // Navigation property
+
+        [ForeignKey("MonHoc")]
+        public int? MaMonHoc { get; set; }  // Khóa ngoại liên kết với MonHoc
+        public MonHoc? MonHoc { get; set; }  // Thuộc tính điều hướng đến MonHoc
+
     }
 
 }

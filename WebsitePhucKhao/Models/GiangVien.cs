@@ -26,5 +26,7 @@ namespace WebsitePhucKhao.Models {
 
         public ICollection<DonPhucKhao>? DonPhucKhaos { get; set; }
         public ICollection<KetQuaPhucKhao>? KetQuaPhucKhaos { get; set; }
+
+        public ICollection<MonHoc>? MonHocs { get; set; }
     }
 }

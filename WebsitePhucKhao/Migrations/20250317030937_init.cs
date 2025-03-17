@@ -26,6 +26,19 @@ namespace WebsitePhucKhao.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HocKys",
+                columns: table => new
+                {
+                    MaHocKy = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenHocKy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HocKys", x => x.MaHocKy);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Khoas",
                 columns: table => new
                 {
@@ -116,6 +129,52 @@ namespace WebsitePhucKhao.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Lops",
+                columns: table => new
+                {
+                    MaLop = table.Column<int>(type: "int", nullable: false),
+                    TenLop = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MaKhoa = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lops", x => x.MaLop);
+                    table.ForeignKey(
+                        name: "FK_Lops_Khoas_MaKhoa",
+                        column: x => x.MaKhoa,
+                        principalTable: "Khoas",
+                        principalColumn: "MaKhoa",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MonHocs",
+                columns: table => new
+                {
+                    MaMonHoc = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenMonHoc = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MaHocKy = table.Column<int>(type: "int", nullable: true),
+                    MaGiangVien = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MonHocs", x => x.MaMonHoc);
+                    table.ForeignKey(
+                        name: "FK_MonHocs_GiangViens_MaGiangVien",
+                        column: x => x.MaGiangVien,
+                        principalTable: "GiangViens",
+                        principalColumn: "MaGiangVien",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_MonHocs_HocKys_MaHocKy",
+                        column: x => x.MaHocKy,
+                        principalTable: "HocKys",
+                        principalColumn: "MaHocKy",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SinhViens",
                 columns: table => new
                 {
@@ -125,7 +184,7 @@ namespace WebsitePhucKhao.Migrations
                     SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaKhoa = table.Column<int>(type: "int", nullable: false),
                     MaChuyenNganh = table.Column<int>(type: "int", nullable: false),
-                    Lop = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaLop = table.Column<int>(type: "int", nullable: true),
                     MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -143,6 +202,38 @@ namespace WebsitePhucKhao.Migrations
                         principalTable: "Khoas",
                         principalColumn: "MaKhoa",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SinhViens_Lops_MaLop",
+                        column: x => x.MaLop,
+                        principalTable: "Lops",
+                        principalColumn: "MaLop",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LichThis",
+                columns: table => new
+                {
+                    MaLichThi = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NgayThi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MaHocKy = table.Column<int>(type: "int", nullable: true),
+                    MaMonHoc = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LichThis", x => x.MaLichThi);
+                    table.ForeignKey(
+                        name: "FK_LichThis_HocKys_MaHocKy",
+                        column: x => x.MaHocKy,
+                        principalTable: "HocKys",
+                        principalColumn: "MaHocKy");
+                    table.ForeignKey(
+                        name: "FK_LichThis_MonHocs_MaMonHoc",
+                        column: x => x.MaMonHoc,
+                        principalTable: "MonHocs",
+                        principalColumn: "MaMonHoc",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,13 +289,10 @@ namespace WebsitePhucKhao.Migrations
                     MaDon = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MaSinhVien = table.Column<int>(type: "int", nullable: false),
-                    MonHoc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiemHienTai = table.Column<float>(type: "real", nullable: false),
                     DiemMongMuon = table.Column<float>(type: "real", nullable: false),
                     HocKy = table.Column<int>(type: "int", nullable: false),
                     NamHoc = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayThi = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CaThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NhomLop = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiaDiemThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhongThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -212,7 +300,9 @@ namespace WebsitePhucKhao.Migrations
                     MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
                     TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayGui = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaLichThi = table.Column<int>(type: "int", nullable: true),
+                    MaMonHoc = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,6 +313,18 @@ namespace WebsitePhucKhao.Migrations
                         principalTable: "GiangViens",
                         principalColumn: "MaGiangVien",
                         onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaos_LichThis_MaLichThi",
+                        column: x => x.MaLichThi,
+                        principalTable: "LichThis",
+                        principalColumn: "MaLichThi",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaos_MonHocs_MaMonHoc",
+                        column: x => x.MaMonHoc,
+                        principalTable: "MonHocs",
+                        principalColumn: "MaMonHoc",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DonPhucKhaos_NhanVienPhongDaoTaos_MaNhanVienPhongDaoTao",
                         column: x => x.MaNhanVienPhongDaoTao,
@@ -437,6 +539,16 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaGiangVien");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaos_MaLichThi",
+                table: "DonPhucKhaos",
+                column: "MaLichThi");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaos_MaMonHoc",
+                table: "DonPhucKhaos",
+                column: "MaMonHoc");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaos_MaNhanVienPhongDaoTao",
                 table: "DonPhucKhaos",
                 column: "MaNhanVienPhongDaoTao");
@@ -462,6 +574,31 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaGiangVien");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LichThis_MaHocKy",
+                table: "LichThis",
+                column: "MaHocKy");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LichThis_MaMonHoc",
+                table: "LichThis",
+                column: "MaMonHoc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lops_MaKhoa",
+                table: "Lops",
+                column: "MaKhoa");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MonHocs_MaGiangVien",
+                table: "MonHocs",
+                column: "MaGiangVien");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MonHocs_MaHocKy",
+                table: "MonHocs",
+                column: "MaHocKy");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SinhViens_MaChuyenNganh",
                 table: "SinhViens",
                 column: "MaChuyenNganh");
@@ -470,6 +607,11 @@ namespace WebsitePhucKhao.Migrations
                 name: "IX_SinhViens_MaKhoa",
                 table: "SinhViens",
                 column: "MaKhoa");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SinhViens_MaLop",
+                table: "SinhViens",
+                column: "MaLop");
         }
 
         /// <inheritdoc />
@@ -506,7 +648,7 @@ namespace WebsitePhucKhao.Migrations
                 name: "DonPhucKhaos");
 
             migrationBuilder.DropTable(
-                name: "GiangViens");
+                name: "LichThis");
 
             migrationBuilder.DropTable(
                 name: "NhanVienPhongDaoTaos");
@@ -515,7 +657,19 @@ namespace WebsitePhucKhao.Migrations
                 name: "SinhViens");
 
             migrationBuilder.DropTable(
+                name: "MonHocs");
+
+            migrationBuilder.DropTable(
                 name: "ChuyenNganhs");
+
+            migrationBuilder.DropTable(
+                name: "Lops");
+
+            migrationBuilder.DropTable(
+                name: "GiangViens");
+
+            migrationBuilder.DropTable(
+                name: "HocKys");
 
             migrationBuilder.DropTable(
                 name: "Khoas");

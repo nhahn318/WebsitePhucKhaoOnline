@@ -25,7 +25,9 @@ namespace WebsitePhucKhao.Models {
         public int MaChuyenNganh { get; set; }
         public ChuyenNganh? ChuyenNganh { get; set; }
 
-        public string? Lop { get; set; }
+        [ForeignKey("Lop")]
+        public int? MaLop { get; set; }
+        public Lop? Lop { get; set; }
 
         public string? MatKhau { get; set; }
 

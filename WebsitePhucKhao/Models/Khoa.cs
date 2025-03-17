@@ -11,6 +11,8 @@ namespace WebsitePhucKhao.Models {
         public string? TenKhoa { get; set; }
 
         public ICollection<ChuyenNganh>? ChuyenNganhs { get; set; }
+
+        public ICollection<Lop>? Lops { get; set; }
     }
 
 }

@@ -37,8 +37,7 @@ namespace WebsitePhucKhao.Controllers {
                         HoTen = model.HoTen,
                         Email = model.Email,
                         SoDienThoai = model.SoDienThoai,
-                        Lop = model.Lop,
-                        MatKhau = "default123" // Mật khẩu mặc định, có thể thay đổi sau
+                        MatKhau = "default123" 
                     };
                     _context.SinhViens.Add(sinhVien);
                 }
@@ -46,13 +45,10 @@ namespace WebsitePhucKhao.Controllers {
                 var donPhucKhao = new DonPhucKhao
                 {
                     MaSinhVien = model.MaSinhVien,
-                    MonHoc = model.MonHoc,
                     DiemHienTai = model.DiemHienTai,
                     DiemMongMuon = model.DiemMongMuon,
                     HocKy = model.HocKy,
                     NamHoc = model.NamHoc,
-                    NgayThi = model.NgayThi,
-                    CaThi = model.CaThi,
                     NhomLop = model.NhomLop,
                     DiaDiemThi = model.DiaDiemThi,
                     PhongThi = model.PhongThi,
