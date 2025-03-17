@@ -401,12 +401,17 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaHocKy"));
 
+                    b.Property<int?>("MaNamHoc")
+                        .HasColumnType("int");
+
                     b.Property<string>("TenHocKy")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("MaHocKy");
+
+                    b.HasIndex("MaNamHoc");
 
                     b.ToTable("HocKys");
                 });
@@ -525,6 +530,22 @@ namespace WebsitePhucKhao.Migrations
                     b.HasIndex("MaHocKy");
 
                     b.ToTable("MonHocs");
+                });
+
+            modelBuilder.Entity("WebsitePhucKhao.Models.NamHoc", b =>
+                {
+                    b.Property<int>("MaNamHoc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaNamHoc"));
+
+                    b.Property<string>("TenNamHoc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaNamHoc");
+
+                    b.ToTable("NamHocs");
                 });
 
             modelBuilder.Entity("WebsitePhucKhao.Models.NhanVienPhongDaoTao", b =>
@@ -735,6 +756,15 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("DonPhucKhao");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.HocKy", b =>
+                {
+                    b.HasOne("WebsitePhucKhao.Models.NamHoc", "NamHoc")
+                        .WithMany("HocKys")
+                        .HasForeignKey("MaNamHoc");
+
+                    b.Navigation("NamHoc");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.KetQuaPhucKhao", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
@@ -872,6 +902,11 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("DonPhucKhaos");
 
                     b.Navigation("LichThis");
+                });
+
+            modelBuilder.Entity("WebsitePhucKhao.Models.NamHoc", b =>
+                {
+                    b.Navigation("HocKys");
                 });
 
             modelBuilder.Entity("WebsitePhucKhao.Models.NhanVienPhongDaoTao", b =>

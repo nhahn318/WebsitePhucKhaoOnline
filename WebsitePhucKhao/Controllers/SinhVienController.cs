@@ -160,10 +160,6 @@ namespace WebsitePhucKhao.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
-
         [HttpGet]
         public async Task<JsonResult> GetChuyenNganhByKhoa(int maKhoa)
         {

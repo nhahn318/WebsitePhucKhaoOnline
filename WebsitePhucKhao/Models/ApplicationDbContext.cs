@@ -21,6 +21,8 @@ namespace WebsitePhucKhao.Models {
         public DbSet<HocKy> HocKys { get; set; }
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<LichThi> LichThis { get; set; }
+        public DbSet<NamHoc> NamHocs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -140,7 +142,12 @@ namespace WebsitePhucKhao.Models {
                 .HasOne(mh => mh.GiangVien)
                 .WithMany(gv => gv.MonHocs)
                 .HasForeignKey(mh => mh.MaGiangVien)
-                .OnDelete(DeleteBehavior.SetNull); 
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<HocKy>()
+                .HasOne(h => h.NamHoc)
+                .WithMany(n => n.HocKys)
+                .HasForeignKey(h => h.MaNamHoc);
 
         }
 

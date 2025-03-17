@@ -1,0 +1,26 @@
+﻿@model WebsitePhucKhao.Models.HocKy
+
+@{
+    ViewData["Title"] = "Thêm Học Kỳ";
+}
+
+<h2>Thêm học kỳ mới</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="TenHocKy"></label>
+        <input asp-for="TenHocKy" class="form-control" required />
+        <span asp-validation-for="TenHocKy" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Năm Học -->
+    <div class="form-group">
+        <label asp-for="MaNamHoc">Chọn Năm Học</label>
+        <select asp-for="MaNamHoc" class="form-control" asp-items="ViewBag.NamHocList">
+            <option value="">-- Chọn Năm Học --</option>
+        </select>
+        <span asp-validation-for="MaHocKy" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+</form>

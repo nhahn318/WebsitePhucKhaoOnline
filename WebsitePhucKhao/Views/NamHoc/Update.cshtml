@@ -1,0 +1,16 @@
+﻿@model WebsitePhucKhao.Models.NamHoc
+
+<h2>Cập nhật Năm Học</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="MaNamHoc" />
+
+    <div class="form-group">
+        <label asp-for="TenNamHoc"></label>
+        <input asp-for="TenNamHoc" class="form-control" required />
+        <span asp-validation-for="TenNamHoc" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

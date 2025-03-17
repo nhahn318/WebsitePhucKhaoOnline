@@ -1,0 +1,10 @@
+﻿<!-- Delete.cshtml -->
+@model WebsitePhucKhao.Models.HocKy
+
+<h2>Xóa Học Kỳ</h2>
+<p>Bạn có chắc chắn muốn xóa học kỳ <strong>@Model.TenHocKy</strong> không?</p>
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaHocKy" method="post">
+    <input type="hidden" asp-for="MaHocKy" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

@@ -7,7 +7,10 @@ namespace WebsitePhucKhao.Models {
 
         [Required]
         [StringLength(50)]
-        public string TenHocKy { get; set; } // Ví dụ: "Học kỳ 1 - 2025"
+        public string? TenHocKy { get; set; } // Ví dụ: "Học kỳ 1 - 2025"
+
+        public int? MaNamHoc { get; set; }
+        public NamHoc? NamHoc { get; set; }
 
         public ICollection<MonHoc>? MonHocs { get; set; }
         public ICollection<LichThi>? LichThis { get; set; }

@@ -1,0 +1,16 @@
+﻿@model WebsitePhucKhao.Models.NamHoc
+
+<h2>Chi tiết Năm Học</h2>
+
+<table class="table">
+    <tr>
+        <th>Mã Năm Học:</th>
+        <td>@Model.MaNamHoc</td>
+    </tr>
+    <tr>
+        <th>Tên Năm Học:</th>
+        <td>@Model.TenNamHoc</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
