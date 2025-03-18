@@ -1,0 +1,18 @@
+﻿@model WebsitePhucKhao.Models.MonHoc
+
+<h2>Thông tin Môn Học</h2>
+
+<div>
+    <strong>Mã Môn Học:</strong> @Model.MaMonHoc
+</div>
+<div>
+    <strong>Tên Môn Học:</strong> @Model.TenMonHoc
+</div>
+<div>
+    <strong>Học Kỳ:</strong> @(Model.HocKy != null ? Model.HocKy.TenHocKy : "Chưa có")
+</div>
+<div>
+    <strong>Giảng Viên:</strong> @(Model.GiangVien != null ? Model.GiangVien.HoTen : "Chưa có")
+</div>
+
+<a asp-action="Index">Trở về</a>

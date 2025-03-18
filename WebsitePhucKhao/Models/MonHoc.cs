@@ -21,6 +21,8 @@ namespace WebsitePhucKhao.Models {
 
         // Quan hệ giữa MonHoc và DonPhucKhao (1:N)
         public ICollection<DonPhucKhao>? DonPhucKhaos { get; set; }  // Một môn học có thể có nhiều đơn phúc khảo
+
+        public ICollection<BangDiem>? BangDiems { get; set; }
     }
 
 }

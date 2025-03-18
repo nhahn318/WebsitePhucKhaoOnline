@@ -276,6 +276,36 @@ namespace WebsitePhucKhao.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BangDiems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaSinhVien = table.Column<int>(type: "int", nullable: false),
+                    MaMonHoc = table.Column<int>(type: "int", nullable: false),
+                    DiemGiuaKy = table.Column<double>(type: "float", nullable: true),
+                    DiemCuoiKy = table.Column<double>(type: "float", nullable: true),
+                    DiemTongKet = table.Column<double>(type: "float", nullable: true),
+                    TrangThaiPhucKhao = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BangDiems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BangDiems_MonHocs_MaMonHoc",
+                        column: x => x.MaMonHoc,
+                        principalTable: "MonHocs",
+                        principalColumn: "MaMonHoc",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BangDiems_SinhViens_MaSinhVien",
+                        column: x => x.MaSinhVien,
+                        principalTable: "SinhViens",
+                        principalColumn: "MaSinhVien",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LichThis",
                 columns: table => new
                 {
@@ -548,6 +578,16 @@ namespace WebsitePhucKhao.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BangDiems_MaMonHoc",
+                table: "BangDiems",
+                column: "MaMonHoc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BangDiems_MaSinhVien",
+                table: "BangDiems",
+                column: "MaSinhVien");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ChuyenNganhs_MaKhoa",
                 table: "ChuyenNganhs",
                 column: "MaKhoa");
@@ -655,6 +695,9 @@ namespace WebsitePhucKhao.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "BangDiems");
 
             migrationBuilder.DropTable(
                 name: "HinhAnhBaiThis");

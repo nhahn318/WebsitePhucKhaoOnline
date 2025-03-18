@@ -1,0 +1,31 @@
+﻿@model WebsitePhucKhao.Models.BangDiem
+
+@{
+    ViewData["Title"] = "Cập nhật Bảng Điểm";
+}
+
+<h2>Cập nhật Bảng Điểm</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="DiemGiuaKy"></label>
+        <input asp-for="DiemGiuaKy" class="form-control" required />
+        <span asp-validation-for="DiemGiuaKy" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiemCuoiKy"></label>
+        <input asp-for="DiemCuoiKy" class="form-control" required />
+        <span asp-validation-for="DiemCuoiKy" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiemTongKet"></label>
+        <input asp-for="DiemTongKet" class="form-control" required />
+        <span asp-validation-for="DiemTongKet" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+</form>

@@ -1,0 +1,11 @@
+﻿@model WebsitePhucKhao.Models.BangDiem
+
+<h2>Xác nhận xóa Bảng Điểm</h2>
+
+<p>Bạn có chắc chắn muốn xóa bảng điểm của sinh viên <strong>@Model.SinhVien?.HoTen</strong> trong môn học <strong>@Model.MonHoc?.TenMonHoc</strong> không?</p>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

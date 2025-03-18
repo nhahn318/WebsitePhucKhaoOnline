@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.MonHoc>
+
+<h2>Danh sách Môn Học</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Môn Học</th>
+            <th>Tên Môn Học</th>
+            <th>Học Kỳ</th>
+            <th>Giảng Viên</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mh in Model)
+        {
+            <tr>
+                <td>@mh.MaMonHoc</td>
+                <td>@mh.TenMonHoc</td>
+                <td>@(mh.HocKy != null ? mh.HocKy.TenHocKy : "Chưa có")</td>
+                <td>@(mh.GiangVien != null ? mh.GiangVien.HoTen : "Chưa có")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@mh.MaMonHoc">Xem</a> |
+                    <a asp-action="Update" asp-route-id="@mh.MaMonHoc">Sửa</a> |
+                    <a asp-action="Delete" asp-route-id="@mh.MaMonHoc">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Thêm Môn Học</a>

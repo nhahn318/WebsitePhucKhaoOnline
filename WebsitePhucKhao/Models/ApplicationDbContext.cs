@@ -22,6 +22,7 @@ namespace WebsitePhucKhao.Models {
         public DbSet<MonHoc> MonHocs { get; set; }
         public DbSet<LichThi> LichThis { get; set; }
         public DbSet<NamHoc> NamHocs { get; set; }
+        public DbSet<BangDiem> BangDiems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -149,6 +150,15 @@ namespace WebsitePhucKhao.Models {
                 .WithMany(n => n.HocKys)
                 .HasForeignKey(h => h.MaNamHoc);
 
+            modelBuilder.Entity<BangDiem>()
+                .HasOne(b => b.SinhVien)
+                .WithMany(s => s.BangDiems)
+                .HasForeignKey(b => b.MaSinhVien);
+
+            modelBuilder.Entity<BangDiem>()
+                .HasOne(b => b.MonHoc)
+                .WithMany(m => m.BangDiems)
+                .HasForeignKey(b => b.MaMonHoc);
         }
 
     }

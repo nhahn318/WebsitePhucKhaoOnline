@@ -247,6 +247,41 @@ namespace WebsitePhucKhao.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.BangDiem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double?>("DiemCuoiKy")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("DiemGiuaKy")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("DiemTongKet")
+                        .HasColumnType("float");
+
+                    b.Property<int>("MaMonHoc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaSinhVien")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TrangThaiPhucKhao")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MaMonHoc");
+
+                    b.HasIndex("MaSinhVien");
+
+                    b.ToTable("BangDiems");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.ChuyenNganh", b =>
                 {
                     b.Property<int>("MaChuyenNganh")
@@ -685,6 +720,25 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("SinhVien");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.BangDiem", b =>
+                {
+                    b.HasOne("WebsitePhucKhao.Models.MonHoc", "MonHoc")
+                        .WithMany("BangDiems")
+                        .HasForeignKey("MaMonHoc")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebsitePhucKhao.Models.SinhVien", "SinhVien")
+                        .WithMany("BangDiems")
+                        .HasForeignKey("MaSinhVien")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MonHoc");
+
+                    b.Navigation("SinhVien");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.ChuyenNganh", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.Khoa", "Khoa")
@@ -899,6 +953,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.MonHoc", b =>
                 {
+                    b.Navigation("BangDiems");
+
                     b.Navigation("DonPhucKhaos");
 
                     b.Navigation("LichThis");
@@ -916,6 +972,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.SinhVien", b =>
                 {
+                    b.Navigation("BangDiems");
+
                     b.Navigation("DonPhucKhaos");
 
                     b.Navigation("User");

@@ -45,6 +45,8 @@ builder.Services.AddScoped<IGiangVienRepository, EFGiangVienRepository>();
 builder.Services.AddScoped<INhanVienPhongDaoTaoRepository, EFNhanVienPhongDaoTaoRepository>();
 builder.Services.AddScoped<IHocKyRepository, EFHocKyRepository>();
 builder.Services.AddScoped<INamHocRepository, EFNamHocRepository>();
+builder.Services.AddScoped<IMonHocRepository, EFMonHocRepository>();
+builder.Services.AddScoped<IBangDiemRepository, EFBangDiemRepository>();
 
 
 

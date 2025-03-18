@@ -1,0 +1,11 @@
+﻿@model WebsitePhucKhao.Models.MonHoc
+
+<h2>Xác nhận xóa môn học</h2>
+
+<p>Bạn có chắc chắn muốn xóa môn học <strong>@Model.TenMonHoc</strong> không?</p>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaMonHoc" method="post">
+    <input type="hidden" asp-for="MaMonHoc" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

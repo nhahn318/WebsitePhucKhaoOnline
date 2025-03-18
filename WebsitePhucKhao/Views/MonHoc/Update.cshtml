@@ -1,0 +1,33 @@
+﻿@model WebsitePhucKhao.Models.MonHoc
+
+<h2>Cập nhật thông tin Môn Học</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="MaMonHoc" />
+
+    <div class="form-group">
+        <label asp-for="TenMonHoc"></label>
+        <input asp-for="TenMonHoc" class="form-control" required />
+        <span asp-validation-for="TenMonHoc" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Học Kỳ -->
+    <div class="form-group">
+        <label asp-for="MaHocKy">Chọn Học Kỳ</label>
+        <select asp-for="MaHocKy" class="form-control" asp-items="ViewBag.HocKyList">
+            <option value="">-- Chọn Học Kỳ --</option>
+        </select>
+        <span asp-validation-for="MaHocKy" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Giảng Viên -->
+    <div class="form-group">
+        <label asp-for="MaGiangVien">Chọn Giảng Viên</label>
+        <select asp-for="MaGiangVien" class="form-control" asp-items="ViewBag.GiangVienList">
+            <option value="">-- Chọn Giảng Viên --</option>
+        </select>
+        <span asp-validation-for="MaGiangVien" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+</form>

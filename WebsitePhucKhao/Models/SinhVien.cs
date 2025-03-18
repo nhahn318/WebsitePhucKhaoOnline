@@ -35,6 +35,6 @@ namespace WebsitePhucKhao.Models {
 
         public ApplicationUser? User { get; set; }
 
-    
+        public ICollection<BangDiem>? BangDiems { get; set; }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model WebsitePhucKhao.Models.BangDiem
+
+@{
+    ViewData["Title"] = "Thêm Bảng Điểm";
+}
+
+<h2>Thêm Bảng Điểm Mới</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label asp-for="MaSinhVien">Chọn Sinh Viên</label>
+        <select asp-for="MaSinhVien" class="form-control" asp-items="ViewBag.SinhVienList">
+            <option value="">-- Chọn Sinh Viên --</option>
+        </select>
+        <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MaMonHoc">Chọn Môn Học</label>
+        <select asp-for="MaMonHoc" class="form-control" asp-items="ViewBag.MonHocList">
+            <option value="">-- Chọn Môn Học --</option>
+        </select>
+        <span asp-validation-for="MaMonHoc" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiemGiuaKy"></label>
+        <input asp-for="DiemGiuaKy" class="form-control" required />
+        <span asp-validation-for="DiemGiuaKy" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiemCuoiKy"></label>
+        <input asp-for="DiemCuoiKy" class="form-control" required />
+        <span asp-validation-for="DiemCuoiKy" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiemTongKet"></label>
+        <input asp-for="DiemTongKet" class="form-control" required />
+        <span asp-validation-for="DiemTongKet" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Thêm</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>
