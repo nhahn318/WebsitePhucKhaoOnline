@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WebsitePhucKhao.Models.WebsitePhucKhao.Models;
 
 namespace WebsitePhucKhao.Models {
     public class NhanVienPhongDaoTao {
@@ -22,5 +23,7 @@ namespace WebsitePhucKhao.Models {
         public string? ChucVu { get; set; } // VD: Trưởng phòng, Nhân viên
 
         public ICollection<DonPhucKhao>? DonPhucKhaos { get; set; }
+        public ICollection<DonPhucKhaoChiTiet>? DonPhucKhaoChiTiets { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WebsitePhucKhao.Models.WebsitePhucKhao.Models;
 
 namespace WebsitePhucKhao.Models {
     public class DonPhucKhao {
@@ -41,6 +42,8 @@ namespace WebsitePhucKhao.Models {
         [ForeignKey("MonHoc")]
         public int? MaMonHoc { get; set; }  // Khóa ngoại liên kết với MonHoc
         public MonHoc? MonHoc { get; set; }  // Thuộc tính điều hướng đến MonHoc
+
+        public ICollection<DonPhucKhaoChiTiet>? DanhSachPhucKhaoChiTiet { get; set; }
 
     }
 

@@ -474,6 +474,43 @@ namespace WebsitePhucKhao.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DonPhucKhaoChiTiet",
+                columns: table => new
+                {
+                    MaChiTiet = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaDon = table.Column<int>(type: "int", nullable: false),
+                    MaGiangVienPhucKhao = table.Column<int>(type: "int", nullable: true),
+                    DiemSauPhucKhao = table.Column<float>(type: "real", nullable: true),
+                    NhanXet = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayChamLai = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TrangThaiPhucKhao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaNhanVienDuyet = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DonPhucKhaoChiTiet", x => x.MaChiTiet);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaoChiTiet_DonPhucKhaos_MaDon",
+                        column: x => x.MaDon,
+                        principalTable: "DonPhucKhaos",
+                        principalColumn: "MaDon",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaoChiTiet_GiangViens_MaGiangVienPhucKhao",
+                        column: x => x.MaGiangVienPhucKhao,
+                        principalTable: "GiangViens",
+                        principalColumn: "MaGiangVien",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaoChiTiet_NhanVienPhongDaoTaos_MaNhanVienDuyet",
+                        column: x => x.MaNhanVienDuyet,
+                        principalTable: "NhanVienPhongDaoTaos",
+                        principalColumn: "MaNhanVienPhongDaoTao",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HinhAnhBaiThis",
                 columns: table => new
                 {
@@ -593,6 +630,21 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaKhoa");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaoChiTiet_MaDon",
+                table: "DonPhucKhaoChiTiet",
+                column: "MaDon");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaoChiTiet_MaGiangVienPhucKhao",
+                table: "DonPhucKhaoChiTiet",
+                column: "MaGiangVienPhucKhao");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaoChiTiet_MaNhanVienDuyet",
+                table: "DonPhucKhaoChiTiet",
+                column: "MaNhanVienDuyet");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaos_MaGiangVien",
                 table: "DonPhucKhaos",
                 column: "MaGiangVien");
@@ -698,6 +750,9 @@ namespace WebsitePhucKhao.Migrations
 
             migrationBuilder.DropTable(
                 name: "BangDiems");
+
+            migrationBuilder.DropTable(
+                name: "DonPhucKhaoChiTiet");
 
             migrationBuilder.DropTable(
                 name: "HinhAnhBaiThis");

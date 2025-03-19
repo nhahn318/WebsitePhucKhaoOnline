@@ -648,6 +648,47 @@ namespace WebsitePhucKhao.Migrations
                     b.ToTable("SinhViens");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
+                {
+                    b.Property<int>("MaChiTiet")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaChiTiet"));
+
+                    b.Property<float?>("DiemSauPhucKhao")
+                        .HasColumnType("real");
+
+                    b.Property<int>("MaDon")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaGiangVienPhucKhao")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MaNhanVienDuyet")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("NgayChamLai")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NhanXet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThaiPhucKhao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaChiTiet");
+
+                    b.HasIndex("MaDon");
+
+                    b.HasIndex("MaGiangVienPhucKhao");
+
+                    b.HasIndex("MaNhanVienDuyet");
+
+                    b.ToTable("DonPhucKhaoChiTiet");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -906,6 +947,31 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("Lop");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
+                {
+                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
+                        .WithMany("DanhSachPhucKhaoChiTiet")
+                        .HasForeignKey("MaDon")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebsitePhucKhao.Models.GiangVien", "GiangVienPhucKhao")
+                        .WithMany("DonPhucKhaoChiTiets")
+                        .HasForeignKey("MaGiangVienPhucKhao")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("WebsitePhucKhao.Models.NhanVienPhongDaoTao", "NhanVienDuyet")
+                        .WithMany("DonPhucKhaoChiTiets")
+                        .HasForeignKey("MaNhanVienDuyet")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("DonPhucKhao");
+
+                    b.Navigation("GiangVienPhucKhao");
+
+                    b.Navigation("NhanVienDuyet");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.ChuyenNganh", b =>
                 {
                     b.Navigation("SinhViens");
@@ -913,6 +979,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhao", b =>
                 {
+                    b.Navigation("DanhSachPhucKhaoChiTiet");
+
                     b.Navigation("HinhAnhBaiThis");
 
                     b.Navigation("KetQuaPhucKhao");
@@ -920,6 +988,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.GiangVien", b =>
                 {
+                    b.Navigation("DonPhucKhaoChiTiets");
+
                     b.Navigation("DonPhucKhaos");
 
                     b.Navigation("KetQuaPhucKhaos");
@@ -967,6 +1037,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.NhanVienPhongDaoTao", b =>
                 {
+                    b.Navigation("DonPhucKhaoChiTiets");
+
                     b.Navigation("DonPhucKhaos");
                 });
 

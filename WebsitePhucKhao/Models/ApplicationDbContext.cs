@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WebsitePhucKhao.Models.WebsitePhucKhao.Models;
 
 namespace WebsitePhucKhao.Models {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
@@ -159,6 +160,27 @@ namespace WebsitePhucKhao.Models {
                 .HasOne(b => b.MonHoc)
                 .WithMany(m => m.BangDiems)
                 .HasForeignKey(b => b.MaMonHoc);
+
+            // Mối quan hệ giữa DonPhucKhao và DonPhucKhaoChiTiet (1:N)
+            modelBuilder.Entity<DonPhucKhaoChiTiet>()
+                .HasOne(dpct => dpct.DonPhucKhao)
+                .WithMany(dp => dp.DanhSachPhucKhaoChiTiet)
+                .HasForeignKey(dpct => dpct.MaDon)
+                .OnDelete(DeleteBehavior.Cascade); // Xóa chi tiết khi đơn bị xóa
+
+            // Mối quan hệ giữa DonPhucKhaoChiTiet và GiangVien (1:N)
+            modelBuilder.Entity<DonPhucKhaoChiTiet>()
+                .HasOne(dpct => dpct.GiangVienPhucKhao)
+                .WithMany(gv => gv.DonPhucKhaoChiTiets)
+                .HasForeignKey(dpct => dpct.MaGiangVienPhucKhao)
+                .OnDelete(DeleteBehavior.SetNull); // Nếu giảng viên bị xóa, đơn vẫn tồn tại
+
+            // Mối quan hệ giữa DonPhucKhaoChiTiet và NhanVienPhongDaoTao (1:N)
+            modelBuilder.Entity<DonPhucKhaoChiTiet>()
+                .HasOne(dpct => dpct.NhanVienDuyet)
+                .WithMany(nv => nv.DonPhucKhaoChiTiets)
+                .HasForeignKey(dpct => dpct.MaNhanVienDuyet)
+                .OnDelete(DeleteBehavior.SetNull); // Nếu nhân viên bị xóa, đơn vẫn tồn tại
         }
 
     }
