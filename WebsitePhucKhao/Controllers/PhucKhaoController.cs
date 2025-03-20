@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
 
@@ -12,11 +12,38 @@ namespace WebsitePhucKhao.Controllers {
             _context = context;
         }
 
-        // GET: Hiển thị form để sinh viên nhập thông tin
         public IActionResult Create()
         {
-            return View();
+            var userEmail = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                ViewBag.ErrorMessage = "Bạn chưa đăng nhập.";
+                return View();
+            }
+
+            var sinhVien = _context.SinhViens
+                .Include(sv => sv.Lop)
+                .FirstOrDefault(sv => sv.Email == userEmail);
+
+            if (sinhVien == null)
+            {
+                ViewBag.ErrorMessage = "Không tìm thấy thông tin sinh viên với email: " + userEmail;
+                return View();
+            }
+
+            var model = new YeuCauPhucKhaoViewModel
+            {
+                MaSinhVien = sinhVien.MaSinhVien,
+                HoTen = sinhVien.HoTen,
+                Email = sinhVien.Email,
+                SoDienThoai = sinhVien.SoDienThoai,
+                Lop = sinhVien.Lop?.TenLop ?? "Không có lớp"
+            };
+
+            return View(model);
         }
+
+
 
         // POST: Nhận dữ liệu từ form và lưu vào Database
         [HttpPost]

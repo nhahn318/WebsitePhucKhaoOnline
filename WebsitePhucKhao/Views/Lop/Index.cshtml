@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebsitePhucKhao.Models.Lop>
+
+<h2>Danh sách Lớp</h2>
+
+<a asp-action="Add" class="btn btn-primary">Thêm Lớp</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Lớp</th>
+            <th>Tên Lớp</th>
+            <th>Khoa</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lop in Model)
+        {
+            <tr>
+                <td>@lop.MaLop</td>
+                <td>@lop.TenLop</td>
+                <td>@lop.Khoa?.TenKhoa</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@lop.MaLop" class="btn btn-warning">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@lop.MaLop" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}

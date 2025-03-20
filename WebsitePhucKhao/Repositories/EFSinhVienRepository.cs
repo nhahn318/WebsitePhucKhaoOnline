@@ -59,5 +59,13 @@ namespace WebsitePhucKhao.Repositories {
                 .ToListAsync();
         }
 
+        public async Task<SinhVien?> GetByEmailAsync(string email)
+        {
+            return await _context.SinhViens
+                .Include(sv => sv.Khoa) // Nếu cần thông tin về Khoa
+                .Include(sv => sv.ChuyenNganh) // Nếu cần thông tin về Chuyên Ngành
+                .FirstOrDefaultAsync(sv => sv.Email == email);
+        }
+
     }
 }

@@ -10,35 +10,36 @@
     <div class="row">
         <div class="col-md-6">
 
+            <!-- Mã sinh viên -->
             <div class="form-group">
                 <label asp-for="MaSinhVien"></label>
-                <input asp-for="MaSinhVien" class="form-control" />
-                <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+                <input asp-for="MaSinhVien" class="form-control" readonly />
             </div>
 
+            <!-- Họ tên -->
             <div class="form-group">
                 <label asp-for="HoTen"></label>
-                <input asp-for="HoTen" class="form-control" />
-                <span asp-validation-for="HoTen" class="text-danger"></span>
+                <input asp-for="HoTen" class="form-control" readonly />
             </div>
 
+            <!-- Email -->
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" readonly />
             </div>
 
+            <!-- Số điện thoại -->
             <div class="form-group">
                 <label asp-for="SoDienThoai"></label>
-                <input asp-for="SoDienThoai" class="form-control" />
-                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                <input asp-for="SoDienThoai" class="form-control" readonly />
             </div>
 
+            <!-- Lớp -->
             <div class="form-group">
                 <label asp-for="Lop"></label>
-                <input asp-for="Lop" class="form-control" />
-                <span asp-validation-for="Lop" class="text-danger"></span>
+                <input asp-for="Lop" class="form-control" readonly />
             </div>
+
 
             <div class="form-group">
                 <label asp-for="MonHoc"></label>
@@ -108,7 +109,6 @@
         <span asp-validation-for="LyDo" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Gửi yêu cầu phúc khảo</button>
 </form>
 
 @section Scripts {

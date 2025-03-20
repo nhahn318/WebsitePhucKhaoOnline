@@ -105,13 +105,13 @@ namespace WebsitePhucKhao.Models {
                 .HasOne(sv => sv.Lop)
                 .WithMany(l => l.SinhViens)
                 .HasForeignKey(sv => sv.MaLop)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Khoa>()
                  .HasMany(k => k.Lops)
                 .WithOne(l => l.Khoa)
                 .HasForeignKey(l => l.MaKhoa)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<HocKy>()
                 .HasMany(hk => hk.MonHocs)

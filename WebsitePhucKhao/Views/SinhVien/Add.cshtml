@@ -49,34 +49,54 @@
         <span asp-validation-for="MaChuyenNganh" class="text-danger"></span>
     </div>
 
+    <!-- Dropdown chọn Lớp -->
     <div class="form-group">
-        <label asp-for="Lop"></label>
-        <input asp-for="Lop" class="form-control" required />
-        <span asp-validation-for="Lop" class="text-danger"></span>
+        <label asp-for="MaLop">Chọn Lớp</label>
+        <select asp-for="MaLop" class="form-control" id="MaLop">
+            <option value="">-- Chọn Lớp --</option>
+        </select>
+        <span asp-validation-for="MaLop" class="text-danger"></span>
     </div>
+
 
 
     <button type="submit" class="btn btn-success">Thêm</button>
 </form>
 
-<!-- JavaScript để tải Chuyên ngành dựa trên Khoa đã chọn -->
+<!-- JavaScript để tải Chuyên ngành dựa trên Khoa đã chọn, Tải lớp theo khoa -->
 <script>
-    document.getElementById("MaKhoa").addEventListener("change", function() {
+    document.getElementById("MaKhoa").addEventListener("change", function () {
         var khoaId = this.value;
         var chuyenNganhDropdown = document.getElementById("MaChuyenNganh");
+        var lopDropdown = document.getElementById("MaLop");
 
-        // Xóa các tùy chọn hiện có
+        // Xóa dữ liệu cũ
         chuyenNganhDropdown.innerHTML = '<option value="">-- Chọn Chuyên Ngành --</option>';
+        lopDropdown.innerHTML = '<option value="">-- Chọn Lớp --</option>';
 
         if (khoaId) {
-            fetch('/SinhVien/GetChuyenNganhByKhoa?maKhoa=' + khoaId)
+            // Lấy danh sách chuyên ngành theo khoa
+            fetch('/SinhVien/GetChuyenNganhsByKhoa?maKhoa=' + khoaId)
                 .then(response => response.json())
                 .then(data => {
-                    data.forEach(function(chuyenNganh) {
+                    data.forEach(function (chuyenNganh) {
                         var option = new Option(chuyenNganh.tenChuyenNganh, chuyenNganh.maChuyenNganh);
                         chuyenNganhDropdown.add(option);
                     });
-                });
+                })
+                .catch(error => console.error("Lỗi khi tải chuyên ngành:", error));
+
+            // Lấy danh sách lớp theo khoa
+            fetch('/SinhVien/GetLopsByKhoa?maKhoa=' + khoaId)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(function (lop) {
+                        var option = new Option(lop.tenLop, lop.maLop);
+                        lopDropdown.add(option);
+                    });
+                })
+                .catch(error => console.error("Lỗi khi tải lớp:", error));
         }
     });
 </script>
+

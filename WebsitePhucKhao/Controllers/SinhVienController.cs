@@ -126,8 +126,6 @@ namespace WebsitePhucKhao.Controllers
             return View(sinhVien);
         }
 
-
-
         // Hiển thị form xác nhận xóa sinh viên
         public async Task<IActionResult> Delete(int id)
         {
@@ -160,13 +158,83 @@ namespace WebsitePhucKhao.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetChuyenNganhByKhoa(int maKhoa)
+        public async Task<IActionResult> GetChuyenNganhsByKhoa(int maKhoa)
         {
             var chuyenNganhs = await _chuyenNganhRepository.GetByKhoaIdAsync(maKhoa);
             return Json(chuyenNganhs);
         }
 
+   
+        public async Task<IActionResult> GetLopsByKhoa(int maKhoa)
+        {
+            var lops = await _context.Lops
+                                     .Where(l => l.MaKhoa == maKhoa)
+                                     .Select(l => new { l.MaLop, l.TenLop })
+                                     .ToListAsync();
+            return Json(lops);
+        }
+
+
+        public async Task<IActionResult> CapNhatThongTin()
+        {
+            var userEmail = User.Identity?.Name; // Kiểm tra null trước khi sử dụng
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return Unauthorized(); // Nếu không có email, trả về lỗi 401
+            } // Lấy email của người đăng nhập
+            var sinhVien = await _sinhVienRepository.GetByEmailAsync(userEmail);
+
+            if (sinhVien == null)
+            {
+                return NotFound();
+            }
+            // Lấy danh sách Khoa
+            var khoaList = await _khoaRepository.GetAllAsync();
+            ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa", sinhVien.MaKhoa);
+
+            // Lấy danh sách Chuyên ngành theo Khoa
+            var chuyenNganhList = await _chuyenNganhRepository.GetByKhoaIdAsync(sinhVien.MaKhoa);
+            ViewBag.ChuyenNganhList = new SelectList(chuyenNganhList, "MaChuyenNganh", "TenChuyenNganh", sinhVien.MaChuyenNganh);
+
+            // Lấy danh sách Lớp theo Khoa
+            var lopList = await _context.Lops.Where(l => l.MaKhoa == sinhVien.MaKhoa).ToListAsync();
+            ViewBag.LopList = new SelectList(lopList, "MaLop", "TenLop", sinhVien.MaLop);
+
+            return View(sinhVien);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CapNhatThongTin(SinhVien sinhVien)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sinhVien);
+            }
+
+            var userEmail = User.Identity?.Name; // Kiểm tra null trước khi sử dụng
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return Unauthorized(); // Nếu không có email, trả về lỗi 401
+            }
+            var existingSinhVien = await _sinhVienRepository.GetByEmailAsync(userEmail);
+
+            if (existingSinhVien == null)
+            {
+                return NotFound();
+            }
+
+            // Cập nhật thông tin
+            existingSinhVien.HoTen = sinhVien.HoTen;
+            existingSinhVien.Email = sinhVien.Email;
+            existingSinhVien.SoDienThoai = sinhVien.SoDienThoai;
+            existingSinhVien.MaKhoa = sinhVien.MaKhoa;
+            existingSinhVien.MaChuyenNganh = sinhVien.MaChuyenNganh;
+            existingSinhVien.MaLop = sinhVien.MaLop;
+
+            await _sinhVienRepository.UpdateAsync(existingSinhVien);
+
+            TempData["Message"] = "Cập nhật thông tin thành công!";
+            return RedirectToAction("CapNhatThongTin");
+        }
 
     }
 }

@@ -16,7 +16,7 @@ namespace WebsitePhucKhao.ViewModels {
         public string? SoDienThoai { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập lớp")]
-        public string Lop { get; set; }
+        public string Lop { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Vui lòng nhập môn học")]
         public string? MonHoc { get; set; }

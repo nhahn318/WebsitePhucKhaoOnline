@@ -1,29 +1,35 @@
 ﻿@model IEnumerable<WebsitePhucKhao.Models.Khoa>
 
+@{
+    ViewData["Title"] = "Danh sách Khoa";
+}
+
 <h2>Danh sách Khoa</h2>
 
-<table class="table">
+<p>
+    <a asp-action="Add" class="btn btn-primary">Thêm Khoa Mới</a>
+</p>
+
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>Mã Khoa</th>
             <th>Tên Khoa</th>
-            <th>Hành động</th>
+            <th>Thao Tác</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var khoa in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@khoa.MaKhoa</td>
-                <td>@khoa.TenKhoa</td>
+                <td>@item.MaKhoa</td>
+                <td>@item.TenKhoa</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@khoa.MaKhoa">Xem</a> |
-                    <a asp-action="Update" asp-route-id="@khoa.MaKhoa">Sửa</a> |
-                    <a asp-action="Delete" asp-route-id="@khoa.MaKhoa">Xóa</a>
+                    <a asp-action="Update" asp-route-id="@item.MaKhoa" class="btn btn-warning btn-sm">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@item.MaKhoa" class="btn btn-info btn-sm">Chi Tiết</a>
+                    <a asp-action="Delete" asp-route-id="@item.MaKhoa" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
-<a asp-action="Add" class="btn btn-primary">Thêm Khoa mới</a>

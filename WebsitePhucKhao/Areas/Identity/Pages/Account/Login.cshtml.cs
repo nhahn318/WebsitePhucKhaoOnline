@@ -206,7 +206,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                     switch (Input.Role)
                     {
                         case "SinhVien":
-                            returnUrl = Url.Content("~/SinhVien/Index");
+                            returnUrl = Url.Content("~/PhucKhao/Create");
                             break;
                         case "GiangVien":
                             returnUrl = Url.Content("~/GiangVien/Index");

@@ -899,7 +899,7 @@ namespace WebsitePhucKhao.Migrations
                     b.HasOne("WebsitePhucKhao.Models.Khoa", "Khoa")
                         .WithMany("Lops")
                         .HasForeignKey("MaKhoa")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Khoa");
                 });
@@ -938,7 +938,7 @@ namespace WebsitePhucKhao.Migrations
                     b.HasOne("WebsitePhucKhao.Models.Lop", "Lop")
                         .WithMany("SinhViens")
                         .HasForeignKey("MaLop")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("ChuyenNganh");
 

@@ -1,0 +1,85 @@
+﻿@model WebsitePhucKhao.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Cập Nhật Thông Tin Cá Nhân";
+}
+
+<h2>Cập Nhật Thông Tin Cá Nhân</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+<form asp-action="CapNhatThongTin" method="post">
+    <div class="form-group">
+        <label asp-for="MaSinhVien">Mã Sinh Viên</label>
+        <input asp-for="MaSinhVien" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HoTen">Họ và Tên</label>
+        <input asp-for="HoTen" class="form-control" />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" readonly />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SoDienThoai">Số Điện Thoại</label>
+        <input asp-for="SoDienThoai" class="form-control" />
+        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Khoa -->
+    <div class="form-group">
+        <label asp-for="MaKhoa">Khoa</label>
+        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList" id="selectKhoa"></select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Chuyên ngành -->
+    <div class="form-group">
+        <label asp-for="MaChuyenNganh">Chuyên Ngành</label>
+        <select asp-for="MaChuyenNganh" class="form-control" asp-items="ViewBag.ChuyenNganhList" id="selectChuyenNganh"></select>
+        <span asp-validation-for="MaChuyenNganh" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Lớp -->
+    <div class="form-group">
+        <label asp-for="MaLop">Lớp</label>
+        <select asp-for="MaLop" class="form-control" asp-items="ViewBag.LopList" id="selectLop"></select>
+        <span asp-validation-for="MaLop" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#selectKhoa").change(function () {
+                var maKhoa = $(this).val();
+                $.get("/SinhVien/GetChuyenNganhsByKhoa?maKhoa=" + maKhoa, function (data) {
+                    $("#selectChuyenNganh").empty();
+                    $.each(data, function (index, item) {
+                        $("#selectChuyenNganh").append(new Option(item.tenChuyenNganh, item.maChuyenNganh));
+                    });
+                });
+
+                $.get("/SinhVien/GetLopsByKhoa?maKhoa=" + maKhoa, function (data) {
+                    $("#selectLop").empty();
+                    $.each(data, function (index, item) {
+                        $("#selectLop").append(new Option(item.tenLop, item.maLop));
+                    });
+                });
+            });
+        });
+    </script>
+}

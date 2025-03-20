@@ -1,0 +1,32 @@
+﻿@model WebsitePhucKhao.Models.Lop
+
+@{
+    ViewData["Title"] = "Thêm Lớp Mới";
+}
+
+<h2>Thêm Lớp Mới</h2>
+
+<form asp-action="Add" method="post">
+ 
+
+    <div class="form-group">
+        <label asp-for="TenLop">Tên Lớp</label>
+        <input asp-for="TenLop" class="form-control" />
+        <span asp-validation-for="TenLop" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MaKhoa">Khoa</label>
+        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
+            <option value="">-- Chọn Khoa --</option>
+        </select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Thêm</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

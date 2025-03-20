@@ -144,7 +144,7 @@ namespace WebsitePhucKhao.Migrations
                         column: x => x.MaKhoa,
                         principalTable: "Khoas",
                         principalColumn: "MaKhoa",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,7 +199,7 @@ namespace WebsitePhucKhao.Migrations
                         column: x => x.MaLop,
                         principalTable: "Lops",
                         principalColumn: "MaLop",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
