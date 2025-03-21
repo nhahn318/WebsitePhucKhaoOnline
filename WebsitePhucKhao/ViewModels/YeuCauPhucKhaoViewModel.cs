@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebsitePhucKhao.ViewModels {
     public class YeuCauPhucKhaoViewModel {
@@ -18,16 +19,11 @@ namespace WebsitePhucKhao.ViewModels {
         [Required(ErrorMessage = "Vui lòng nhập lớp")]
         public string Lop { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Vui lòng nhập môn học")]
-        public string? MonHoc { get; set; }
-
         [Required(ErrorMessage = "Vui lòng nhập điểm hiện tại")]
         public float DiemHienTai { get; set; }
 
         public float DiemMongMuon { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập học kỳ")]
-        public int HocKy { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập năm học")]
         public string? NamHoc { get; set; }
@@ -36,12 +32,19 @@ namespace WebsitePhucKhao.ViewModels {
         public DateTime NgayThi { get; set; }
 
         public string? CaThi { get; set; }
-        public string? NhomLop { get; set; }
         public string? DiaDiemThi { get; set; }
         public string? PhongThi { get; set; }
         public int? MaGiangVien { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập lý do phúc khảo")]
         public string? LyDo { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn môn học")]
+        public int? MaMonHoc { get; set; }
+        public SelectList? DanhSachMonHoc { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn học kỳ")]
+        public int? MaHocKy { get; set; }
+        public SelectList? DanhSachHocKy { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250320090118_init")]
+    [Migration("20250321153418_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -441,6 +441,12 @@ namespace WebsitePhucKhao.Migrations
 
                     b.Property<int?>("MaNamHoc")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("NgayBatDauPhucKhao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayKetThucPhucKhao")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TenHocKy")
                         .IsRequired()

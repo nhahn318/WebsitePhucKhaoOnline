@@ -1,0 +1,26 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>Danh sách đơn phúc khảo</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Ngày gửi</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var don in Model)
+        {
+            <tr>
+                <td>@don.STT</td>
+                <td>@don.NgayGui.ToString("dd/MM/yyyy")</td>
+                <td>@don.TrangThai</td>
+              
+            </tr>
+        }
+    </tbody>
+    
+    <a asp-controller="PhucKhao" asp-action="Create">Tạo đơn mới</a>
+</table>

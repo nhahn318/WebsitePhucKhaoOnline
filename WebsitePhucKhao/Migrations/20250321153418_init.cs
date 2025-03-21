@@ -154,7 +154,9 @@ namespace WebsitePhucKhao.Migrations
                     MaHocKy = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenHocKy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MaNamHoc = table.Column<int>(type: "int", nullable: true)
+                    MaNamHoc = table.Column<int>(type: "int", nullable: true),
+                    NgayBatDauPhucKhao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayKetThucPhucKhao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

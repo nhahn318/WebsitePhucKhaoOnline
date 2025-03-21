@@ -5,7 +5,6 @@
 }
 
 <h2>Thêm học kỳ mới</h2>
-
 <form asp-action="Add" method="post">
     <div class="form-group">
         <label asp-for="TenHocKy"></label>
@@ -19,7 +18,21 @@
         <select asp-for="MaNamHoc" class="form-control" asp-items="ViewBag.NamHocList">
             <option value="">-- Chọn Năm Học --</option>
         </select>
-        <span asp-validation-for="MaHocKy" class="text-danger"></span>
+        <span asp-validation-for="MaNamHoc" class="text-danger"></span>
+    </div>
+
+    <!-- Chọn ngày bắt đầu phúc khảo -->
+    <div class="form-group">
+        <label asp-for="NgayBatDauPhucKhao"></label>
+        <input asp-for="NgayBatDauPhucKhao" type="date" class="form-control" required />
+        <span asp-validation-for="NgayBatDauPhucKhao" class="text-danger"></span>
+    </div>
+
+    <!-- Chọn ngày kết thúc phúc khảo -->
+    <div class="form-group">
+        <label asp-for="NgayKetThucPhucKhao"></label>
+        <input asp-for="NgayKetThucPhucKhao" type="date" class="form-control" required />
+        <span asp-validation-for="NgayKetThucPhucKhao" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Thêm</button>

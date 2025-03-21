@@ -439,6 +439,12 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<int?>("MaNamHoc")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("NgayBatDauPhucKhao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayKetThucPhucKhao")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("TenHocKy")
                         .IsRequired()
                         .HasMaxLength(50)

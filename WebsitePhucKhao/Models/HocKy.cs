@@ -14,6 +14,13 @@ namespace WebsitePhucKhao.Models {
 
         public ICollection<MonHoc>? MonHocs { get; set; }
         public ICollection<LichThi>? LichThis { get; set; }
+
+
+        [Required(ErrorMessage = "Vui lòng chọn ngày bắt đầu phúc khảo")]
+        public DateTime NgayBatDauPhucKhao { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng chọn ngày kết thúc phúc khảo")]
+        public DateTime NgayKetThucPhucKhao { get; set; }
     }
 
 }

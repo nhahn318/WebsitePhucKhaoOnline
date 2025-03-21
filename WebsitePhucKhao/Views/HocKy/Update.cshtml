@@ -1,12 +1,39 @@
 ﻿@model WebsitePhucKhao.Models.HocKy
 
+@{
+    ViewData["Title"] = "Cập nhật Học Kỳ";
+}
+
 <h2>Cập nhật Học Kỳ</h2>
 
-<form asp-action="Update">
+<form asp-action="Update" method="post">
     <input type="hidden" asp-for="MaHocKy" />
+
     <div class="form-group">
-        <label>Tên Học Kỳ</label>
-        <input asp-for="TenHocKy" class="form-control" />
+        <label asp-for="TenHocKy"></label>
+        <input asp-for="TenHocKy" class="form-control" required />
+        <span asp-validation-for="TenHocKy" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label asp-for="MaNamHoc">Chọn Năm Học</label>
+        <select asp-for="MaNamHoc" class="form-control" asp-items="ViewBag.NamHocList">
+            <option value="">-- Chọn Năm Học --</option>
+        </select>
+        <span asp-validation-for="MaNamHoc" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NgayBatDauPhucKhao"></label>
+        <input asp-for="NgayBatDauPhucKhao" type="date" class="form-control" required />
+        <span asp-validation-for="NgayBatDauPhucKhao" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NgayKetThucPhucKhao"></label>
+        <input asp-for="NgayKetThucPhucKhao" type="date" class="form-control" required />
+        <span asp-validation-for="NgayKetThucPhucKhao" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Lưu</button>
 </form>

@@ -2,13 +2,14 @@
 @model IEnumerable<WebsitePhucKhao.Models.HocKy>
 
 <h2>Danh sách Học Kỳ</h2>
-<a asp-action="Add" class="btn btn-success">Thêm Học Kỳ</a>
 <table class="table">
     <thead>
         <tr>
             <th>Mã Học Kỳ</th>
             <th>Tên Học Kỳ</th>
             <th>Năm Học</th>
+            <th>Ngày Bắt Đầu Phúc Khảo</th>
+            <th>Ngày Kết Thúc Phúc Khảo</th>
             <th>Hành Động</th>
         </tr>
     </thead>
@@ -18,7 +19,9 @@
             <tr>
                 <td>@item.MaHocKy</td>
                 <td>@item.TenHocKy</td>
-      @*           <td>@item.NamHoc.TenNamHoc</td> *@
+                <td>@item.NamHoc?.TenNamHoc</td>
+                <td>@item.NgayBatDauPhucKhao.ToString("dd/MM/yyyy")</td>
+                <td>@item.NgayKetThucPhucKhao.ToString("dd/MM/yyyy")</td>
                 <td>
                     <a asp-action="Update" asp-route-id="@item.MaHocKy" class="btn btn-warning">Sửa</a>
                     <a asp-action="Details" asp-route-id="@item.MaHocKy" class="btn btn-info">Chi tiết</a>

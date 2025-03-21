@@ -41,11 +41,7 @@
             </div>
 
 
-            <div class="form-group">
-                <label asp-for="MonHoc"></label>
-                <input asp-for="MonHoc" class="form-control" />
-                <span asp-validation-for="MonHoc" class="text-danger"></span>
-            </div>
+        
 
             <div class="form-group">
                 <label asp-for="DiemHienTai"></label>
@@ -61,11 +57,20 @@
         </div>
 
         <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="MaMonHoc"></label>
+                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control">
+                    <option value="">-- Chọn môn học --</option>
+                </select>
+                <span asp-validation-for="MaMonHoc" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
-                <label asp-for="HocKy"></label>
-                <input asp-for="HocKy" class="form-control" />
-                <span asp-validation-for="HocKy" class="text-danger"></span>
+                <label asp-for="MaHocKy"></label>
+                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control">
+                    <option value="">-- Chọn học kỳ --</option>
+                </select>
+                <span asp-validation-for="MaHocKy" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -85,11 +90,7 @@
                 <input asp-for="CaThi" class="form-control" />
             </div>
 
-            <div class="form-group">
-                <label asp-for="NhomLop"></label>
-                <input asp-for="NhomLop" class="form-control" />
-            </div>
-
+       
             <div class="form-group">
                 <label asp-for="DiaDiemThi"></label>
                 <input asp-for="DiaDiemThi" class="form-control" />
@@ -108,7 +109,9 @@
         <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
         <span asp-validation-for="LyDo" class="text-danger"></span>
     </div>
-
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tạo đơn phúc khảo</button>
+    </div>
 </form>
 
 @section Scripts {
