@@ -1,0 +1,35 @@
+﻿/*base*/
+.error_txt {
+    margin-bottom: 10px;
+    display: block;
+    color: #f00;
+    font-size: 13px;
+}
+
+.inactive {
+    display: none;
+}
+
+/*foundation-example*/
+#foundation-example {
+}
+
+.foundation-example__ex-wrapper {
+    background-color: lightblue;
+}
+
+.foundation-example__in-wrapper {
+    margin: auto;
+    max-width: 960px;
+    background: white;
+    padding: 30px;
+}
+
+.foundation-example__title {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 32px;
+}
+
+.foundation-example__form-wrapper {
+}

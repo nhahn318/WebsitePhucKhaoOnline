@@ -1,116 +1,188 @@
 ﻿@model WebsitePhucKhao.ViewModels.YeuCauPhucKhaoViewModel
 
-@{
-    ViewData["Title"] = "Yêu cầu phúc khảo bài thi";
-}
+<link href="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<h3>@ViewData["Title"]</h3>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Foundation for Sites</title>
+	<link rel="stylesheet" href="/css/MauPhucKhao.css">
+</head>
 
-<form asp-action="Create" method="post">
-    <div class="row">
-        <div class="col-md-6">
+<body>
 
-            <!-- Mã sinh viên -->
-            <div class="form-group">
-                <label asp-for="MaSinhVien"></label>
-                <input asp-for="MaSinhVien" class="form-control" readonly />
-            </div>
+	<section id="foundation-example">
+		<div style="height: 50px;background: lightblue;"></div>
+		<div class="foundation-example__ex-wrapper">
+			<div class="foundation-example__in-wrapper">
+				<div class="foundation-example__title"> Yêu cầu phúc khảo bài thi</div>
+				<div class="foundation-example__form-wrapper">
+					<form method="post" id="Feedback">
 
-            <!-- Họ tên -->
-            <div class="form-group">
-                <label asp-for="HoTen"></label>
-                <input asp-for="HoTen" class="form-control" readonly />
-            </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="MaSinhVien">
+									Mã sinh viên
+									<input type="text" name="MaSinhVien" id="MaSinhVien">
+									<div class="error_txt inactive" id="error_MaSinhVien">Please provide your MaSinhVien.</div>
+								</label>
+							</div>
 
-            <!-- Email -->
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" readonly />
-            </div>
-
-            <!-- Số điện thoại -->
-            <div class="form-group">
-                <label asp-for="SoDienThoai"></label>
-                <input asp-for="SoDienThoai" class="form-control" readonly />
-            </div>
-
-            <!-- Lớp -->
-            <div class="form-group">
-                <label asp-for="Lop"></label>
-                <input asp-for="Lop" class="form-control" readonly />
-            </div>
+							<div class="large-6 columns">
+								<label for="HoTen">
+									Họ tên
+									<input type="text" name="HoTen" id="HoTen">
+									<div class="error_txt inactive" id="error_HoTen">Please provide your HoTen.</div>
+								</label>
+							</div>
+						</div>
 
 
-            <div class="form-group">
-                <label asp-for="MonHoc"></label>
-                <input asp-for="MonHoc" class="form-control" />
-                <span asp-validation-for="MonHoc" class="text-danger"></span>
-            </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="Email">
+									Email
+									<input type="email" name="Email" id="Email">
+									<div class="error_txt inactive" id="error_Email">Please provide your Email.</div>
+								</label>
 
-            <div class="form-group">
-                <label asp-for="DiemHienTai"></label>
-                <input asp-for="DiemHienTai" class="form-control" step="0.01" />
-                <span asp-validation-for="DiemHienTai" class="text-danger"></span>
-            </div>
+								<label for="SoDienThoai">
+									Số điện thoại
+									<input type="text" name="SoDienThoai" id="SoDienThoai">
+									<div class="error_txt inactive" id="error_SoDienThoai">Please provide your SoDienThoai.</div>
+								</label>
+							</div>
 
-            <div class="form-group">
-                <label asp-for="DiemMongMuon"></label>
-                <input asp-for="DiemMongMuon" class="form-control" step="0.01" />
-            </div>
+							<div class="large-6 columns">
+								<label for="Lop">
+									Lớp
+									<input type="text" name="Lop" id="Lop">
+									<div class="error_txt inactive" id="error_Lop">Please provide your Lop.</div>
+								</label>
+							</div>
+						</div>
 
-        </div>
 
-        <div class="col-md-6">
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="MonHoc">
+									Môn học
+									<input type="text" name="MonHoc" id="MonHoc">
+									<div class="error_txt inactive" id="error_MonHoc">Please provide your MonHoc.</div>
+								</label>
+							</div>
 
-            <div class="form-group">
-                <label asp-for="HocKy"></label>
-                <input asp-for="HocKy" class="form-control" />
-                <span asp-validation-for="HocKy" class="text-danger"></span>
-            </div>
+							<div class="large-6 columns">
+								<label for="DiemHienTai">
+									Điểm hiện tại
+									<input type="text" name="DiemHienTai" id="DiemHienTai" step="0.01">
+									<div class="error_txt inactive" id="error_DiemHienTai">Please provide your DiemHienTai.</div>
+								</label>
+							</div>
+						</div>
 
-            <div class="form-group">
-                <label asp-for="NamHoc"></label>
-                <input asp-for="NamHoc" class="form-control" placeholder="Ví dụ: 2024-2025" />
-                <span asp-validation-for="NamHoc" class="text-danger"></span>
-            </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="DiemMongMuon">
+									Điểm mong muốn
+									<input type="text" name="DiemMongMuon" id="DiemMongMuon" step="0.01">
+									<div class="error_txt inactive" id="error_DiemMongMuon">Please provide your DiemMongMuon.</div>
+								</label>
+							</div>
 
-            <div class="form-group">
-                <label asp-for="NgayThi"></label>
-                <input asp-for="NgayThi" type="date" class="form-control" />
-                <span asp-validation-for="NgayThi" class="text-danger"></span>
-            </div>
+							<div class="large-6 columns">
+								<label for="HocKy">
+									Học kỳ
+									<input type="text" name="HocKy" id="HocKy">
+									<div class="error_txt inactive" id="error_HocKy">Please provide your HocKy.</div>
+								</label>
+							</div>
+						</div>
 
-            <div class="form-group">
-                <label asp-for="CaThi"></label>
-                <input asp-for="CaThi" class="form-control" />
-            </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="NamHoc">
+									Năm học
+									<input type="text" name="NamHoc" id="NamHoc" placeholder="Ví dụ: 2024-2025">
+									<div class="error_txt inactive" id="error_NamHoc">Please provide your NamHoc.</div>
+								</label>
+							</div>
 
-            <div class="form-group">
-                <label asp-for="NhomLop"></label>
-                <input asp-for="NhomLop" class="form-control" />
-            </div>
+							<div class="large-6 columns">
+								<label for="NgayThi">
+									Ngày thi
+									<input type="date" name="NgayThi" id="NgayThi">
+									<div class="error_txt inactive" id="error_NgayThi">Please provide your NgayThi.</div>
+								</label>
+							</div>
+						</div>
 
-            <div class="form-group">
-                <label asp-for="DiaDiemThi"></label>
-                <input asp-for="DiaDiemThi" class="form-control" />
-            </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="CaThi">
+									Ca thi
+									<input type="text" name="CaThi" id="CaThi">
+									<div class="error_txt inactive" id="error_CaThi">Please provide your CaThi.</div>
+								</label>
+							</div>
 
-            <div class="form-group">
-                <label asp-for="PhongThi"></label>
-                <input asp-for="PhongThi" class="form-control" />
-            </div>           
+							<div class="large-6 columns">
+								<label for="NhomLop">
+									Nhóm lớp
+									<input type="text" name="NhomLop" id="NhomLop">
+									<div class="error_txt inactive" id="error_NhomLop">Please provide your NhomLop.</div>
+								</label>
+							</div>
+						</div>
 
-        </div>
-    </div>
+						<div class="row">
+							<div class="large-6 columns">
+								<label for="DiaDiemThi">
+									Địa điểm thi
+									<input type="text" name="DiaDiemThi" id="DiaDiemThi">
+									<div class="error_txt inactive" id="error_DiaDiemThi">Please provide your DiaDiemThi.</div>
+								</label>
+							</div>
 
-    <div class="form-group">
-        <label asp-for="LyDo"></label>
-        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="LyDo" class="text-danger"></span>
-    </div>
+							<div class="large-6 columns">
+								<label for="PhongThi">
+									Phòng thi
+									<input type="text" name="PhongThi" id="PhongThi">
+									<div class="error_txt inactive" id="error_PhongThi">Please provide your PhongThi.</div>
+								</label>
+							</div>
+						</div>
 
-</form>
+						<div class="row">
+							<div class="large-12 columns">
+								<label for="LyDo">
+									Lý do
+									<textarea rows="10" name="LyDo" id="LyDo"></textarea>
+									<div class="error_txt inactive" id="error_LyDo">Please provide your LyDo.</div>
+								</label>
+							</div>
+						</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+						<div class="row">
+							<div class="large-12 columns text-center">
+								<button type="submit" class="button" id="submit">Gửi</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+		<div style="height: 50px;background: lightblue;"></div>
+	</section>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="~/js/MauPhucKhao.js"></script>
+
+</body>
+</html>
