@@ -30,6 +30,8 @@ builder.Services.Configure<IdentityOptions>(options =>
 
     // Không yêu cầu ký tự in thường
     options.Password.RequireLowercase = false;
+
+
 });
 
 
@@ -51,6 +53,8 @@ builder.Services.AddScoped<ILopRepository, EFLopRepository>();
 
 
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -63,7 +67,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
 
 app.UseAuthorization();
 

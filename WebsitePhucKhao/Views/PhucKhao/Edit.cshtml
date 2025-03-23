@@ -1,0 +1,63 @@
+﻿@model WebsitePhucKhao.ViewModels.YeuCauPhucKhaoViewModel
+@{
+    ViewData["Title"] = "Cập nhật đơn phúc khảo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="DiemHienTai"></label>
+                <input asp-for="DiemHienTai" class="form-control" />
+                <span asp-validation-for="DiemHienTai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiemMongMuon"></label>
+                <input asp-for="DiemMongMuon" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaDiemThi"></label>
+                <input asp-for="DiaDiemThi" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhongThi"></label>
+                <input asp-for="PhongThi" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="MaMonHoc"></label>
+                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control">
+                    <option value="">-- Chọn môn học --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaHocKy"></label>
+                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control">
+                    <option value="">-- Chọn học kỳ --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NamHoc"></label>
+                <input asp-for="NamHoc" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LyDo"></label>
+        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a asp-action="DanhSachDonPhucKhao" class="btn btn-secondary">Hủy</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -3,14 +3,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebsitePhucKhao.Controllers {
     public class PhucKhaoController : Controller {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public PhucKhaoController(ApplicationDbContext context)
+        public PhucKhaoController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> DanhSachDonPhucKhao()
@@ -44,6 +47,99 @@ namespace WebsitePhucKhao.Controllers {
 
             return View(danhSach);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var don = await _context.DonPhucKhaos
+                .Include(d => d.MonHoc)
+                .Include(d => d.SinhVien)
+                .FirstOrDefaultAsync(d => d.MaDon == id);
+
+            if (don == null)
+                return NotFound();
+
+            return View(don);
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var don = await _context.DonPhucKhaos.FindAsync(id);
+            if (don == null || don.TrangThai != "Chờ xác nhận")
+                return NotFound();
+
+            var viewModel = new YeuCauPhucKhaoViewModel
+            {
+                MaSinhVien = don.MaSinhVien,
+                DiemHienTai = don.DiemHienTai,
+                DiemMongMuon = don.DiemMongMuon,
+                MaMonHoc = don.MaMonHoc,
+                MaHocKy = don.HocKy,
+                NamHoc = don.NamHoc,
+                DiaDiemThi = don.DiaDiemThi,
+                PhongThi = don.PhongThi,
+                LyDo = don.LyDo,
+            };
+
+            viewModel.DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc");
+            viewModel.DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy");
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, YeuCauPhucKhaoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var don = await _context.DonPhucKhaos.FindAsync(id);
+                if (don == null || don.TrangThai != "Chờ xác nhận")
+                    return NotFound();
+
+                don.DiemHienTai = model.DiemHienTai;
+                don.DiemMongMuon = model.DiemMongMuon;
+                don.MaMonHoc = model.MaMonHoc;
+                don.HocKy = model.MaHocKy ?? 0;
+                don.NamHoc = model.NamHoc;
+                don.DiaDiemThi = model.DiaDiemThi;
+                don.PhongThi = model.PhongThi;
+                don.LyDo = model.LyDo;
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction("DanhSachDonPhucKhao");
+            }
+
+            model.DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc");
+            model.DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy");
+
+            return View(model);
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            var don = await _context.DonPhucKhaos
+                .Include(d => d.MonHoc)
+                .FirstOrDefaultAsync(d => d.MaDon == id);
+
+            if (don == null || don.TrangThai != "Chờ xác nhận")
+                return NotFound();
+
+            return View(don); // Hiển thị xác nhận xóa
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var don = await _context.DonPhucKhaos.FindAsync(id);
+            if (don != null && don.TrangThai == "Chờ xác nhận")
+            {
+                _context.DonPhucKhaos.Remove(don);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("DanhSachDonPhucKhao");
+        }
+
+
+        //======================================================GIANGVIEN===============================================
+
 
         // GET: Hiển thị form tạo đơn phúc khảo
         public async Task<IActionResult> Create()
@@ -155,6 +251,39 @@ namespace WebsitePhucKhao.Controllers {
         public IActionResult CreateSuccess()
         {
             return View();
+        }
+       
+        //======================================================NHANVIEN===============================================
+        
+        // Hiển thị danh sách đơn cần duyệt cho nhân viên
+        public IActionResult DanhSachChoDuyet()
+        {
+            var danhSach = _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .Where(d => d.TrangThai == "Chờ xác nhận")
+                .ToList();
+
+            return View(danhSach);
+        }
+
+        // Duyệt đơn
+        public async Task<IActionResult> Duyet(int id)
+        {
+            var don = await _context.DonPhucKhaos.FindAsync(id);
+            if (don == null) return NotFound();
+
+            var user = await _userManager.GetUserAsync(User); // lấy user hiện tại
+            var maNV = user?.MaNhanVienPhongDaoTao;
+
+            if (maNV == null)
+                return Unauthorized(); // Không xác định được mã nhân viên
+
+            don.MaNhanVienPhongDaoTao = maNV.Value;
+            don.TrangThai = "Đã duyệt";
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("DanhSachChoDuyet");
         }
     }
 

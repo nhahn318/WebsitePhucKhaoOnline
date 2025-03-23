@@ -212,7 +212,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                             returnUrl = Url.Content("~/GiangVien/Index");
                             break;
                         case "NhanVien":
-                            returnUrl = Url.Content("~/NhanVienPhongDaoTao/Index");
+                            returnUrl = Url.Content("~/PhucKhao/DanhSachChoDuyet");
                             break;
                     }
 
