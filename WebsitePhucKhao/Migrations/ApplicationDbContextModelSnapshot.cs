@@ -193,8 +193,8 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<int?>("MaNhanVienPhongDaoTao")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MaSinhVien")
-                        .HasColumnType("int");
+                    b.Property<long?>("MaSinhVien")
+                        .HasColumnType("bigint");
 
                     b.Property<int?>("NhanVienPhongDaoTaoMaNhanVienPhongDaoTao")
                         .HasColumnType("int");
@@ -267,8 +267,8 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<int>("MaMonHoc")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaSinhVien")
-                        .HasColumnType("int");
+                    b.Property<long>("MaSinhVien")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("TrangThaiPhucKhao")
                         .HasColumnType("bit");
@@ -341,8 +341,8 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<int?>("MaNhanVienPhongDaoTao")
                         .HasColumnType("int");
 
-                    b.Property<int>("MaSinhVien")
-                        .HasColumnType("int");
+                    b.Property<long>("MaSinhVien")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("NamHoc")
                         .HasColumnType("nvarchar(max)");
@@ -528,7 +528,10 @@ namespace WebsitePhucKhao.Migrations
             modelBuilder.Entity("WebsitePhucKhao.Models.Lop", b =>
                 {
                     b.Property<int>("MaLop")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaLop"));
 
                     b.Property<int?>("MaKhoa")
                         .HasColumnType("int");
@@ -617,8 +620,8 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.SinhVien", b =>
                 {
-                    b.Property<int>("MaSinhVien")
-                        .HasColumnType("int");
+                    b.Property<long>("MaSinhVien")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Email")
                         .IsRequired()

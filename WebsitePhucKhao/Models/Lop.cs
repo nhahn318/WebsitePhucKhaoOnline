@@ -5,7 +5,7 @@ namespace WebsitePhucKhao.Models {
     public class Lop {
         [Key]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MaLop { get; set; }
 
         [Required]

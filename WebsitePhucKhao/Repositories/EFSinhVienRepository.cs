@@ -17,12 +17,13 @@ namespace WebsitePhucKhao.Repositories {
                 .ToListAsync();
         }
 
-        public async Task<SinhVien?> GetByIdAsync(int maSinhVien)
+        public async Task<SinhVien?> GetByIdAsync(long maSinhVien)
         {
             return await _context.SinhViens
-                .Include(sv => sv.DonPhucKhaos) // Include nếu bạn cần thông tin liên quan
+                .Include(sv => sv.DonPhucKhaos)
                 .FirstOrDefaultAsync(sv => sv.MaSinhVien == maSinhVien);
         }
+
 
         public async Task AddAsync(SinhVien sinhVien)
         {
@@ -41,7 +42,7 @@ namespace WebsitePhucKhao.Repositories {
         }
 
 
-        public async Task DeleteAsync(int maSinhVien)
+        public async Task DeleteAsync(long maSinhVien)
         {
             var sinhVien = await _context.SinhViens.FindAsync(maSinhVien);
             if (sinhVien != null)
@@ -50,6 +51,7 @@ namespace WebsitePhucKhao.Repositories {
                 await _context.SaveChangesAsync();
             }
         }
+
 
         public async Task<IEnumerable<SinhVien>> GetAllWithDetailsAsync()
         {

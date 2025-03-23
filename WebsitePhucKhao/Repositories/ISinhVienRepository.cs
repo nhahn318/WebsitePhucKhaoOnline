@@ -3,10 +3,10 @@
 namespace WebsitePhucKhao.Repositories {
     public interface ISinhVienRepository {
         Task<IEnumerable<SinhVien>> GetAllAsync();
-        Task<SinhVien?> GetByIdAsync(int maSinhVien);
+        Task<SinhVien?> GetByIdAsync(long maSinhVien);
         Task AddAsync(SinhVien sinhVien);
         Task UpdateAsync(SinhVien sinhVien);
-        Task DeleteAsync(int maSinhVien);
+        Task DeleteAsync(long maSinhVien);
         public Task<IEnumerable<SinhVien>> GetAllWithDetailsAsync();
         Task<SinhVien?> GetByEmailAsync(string email);
     }

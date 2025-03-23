@@ -10,7 +10,7 @@ namespace WebsitePhucKhao.Models {
         public string HoTen { get; set; } = string.Empty;
 
         [ForeignKey("SinhVien")]
-        public int? MaSinhVien { get; set; }
+        public long? MaSinhVien { get; set; }
 
         public SinhVien? SinhVien { get; set; }
 

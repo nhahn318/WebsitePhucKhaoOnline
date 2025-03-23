@@ -69,7 +69,7 @@ namespace WebsitePhucKhao.Controllers
         }
 
         // Hiển thị thông tin chi tiết sinh viên
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
             if (sinhVien == null)
@@ -79,7 +79,7 @@ namespace WebsitePhucKhao.Controllers
             return View(sinhVien);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
             if (sinhVien == null)
@@ -100,7 +100,7 @@ namespace WebsitePhucKhao.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id, SinhVien sinhVien)
+        public async Task<IActionResult> Update(long id, SinhVien sinhVien)
         {
             ModelState.Remove("MatKhau"); // bỏ qua mật khẩu khi cập nhật nếu bạn không gửi lên
             if (ModelState.IsValid)
@@ -127,7 +127,7 @@ namespace WebsitePhucKhao.Controllers
         }
 
         // Hiển thị form xác nhận xóa sinh viên
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
             if (sinhVien == null)
@@ -138,7 +138,7 @@ namespace WebsitePhucKhao.Controllers
         }
 
         [HttpPost, ActionName("DeleteConfirmed")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             // Bước 1: Xóa tất cả user liên quan trong AspNetUsers trước
             var users = _context.Users.Where(u => u.MaSinhVien == id).ToList();

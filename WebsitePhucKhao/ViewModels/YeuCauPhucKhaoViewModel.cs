@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace WebsitePhucKhao.ViewModels {
     public class YeuCauPhucKhaoViewModel {
         [Required(ErrorMessage = "Vui lòng nhập mã số sinh viên")]
-        public int MaSinhVien { get; set; }
+        public long MaSinhVien { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập họ tên")]
         public string HoTen { get; set; } = null!;

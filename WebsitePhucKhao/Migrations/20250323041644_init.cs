@@ -132,7 +132,8 @@ namespace WebsitePhucKhao.Migrations
                 name: "Lops",
                 columns: table => new
                 {
-                    MaLop = table.Column<int>(type: "int", nullable: false),
+                    MaLop = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TenLop = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MaKhoa = table.Column<int>(type: "int", nullable: true)
                 },
@@ -172,7 +173,7 @@ namespace WebsitePhucKhao.Migrations
                 name: "SinhViens",
                 columns: table => new
                 {
-                    MaSinhVien = table.Column<int>(type: "int", nullable: false),
+                    MaSinhVien = table.Column<long>(type: "bigint", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -237,7 +238,7 @@ namespace WebsitePhucKhao.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaSinhVien = table.Column<int>(type: "int", nullable: true),
+                    MaSinhVien = table.Column<long>(type: "bigint", nullable: true),
                     MaGiangVien = table.Column<int>(type: "int", nullable: true),
                     GiangVienMaGiangVien = table.Column<int>(type: "int", nullable: true),
                     MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
@@ -283,7 +284,7 @@ namespace WebsitePhucKhao.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaSinhVien = table.Column<int>(type: "int", nullable: false),
+                    MaSinhVien = table.Column<long>(type: "bigint", nullable: false),
                     MaMonHoc = table.Column<int>(type: "int", nullable: false),
                     DiemGiuaKy = table.Column<double>(type: "float", nullable: true),
                     DiemCuoiKy = table.Column<double>(type: "float", nullable: true),
@@ -424,7 +425,7 @@ namespace WebsitePhucKhao.Migrations
                 {
                     MaDon = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaSinhVien = table.Column<int>(type: "int", nullable: false),
+                    MaSinhVien = table.Column<long>(type: "bigint", nullable: false),
                     DiemHienTai = table.Column<float>(type: "real", nullable: false),
                     DiemMongMuon = table.Column<float>(type: "real", nullable: false),
                     HocKy = table.Column<int>(type: "int", nullable: false),

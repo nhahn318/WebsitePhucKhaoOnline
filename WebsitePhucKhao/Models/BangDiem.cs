@@ -7,7 +7,7 @@ namespace WebsitePhucKhao.Models {
         public int Id { get; set; } // Khóa chính tự tăng
 
         [ForeignKey("SinhVien")]
-        public int MaSinhVien { get; set; }
+        public long MaSinhVien { get; set; }
         public SinhVien? SinhVien { get; set; }
 
         [ForeignKey("MonHoc")]

@@ -8,7 +8,7 @@ namespace WebsitePhucKhao.Models {
         public int MaDon { get; set; }
 
         [Required]
-        public int MaSinhVien { get; set; }
+        public long MaSinhVien { get; set; }
 
         [ForeignKey("MaSinhVien")]
         public SinhVien? SinhVien { get; set; }
