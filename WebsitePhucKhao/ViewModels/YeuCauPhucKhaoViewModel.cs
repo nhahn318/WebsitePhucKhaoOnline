@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebsitePhucKhao.ViewModels {
     public class YeuCauPhucKhaoViewModel {
+        public int MaDon { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập mã số sinh viên")]
         public long MaSinhVien { get; set; }
 
@@ -26,7 +28,10 @@ namespace WebsitePhucKhao.ViewModels {
 
 
         [Required(ErrorMessage = "Vui lòng nhập năm học")]
-        public string? NamHoc { get; set; }
+        [Display(Name = "Năm học")]
+        public int? MaNamHoc { get; set; } // ID năm học được chọn
+        public SelectList? DanhSachNamHoc { get; set; } // Dropdown năm học
+
 
         [Required(ErrorMessage = "Vui lòng nhập ngày thi")]
         public DateTime NgayThi { get; set; }
@@ -40,10 +45,12 @@ namespace WebsitePhucKhao.ViewModels {
         public string? LyDo { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn môn học")]
+        [Display(Name = "Môn học")]
         public int? MaMonHoc { get; set; }
         public SelectList? DanhSachMonHoc { get; set; }
 
         [Required(ErrorMessage = "Vui lòng chọn học kỳ")]
+        [Display(Name = "Học kỳ")]
         public int? MaHocKy { get; set; }
         public SelectList? DanhSachHocKy { get; set; }
     }

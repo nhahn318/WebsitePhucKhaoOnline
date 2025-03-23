@@ -17,14 +17,18 @@ namespace WebsitePhucKhao.Models {
         public float DiemMongMuon { get; set; }
 
         public int HocKy { get; set; }
-        public string? NamHoc { get; set; }
+        public int? MaNamHoc { get; set; }
+
+        [ForeignKey("MaNamHoc")]
+        public NamHoc? NamHoc { get; set; }
+
 
         public string? NhomLop { get; set; }
         public string? DiaDiemThi { get; set; }
         public string? PhongThi { get; set; }
-        public int? MaGiangVien { get; set; }
+        public long? MaGiangVien { get; set; }
         public GiangVien? GiangVien { get; set; }
-        public int? MaNhanVienPhongDaoTao { get; set; }
+        public long? MaNhanVienPhongDaoTao { get; set; }
         public NhanVienPhongDaoTao? NhanVienPhongDaoTao { get; set; }
         public string TrangThai { get; set; } = "Đang chờ xử lý";
         public DateTime NgayGui { get; set; } = DateTime.Now;

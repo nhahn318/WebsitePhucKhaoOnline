@@ -16,7 +16,7 @@ namespace WebsitePhucKhao.Models {
 
         public ICollection<LichThi>? LichThis { get; set; }
 
-        public int? MaGiangVien { get; set; }  
+        public long? MaGiangVien { get; set; }  
         public GiangVien? GiangVien { get; set; }
 
         // Quan hệ giữa MonHoc và DonPhucKhao (1:N)

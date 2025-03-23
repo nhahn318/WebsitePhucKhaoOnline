@@ -7,7 +7,7 @@ namespace WebsitePhucKhao.Models {
         [Key]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MaGiangVien { get; set; }
+        public long MaGiangVien { get; set; }
 
         [Required]
         [StringLength(255)]

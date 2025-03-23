@@ -17,7 +17,7 @@ namespace WebsitePhucKhao.Repositories {
             return await _context.GiangViens.ToListAsync();
         }
 
-        public async Task<GiangVien?> GetByIdAsync(int maGiangVien)
+        public async Task<GiangVien?> GetByIdAsync(long maGiangVien)
         {
             return await _context.GiangViens.FindAsync(maGiangVien);
         }
@@ -38,7 +38,7 @@ namespace WebsitePhucKhao.Repositories {
             }
         }
 
-        public async Task DeleteAsync(int maGiangVien)
+        public async Task DeleteAsync(long maGiangVien)
         {
             var giangVien = await _context.GiangViens.FindAsync(maGiangVien);
             if (giangVien != null)

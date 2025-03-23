@@ -66,31 +66,32 @@ namespace WebsitePhucKhao.Controllers {
             if (don == null || don.TrangThai != "Chờ xác nhận")
                 return NotFound();
 
-            var viewModel = new YeuCauPhucKhaoViewModel
+            var viewModel = new SuaPhucKhaoViewModel
             {
-                MaSinhVien = don.MaSinhVien,
+                MaDon = don.MaDon,
                 DiemHienTai = don.DiemHienTai,
                 DiemMongMuon = don.DiemMongMuon,
                 MaMonHoc = don.MaMonHoc,
                 MaHocKy = don.HocKy,
-                NamHoc = don.NamHoc,
+                MaNamHoc = don.MaNamHoc,
                 DiaDiemThi = don.DiaDiemThi,
                 PhongThi = don.PhongThi,
                 LyDo = don.LyDo,
+                DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc"),
+                DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy"),
+                DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc")
             };
-
-            viewModel.DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc");
-            viewModel.DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy");
 
             return View(viewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, YeuCauPhucKhaoViewModel model)
+        public async Task<IActionResult> Edit(SuaPhucKhaoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var don = await _context.DonPhucKhaos.FindAsync(id);
+                var don = await _context.DonPhucKhaos.FindAsync(model.MaDon);
                 if (don == null || don.TrangThai != "Chờ xác nhận")
                     return NotFound();
 
@@ -98,7 +99,7 @@ namespace WebsitePhucKhao.Controllers {
                 don.DiemMongMuon = model.DiemMongMuon;
                 don.MaMonHoc = model.MaMonHoc;
                 don.HocKy = model.MaHocKy ?? 0;
-                don.NamHoc = model.NamHoc;
+                don.MaNamHoc = model.MaNamHoc ?? 0;
                 don.DiaDiemThi = model.DiaDiemThi;
                 don.PhongThi = model.PhongThi;
                 don.LyDo = model.LyDo;
@@ -109,13 +110,17 @@ namespace WebsitePhucKhao.Controllers {
 
             model.DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc");
             model.DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy");
+            model.DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc");
 
             return View(model);
         }
+
         public async Task<IActionResult> Delete(int id)
         {
             var don = await _context.DonPhucKhaos
                 .Include(d => d.MonHoc)
+                .Include(d => d.SinhVien)    
+                .Include(d => d.NamHoc)
                 .FirstOrDefaultAsync(d => d.MaDon == id);
 
             if (don == null || don.TrangThai != "Chờ xác nhận")
@@ -123,11 +128,12 @@ namespace WebsitePhucKhao.Controllers {
 
             return View(don); // Hiển thị xác nhận xóa
         }
-        [HttpPost, ActionName("Delete")]
+
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int maDon)
         {
-            var don = await _context.DonPhucKhaos.FindAsync(id);
+            var don = await _context.DonPhucKhaos.FindAsync(maDon);
             if (don != null && don.TrangThai == "Chờ xác nhận")
             {
                 _context.DonPhucKhaos.Remove(don);
@@ -136,6 +142,7 @@ namespace WebsitePhucKhao.Controllers {
 
             return RedirectToAction("DanhSachDonPhucKhao");
         }
+
 
 
         //======================================================GIANGVIEN===============================================
@@ -181,6 +188,7 @@ namespace WebsitePhucKhao.Controllers {
 
             var monHocs = await _context.MonHocs.ToListAsync();
             var hocKys = await _context.HocKys.ToListAsync();
+            var namHocs = await _context.NamHocs.ToListAsync();
 
             var model = new YeuCauPhucKhaoViewModel
             {
@@ -190,7 +198,8 @@ namespace WebsitePhucKhao.Controllers {
                 SoDienThoai = sinhVien.SoDienThoai,
                 Lop = sinhVien.Lop?.TenLop ?? "Không có lớp",
                 DanhSachMonHoc = new SelectList(monHocs, "MaMonHoc", "TenMonHoc"),
-                DanhSachHocKy = new SelectList(hocKys, "MaHocKy", "TenHocKy")
+                DanhSachHocKy = new SelectList(hocKys, "MaHocKy", "TenHocKy"),
+                DanhSachNamHoc = new SelectList(namHocs, "MaNamHoc", "TenNamHoc")
             };
 
             return View(model);
@@ -201,6 +210,7 @@ namespace WebsitePhucKhao.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(YeuCauPhucKhaoViewModel model)
         {
+           
             if (ModelState.IsValid)
             {
                 var sinhVien = await _context.SinhViens.FindAsync(model.MaSinhVien);
@@ -217,6 +227,7 @@ namespace WebsitePhucKhao.Controllers {
                     };
                     _context.SinhViens.Add(sinhVien);
                 }
+                var namHoc = await _context.NamHocs.FindAsync(model.MaNamHoc);
 
                 var donPhucKhao = new DonPhucKhao
                 {
@@ -227,7 +238,7 @@ namespace WebsitePhucKhao.Controllers {
                     MaLichThi = null,
                     MaGiangVien = model.MaGiangVien,
                     HocKy = model.MaHocKy ?? 0,
-                    NamHoc = model.NamHoc,
+                    MaNamHoc = model.MaNamHoc ?? 0,
                     DiaDiemThi = model.DiaDiemThi,
                     PhongThi = model.PhongThi,
                     LyDo = model.LyDo,
@@ -268,7 +279,7 @@ namespace WebsitePhucKhao.Controllers {
         }
 
         // Duyệt đơn
-        public async Task<IActionResult> Duyet(int id)
+        public async Task<IActionResult> Duyet(long id)
         {
             var don = await _context.DonPhucKhaos.FindAsync(id);
             if (don == null) return NotFound();

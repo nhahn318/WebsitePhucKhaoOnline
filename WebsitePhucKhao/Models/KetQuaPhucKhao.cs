@@ -14,7 +14,7 @@ namespace WebsitePhucKhao.Models {
         public DateTime NgayCapNhat { get; set; } = DateTime.Now;
 
         // Thêm khóa ngoại đến GiangVien
-        public int? MaGiangVien { get; set; } 
+        public long? MaGiangVien { get; set; } 
         public GiangVien? GiangVien { get; set; } 
     }
 }

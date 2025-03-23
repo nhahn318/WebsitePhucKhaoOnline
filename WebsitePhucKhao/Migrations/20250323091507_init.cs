@@ -55,7 +55,7 @@ namespace WebsitePhucKhao.Migrations
                 name: "NhanVienPhongDaoTaos",
                 columns: table => new
                 {
-                    MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: false),
+                    MaNhanVienPhongDaoTao = table.Column<long>(type: "bigint", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
@@ -111,7 +111,7 @@ namespace WebsitePhucKhao.Migrations
                 name: "GiangViens",
                 columns: table => new
                 {
-                    MaGiangVien = table.Column<int>(type: "int", nullable: false),
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
@@ -213,7 +213,7 @@ namespace WebsitePhucKhao.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenMonHoc = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     MaHocKy = table.Column<int>(type: "int", nullable: true),
-                    MaGiangVien = table.Column<int>(type: "int", nullable: true)
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -239,10 +239,10 @@ namespace WebsitePhucKhao.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     HoTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaSinhVien = table.Column<long>(type: "bigint", nullable: true),
-                    MaGiangVien = table.Column<int>(type: "int", nullable: true),
-                    GiangVienMaGiangVien = table.Column<int>(type: "int", nullable: true),
-                    MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
-                    NhanVienPhongDaoTaoMaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: true),
+                    GiangVienMaGiangVien = table.Column<long>(type: "bigint", nullable: true),
+                    MaNhanVienPhongDaoTao = table.Column<long>(type: "bigint", nullable: true),
+                    NhanVienPhongDaoTaoMaNhanVienPhongDaoTao = table.Column<long>(type: "bigint", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -429,12 +429,12 @@ namespace WebsitePhucKhao.Migrations
                     DiemHienTai = table.Column<float>(type: "real", nullable: false),
                     DiemMongMuon = table.Column<float>(type: "real", nullable: false),
                     HocKy = table.Column<int>(type: "int", nullable: false),
-                    NamHoc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaNamHoc = table.Column<int>(type: "int", nullable: true),
                     NhomLop = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiaDiemThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhongThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MaGiangVien = table.Column<int>(type: "int", nullable: true),
-                    MaNhanVienPhongDaoTao = table.Column<int>(type: "int", nullable: true),
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: true),
+                    MaNhanVienPhongDaoTao = table.Column<long>(type: "bigint", nullable: true),
                     TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayGui = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -463,6 +463,11 @@ namespace WebsitePhucKhao.Migrations
                         principalColumn: "MaMonHoc",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_DonPhucKhaos_NamHocs_MaNamHoc",
+                        column: x => x.MaNamHoc,
+                        principalTable: "NamHocs",
+                        principalColumn: "MaNamHoc");
+                    table.ForeignKey(
                         name: "FK_DonPhucKhaos_NhanVienPhongDaoTaos_MaNhanVienPhongDaoTao",
                         column: x => x.MaNhanVienPhongDaoTao,
                         principalTable: "NhanVienPhongDaoTaos",
@@ -483,12 +488,12 @@ namespace WebsitePhucKhao.Migrations
                     MaChiTiet = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MaDon = table.Column<int>(type: "int", nullable: false),
-                    MaGiangVienPhucKhao = table.Column<int>(type: "int", nullable: true),
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: true),
                     DiemSauPhucKhao = table.Column<float>(type: "real", nullable: true),
                     NhanXet = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayChamLai = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrangThaiPhucKhao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaNhanVienDuyet = table.Column<int>(type: "int", nullable: true)
+                    MaNhanVienDuyet = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -500,8 +505,8 @@ namespace WebsitePhucKhao.Migrations
                         principalColumn: "MaDon",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DonPhucKhaoChiTiet_GiangViens_MaGiangVienPhucKhao",
-                        column: x => x.MaGiangVienPhucKhao,
+                        name: "FK_DonPhucKhaoChiTiet_GiangViens_MaGiangVien",
+                        column: x => x.MaGiangVien,
                         principalTable: "GiangViens",
                         principalColumn: "MaGiangVien",
                         onDelete: ReferentialAction.SetNull);
@@ -542,7 +547,7 @@ namespace WebsitePhucKhao.Migrations
                     DiemCuoiCung = table.Column<float>(type: "real", nullable: false),
                     GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MaGiangVien = table.Column<int>(type: "int", nullable: true)
+                    MaGiangVien = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -638,9 +643,9 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaDon");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DonPhucKhaoChiTiet_MaGiangVienPhucKhao",
+                name: "IX_DonPhucKhaoChiTiet_MaGiangVien",
                 table: "DonPhucKhaoChiTiet",
-                column: "MaGiangVienPhucKhao");
+                column: "MaGiangVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaoChiTiet_MaNhanVienDuyet",
@@ -661,6 +666,11 @@ namespace WebsitePhucKhao.Migrations
                 name: "IX_DonPhucKhaos_MaMonHoc",
                 table: "DonPhucKhaos",
                 column: "MaMonHoc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaos_MaNamHoc",
+                table: "DonPhucKhaos",
+                column: "MaNamHoc");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaos_MaNhanVienPhongDaoTao",

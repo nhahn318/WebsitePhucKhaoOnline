@@ -170,9 +170,9 @@ namespace WebsitePhucKhao.Models {
 
             // Mối quan hệ giữa DonPhucKhaoChiTiet và GiangVien (1:N)
             modelBuilder.Entity<DonPhucKhaoChiTiet>()
-                .HasOne(dpct => dpct.GiangVienPhucKhao)
+                .HasOne(dpct => dpct.GiangVien)
                 .WithMany(gv => gv.DonPhucKhaoChiTiets)
-                .HasForeignKey(dpct => dpct.MaGiangVienPhucKhao)
+                .HasForeignKey(dpct => dpct.MaGiangVien)
                 .OnDelete(DeleteBehavior.SetNull); // Nếu giảng viên bị xóa, đơn vẫn tồn tại
 
             // Mối quan hệ giữa DonPhucKhaoChiTiet và NhanVienPhongDaoTao (1:N)

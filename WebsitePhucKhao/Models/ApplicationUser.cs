@@ -14,10 +14,10 @@ namespace WebsitePhucKhao.Models {
 
         public SinhVien? SinhVien { get; set; }
 
-        public int? MaGiangVien { get; set; }
+        public long? MaGiangVien { get; set; }
         public GiangVien? GiangVien { get; set; }
 
-        public int? MaNhanVienPhongDaoTao { get; set; }
+        public long? MaNhanVienPhongDaoTao { get; set; }
         public NhanVienPhongDaoTao? NhanVienPhongDaoTao { get; set; }
     }
 }

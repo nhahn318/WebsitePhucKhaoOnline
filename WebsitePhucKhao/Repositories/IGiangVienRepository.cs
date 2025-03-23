@@ -3,10 +3,10 @@
 namespace WebsitePhucKhao.Repositories {
     public interface IGiangVienRepository {
         Task<IEnumerable<GiangVien>> GetAllAsync();
-        Task<GiangVien?> GetByIdAsync(int maGiangVien);
+        Task<GiangVien?> GetByIdAsync(long maGiangVien);
         Task AddAsync(GiangVien giangVien);
         Task UpdateAsync(GiangVien giangVien);
-        Task DeleteAsync(int maGiangVien);
+        Task DeleteAsync(long maGiangVien);
         Task<IEnumerable<GiangVien>> GetAllWithDetailsAsync();
     }
 }

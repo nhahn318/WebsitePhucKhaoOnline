@@ -41,8 +41,7 @@
             </div>
 
 
-        
-
+      
             <div class="form-group">
                 <label asp-for="DiemHienTai"></label>
                 <input asp-for="DiemHienTai" class="form-control" step="0.01" />
@@ -74,10 +73,13 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="NamHoc"></label>
-                <input asp-for="NamHoc" class="form-control" placeholder="Ví dụ: 2024-2025" />
-                <span asp-validation-for="NamHoc" class="text-danger"></span>
+                <label asp-for="MaNamHoc"></label>
+                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-control">
+                    <option value="">-- Chọn năm học --</option>
+                </select>
+                <span asp-validation-for="MaNamHoc" class="text-danger"></span>
             </div>
+
 
             <div class="form-group">
                 <label asp-for="NgayThi"></label>

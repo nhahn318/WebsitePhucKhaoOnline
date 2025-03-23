@@ -46,7 +46,7 @@ namespace WebsitePhucKhao.Controllers {
         }
 
         // Hiển thị thông tin chi tiết giảng viên
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(long id)
         {
             var giangVien = await _giangVienRepository.GetByIdAsync(id);
             if (giangVien == null)
@@ -56,7 +56,7 @@ namespace WebsitePhucKhao.Controllers {
             return View(giangVien);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(long id)
         {
             var giangVien = await _giangVienRepository.GetByIdAsync(id);
             if (giangVien == null)
@@ -71,7 +71,7 @@ namespace WebsitePhucKhao.Controllers {
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(int id, GiangVien giangVien)
+        public async Task<IActionResult> Update(long id, GiangVien giangVien)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace WebsitePhucKhao.Controllers {
         }
 
         // Hiển thị form xác nhận xóa giảng viên
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(long id)
         {
             var giangVien = await _giangVienRepository.GetByIdAsync(id);
             if (giangVien == null)
@@ -105,7 +105,7 @@ namespace WebsitePhucKhao.Controllers {
         }
 
         [HttpPost, ActionName("DeleteConfirmed")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var giangVien = await _giangVienRepository.GetByIdAsync(id);
             if (giangVien != null)

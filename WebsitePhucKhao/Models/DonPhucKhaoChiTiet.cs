@@ -13,8 +13,8 @@ namespace WebsitePhucKhao.Models {
             public DonPhucKhao? DonPhucKhao { get; set; }
 
             [ForeignKey("GiangVien")]
-            public int? MaGiangVienPhucKhao { get; set; } // Giảng viên được phân công chấm
-            public GiangVien? GiangVienPhucKhao { get; set; }
+            public long? MaGiangVien { get; set; } // Giảng viên được phân công chấm
+            public GiangVien? GiangVien { get; set; }
 
             public float? DiemSauPhucKhao { get; set; } // Điểm sau phúc khảo
             public string? NhanXet { get; set; }  // Nhận xét từ giảng viên
@@ -24,7 +24,7 @@ namespace WebsitePhucKhao.Models {
             public string TrangThaiPhucKhao { get; set; } = "Chưa chấm"; // Trạng thái phúc khảo (Chưa chấm, Đã chấm)
 
             [ForeignKey("NhanVienPhongDaoTao")]
-            public int? MaNhanVienDuyet { get; set; }  // Nhân viên duyệt đơn này
+            public long? MaNhanVienDuyet { get; set; }  // Nhân viên duyệt đơn này
             public NhanVienPhongDaoTao? NhanVienDuyet { get; set; }
         }
 
