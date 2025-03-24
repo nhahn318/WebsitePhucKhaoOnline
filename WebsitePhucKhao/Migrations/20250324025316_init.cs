@@ -482,7 +482,7 @@ namespace WebsitePhucKhao.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DonPhucKhaoChiTiet",
+                name: "DonPhucKhaoChiTiets",
                 columns: table => new
                 {
                     MaChiTiet = table.Column<int>(type: "int", nullable: false)
@@ -497,21 +497,21 @@ namespace WebsitePhucKhao.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DonPhucKhaoChiTiet", x => x.MaChiTiet);
+                    table.PrimaryKey("PK_DonPhucKhaoChiTiets", x => x.MaChiTiet);
                     table.ForeignKey(
-                        name: "FK_DonPhucKhaoChiTiet_DonPhucKhaos_MaDon",
+                        name: "FK_DonPhucKhaoChiTiets_DonPhucKhaos_MaDon",
                         column: x => x.MaDon,
                         principalTable: "DonPhucKhaos",
                         principalColumn: "MaDon",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DonPhucKhaoChiTiet_GiangViens_MaGiangVien",
+                        name: "FK_DonPhucKhaoChiTiets_GiangViens_MaGiangVien",
                         column: x => x.MaGiangVien,
                         principalTable: "GiangViens",
                         principalColumn: "MaGiangVien",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_DonPhucKhaoChiTiet_NhanVienPhongDaoTaos_MaNhanVienDuyet",
+                        name: "FK_DonPhucKhaoChiTiets_NhanVienPhongDaoTaos_MaNhanVienDuyet",
                         column: x => x.MaNhanVienDuyet,
                         principalTable: "NhanVienPhongDaoTaos",
                         principalColumn: "MaNhanVienPhongDaoTao",
@@ -638,18 +638,18 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaKhoa");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DonPhucKhaoChiTiet_MaDon",
-                table: "DonPhucKhaoChiTiet",
+                name: "IX_DonPhucKhaoChiTiets_MaDon",
+                table: "DonPhucKhaoChiTiets",
                 column: "MaDon");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DonPhucKhaoChiTiet_MaGiangVien",
-                table: "DonPhucKhaoChiTiet",
+                name: "IX_DonPhucKhaoChiTiets_MaGiangVien",
+                table: "DonPhucKhaoChiTiets",
                 column: "MaGiangVien");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DonPhucKhaoChiTiet_MaNhanVienDuyet",
-                table: "DonPhucKhaoChiTiet",
+                name: "IX_DonPhucKhaoChiTiets_MaNhanVienDuyet",
+                table: "DonPhucKhaoChiTiets",
                 column: "MaNhanVienDuyet");
 
             migrationBuilder.CreateIndex(
@@ -765,7 +765,7 @@ namespace WebsitePhucKhao.Migrations
                 name: "BangDiems");
 
             migrationBuilder.DropTable(
-                name: "DonPhucKhaoChiTiet");
+                name: "DonPhucKhaoChiTiets");
 
             migrationBuilder.DropTable(
                 name: "HinhAnhBaiThis");

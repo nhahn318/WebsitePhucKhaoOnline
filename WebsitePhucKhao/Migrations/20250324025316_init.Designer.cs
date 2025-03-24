@@ -12,7 +12,7 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250323091507_init")]
+    [Migration("20250324025316_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -700,7 +700,7 @@ namespace WebsitePhucKhao.Migrations
 
                     b.HasIndex("MaNhanVienDuyet");
 
-                    b.ToTable("DonPhucKhaoChiTiet");
+                    b.ToTable("DonPhucKhaoChiTiets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

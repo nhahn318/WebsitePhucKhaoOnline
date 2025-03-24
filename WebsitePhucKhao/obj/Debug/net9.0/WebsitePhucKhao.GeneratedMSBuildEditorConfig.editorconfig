@@ -244,6 +244,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/PhucKhao/ChiTietUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cQ2hpVGlldFVwbG9hZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/PhucKhao/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -272,8 +276,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/PhucKhao/EditUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cRWRpdFVwbG9hZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/PhucKhao/OutsidePhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cT3V0c2lkZVBodWNLaGFvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/PhucKhao/UploadBaiThi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGh1Y0toYW9cVXBsb2FkQmFpVGhpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhao/Views/Shared/Error.cshtml]

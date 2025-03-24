@@ -24,6 +24,8 @@ namespace WebsitePhucKhao.Models {
         public DbSet<LichThi> LichThis { get; set; }
         public DbSet<NamHoc> NamHocs { get; set; }
         public DbSet<BangDiem> BangDiems { get; set; }
+        public DbSet<DonPhucKhaoChiTiet> DonPhucKhaoChiTiets { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

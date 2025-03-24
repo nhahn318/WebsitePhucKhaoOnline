@@ -1,0 +1,45 @@
+﻿@model WebsitePhucKhao.ViewModels.ChiTietUploadViewModel
+
+<h3>Chi tiết bài thi đã upload</h3>
+
+<h5>Thông tin đơn phúc khảo</h5>
+<ul>
+    <li><strong>Mã đơn:</strong> @Model.Don.MaDon</li>
+    <li><strong>Sinh viên:</strong> @Model.Don.SinhVien?.HoTen</li>
+    <li><strong>Môn học:</strong> @Model.Don.MonHoc?.TenMonHoc</li>
+    <li><strong>Ngày gửi:</strong> @Model.Don.NgayGui.ToString("dd/MM/yyyy")</li>
+</ul>
+
+<h5>Ảnh bài thi:</h5>
+@if (Model.DanhSachAnh.Any())
+{
+    <div class="row">
+        @foreach (var anh in Model.DanhSachAnh)
+        {
+            <div class="col-md-4 mb-3">
+                <img src="@anh.DuongDanFile" alt="Ảnh bài thi" class="img-fluid border p-2" />
+                <p class="text-muted">Tải lên lúc: @anh.NgayTaiLen</p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Chưa có ảnh bài thi được upload.</p>
+}
+
+<h5>Thông tin giảng viên chấm lại:</h5>
+@if (Model.ChiTiet != null)
+{
+    <ul>
+        <li><strong>Giảng viên:</strong> @Model.ChiTiet.GiangVien?.HoTen</li>
+        <li><strong>Trạng thái:</strong> @Model.ChiTiet.TrangThaiPhucKhao</li>
+        <li><strong>Điểm sau phúc khảo:</strong> @Model.ChiTiet.DiemSauPhucKhao</li>
+        <li><strong>Nhận xét:</strong> @Model.ChiTiet.NhanXet</li>
+    </ul>
+    <a asp-action="DanhSachChoDuyet" class="btn btn-secondary">Quay lại</a>
+}
+else
+{
+    <p>Chưa phân công giảng viên chấm lại.</p>
+}

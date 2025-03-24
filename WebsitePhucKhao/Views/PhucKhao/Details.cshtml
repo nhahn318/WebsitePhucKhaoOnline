@@ -14,7 +14,7 @@
         <tr><th>Điểm hiện tại</th><td>@Model.DiemHienTai</td></tr>
         <tr><th>Điểm mong muốn</th><td>@Model.DiemMongMuon</td></tr>
         <tr><th>Học kỳ</th><td>@Model.HocKy</td></tr>
-        <tr><th>Năm học</th><td>@Model.NamHoc</td></tr>
+        <tr><th>Năm học</th><td>@Model.NamHoc?.TenNamHoc</td></tr>
         <tr><th>Ngày gửi</th><td>@Model.NgayGui.ToString("dd/MM/yyyy")</td></tr>
         <tr><th>Phòng thi</th><td>@Model.PhongThi</td></tr>
         <tr><th>Địa điểm thi</th><td>@Model.DiaDiemThi</td></tr>
@@ -23,4 +23,4 @@
     </table>
 </div>
 
-<a asp-action="DanhSachDonPhucKhao" class="btn btn-secondary">Quay lại</a>
+<a asp-action="DanhSachChoDuyet" class="btn btn-secondary">Quay lại</a>

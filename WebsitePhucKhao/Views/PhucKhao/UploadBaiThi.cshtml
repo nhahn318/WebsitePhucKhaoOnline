@@ -1,0 +1,46 @@
+﻿@model WebsitePhucKhao.ViewModels.UploadBaiThiViewModel
+
+<h3>Upload bài thi và phân công giảng viên</h3>
+
+<form asp-action="UploadBaiThi" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="MaDon" />
+
+    <div class="form-group">
+        <label>Chọn ảnh bài thi:</label>
+        <input type="file" name="files" id="fileInput" class="form-control" multiple accept="image/*" onchange="previewFiles()" />
+    </div>
+
+    <div class="form-group">
+        <label>Giảng viên chấm:</label>
+        <select asp-for="MaGiangVien" asp-items="ViewBag.GiangViens" class="form-control"></select>
+    </div>
+
+    <div id="previewArea" class="row mt-3"></div>
+
+    <button type="submit" class="btn btn-primary mt-3">Lưu</button>
+    <a asp-action="DanhSachChoDuyet" class="btn btn-secondary">Quay lại</a>
+</form>
+
+@section Scripts {
+    <script>
+        function previewFiles() {
+            const preview = document.getElementById("previewArea");
+            const files = document.getElementById("fileInput").files;
+            preview.innerHTML = ""; // Xóa ảnh cũ nếu reselect
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                       const img = document.createElement("img");
+                       img.src = e.target.result;
+                       img.className = "img-thumbnail m-2";
+                       img.style.maxHeight = "200px";
+                       img.style.height = "auto";
+                       img.style.width = "auto";
+                       preview.appendChild(img);
+                     };
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+}

@@ -1,0 +1,40 @@
+﻿@model WebsitePhucKhao.ViewModels.EditUploadViewModel
+
+@{
+    ViewData["Title"] = "Sửa Ảnh Bài Thi";
+}
+
+<h2>Sửa Upload Bài Thi</h2>
+
+<form asp-action="EditUpload" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="MaDon" />
+
+    <div class="form-group">
+        <label>Chọn giảng viên chấm lại:</label>
+        <select asp-for="MaGiangVien" asp-items="Model.DanhSachGiangVien" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Ảnh đã upload:</label>
+        <div class="row">
+            @foreach (var anh in Model.DanhSachAnh)
+            {
+                    <div class="col-md-3 text-center mb-3">
+                        <img src="@anh.DuongDanFile" class="img-thumbnail" width="150" />
+                        <div>
+                            <input type="checkbox" name="AnhCanXoa" value="@anh.MaHinhAnh" />
+                            <label>Xoá</label>
+                        </div>
+                    </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Thêm ảnh mới:</label>
+        <input type="file" name="AnhMoi" multiple class="form-control-file" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="DanhSachChoDuyet" class="btn btn-secondary">Quay lại</a>
+</form>

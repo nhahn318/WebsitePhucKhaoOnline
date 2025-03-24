@@ -22,8 +22,26 @@
                 <td>@Model[i].MonHoc?.TenMonHoc</td>
                 <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
                 <td>@Model[i].TrangThai</td>
+
+
                 <td>
-                    <a asp-action="Duyet" asp-route-id="@Model[i].MaDon" class="btn btn-success">Duyệt</a>
+
+                    <a asp-action="Details" asp-route-id="@Model[i].MaDon" class="btn btn-info btn-sm">Chi tiết</a>
+
+                    @if (Model[i].TrangThai == "Chờ xác nhận")
+                    {
+                        <a asp-action="Duyet" asp-route-id="@Model[i].MaDon" class="btn btn-success btn-sm">Duyệt</a>
+                    }
+
+                    @if (Model[i].TrangThai == "Đã duyệt")
+                    {
+                        <a asp-action="UploadBaiThi" asp-route-maDon="@Model[i].MaDon" class="btn btn-warning btn-sm">Upload bài thi</a>
+                        <a asp-action="ChiTietUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">Xem Upload</a>
+                        <a asp-action="EditUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">
+                            Sửa Upload
+                        </a>
+
+                    }
                 </td>
             </tr>
         }

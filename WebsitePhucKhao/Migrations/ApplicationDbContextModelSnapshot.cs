@@ -697,7 +697,7 @@ namespace WebsitePhucKhao.Migrations
 
                     b.HasIndex("MaNhanVienDuyet");
 
-                    b.ToTable("DonPhucKhaoChiTiet");
+                    b.ToTable("DonPhucKhaoChiTiets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
