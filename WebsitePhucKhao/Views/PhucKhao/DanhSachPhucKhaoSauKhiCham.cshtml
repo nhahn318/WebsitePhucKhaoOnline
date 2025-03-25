@@ -1,0 +1,42 @@
+﻿@model List<WebsitePhucKhao.ViewModels.DonPhucKhaoSauKhiChamViewModel>
+
+<h2>Kết quả phúc khảo đã chấm</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Ngày gửi</th>
+            <th>Điểm cũ</th>
+            <th>Điểm sau</th>
+            <th>Nhận xét</th>
+            <th>Bài giải tay</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.STT</td>
+                <td>@item.NgayGui.ToString("dd/MM/yyyy")</td>
+                <td>@item.DiemHienTai</td>
+                <td>@item.DiemSauPhucKhao</td>
+                <td>@item.NhanXet</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.BaiGiaiTayUrl))
+                    {
+                        <a href="@item.BaiGiaiTayUrl" target="_blank">Xem bài</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <a asp-action="DanhSachDonPhucKhao" class="btn btn-outline-primary mb-3">
+        ← Quay về đơn đang xử lý
+    </a>
+
+</table>

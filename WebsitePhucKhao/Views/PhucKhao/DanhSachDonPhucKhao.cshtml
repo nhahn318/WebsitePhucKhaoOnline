@@ -1,4 +1,5 @@
-﻿@model IEnumerable<dynamic>
+﻿@model IEnumerable<WebsitePhucKhao.ViewModels.DanhSachDonPhucKhaoViewModel>
+@using WebsitePhucKhao.Enums
 
 <h2>Danh sách đơn phúc khảo</h2>
 <a asp-controller="PhucKhao" asp-action="Create" class="btn btn-primary mb-3">Tạo đơn mới</a>
@@ -18,14 +19,23 @@
             <tr>
                 <td>@don.STT</td>
                 <td>@don.NgayGui.ToString("dd/MM/yyyy")</td>
-                <td>@don.TrangThai</td>
+                <td>@don.TrangThai.ToFriendlyString()</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@don.MaDon" class="btn btn-info btn-sm">Chi tiết</a>
 
-                    @if (don.TrangThai == "Chờ xác nhận")
+                    @if (don.TrangThai == TrangThaiPhucKhao.ChoXacNhan)
                     {
                         <a asp-action="Edit" asp-route-id="@don.MaDon" class="btn btn-warning btn-sm">Sửa</a>
                         <a asp-action="Delete" asp-route-id="@don.MaDon" class="btn btn-danger btn-sm">Xóa</a>
+                    }
+                    else if (don.TrangThai == TrangThaiPhucKhao.DaCham)
+                    {
+                        <a asp-action="DanhSachPhucKhaoSauKhiCham" asp-route-maDon="@don.MaDon" class="btn btn-success btn-sm">
+                            Xem kết quả
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@don.MaDon" class="btn btn-info btn-sm">Chi tiết</a>
                     }
                 </td>
             </tr>

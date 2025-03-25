@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WebsitePhucKhao.Enums;
 
 namespace WebsitePhucKhao.Models {
 
@@ -20,7 +21,7 @@ namespace WebsitePhucKhao.Models {
 
         public DateTime NgayChamLai { get; set; } = DateTime.Now;  // Ngày giảng viên chấm lại
 
-        public string TrangThaiPhucKhao { get; set; } = "Chưa chấm"; // Trạng thái phúc khảo (Chưa chấm, Đã chấm)
+        public TrangThaiPhucKhao TrangThai { get; set; }
 
         [ForeignKey("NhanVienPhongDaoTao")]
         public long? MaNhanVienDuyet { get; set; }  // Nhân viên duyệt đơn này
@@ -34,5 +35,7 @@ namespace WebsitePhucKhao.Models {
         [ForeignKey("MonHoc")]
         public int? MaMonHoc { get; set; }
         public MonHoc? MonHoc { get; set; }
+        public string? BaiGiaiTayUrl { get; set; }
+
     }
 }

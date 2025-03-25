@@ -11,5 +11,7 @@ namespace WebsitePhucKhao.ViewModels {
         public string? LyDo { get; set; }
         public List<HinhAnhBaiThi> DanhSachAnh { get; set; } = new();
         public float? DiemSauPhucKhao { get; set; }
+        public IFormFile? BaiGiaiTay { get; set; }
+        public string? BaiGiaiTayUrl { get; set; }
     }
 }

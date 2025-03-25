@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.ViewModels;
+using Humanizer;
+using WebsitePhucKhao.Enums;
 
 namespace WebsitePhucKhao.Controllers {
     public class GiangVienController : Controller {
@@ -126,6 +128,8 @@ namespace WebsitePhucKhao.Controllers {
 
             return RedirectToAction(nameof(Index));
         }
+
+
         public async Task<IActionResult> PhucKhaoDuocPhanCong()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -146,11 +150,13 @@ namespace WebsitePhucKhao.Controllers {
                 TenMonHoc = d.MonHoc?.TenMonHoc ?? "Không rõ",
                 NgayChamLai = d.NgayChamLai,
                 NguoiDuyet = d.NhanVienDuyet?.HoTen ?? "Chưa duyệt",
-                DiemSauPhucKhao = d.DiemSauPhucKhao
+                DiemSauPhucKhao = d.DiemSauPhucKhao,
+                TrangThaiPhucKhao = d.DonPhucKhao?.TrangThai ?? TrangThaiPhucKhao.ChoXacNhan
             }).ToList();
 
             return View(danhSachViewModel);
         }
+        //====================================================================CHAM DIEM BAI PHUC KHAO===========================================
 
         public async Task<IActionResult> ChamDiem(int maDon)
         {
@@ -185,22 +191,44 @@ namespace WebsitePhucKhao.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChamDiem(int MaDon, float DiemSauPhucKhao, string? NhanXet)
+        public async Task<IActionResult> ChamDiem(int MaDon, float DiemSauPhucKhao, string? NhanXet, IFormFile? BaiGiaiTay)
         {
-            var chiTiet = await _context.DonPhucKhaoChiTiets
-                .FirstOrDefaultAsync(c => c.MaDon == MaDon);
-
-            if (chiTiet == null)
-                return NotFound();
+            var chiTiet = await _context.DonPhucKhaoChiTiets.FirstOrDefaultAsync(c => c.MaDon == MaDon);
+            if (chiTiet == null) return NotFound();
 
             chiTiet.DiemSauPhucKhao = DiemSauPhucKhao;
             chiTiet.NgayChamLai = DateTime.Now;
             chiTiet.NhanXet = NhanXet;
 
-            await _context.SaveChangesAsync();
+            if (BaiGiaiTay != null && BaiGiaiTay.Length > 0)
+            {
+                var folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "bai-giai-tay");
+                if (!Directory.Exists(folder))
+                    Directory.CreateDirectory(folder);
 
+                var fileName = $"{MaDon}_{Path.GetFileName(BaiGiaiTay.FileName)}";
+                var filePath = Path.Combine(folder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await BaiGiaiTay.CopyToAsync(stream);
+                }
+
+                chiTiet.BaiGiaiTayUrl = "/bai-giai-tay/" + fileName; 
+            }
+
+            var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == MaDon);
+            if (don != null)
+            {
+                don.TrangThai = TrangThaiPhucKhao.DaCham;
+            }
+
+            await _context.SaveChangesAsync();
             return RedirectToAction("PhucKhaoDuocPhanCong");
         }
+
+
+
         public async Task<IActionResult> DetailChamDiem(int maDon)
         {
             var don = await _context.DonPhucKhaos
@@ -228,11 +256,73 @@ namespace WebsitePhucKhao.Controllers {
                 DiemMongMuon = don.DiemMongMuon,
                 DiemSauPhucKhao = chiTiet.DiemSauPhucKhao,
                 NhanXet = chiTiet.NhanXet,
-                DanhSachAnh = hinhAnh
+                DanhSachAnh = hinhAnh,
+                BaiGiaiTayUrl = chiTiet.BaiGiaiTayUrl
             };
 
             return View(viewModel);
         }
+
+        public async Task<IActionResult> EditChamDiem(int maDon)
+        {
+            var chiTiet = await _context.DonPhucKhaoChiTiets
+                .Include(c => c.DonPhucKhao)
+                .ThenInclude(d => d.SinhVien)
+                .Include(c => c.DonPhucKhao.MonHoc)
+                .FirstOrDefaultAsync(c => c.MaDon == maDon);
+
+            if (chiTiet == null) return NotFound();
+
+            var hinhAnh = await _context.HinhAnhBaiThis
+                .Where(h => h.MaDon == maDon)
+                .ToListAsync();
+
+            var model = new ChamDiemViewModel
+            {
+                MaDon = maDon,
+                TenSinhVien = chiTiet.DonPhucKhao?.SinhVien?.HoTen,
+                TenMonHoc = chiTiet.DonPhucKhao?.MonHoc?.TenMonHoc,
+                DiemTruocPhucKhao = chiTiet.DonPhucKhao?.DiemHienTai,
+                DiemMongMuon = chiTiet.DonPhucKhao?.DiemMongMuon,
+                DiemSauPhucKhao = chiTiet.DiemSauPhucKhao,
+                NhanXet = chiTiet.NhanXet,
+                BaiGiaiTayUrl = chiTiet.BaiGiaiTayUrl,
+                DanhSachAnh = hinhAnh
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditChamDiem(ChamDiemViewModel model)
+        {
+            var chiTiet = await _context.DonPhucKhaoChiTiets.FirstOrDefaultAsync(c => c.MaDon == model.MaDon);
+            if (chiTiet == null) return NotFound();
+
+            chiTiet.DiemSauPhucKhao = model.DiemSauPhucKhao;
+            chiTiet.NhanXet = model.NhanXet;
+            chiTiet.NgayChamLai = DateTime.Now;
+
+            // Nếu có bài giải tay mới
+            if (model.BaiGiaiTay != null && model.BaiGiaiTay.Length > 0)
+            {
+                var uploadFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "bai-giai-tay");
+                if (!Directory.Exists(uploadFolder)) Directory.CreateDirectory(uploadFolder);
+
+                var fileName = $"{model.MaDon}_{Path.GetFileName(model.BaiGiaiTay.FileName)}";
+                var filePath = Path.Combine(uploadFolder, fileName);
+
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await model.BaiGiaiTay.CopyToAsync(stream);
+
+                chiTiet.BaiGiaiTayUrl = "/bai-giai-tay/" + fileName;
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("DetailChamDiem", new { maDon = model.MaDon });
+        }
+
 
 
 

@@ -60,6 +60,8 @@ C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\bootstrap
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\jquery\dist\jquery.slim.min.js
+wwwroot\bai-giai-tay\1_ChuKy.jpg
+wwwroot\bai-giai-tay\1_DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
@@ -126,3 +128,4 @@ wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\uploads\DACS_TranThienNhan_NguyenHuynhNam.jpg
 wwwroot\uploads\DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg
 wwwroot\uploads\Playerflip.gif
+wwwroot\uploads\z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg

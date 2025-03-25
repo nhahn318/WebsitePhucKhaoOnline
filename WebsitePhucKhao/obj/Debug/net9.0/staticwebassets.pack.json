@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\WebsitePhucKhao.aj8fwwb0mz.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\1_ChuKy.jpg",
+      "PackagePath": "staticwebassets\\bai-giai-tay\\1_ChuKy.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\1_DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg",
+      "PackagePath": "staticwebassets\\bai-giai-tay\\1_DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -267,6 +275,10 @@
     {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\Playerflip.gif",
       "PackagePath": "staticwebassets\\uploads\\Playerflip.gif"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg",
+      "PackagePath": "staticwebassets\\uploads\\z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.WebsitePhucKhao.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

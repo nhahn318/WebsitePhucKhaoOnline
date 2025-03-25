@@ -162,12 +162,12 @@ namespace WebsitePhucKhao.Models {
                 .WithMany(m => m.BangDiems)
                 .HasForeignKey(b => b.MaMonHoc);
 
-            // Mối quan hệ giữa DonPhucKhao và DonPhucKhaoChiTiet (1:N)
-            modelBuilder.Entity<DonPhucKhaoChiTiet>()
-                .HasOne(dpct => dpct.DonPhucKhao)
-                .WithMany(dp => dp.DanhSachPhucKhaoChiTiet)
-                .HasForeignKey(dpct => dpct.MaDon)
-                .OnDelete(DeleteBehavior.Cascade); // Xóa chi tiết khi đơn bị xóa
+            modelBuilder.Entity<DonPhucKhao>()
+                .HasOne(d => d.ChiTietPhucKhao)
+                .WithOne()
+                .HasForeignKey<DonPhucKhaoChiTiet>(ct => ct.MaDon)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
             // Mối quan hệ giữa DonPhucKhaoChiTiet và GiangVien (1:N)
             modelBuilder.Entity<DonPhucKhaoChiTiet>()

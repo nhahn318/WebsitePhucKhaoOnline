@@ -14,6 +14,7 @@ namespace WebsitePhucKhao.Repositories {
         {
             var danhSach = await _context.DonPhucKhaoChiTiets
             .Include(d => d.GiangVien)
+            .Include(d => d.SinhVien)
             .Include(d => d.DonPhucKhao)           
             .Include(d => d.NhanVienDuyet)
             .Include(d => d.MonHoc)

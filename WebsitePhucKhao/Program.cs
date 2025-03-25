@@ -51,6 +51,7 @@ builder.Services.AddScoped<IMonHocRepository, EFMonHocRepository>();
 builder.Services.AddScoped<IBangDiemRepository, EFBangDiemRepository>();
 builder.Services.AddScoped<ILopRepository, EFLopRepository>();
 builder.Services.AddScoped<IDonPhucKhaoChiTietRepository, EFDonPhucKhaoChiTietRepository>();
+builder.Services.AddScoped<IPhucKhaoRepository, EFPhucKhaoRepository>();
 
 
 

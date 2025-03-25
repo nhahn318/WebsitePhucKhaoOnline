@@ -1,4 +1,5 @@
-﻿@model List<WebsitePhucKhao.ViewModels.PhucKhaoDuocPhanCongViewModel>
+﻿@model IEnumerable<WebsitePhucKhao.ViewModels.PhucKhaoDuocPhanCongViewModel>
+@using WebsitePhucKhao.Enums
 
 <table class="table">
     <thead>
@@ -25,20 +26,21 @@
                 <td>@item.NgayChamLai?.ToString("dd/MM/yyyy")</td>
                 <td>@item.NguoiDuyet</td>
                 <td>
-                <td>
-                        @if (item.DiemSauPhucKhao != null)
-                        {
+                    @if (item.DiemSauPhucKhao != null || item.TrangThaiPhucKhao == TrangThaiPhucKhao.DaCham)
+                    {
                         <a asp-controller="GiangVien" asp-action="DetailChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-success">
                             Xem chi tiết
                         </a>
-                        }
-                        else
-                        {
+                        <a asp-action="EditChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-warning btn-sm">
+                            Sửa chấm điểm
+                        </a>
+                    }
+                    else
+                    {
                         <a asp-controller="GiangVien" asp-action="ChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-primary">
                             Chấm điểm
                         </a>
-                        }
-                </td>
+                    }
                 </td>
             </tr>
         }

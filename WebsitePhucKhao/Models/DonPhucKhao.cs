@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using WebsitePhucKhao.Enums;
 
 
 namespace WebsitePhucKhao.Models {
@@ -30,7 +31,7 @@ namespace WebsitePhucKhao.Models {
         public GiangVien? GiangVien { get; set; }
         public long? MaNhanVienPhongDaoTao { get; set; }
         public NhanVienPhongDaoTao? NhanVienPhongDaoTao { get; set; }
-        public string TrangThai { get; set; } = "Đang chờ xử lý";
+        public TrangThaiPhucKhao TrangThai { get; set; }
         public DateTime NgayGui { get; set; } = DateTime.Now;
 
         [Required]
@@ -47,8 +48,7 @@ namespace WebsitePhucKhao.Models {
         public int? MaMonHoc { get; set; }  // Khóa ngoại liên kết với MonHoc
         public MonHoc? MonHoc { get; set; }  // Thuộc tính điều hướng đến MonHoc
 
-        public ICollection<DonPhucKhaoChiTiet>? DanhSachPhucKhaoChiTiet { get; set; }
-
+        public DonPhucKhaoChiTiet? ChiTietPhucKhao { get; set; }
     }
 
 }

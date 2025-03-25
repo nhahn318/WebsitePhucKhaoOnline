@@ -435,7 +435,7 @@ namespace WebsitePhucKhao.Migrations
                     PhongThi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaGiangVien = table.Column<long>(type: "bigint", nullable: true),
                     MaNhanVienPhongDaoTao = table.Column<long>(type: "bigint", nullable: true),
-                    TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrangThai = table.Column<int>(type: "int", nullable: false),
                     NgayGui = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaLichThi = table.Column<int>(type: "int", nullable: true),
@@ -488,18 +488,25 @@ namespace WebsitePhucKhao.Migrations
                     MaChiTiet = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MaDon = table.Column<int>(type: "int", nullable: false),
+                    DonPhucKhaoMaDon = table.Column<int>(type: "int", nullable: true),
                     MaGiangVien = table.Column<long>(type: "bigint", nullable: true),
                     DiemSauPhucKhao = table.Column<float>(type: "real", nullable: true),
                     NhanXet = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayChamLai = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TrangThaiPhucKhao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrangThai = table.Column<int>(type: "int", nullable: false),
                     MaNhanVienDuyet = table.Column<long>(type: "bigint", nullable: true),
                     MaSinhVien = table.Column<long>(type: "bigint", nullable: true),
-                    MaMonHoc = table.Column<int>(type: "int", nullable: true)
+                    MaMonHoc = table.Column<int>(type: "int", nullable: true),
+                    BaiGiaiTayUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DonPhucKhaoChiTiets", x => x.MaChiTiet);
+                    table.ForeignKey(
+                        name: "FK_DonPhucKhaoChiTiets_DonPhucKhaos_DonPhucKhaoMaDon",
+                        column: x => x.DonPhucKhaoMaDon,
+                        principalTable: "DonPhucKhaos",
+                        principalColumn: "MaDon");
                     table.ForeignKey(
                         name: "FK_DonPhucKhaoChiTiets_DonPhucKhaos_MaDon",
                         column: x => x.MaDon,
@@ -650,9 +657,15 @@ namespace WebsitePhucKhao.Migrations
                 column: "MaKhoa");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DonPhucKhaoChiTiets_DonPhucKhaoMaDon",
+                table: "DonPhucKhaoChiTiets",
+                column: "DonPhucKhaoMaDon");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaoChiTiets_MaDon",
                 table: "DonPhucKhaoChiTiets",
-                column: "MaDon");
+                column: "MaDon",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DonPhucKhaoChiTiets_MaGiangVien",

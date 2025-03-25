@@ -1,4 +1,5 @@
-﻿using WebsitePhucKhao.Models;
+﻿using WebsitePhucKhao.Enums;
+using WebsitePhucKhao.Models;
 
 namespace WebsitePhucKhao.ViewModels {
     public class PhucKhaoDuocPhanCongViewModel {
@@ -13,7 +14,6 @@ namespace WebsitePhucKhao.ViewModels {
         public DateTime? NgayChamLai { get; set; }
         public string? NguoiDuyet { get; set; }
         public float? DiemSauPhucKhao { get; set; }
-
+        public TrangThaiPhucKhao TrangThaiPhucKhao { get; set; }
     }
-
 }

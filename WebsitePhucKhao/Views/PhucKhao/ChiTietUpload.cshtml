@@ -1,4 +1,5 @@
 ﻿@model WebsitePhucKhao.ViewModels.ChiTietUploadViewModel
+@using WebsitePhucKhao.Enums
 
 <h3>Chi tiết bài thi đã upload</h3>
 
@@ -33,7 +34,7 @@ else
 {
     <ul>
         <li><strong>Giảng viên:</strong> @Model.ChiTiet.GiangVien?.HoTen</li>
-        <li><strong>Trạng thái:</strong> @Model.ChiTiet.TrangThaiPhucKhao</li>
+        <li><strong>Trạng thái:</strong> @Model.ChiTiet.TrangThai.ToFriendlyString()</li>
         <li><strong>Điểm sau phúc khảo:</strong> @Model.ChiTiet.DiemSauPhucKhao</li>
         <li><strong>Nhận xét:</strong> @Model.ChiTiet.NhanXet</li>
     </ul>

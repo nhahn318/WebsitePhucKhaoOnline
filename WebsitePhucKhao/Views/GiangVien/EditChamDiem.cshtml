@@ -1,0 +1,57 @@
+﻿@model WebsitePhucKhao.ViewModels.ChamDiemViewModel
+@{
+    ViewData["Title"] = "Sửa chấm điểm phúc khảo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="EditChamDiem" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="MaDon" />
+
+    <div class="mb-3">
+        <label>Sinh viên:</label> <strong>@Model.TenSinhVien</strong>
+    </div>
+    <div class="mb-3">
+        <label>Môn học:</label> <strong>@Model.TenMonHoc</strong>
+    </div>
+    <div class="mb-3">
+        <label>Điểm hiện tại:</label> <strong>@Model.DiemTruocPhucKhao</strong>
+    </div>
+    <div class="mb-3">
+        <label>Điểm mong muốn:</label> <strong>@Model.DiemMongMuon</strong>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DiemSauPhucKhao">Điểm chấm lại</label>
+        <input asp-for="DiemSauPhucKhao" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NhanXet">Nhận xét của giảng viên</label>
+        <textarea asp-for="NhanXet" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Ảnh bài thi:</label>
+        <div class="row">
+            @foreach (var anh in Model.DanhSachAnh ?? new List<WebsitePhucKhao.Models.HinhAnhBaiThi>())
+            {
+                <div class="col-md-4 mb-2">
+                    <img src="@anh.DuongDanFile" class="img-thumbnail" style="max-height: 300px;" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label>File bài giải tay (nếu muốn thay)</label>
+        <input asp-for="BaiGiaiTay" type="file" class="form-control" />
+        @if (!string.IsNullOrEmpty(Model.BaiGiaiTayUrl))
+        {
+            <p class="mt-2">Bài giải tay hiện tại: <a href="@Model.BaiGiaiTayUrl" target="_blank">Xem/Tải</a></p>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="DetailChamDiem" asp-route-maDon="@Model.MaDon" class="btn btn-secondary ms-2">← Quay lại</a>
+</form>

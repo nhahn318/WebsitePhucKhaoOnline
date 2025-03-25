@@ -356,9 +356,8 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<string>("PhongThi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TrangThai")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("MaDon");
 
@@ -385,8 +384,14 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaChiTiet"));
 
+                    b.Property<string>("BaiGiaiTayUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float?>("DiemSauPhucKhao")
                         .HasColumnType("real");
+
+                    b.Property<int?>("DonPhucKhaoMaDon")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaDon")
                         .HasColumnType("int");
@@ -409,13 +414,15 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<string>("NhanXet")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TrangThaiPhucKhao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("MaChiTiet");
 
-                    b.HasIndex("MaDon");
+                    b.HasIndex("DonPhucKhaoMaDon");
+
+                    b.HasIndex("MaDon")
+                        .IsUnique();
 
                     b.HasIndex("MaGiangVien");
 
@@ -859,8 +866,12 @@ namespace WebsitePhucKhao.Migrations
             modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
-                        .WithMany("DanhSachPhucKhaoChiTiet")
-                        .HasForeignKey("MaDon")
+                        .WithMany()
+                        .HasForeignKey("DonPhucKhaoMaDon");
+
+                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", null)
+                        .WithOne("ChiTietPhucKhao")
+                        .HasForeignKey("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", "MaDon")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1018,7 +1029,7 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhao", b =>
                 {
-                    b.Navigation("DanhSachPhucKhaoChiTiet");
+                    b.Navigation("ChiTietPhucKhao");
 
                     b.Navigation("HinhAnhBaiThis");
 
