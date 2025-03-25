@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using WebsitePhucKhao.Models.WebsitePhucKhao.Models;
+
 
 namespace WebsitePhucKhao.Models {
     public class DonPhucKhao {

@@ -1,0 +1,29 @@
+﻿@model List<WebsitePhucKhao.ViewModels.PhucKhaoDuocPhanCongViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã Đơn</th>
+            <th>Môn Học</th>
+            <th>Điểm Trước Phúc Khảo</th>
+            <th>Điểm Mong Muốn</th>
+            <th>Lý Do</th>
+            <th>Ngày Chấm Lại</th>
+            <th>Người Duyệt</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MaDon</td>
+                <td>@item.TenMonHoc</td>
+                <td>@item.DiemTruocPhucKhao</td>
+                <td>@item.DiemMongMuon</td>
+                <td>@item.LyDo</td>
+                <td>@item.NgayChamLai?.ToString("dd/MM/yyyy")</td>
+                <td>@item.NguoiDuyet</td>
+            </tr>
+        }
+    </tbody>
+</table>

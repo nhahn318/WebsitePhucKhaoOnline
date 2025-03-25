@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using WebsitePhucKhao.Models.WebsitePhucKhao.Models;
+
 
 namespace WebsitePhucKhao.Controllers {
     public class PhucKhaoController : Controller {
@@ -352,11 +352,18 @@ namespace WebsitePhucKhao.Controllers {
                 }
             }
 
+            var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == model.MaDon);
+            if (don == null)
+            {
+                return NotFound("Không tìm thấy đơn phúc khảo.");
+            }
+
             // Lưu phân công giảng viên
             var chiTiet = new DonPhucKhaoChiTiet
             {
                 MaDon = model.MaDon,
                 MaGiangVien = model.MaGiangVien,
+                MaMonHoc = don.MaMonHoc ?? 0,
                 MaNhanVienDuyet = (await _userManager.GetUserAsync(User))?.MaNhanVienPhongDaoTao
             };
             _context.DonPhucKhaoChiTiets.Add(chiTiet);

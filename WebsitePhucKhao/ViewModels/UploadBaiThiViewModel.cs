@@ -5,6 +5,7 @@ namespace WebsitePhucKhao.ViewModels {
 
         [Required(ErrorMessage = "Chọn giảng viên chấm lại")]
         public long MaGiangVien { get; set; }
+/*        public int? MaMonHoc { get; set; }*/
     }
 
 }

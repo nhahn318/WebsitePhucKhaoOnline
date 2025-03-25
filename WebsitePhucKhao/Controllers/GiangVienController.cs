@@ -4,16 +4,24 @@ using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using WebsitePhucKhao.ViewModels;
 
 namespace WebsitePhucKhao.Controllers {
     public class GiangVienController : Controller {
         private readonly IGiangVienRepository _giangVienRepository;
         private readonly IKhoaRepository _khoaRepository;
+        private readonly IDonPhucKhaoChiTietRepository _DonPhucKhaoChiTietRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository)
+
+        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager)
         {
             _giangVienRepository = giangVienRepository;
             _khoaRepository = khoaRepository;
+            _DonPhucKhaoChiTietRepository = donPhucKhaoChiTietRepository;
+            _userManager = userManager;
         }
 
         // Hiển thị danh sách giảng viên
@@ -115,5 +123,32 @@ namespace WebsitePhucKhao.Controllers {
 
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> PhucKhaoDuocPhanCong()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            var giangVien = await _giangVienRepository.GetByEmailAsync(user.Email);
+            if (giangVien == null) return RedirectToAction("AccessDenied", "Account");
+
+            var danhSachDon = await _DonPhucKhaoChiTietRepository.GetPhucKhaoByGiangVienAsync(giangVien.MaGiangVien);
+
+            // Chuyển đổi danh sách DonPhucKhaoChiTiet thành ViewModel
+            var danhSachViewModel = danhSachDon.Select(d => new PhucKhaoDuocPhanCongViewModel
+            {
+                MaDon = d.MaDon,
+                DiemTruocPhucKhao = d.DonPhucKhao?.DiemHienTai ?? 0,
+                DiemMongMuon = d.DonPhucKhao?.DiemMongMuon ?? 0,           
+                LyDo = d.DonPhucKhao?.LyDo ?? "Không có lý do",
+                TenMonHoc = d.MonHoc?.TenMonHoc ?? "Không rõ",
+                NgayChamLai = d.NgayChamLai,
+                NguoiDuyet = d.NhanVienDuyet?.HoTen ?? "Chưa duyệt"
+            }).ToList();
+
+            return View(danhSachViewModel);
+        }
+
+
+
     }
 }

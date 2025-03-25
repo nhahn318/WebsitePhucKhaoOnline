@@ -8,5 +8,7 @@ namespace WebsitePhucKhao.Repositories {
         Task UpdateAsync(GiangVien giangVien);
         Task DeleteAsync(long maGiangVien);
         Task<IEnumerable<GiangVien>> GetAllWithDetailsAsync();
+        Task<GiangVien> GetByEmailAsync(string email);
+
     }
 }

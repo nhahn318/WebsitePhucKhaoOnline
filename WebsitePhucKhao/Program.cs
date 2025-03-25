@@ -50,6 +50,7 @@ builder.Services.AddScoped<INamHocRepository, EFNamHocRepository>();
 builder.Services.AddScoped<IMonHocRepository, EFMonHocRepository>();
 builder.Services.AddScoped<IBangDiemRepository, EFBangDiemRepository>();
 builder.Services.AddScoped<ILopRepository, EFLopRepository>();
+builder.Services.AddScoped<IDonPhucKhaoChiTietRepository, EFDonPhucKhaoChiTietRepository>();
 
 
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uvFMCLDxpnABjBdMB58xns5abmIWhIBPdmoahH10UmY=",
+  "Hash": "qZ76FbRXEljIQ8Sn39bIijmJEomGNkihnubyuYWucfM=",
   "Source": "WebsitePhucKhao",
   "BasePath": "_content/WebsitePhucKhao",
   "Mode": "Default",
@@ -5351,6 +5351,27 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam.jpg",
+      "SourceId": "WebsitePhucKhao",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\",
+      "BasePath": "_content/WebsitePhucKhao",
+      "RelativePath": "uploads/DACS_TranThienNhan_NguyenHuynhNam#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "y5np27uxj2",
+      "Integrity": "hh/lPVrA42RZrlbS8zEmyqQvZ20X22te67FUfwalQ9U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam.jpg"
+    },
+    {
       "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg",
       "SourceId": "WebsitePhucKhao",
       "SourceType": "Discovered",
@@ -5370,6 +5391,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\Playerflip.gif",
+      "SourceId": "WebsitePhucKhao",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\",
+      "BasePath": "_content/WebsitePhucKhao",
+      "RelativePath": "uploads/Playerflip#[.{fingerprint}]?.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "con8q1iorx",
+      "Integrity": "JLjQ9KeUrpPT1yN5wE7kI32fCk1+G0VbvP+q/nj+Vs4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Playerflip.gif"
     }
   ],
   "Endpoints": [
@@ -34794,6 +34836,88 @@
       ]
     },
     {
+      "Route": "uploads/DACS_TranThienNhan_NguyenHuynhNam.jpg",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hh/lPVrA42RZrlbS8zEmyqQvZ20X22te67FUfwalQ9U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 15:23:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hh/lPVrA42RZrlbS8zEmyqQvZ20X22te67FUfwalQ9U="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/DACS_TranThienNhan_NguyenHuynhNam.y5np27uxj2.jpg",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "470458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hh/lPVrA42RZrlbS8zEmyqQvZ20X22te67FUfwalQ9U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 15:23:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "y5np27uxj2"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/DACS_TranThienNhan_NguyenHuynhNam.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hh/lPVrA42RZrlbS8zEmyqQvZ20X22te67FUfwalQ9U="
+        }
+      ]
+    },
+    {
       "Route": "uploads/DACS_TranThienNhan_NguyenHuynhNam_Tuan2.ckmxb3qpuu.jpg",
       "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg",
       "Selectors": [],
@@ -34816,7 +34940,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Mar 2025 03:13:20 GMT"
+          "Value": "Tue, 25 Mar 2025 02:40:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34861,7 +34985,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 24 Mar 2025 03:13:20 GMT"
+          "Value": "Tue, 25 Mar 2025 02:40:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34872,6 +34996,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-fKeTkCyBU3I17vihFNjn7O5czT06IBipJX1rHFnAnNo="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/Playerflip.con8q1iorx.gif",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\Playerflip.gif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12288"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/gif"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JLjQ9KeUrpPT1yN5wE7kI32fCk1+G0VbvP+q/nj+Vs4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 13:56:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "con8q1iorx"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/Playerflip.gif"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JLjQ9KeUrpPT1yN5wE7kI32fCk1+G0VbvP+q/nj+Vs4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/Playerflip.gif",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhao\\wwwroot\\uploads\\Playerflip.gif",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12288"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/gif"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JLjQ9KeUrpPT1yN5wE7kI32fCk1+G0VbvP+q/nj+Vs4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 24 Mar 2025 13:56:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JLjQ9KeUrpPT1yN5wE7kI32fCk1+G0VbvP+q/nj+Vs4="
         }
       ]
     },
@@ -34900,7 +35106,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -34961,7 +35167,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35006,7 +35212,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35061,7 +35267,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35122,7 +35328,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35167,7 +35373,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35222,7 +35428,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35275,7 +35481,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35312,7 +35518,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35359,7 +35565,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35412,7 +35618,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -35449,7 +35655,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 09 Mar 2025 13:31:00 GMT"
+          "Value": "Mon, 24 Mar 2025 13:53:16 GMT"
         },
         {
           "Name": "Cache-Control",

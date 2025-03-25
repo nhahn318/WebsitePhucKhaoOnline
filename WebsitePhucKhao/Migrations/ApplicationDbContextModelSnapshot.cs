@@ -377,6 +377,57 @@ namespace WebsitePhucKhao.Migrations
                     b.ToTable("DonPhucKhaos");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
+                {
+                    b.Property<int>("MaChiTiet")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaChiTiet"));
+
+                    b.Property<float?>("DiemSauPhucKhao")
+                        .HasColumnType("real");
+
+                    b.Property<int>("MaDon")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("MaGiangVien")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("MaMonHoc")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("MaNhanVienDuyet")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("MaSinhVien")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("NgayChamLai")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NhanXet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrangThaiPhucKhao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaChiTiet");
+
+                    b.HasIndex("MaDon");
+
+                    b.HasIndex("MaGiangVien");
+
+                    b.HasIndex("MaMonHoc");
+
+                    b.HasIndex("MaNhanVienDuyet");
+
+                    b.HasIndex("MaSinhVien");
+
+                    b.ToTable("DonPhucKhaoChiTiets");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.GiangVien", b =>
                 {
                     b.Property<long>("MaGiangVien")
@@ -659,47 +710,6 @@ namespace WebsitePhucKhao.Migrations
                     b.ToTable("SinhViens");
                 });
 
-            modelBuilder.Entity("WebsitePhucKhao.Models.WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
-                {
-                    b.Property<int>("MaChiTiet")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaChiTiet"));
-
-                    b.Property<float?>("DiemSauPhucKhao")
-                        .HasColumnType("real");
-
-                    b.Property<int>("MaDon")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("MaGiangVien")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("MaNhanVienDuyet")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("NgayChamLai")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NhanXet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TrangThaiPhucKhao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("MaChiTiet");
-
-                    b.HasIndex("MaDon");
-
-                    b.HasIndex("MaGiangVien");
-
-                    b.HasIndex("MaNhanVienDuyet");
-
-                    b.ToTable("DonPhucKhaoChiTiets");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -846,6 +856,43 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("SinhVien");
                 });
 
+            modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
+                {
+                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
+                        .WithMany("DanhSachPhucKhaoChiTiet")
+                        .HasForeignKey("MaDon")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebsitePhucKhao.Models.GiangVien", "GiangVien")
+                        .WithMany("DonPhucKhaoChiTiets")
+                        .HasForeignKey("MaGiangVien")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("WebsitePhucKhao.Models.MonHoc", "MonHoc")
+                        .WithMany()
+                        .HasForeignKey("MaMonHoc");
+
+                    b.HasOne("WebsitePhucKhao.Models.NhanVienPhongDaoTao", "NhanVienDuyet")
+                        .WithMany("DonPhucKhaoChiTiets")
+                        .HasForeignKey("MaNhanVienDuyet")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("WebsitePhucKhao.Models.SinhVien", "SinhVien")
+                        .WithMany()
+                        .HasForeignKey("MaSinhVien");
+
+                    b.Navigation("DonPhucKhao");
+
+                    b.Navigation("GiangVien");
+
+                    b.Navigation("MonHoc");
+
+                    b.Navigation("NhanVienDuyet");
+
+                    b.Navigation("SinhVien");
+                });
+
             modelBuilder.Entity("WebsitePhucKhao.Models.GiangVien", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.Khoa", "Khoa")
@@ -962,31 +1009,6 @@ namespace WebsitePhucKhao.Migrations
                     b.Navigation("Khoa");
 
                     b.Navigation("Lop");
-                });
-
-            modelBuilder.Entity("WebsitePhucKhao.Models.WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
-                {
-                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
-                        .WithMany("DanhSachPhucKhaoChiTiet")
-                        .HasForeignKey("MaDon")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebsitePhucKhao.Models.GiangVien", "GiangVien")
-                        .WithMany("DonPhucKhaoChiTiets")
-                        .HasForeignKey("MaGiangVien")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("WebsitePhucKhao.Models.NhanVienPhongDaoTao", "NhanVienDuyet")
-                        .WithMany("DonPhucKhaoChiTiets")
-                        .HasForeignKey("MaNhanVienDuyet")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("DonPhucKhao");
-
-                    b.Navigation("GiangVien");
-
-                    b.Navigation("NhanVienDuyet");
                 });
 
             modelBuilder.Entity("WebsitePhucKhao.Models.ChuyenNganh", b =>
