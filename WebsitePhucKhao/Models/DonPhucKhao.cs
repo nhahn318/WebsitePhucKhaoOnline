@@ -36,6 +36,15 @@ namespace WebsitePhucKhao.Models {
         [Required]
         public string? LyDo { get; set; }
 
+
+        //gửi email thông báo sinh viên
+        public string EmailSinhVien { get; set; }
+        
+        public bool DaGuiEmail { get; set; }
+
+
+        //Liên kết các mối quan hệ
+
         public ICollection<HinhAnhBaiThi>? HinhAnhBaiThis { get; set; }
         public KetQuaPhucKhao? KetQuaPhucKhao { get; set; }
 

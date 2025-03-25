@@ -4,17 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using WebsitePhucKhao.Repositories;
 
 
 namespace WebsitePhucKhao.Controllers {
     public class PhucKhaoController : Controller {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICustomEmailSender _emailSender;
 
-        public PhucKhaoController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        
+
+        public PhucKhaoController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICustomEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         public async Task<IActionResult> DanhSachDonPhucKhao()
@@ -244,6 +250,8 @@ namespace WebsitePhucKhao.Controllers {
                     DiaDiemThi = model.DiaDiemThi,
                     PhongThi = model.PhongThi,
                     LyDo = model.LyDo,
+                    EmailSinhVien = sinhVien.Email,
+                    DaGuiEmail = false,
                     TrangThai = "Chờ xác nhận",
                     NgayGui = DateTime.Now
                 };
@@ -492,7 +500,39 @@ namespace WebsitePhucKhao.Controllers {
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Duyet(int id, bool chapNhan)
+        {
+            var don = await _context.DonPhucKhaos.FindAsync(id);
+            if (don == null) return NotFound();
 
+            // Cập nhật trạng thái đơn
+            don.TrangThai = chapNhan ? "Đã duyệt" : "Từ chối";
+
+            // Soạn nội dung email
+            string ketQua = chapNhan ? "được DUYỆT" : "bị TỪ CHỐI";
+            string noiDung = $@"
+                                Chào bạn,
+
+                                Đơn phúc khảo của bạn đã {ketQua}.
+                                Trạng thái hiện tại: {don.TrangThai}
+
+                                Trân trọng,
+                                Phòng đào tạo
+                                ";
+
+            // Gửi email nếu chưa gửi
+            if (!don.DaGuiEmail && !string.IsNullOrEmpty(don.EmailSinhVien))
+            {
+                await _emailSender.SendEmailAsync(don.EmailSinhVien, "Kết quả đơn phúc khảo", noiDung);
+                don.DaGuiEmail = true;
+            }
+
+            // Lưu thay đổi vào database
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("DanhSachChoDuyet");
+        }
     }
 
 }

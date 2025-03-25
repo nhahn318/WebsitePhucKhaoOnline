@@ -313,6 +313,9 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDon"));
 
+                    b.Property<bool>("DaGuiEmail")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DiaDiemThi")
                         .HasColumnType("nvarchar(max)");
 
@@ -321,6 +324,10 @@ namespace WebsitePhucKhao.Migrations
 
                     b.Property<float>("DiemMongMuon")
                         .HasColumnType("real");
+
+                    b.Property<string>("EmailSinhVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HocKy")
                         .HasColumnType("int");

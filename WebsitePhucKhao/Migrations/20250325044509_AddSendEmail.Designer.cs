@@ -12,8 +12,8 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250325023816_init")]
-    partial class init
+    [Migration("20250325044509_AddSendEmail")]
+    partial class AddSendEmail
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,6 +316,9 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDon"));
 
+                    b.Property<bool>("DaGuiEmail")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DiaDiemThi")
                         .HasColumnType("nvarchar(max)");
 
@@ -324,6 +327,10 @@ namespace WebsitePhucKhao.Migrations
 
                     b.Property<float>("DiemMongMuon")
                         .HasColumnType("real");
+
+                    b.Property<string>("EmailSinhVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HocKy")
                         .HasColumnType("int");

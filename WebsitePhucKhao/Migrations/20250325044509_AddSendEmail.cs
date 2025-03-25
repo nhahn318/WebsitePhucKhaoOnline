@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebsitePhucKhao.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class AddSendEmail : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -438,6 +438,8 @@ namespace WebsitePhucKhao.Migrations
                     TrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayGui = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailSinhVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DaGuiEmail = table.Column<bool>(type: "bit", nullable: false),
                     MaLichThi = table.Column<int>(type: "int", nullable: true),
                     MaMonHoc = table.Column<int>(type: "int", nullable: true)
                 },

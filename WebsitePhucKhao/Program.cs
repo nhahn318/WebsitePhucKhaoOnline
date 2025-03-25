@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
@@ -52,7 +53,8 @@ builder.Services.AddScoped<IBangDiemRepository, EFBangDiemRepository>();
 builder.Services.AddScoped<ILopRepository, EFLopRepository>();
 builder.Services.AddScoped<IDonPhucKhaoChiTietRepository, EFDonPhucKhaoChiTietRepository>();
 
-
+//Gửi email
+builder.Services.AddTransient<ICustomEmailSender, EFEmailSender>();
 
 
 
