@@ -12,6 +12,8 @@ namespace WebsitePhucKhao.ViewModels {
         public string? LyDo { get; set; }
         public DateTime? NgayChamLai { get; set; }
         public string? NguoiDuyet { get; set; }
+        public float? DiemSauPhucKhao { get; set; }
+
     }
 
 }

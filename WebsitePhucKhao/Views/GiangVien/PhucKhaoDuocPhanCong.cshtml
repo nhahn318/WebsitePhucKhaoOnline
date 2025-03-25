@@ -10,6 +10,7 @@
             <th>Lý Do</th>
             <th>Ngày Chấm Lại</th>
             <th>Người Duyệt</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,22 @@
                 <td>@item.LyDo</td>
                 <td>@item.NgayChamLai?.ToString("dd/MM/yyyy")</td>
                 <td>@item.NguoiDuyet</td>
+                <td>
+                <td>
+                        @if (item.DiemSauPhucKhao != null)
+                        {
+                        <a asp-controller="GiangVien" asp-action="DetailChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-success">
+                            Xem chi tiết
+                        </a>
+                        }
+                        else
+                        {
+                        <a asp-controller="GiangVien" asp-action="ChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-primary">
+                            Chấm điểm
+                        </a>
+                        }
+                </td>
+                </td>
             </tr>
         }
     </tbody>

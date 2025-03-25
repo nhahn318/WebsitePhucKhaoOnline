@@ -14,14 +14,17 @@ namespace WebsitePhucKhao.Controllers {
         private readonly IKhoaRepository _khoaRepository;
         private readonly IDonPhucKhaoChiTietRepository _DonPhucKhaoChiTietRepository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
 
-        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager)
+
+        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _giangVienRepository = giangVienRepository;
             _khoaRepository = khoaRepository;
             _DonPhucKhaoChiTietRepository = donPhucKhaoChiTietRepository;
             _userManager = userManager;
+            _context = context;
         }
 
         // Hiển thị danh sách giảng viên
@@ -142,10 +145,93 @@ namespace WebsitePhucKhao.Controllers {
                 LyDo = d.DonPhucKhao?.LyDo ?? "Không có lý do",
                 TenMonHoc = d.MonHoc?.TenMonHoc ?? "Không rõ",
                 NgayChamLai = d.NgayChamLai,
-                NguoiDuyet = d.NhanVienDuyet?.HoTen ?? "Chưa duyệt"
+                NguoiDuyet = d.NhanVienDuyet?.HoTen ?? "Chưa duyệt",
+                DiemSauPhucKhao = d.DiemSauPhucKhao
             }).ToList();
 
             return View(danhSachViewModel);
+        }
+
+        public async Task<IActionResult> ChamDiem(int maDon)
+        {
+            var don = await _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .FirstOrDefaultAsync(d => d.MaDon == maDon);
+
+            if (don == null) return NotFound();
+
+            var chiTiet = await _context.DonPhucKhaoChiTiets
+                .FirstOrDefaultAsync(ct => ct.MaDon == maDon);
+
+            var hinhAnh = await _context.HinhAnhBaiThis
+                .Where(h => h.MaDon == maDon)
+                .ToListAsync();
+
+            var viewModel = new ChamDiemViewModel
+            {
+                MaDon = maDon,
+                TenSinhVien = don.SinhVien?.HoTen,
+                TenMonHoc = don.MonHoc?.TenMonHoc,
+                DiemTruocPhucKhao = don.DiemHienTai,
+                DiemMongMuon = don.DiemMongMuon,
+                LyDo = don.LyDo,
+                DanhSachAnh = hinhAnh,
+                DiemSauPhucKhao = chiTiet?.DiemSauPhucKhao
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChamDiem(int MaDon, float DiemSauPhucKhao, string? NhanXet)
+        {
+            var chiTiet = await _context.DonPhucKhaoChiTiets
+                .FirstOrDefaultAsync(c => c.MaDon == MaDon);
+
+            if (chiTiet == null)
+                return NotFound();
+
+            chiTiet.DiemSauPhucKhao = DiemSauPhucKhao;
+            chiTiet.NgayChamLai = DateTime.Now;
+            chiTiet.NhanXet = NhanXet;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("PhucKhaoDuocPhanCong");
+        }
+        public async Task<IActionResult> DetailChamDiem(int maDon)
+        {
+            var don = await _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .FirstOrDefaultAsync(d => d.MaDon == maDon);
+
+            var chiTiet = await _context.DonPhucKhaoChiTiets
+                .Include(ct => ct.GiangVien)
+                .FirstOrDefaultAsync(ct => ct.MaDon == maDon);
+
+            var hinhAnh = await _context.HinhAnhBaiThis
+                .Where(h => h.MaDon == maDon)
+                .ToListAsync();
+
+            if (don == null || chiTiet == null)
+                return NotFound();
+
+            var viewModel = new ChamDiemViewModel
+            {
+                MaDon = maDon,
+                TenSinhVien = don.SinhVien?.HoTen,
+                TenMonHoc = don.MonHoc?.TenMonHoc,
+                DiemTruocPhucKhao = don.DiemHienTai,
+                DiemMongMuon = don.DiemMongMuon,
+                DiemSauPhucKhao = chiTiet.DiemSauPhucKhao,
+                NhanXet = chiTiet.NhanXet,
+                DanhSachAnh = hinhAnh
+            };
+
+            return View(viewModel);
         }
 
 

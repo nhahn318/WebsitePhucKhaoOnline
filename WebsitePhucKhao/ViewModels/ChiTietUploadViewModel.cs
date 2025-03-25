@@ -6,5 +6,7 @@ namespace WebsitePhucKhao.ViewModels {
         public DonPhucKhao? Don { get; set; }
         public List<HinhAnhBaiThi>? DanhSachAnh { get; set; }
         public DonPhucKhaoChiTiet? ChiTiet { get; set; }
+
+
     }
 }

@@ -1,0 +1,28 @@
+﻿@model WebsitePhucKhao.ViewModels.ChamDiemViewModel
+
+<h2>Chấm Điểm Phúc Khảo</h2>
+
+<p><strong>Sinh viên:</strong> @Model.TenSinhVien</p>
+<p><strong>Môn học:</strong> @Model.TenMonHoc</p>
+<p><strong>Điểm hiện tại:</strong> @Model.DiemTruocPhucKhao</p>
+<p><strong>Điểm mong muốn:</strong> @Model.DiemMongMuon</p>
+<p><strong>Lý do:</strong> @Model.LyDo</p>
+
+<h4>Ảnh bài thi</h4>
+@foreach (var anh in Model.DanhSachAnh)
+{
+    <img src="@anh.DuongDanFile" alt="Bài thi" style="max-width: 400px;" class="mb-3" />
+}
+
+<form asp-action="ChamDiem" method="post">
+    <input type="hidden" name="MaDon" value="@Model.MaDon" />
+    <div class="form-group">
+        <label for="DiemChamLai">Điểm chấm lại</label>
+        <input type="number" step="0.1" name="DiemSauPhucKhao" class="form-control" required value="@Model.DiemSauPhucKhao" />
+    </div>
+    <div class="form-group mt-3">
+        <label>Nhận xét của giảng viên</label>
+        <textarea name="NhanXet" class="form-control" rows="3">@Model.NhanXet</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Lưu điểm</button>
+</form>
