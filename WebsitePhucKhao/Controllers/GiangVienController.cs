@@ -183,7 +183,8 @@ namespace WebsitePhucKhao.Controllers {
                 DiemMongMuon = don.DiemMongMuon,
                 LyDo = don.LyDo,
                 DanhSachAnh = hinhAnh,
-                DiemSauPhucKhao = chiTiet?.DiemSauPhucKhao
+                DiemSauPhucKhao = chiTiet?.DiemSauPhucKhao,
+                BaiGiaiTayUrl = chiTiet?.BaiGiaiTayUrl
             };
 
             return View(viewModel);
@@ -214,7 +215,8 @@ namespace WebsitePhucKhao.Controllers {
                     await BaiGiaiTay.CopyToAsync(stream);
                 }
 
-                chiTiet.BaiGiaiTayUrl = "/bai-giai-tay/" + fileName; 
+                chiTiet.BaiGiaiTayUrl = "/bai-giai-tay/" + fileName;
+                _context.Update(chiTiet);
             }
 
             var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == MaDon);

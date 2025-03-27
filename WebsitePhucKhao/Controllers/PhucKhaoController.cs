@@ -3,17 +3,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using WebsitePhucKhao.Repositories;
+
 
 namespace WebsitePhucKhao.Controllers {
     public class PhucKhaoController : Controller {
         private readonly IPhucKhaoRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICustomEmailSender _emailSen;
 
-        public PhucKhaoController(IPhucKhaoRepository repository, UserManager<ApplicationUser> userManager)
+        public PhucKhaoController(IPhucKhaoRepository repository, UserManager<ApplicationUser> userManager, ICustomEmailSender emailSender)
         {
             _repository = repository;
             _userManager = userManager;
+            _emailSen = emailSender;
         }
 
         // Sinh viên - danh sách
@@ -145,6 +149,36 @@ namespace WebsitePhucKhao.Controllers {
             if (user?.MaNhanVienPhongDaoTao == null) return Unauthorized();
 
             await _repository.DuyetDonAsync(id, user.MaNhanVienPhongDaoTao);
+            // Lấy lại đơn để lấy email sinh viên
+            var don = await _repository.GetDonPhucKhaoAsync(id);
+            if (don != null && !string.IsNullOrEmpty(don.EmailSinhVien) && !don.DaGuiEmail)
+            {
+                var subject = "Thông báo duyệt đơn phúc khảo";
+                var message = $"""
+                Xin chào {don.SinhVien?.HoTen},
+
+                Đơn phúc khảo mã số {don.MaDon} của bạn đã được nhân viên phòng đào tạo duyệt.
+
+                Bạn sẽ nhận được kết quả chấm lại trong thời gian tới.
+
+                Trân trọng,
+                Phòng Đào Tạo
+                """;
+
+                try
+                {
+                    await _emailSen.SendEmailAsync(don.EmailSinhVien, subject, message);
+                    don.DaGuiEmail = true;
+                    _repository.Update(don); // đảm bảo repository có Update()
+                    await _repository.SaveAsync(); // đảm bảo có SaveAsync()
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log hoặc xử lý lỗi gửi email nếu cần
+                    Console.WriteLine($"Lỗi gửi email: {ex.Message}");
+                }
+
+            }
             return RedirectToAction("DanhSachChoDuyet");
         }
 

@@ -1,0 +1,60 @@
+﻿@model WebsitePhucKhao.ViewModels.DonPhucKhaoSauKhiChamViewModel
+
+<h2>Chi tiết đơn phúc khảo</h2>
+
+<table class="table table-bordered mt-4">
+    <tr>
+        <th>Mã đơn</th>
+        <td>@Model.MaDon</td>
+    </tr>
+    <tr>
+        <th>Ngày gửi</th>
+        <td>@Model.NgayGui.ToString("dd/MM/yyyy")</td>
+    </tr>
+    <tr>
+        <th>Trạng thái</th>
+        <td>@Model.TrangThai</td>
+    </tr>
+    <tr>
+        <th>Điểm trước phúc khảo</th>
+        <td>@Model.DiemHienTai</td>
+    </tr>
+    <tr>
+        <th>Điểm sau phúc khảo</th>
+        <td>@(Model.DiemSauPhucKhao.HasValue ? Model.DiemSauPhucKhao.ToString() : "Chưa có")</td>
+    </tr>
+    <tr>
+        <th>Nhận xét của giảng viên</th>
+        <td>@(string.IsNullOrWhiteSpace(Model.NhanXet) ? "Chưa có nhận xét" : Model.NhanXet)</td>
+    </tr>
+    <tr>
+        <th>Bài giải tay</th>
+        <td>
+            @if (!string.IsNullOrEmpty(Model.BaiGiaiTayUrl))
+            {
+                <a href="@Model.BaiGiaiTayUrl" target="_blank" class="btn btn-sm btn-primary">Xem bài</a>
+            }
+            else
+            {
+                <span>Chưa có bài giải tay</span>
+            }
+        </td>
+    </tr>
+</table>
+
+<h4>Ảnh bài thi của sinh viên:</h4>
+@if (Model.DanhSachAnh.Any())
+{
+    <div class="row">
+        @foreach (var anh in Model.DanhSachAnh)
+        {
+            <div class="col-md-4 mb-3">
+                <img src="@anh.DuongDanFile" class="img-fluid border" alt="Ảnh bài thi" />
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Không có ảnh bài thi được đính kèm.</p>
+}

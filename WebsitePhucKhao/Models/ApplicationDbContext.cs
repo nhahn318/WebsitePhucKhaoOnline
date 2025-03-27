@@ -164,9 +164,11 @@ namespace WebsitePhucKhao.Models {
 
             modelBuilder.Entity<DonPhucKhao>()
                 .HasOne(d => d.ChiTietPhucKhao)
-                .WithOne()
+                .WithOne(ct => ct.DonPhucKhao)
                 .HasForeignKey<DonPhucKhaoChiTiet>(ct => ct.MaDon)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
 
 
             // Mối quan hệ giữa DonPhucKhaoChiTiet và GiangVien (1:N)

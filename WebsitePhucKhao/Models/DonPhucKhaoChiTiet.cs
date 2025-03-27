@@ -8,8 +8,9 @@ namespace WebsitePhucKhao.Models {
         [Key]
         public int MaChiTiet { get; set; }  // Khóa chính
 
-        [ForeignKey("DonPhucKhao")]
         public int MaDon { get; set; }  // Khóa ngoại liên kết với đơn phúc khảo
+        
+        [ForeignKey("MaDon")]
         public DonPhucKhao? DonPhucKhao { get; set; }
 
         [ForeignKey("GiangVien")]

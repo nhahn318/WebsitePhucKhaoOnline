@@ -114,7 +114,10 @@ namespace WebsitePhucKhao.Repositories {
                 Lop = sinhVien.Lop?.TenLop ?? "Không có lớp",
                 DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc"),
                 DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy"),
-                DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc")
+                DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc"),
+
+                NgayBatDauPhucKhao = hocKy.NgayBatDauPhucKhao,
+                NgayKetThucPhucKhao = hocKy.NgayKetThucPhucKhao
             };
             return model;
         }
@@ -147,7 +150,8 @@ namespace WebsitePhucKhao.Repositories {
                 PhongThi = model.PhongThi,
                 LyDo = model.LyDo,
                 TrangThai = TrangThaiPhucKhao.ChoXacNhan,
-                NgayGui = DateTime.Now
+                NgayGui = DateTime.Now,
+                EmailSinhVien = sinhVien?.Email ?? ""
             };
 
             _context.DonPhucKhaos.Add(don);
@@ -351,6 +355,15 @@ namespace WebsitePhucKhao.Repositories {
                     BaiGiaiTayUrl = d.ChiTietPhucKhao?.BaiGiaiTayUrl
                 })
                 .ToList();
+        }
+        public void Update(DonPhucKhao don)
+        {
+            _context.Update(don); // hoặc _context.DonPhucKhaos.Update(don);
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

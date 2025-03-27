@@ -115,6 +115,12 @@
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Tạo đơn phúc khảo</button>
     </div>
+
+    <div class="alert alert-info">
+        <strong>Thời gian phúc khảo:</strong>
+        từ <span class="text-primary">@Model.NgayBatDauPhucKhao.ToString("dd/MM/yyyy")</span>
+        đến <span class="text-primary">@Model.NgayKetThucPhucKhao.ToString("dd/MM/yyyy")</span>
+    </div>
 </form>
 
 @section Scripts {

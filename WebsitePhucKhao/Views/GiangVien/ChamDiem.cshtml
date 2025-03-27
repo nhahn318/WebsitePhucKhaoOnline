@@ -14,7 +14,7 @@
     <img src="@anh.DuongDanFile" alt="Bài thi" style="max-width: 400px;" class="mb-3" />
 }
 
-<form asp-action="ChamDiem" method="post">
+<form asp-action="ChamDiem" method="post" enctype="multipart/form-data">
     <input type="hidden" name="MaDon" value="@Model.MaDon" />
     <div class="form-group">
         <label for="DiemChamLai">Điểm chấm lại</label>

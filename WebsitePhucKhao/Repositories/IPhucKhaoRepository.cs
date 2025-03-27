@@ -27,5 +27,10 @@ namespace WebsitePhucKhao.Repositories {
         Task<List<DonPhucKhaoSauKhiChamViewModel>> GetDanhSachPhucKhaoViewModelAsync(long maSinhVien);
 
 
+
+        void Update(DonPhucKhao don);
+        Task SaveAsync();
+
+
     }
 }

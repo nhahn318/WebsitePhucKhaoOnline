@@ -53,5 +53,8 @@ namespace WebsitePhucKhao.ViewModels {
         [Display(Name = "Học kỳ")]
         public int? MaHocKy { get; set; }
         public SelectList? DanhSachHocKy { get; set; }
+
+        public DateTime NgayBatDauPhucKhao { get; set; }
+        public DateTime NgayKetThucPhucKhao { get; set; }
     }
 }

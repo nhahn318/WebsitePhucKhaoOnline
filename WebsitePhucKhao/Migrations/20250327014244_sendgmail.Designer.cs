@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebsitePhucKhao.Models;
 
@@ -11,9 +12,11 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250327014244_sendgmail")]
+    partial class sendgmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -397,6 +400,9 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<float?>("DiemSauPhucKhao")
                         .HasColumnType("real");
 
+                    b.Property<int?>("DonPhucKhaoMaDon")
+                        .HasColumnType("int");
+
                     b.Property<int>("MaDon")
                         .HasColumnType("int");
 
@@ -422,6 +428,8 @@ namespace WebsitePhucKhao.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MaChiTiet");
+
+                    b.HasIndex("DonPhucKhaoMaDon");
 
                     b.HasIndex("MaDon")
                         .IsUnique();
@@ -868,6 +876,10 @@ namespace WebsitePhucKhao.Migrations
             modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
+                        .WithMany()
+                        .HasForeignKey("DonPhucKhaoMaDon");
+
+                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", null)
                         .WithOne("ChiTietPhucKhao")
                         .HasForeignKey("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", "MaDon")
                         .OnDelete(DeleteBehavior.Cascade)

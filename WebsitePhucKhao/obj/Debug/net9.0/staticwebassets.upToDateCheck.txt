@@ -62,6 +62,8 @@ C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\bootstrap
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhao\wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\bai-giai-tay\1_ChuKy.jpg
 wwwroot\bai-giai-tay\1_DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg
+wwwroot\bai-giai-tay\1_z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg
+wwwroot\bai-giai-tay\8_DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js
@@ -127,5 +129,6 @@ wwwroot\lib\jquery-validation-unobtrusive\dist\jquery.validate.unobtrusive.min.j
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\uploads\DACS_TranThienNhan_NguyenHuynhNam.jpg
 wwwroot\uploads\DACS_TranThienNhan_NguyenHuynhNam_Tuan2.jpg
+wwwroot\uploads\DACS_Tuan1.jpg
 wwwroot\uploads\Playerflip.gif
 wwwroot\uploads\z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg

@@ -52,6 +52,7 @@ builder.Services.AddScoped<IBangDiemRepository, EFBangDiemRepository>();
 builder.Services.AddScoped<ILopRepository, EFLopRepository>();
 builder.Services.AddScoped<IDonPhucKhaoChiTietRepository, EFDonPhucKhaoChiTietRepository>();
 builder.Services.AddScoped<IPhucKhaoRepository, EFPhucKhaoRepository>();
+builder.Services.AddScoped<ICustomEmailSender, EFCustomEmailSender>();
 
 
 
@@ -69,6 +70,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
 
 app.UseAuthorization();
 

@@ -49,6 +49,12 @@ namespace WebsitePhucKhao.Models {
         public MonHoc? MonHoc { get; set; }  // Thuộc tính điều hướng đến MonHoc
 
         public DonPhucKhaoChiTiet? ChiTietPhucKhao { get; set; }
+
+
+        //gửi email thông báo sinh viên
+        public string EmailSinhVien { get; set; }
+
+        public bool DaGuiEmail { get; set; }
     }
 
 }
