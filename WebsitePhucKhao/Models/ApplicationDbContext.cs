@@ -152,16 +152,6 @@ namespace WebsitePhucKhao.Models {
                 .WithMany(n => n.HocKys)
                 .HasForeignKey(h => h.MaNamHoc);
 
-            modelBuilder.Entity<BangDiem>()
-                .HasOne(b => b.SinhVien)
-                .WithMany(s => s.BangDiems)
-                .HasForeignKey(b => b.MaSinhVien);
-
-            modelBuilder.Entity<BangDiem>()
-                .HasOne(b => b.MonHoc)
-                .WithMany(m => m.BangDiems)
-                .HasForeignKey(b => b.MaMonHoc);
-
             modelBuilder.Entity<DonPhucKhao>()
                 .HasOne(d => d.ChiTietPhucKhao)
                 .WithOne(ct => ct.DonPhucKhao)
@@ -184,6 +174,31 @@ namespace WebsitePhucKhao.Models {
                 .WithMany(nv => nv.DonPhucKhaoChiTiets)
                 .HasForeignKey(dpct => dpct.MaNhanVienDuyet)
                 .OnDelete(DeleteBehavior.SetNull); // Nếu nhân viên bị xóa, đơn vẫn tồn tại
+
+            // xóa một HocKy thì EF sẽ không tự xóa các BangDiem liên quan, bạn phải tự xử lý nếu muốn xóa đồng bộ.
+            modelBuilder.Entity<BangDiem>()
+            .HasOne(b => b.HocKy)
+            .WithMany()
+            .HasForeignKey(b => b.MaHocKy)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BangDiem>()
+                .HasOne(b => b.NamHoc)
+                .WithMany()
+                .HasForeignKey(b => b.MaNamHoc)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BangDiem>()
+                .HasOne(b => b.SinhVien)
+                .WithMany(sv => sv.BangDiems)
+                .HasForeignKey(b => b.MaSinhVien)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<BangDiem>()
+                .HasOne(b => b.MonHoc)
+                .WithMany(mh => mh.BangDiems)
+                .HasForeignKey(b => b.MaMonHoc)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

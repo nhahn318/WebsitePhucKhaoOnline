@@ -9,39 +9,32 @@
 <form asp-action="Create" method="post">
     <div class="row">
         <div class="col-md-6">
-
-            <!-- Mã sinh viên -->
+            <!-- Thông tin sinh viên -->
             <div class="form-group">
                 <label asp-for="MaSinhVien"></label>
                 <input asp-for="MaSinhVien" class="form-control" readonly />
             </div>
 
-            <!-- Họ tên -->
             <div class="form-group">
                 <label asp-for="HoTen"></label>
                 <input asp-for="HoTen" class="form-control" readonly />
             </div>
 
-            <!-- Email -->
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" readonly />
             </div>
 
-            <!-- Số điện thoại -->
             <div class="form-group">
                 <label asp-for="SoDienThoai"></label>
                 <input asp-for="SoDienThoai" class="form-control" readonly />
             </div>
 
-            <!-- Lớp -->
             <div class="form-group">
                 <label asp-for="Lop"></label>
                 <input asp-for="Lop" class="form-control" readonly />
             </div>
 
-
-      
             <div class="form-group">
                 <label asp-for="DiemHienTai"></label>
                 <input asp-for="DiemHienTai" class="form-control" step="0.01" />
@@ -52,13 +45,13 @@
                 <label asp-for="DiemMongMuon"></label>
                 <input asp-for="DiemMongMuon" class="form-control" step="0.01" />
             </div>
-
         </div>
 
         <div class="col-md-6">
+            <!-- Chọn học phần -->
             <div class="form-group">
                 <label asp-for="MaMonHoc"></label>
-                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control">
+                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control" id="MaMonHoc">
                     <option value="">-- Chọn môn học --</option>
                 </select>
                 <span asp-validation-for="MaMonHoc" class="text-danger"></span>
@@ -66,46 +59,42 @@
 
             <div class="form-group">
                 <label asp-for="MaHocKy"></label>
-                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control">
+                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control" id="MaHocKy" readonly>
                     <option value="">-- Chọn học kỳ --</option>
                 </select>
-                <span asp-validation-for="MaHocKy" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="MaNamHoc"></label>
-                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-control">
+                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-control" id="MaNamHoc">
                     <option value="">-- Chọn năm học --</option>
                 </select>
-                <span asp-validation-for="MaNamHoc" class="text-danger"></span>
             </div>
 
-
+            <!-- Thông tin lịch thi -->
             <div class="form-group">
                 <label asp-for="NgayThi"></label>
-                <input asp-for="NgayThi" type="date" class="form-control" />
-                <span asp-validation-for="NgayThi" class="text-danger"></span>
+                <input asp-for="NgayThi" type="date" class="form-control" id="NgayThi" />
             </div>
 
             <div class="form-group">
                 <label asp-for="CaThi"></label>
-                <input asp-for="CaThi" class="form-control" />
+                <input asp-for="CaThi" class="form-control" id="CaThi" />
             </div>
 
-       
             <div class="form-group">
                 <label asp-for="DiaDiemThi"></label>
-                <input asp-for="DiaDiemThi" class="form-control" />
+                <input asp-for="DiaDiemThi" class="form-control" id="DiaDiemThi" />
             </div>
 
             <div class="form-group">
                 <label asp-for="PhongThi"></label>
-                <input asp-for="PhongThi" class="form-control" />
-            </div>           
-
+                <input asp-for="PhongThi" class="form-control" id="PhongThi" />
+            </div>
         </div>
     </div>
 
+    <!-- Lý do -->
     <div class="form-group">
         <label asp-for="LyDo"></label>
         <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
@@ -116,6 +105,7 @@
         <button type="submit" class="btn btn-primary">Tạo đơn phúc khảo</button>
     </div>
 
+    <!-- Thông báo thời gian phúc khảo -->
     <div class="alert alert-info">
         <strong>Thời gian phúc khảo:</strong>
         từ <span class="text-primary">@Model.NgayBatDauPhucKhao.ToString("dd/MM/yyyy")</span>
@@ -125,4 +115,40 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+              $(document).ready(function () {
+            function updateLichThi() {
+                const maMonHoc = $('#MaMonHoc').val();
+                const maHocKy = $('#MaHocKy').val();
+                const maNamHoc = $('#MaNamHoc').val();
+
+                if (maMonHoc && maHocKy && maNamHoc) {
+                    $.get('/PhucKhao/GetLichThiInfo', {
+                        maMonHoc: maMonHoc,
+                        maHocKy: maHocKy,
+                        maNamHoc: maNamHoc
+                    }, function (data) {
+                        if (data) {
+                            $('#NgayThi').val(data.ngayThi);
+                            $('#CaThi').val(data.caThi);
+                            $('#PhongThi').val(data.phongThi);
+                            $('#DiaDiemThi').val(data.diaDiemThi);
+                        } else {
+                            $('#NgayThi').val('');
+                            $('#CaThi').val('');
+                            $('#PhongThi').val('');
+                            $('#DiaDiemThi').val('');
+                        }
+                    });
+                }
+            }
+
+            // Gọi lại khi thay đổi bất kỳ mục nào
+            $('#MaMonHoc').change(updateLichThi);
+            $('#MaHocKy').change(updateLichThi);
+            $('#MaNamHoc').change(updateLichThi);
+        });
+
+    </script>
 }

@@ -5,6 +5,7 @@ using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WebsitePhucKhao.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace WebsitePhucKhao.Controllers {
@@ -12,12 +13,14 @@ namespace WebsitePhucKhao.Controllers {
         private readonly IPhucKhaoRepository _repository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ICustomEmailSender _emailSen;
+        private readonly ApplicationDbContext _context;
 
-        public PhucKhaoController(IPhucKhaoRepository repository, UserManager<ApplicationUser> userManager, ICustomEmailSender emailSender)
+        public PhucKhaoController(IPhucKhaoRepository repository, UserManager<ApplicationUser> userManager, ICustomEmailSender emailSender, ApplicationDbContext context)
         {
             _repository = repository;
             _userManager = userManager;
             _emailSen = emailSender;
+            _context = context;
         }
 
         // Sinh viên - danh sách
@@ -132,7 +135,31 @@ namespace WebsitePhucKhao.Controllers {
             var ds = await _repository.GetDanhSachChoDuyetAsync();
             return View(ds);
         }
-        
+        [HttpGet]
+        public async Task<IActionResult> GetLichThiInfo(int maMonHoc, int maHocKy, int maNamHoc)
+        {
+            var lichThi = await _context.LichThis
+                .Where(l => l.MaMonHoc == maMonHoc
+                         && l.MaHocKy == maHocKy
+                         && l.MaNamHoc == maNamHoc)
+                .FirstOrDefaultAsync();
+
+            if (lichThi == null)
+            {
+                return Json(null);
+            }
+
+            return Json(new
+            {
+                ngayThi = lichThi.NgayThi.ToString("yyyy-MM-dd"),
+                caThi = lichThi.CaThi,
+                phongThi = lichThi.PhongThi,
+                diaDiemThi = lichThi.DiaDiemThi
+            });
+        }
+
+
+
         //=============================================================NhanVienPhongDaoTao===============================================
 
         public async Task<IActionResult> ChiTietPhucKhaoChoNhanVien(int id)

@@ -105,6 +105,24 @@ namespace WebsitePhucKhao.Repositories {
             if (today < hocKy.NgayBatDauPhucKhao || today > hocKy.NgayKetThucPhucKhao)
                 return null;
 
+            //Lấy danh sách môn sinh viên đã thi (theo HK + NH)
+            var monDaThi = await _context.BangDiems
+                .Where(b => b.MaSinhVien == sinhVien.MaSinhVien
+                            && b.MaHocKy == hocKy.MaHocKy
+                            && b.MaNamHoc == hocKy.MaNamHoc
+                            && b.DiemTongKet != null)
+                .Select(b => b.MonHoc)
+                .Distinct()
+                .ToListAsync();
+            var monHocDauTien = monDaThi.FirstOrDefault();
+
+            // Tìm lịch thi tương ứng với môn học đầu tiên
+            var lichThiDauTien = await _context.LichThis
+                .Where(l => l.MaMonHoc == monHocDauTien.MaMonHoc
+                         && l.MaHocKy == hocKy.MaHocKy
+                         && l.MaNamHoc == hocKy.MaNamHoc)
+                .FirstOrDefaultAsync();
+
             var model = new YeuCauPhucKhaoViewModel
             {
                 MaSinhVien = sinhVien.MaSinhVien,
@@ -112,12 +130,19 @@ namespace WebsitePhucKhao.Repositories {
                 Email = sinhVien.Email,
                 SoDienThoai = sinhVien.SoDienThoai,
                 Lop = sinhVien.Lop?.TenLop ?? "Không có lớp",
-                DanhSachMonHoc = new SelectList(await _context.MonHocs.ToListAsync(), "MaMonHoc", "TenMonHoc"),
+                DanhSachMonHoc = new SelectList(monDaThi, "MaMonHoc", "TenMonHoc"),
+
                 DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy"),
                 DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc"),
 
                 NgayBatDauPhucKhao = hocKy.NgayBatDauPhucKhao,
-                NgayKetThucPhucKhao = hocKy.NgayKetThucPhucKhao
+                NgayKetThucPhucKhao = hocKy.NgayKetThucPhucKhao,
+
+                NgayThi = lichThiDauTien?.NgayThi,
+                CaThi = lichThiDauTien?.CaThi,
+                PhongThi = lichThiDauTien?.PhongThi,
+                DiaDiemThi = lichThiDauTien?.DiaDiemThi
+
             };
             return model;
         }

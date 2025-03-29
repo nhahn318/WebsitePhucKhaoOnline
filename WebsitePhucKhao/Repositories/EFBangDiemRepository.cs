@@ -1,6 +1,7 @@
 ﻿using WebsitePhucKhao.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace WebsitePhucKhao.Repositories {
     public class EFBangDiemRepository : IBangDiemRepository {
         private readonly ApplicationDbContext _context;

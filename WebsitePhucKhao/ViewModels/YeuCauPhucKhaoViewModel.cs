@@ -34,7 +34,7 @@ namespace WebsitePhucKhao.ViewModels {
 
 
         [Required(ErrorMessage = "Vui lòng nhập ngày thi")]
-        public DateTime NgayThi { get; set; }
+        public DateTime? NgayThi { get; set; }
 
         public string? CaThi { get; set; }
         public string? DiaDiemThi { get; set; }

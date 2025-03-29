@@ -12,8 +12,8 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250327075547_FixDonPhucKhao")]
-    partial class FixDonPhucKhao
+    [Migration("20250327152826_updatelichthi")]
+    partial class updatelichthi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -267,18 +267,34 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<double?>("DiemTongKet")
                         .HasColumnType("float");
 
+                    b.Property<int>("LanThi")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaHocKy")
+                        .HasColumnType("int");
+
                     b.Property<int>("MaMonHoc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaNamHoc")
                         .HasColumnType("int");
 
                     b.Property<long>("MaSinhVien")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("NgayThi")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("TrangThaiPhucKhao")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MaHocKy");
+
                     b.HasIndex("MaMonHoc");
+
+                    b.HasIndex("MaNamHoc");
 
                     b.HasIndex("MaSinhVien");
 
@@ -572,6 +588,12 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaLichThi"));
 
+                    b.Property<string>("CaThi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaDiemThi")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("MaHocKy")
                         .HasColumnType("int");
 
@@ -580,6 +602,9 @@ namespace WebsitePhucKhao.Migrations
 
                     b.Property<DateTime>("NgayThi")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("PhongThi")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaLichThi");
 
@@ -796,19 +821,35 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.BangDiem", b =>
                 {
+                    b.HasOne("WebsitePhucKhao.Models.HocKy", "HocKy")
+                        .WithMany()
+                        .HasForeignKey("MaHocKy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("WebsitePhucKhao.Models.MonHoc", "MonHoc")
                         .WithMany("BangDiems")
                         .HasForeignKey("MaMonHoc")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WebsitePhucKhao.Models.NamHoc", "NamHoc")
+                        .WithMany()
+                        .HasForeignKey("MaNamHoc")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("WebsitePhucKhao.Models.SinhVien", "SinhVien")
                         .WithMany("BangDiems")
                         .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("HocKy");
+
                     b.Navigation("MonHoc");
+
+                    b.Navigation("NamHoc");
 
                     b.Navigation("SinhVien");
                 });

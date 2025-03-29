@@ -17,6 +17,14 @@ namespace WebsitePhucKhao.Models {
         public int? MaMonHoc { get; set; }
         public MonHoc? MonHoc { get; set; } // Liên kết với Môn Học
 
+        [ForeignKey("NamHoc")]
+        public int? MaNamHoc { get; set; }
+        public NamHoc? NamHoc { get; set; }
+
+        public string? CaThi { get; set; }
+        public string? DiaDiemThi { get; set; }
+        public string? PhongThi { get; set; }
+
         public ICollection<DonPhucKhao>? DonPhucKhaos { get; set; }
     }
 

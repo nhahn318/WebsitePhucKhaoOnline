@@ -12,7 +12,7 @@ using WebsitePhucKhao.Models;
 namespace WebsitePhucKhao.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250325145536_init")]
+    [Migration("20250327145757_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -267,18 +267,34 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<double?>("DiemTongKet")
                         .HasColumnType("float");
 
+                    b.Property<int>("LanThi")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaHocKy")
+                        .HasColumnType("int");
+
                     b.Property<int>("MaMonHoc")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaNamHoc")
                         .HasColumnType("int");
 
                     b.Property<long>("MaSinhVien")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("NgayThi")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("TrangThaiPhucKhao")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MaHocKy");
+
                     b.HasIndex("MaMonHoc");
+
+                    b.HasIndex("MaNamHoc");
 
                     b.HasIndex("MaSinhVien");
 
@@ -316,6 +332,9 @@ namespace WebsitePhucKhao.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDon"));
 
+                    b.Property<bool>("DaGuiEmail")
+                        .HasColumnType("bit");
+
                     b.Property<string>("DiaDiemThi")
                         .HasColumnType("nvarchar(max)");
 
@@ -324,6 +343,10 @@ namespace WebsitePhucKhao.Migrations
 
                     b.Property<float>("DiemMongMuon")
                         .HasColumnType("real");
+
+                    b.Property<string>("EmailSinhVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HocKy")
                         .HasColumnType("int");
@@ -393,9 +416,6 @@ namespace WebsitePhucKhao.Migrations
                     b.Property<float?>("DiemSauPhucKhao")
                         .HasColumnType("real");
 
-                    b.Property<int?>("DonPhucKhaoMaDon")
-                        .HasColumnType("int");
-
                     b.Property<int>("MaDon")
                         .HasColumnType("int");
 
@@ -421,8 +441,6 @@ namespace WebsitePhucKhao.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MaChiTiet");
-
-                    b.HasIndex("DonPhucKhaoMaDon");
 
                     b.HasIndex("MaDon")
                         .IsUnique();
@@ -794,19 +812,35 @@ namespace WebsitePhucKhao.Migrations
 
             modelBuilder.Entity("WebsitePhucKhao.Models.BangDiem", b =>
                 {
+                    b.HasOne("WebsitePhucKhao.Models.HocKy", "HocKy")
+                        .WithMany()
+                        .HasForeignKey("MaHocKy")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("WebsitePhucKhao.Models.MonHoc", "MonHoc")
                         .WithMany("BangDiems")
                         .HasForeignKey("MaMonHoc")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WebsitePhucKhao.Models.NamHoc", "NamHoc")
+                        .WithMany()
+                        .HasForeignKey("MaNamHoc")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("WebsitePhucKhao.Models.SinhVien", "SinhVien")
                         .WithMany("BangDiems")
                         .HasForeignKey("MaSinhVien")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.Navigation("HocKy");
+
                     b.Navigation("MonHoc");
+
+                    b.Navigation("NamHoc");
 
                     b.Navigation("SinhVien");
                 });
@@ -869,10 +903,6 @@ namespace WebsitePhucKhao.Migrations
             modelBuilder.Entity("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", b =>
                 {
                     b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", "DonPhucKhao")
-                        .WithMany()
-                        .HasForeignKey("DonPhucKhaoMaDon");
-
-                    b.HasOne("WebsitePhucKhao.Models.DonPhucKhao", null)
                         .WithOne("ChiTietPhucKhao")
                         .HasForeignKey("WebsitePhucKhao.Models.DonPhucKhaoChiTiet", "MaDon")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -69,6 +69,16 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Fix lỗi font tiếng Việt khi trả JSON
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/PhucKhao/GetLichThiInfo"))
+    {
+        context.Response.Headers["Content-Type"] = "application/json; charset=utf-8";
+    }
+    await next.Invoke();
+});
 app.UseRouting();
 
 
