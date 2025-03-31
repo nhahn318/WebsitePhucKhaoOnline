@@ -3,59 +3,135 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WebsitePhucKhao</title>
+    <title>@ViewData["Title"] - Hệ thống phúc khảo</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebsitePhucKhao.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebsitePhucKhao</a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap me-2"></i>
+                    Hệ thống phúc khảo
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-lg-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Trang chủ
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PhucKhao" asp-action="Create">Tạo đơn phúc khảo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SinhVien" asp-action="CapNhatThongTin">Cập nhật thông tin sinh viên</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PhucKhao" asp-action="DanhSachDonPhucKhao">Danh sách đơn phúc khảo (SV)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PhucKhao" asp-action="DanhSachChoDuyet">Danh sách Đơn chờ duyệt (NV)</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="GiangVien" asp-action="PhucKhaoDuocPhanCong">Danh sách Đơn được phân công (GV)</a>
-                        </li>
-
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="PhucKhao" asp-action="Create">
+                                    <i class="fas fa-file-alt me-1"></i>Tạo đơn phúc khảo
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="SinhVien" asp-action="CapNhatThongTin">
+                                    <i class="fas fa-user-edit me-1"></i>Cập nhật thông tin
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="PhucKhao" asp-action="DanhSachDonPhucKhao">
+                                    <i class="fas fa-list me-1"></i>Danh sách đơn (SV)
+                                </a>
+                            </li>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="PhucKhao" asp-action="DanhSachChoDuyet">
+                                        <i class="fas fa-clock me-1"></i>Đơn chờ duyệt (NV)
+                                    </a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Teacher"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark d-flex align-items-center" asp-area="" asp-controller="GiangVien" asp-action="PhucKhaoDuocPhanCong">
+                                        <i class="fas fa-tasks me-1"></i>Đơn được phân công (GV)
+                                    </a>
+                                </li>
+                            }
+                        }
                     </ul>
-                    <partial name = "_LoginPartial" />
+                    <div class="d-flex align-items-center">
+                        <partial name="_LoginPartial" />
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - WebsitePhucKhao - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main role="main" class="flex-grow-1">
+        <div class="container py-4">
+            @RenderBody()
         </div>
-    </footer>
+    </main>
+
+    @{
+        var isLoginPage = Context.Request.Path.Value?.Contains("/Account/Login") ?? false;
+    }
+    
+    @if (!isLoginPage)
+    {
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Hệ Thống Phúc Khảo</h3>
+                        <p>Hệ thống phúc khảo trực tuyến giúp sinh viên dễ dàng nộp và theo dõi yêu cầu phúc khảo kết quả học tập một cách nhanh chóng, hiệu quả.</p>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Liên kết nhanh</h3>
+                        <ul class="footer-links">
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                            <li><a href="#">Hướng dẫn sử dụng</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
+                            <li><a href="#">Liên hệ hỗ trợ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h3>Thông tin liên hệ</h3>
+                        <div class="footer-contact">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>123 ABC, Quận 1, TP.HCM</p>
+                        </div>
+                        <div class="footer-contact">
+                            <i class="fas fa-phone"></i>
+                            <p>(028) 1234 5678</p>
+                        </div>
+                        <div class="footer-contact">
+                            <i class="fas fa-envelope"></i>
+                            <p>support@phuckhao.edu.vn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p>&copy; @DateTime.Now.Year - Hệ thống phúc khảo. All rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
