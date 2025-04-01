@@ -82,10 +82,6 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Required]
-            [Display(Name = "Chọn vai trò")]
-            public string Role { get; set; }
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -123,51 +119,49 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
 
                 if (user == null)
                 {
-                    switch (Input.Role)
+                    // Kiểm tra trong các bảng khác
+                    var sinhVien = await _context.SinhViens.FirstOrDefaultAsync(sv => sv.Email == Input.Email);
+                    if (sinhVien != null)
                     {
-                        case "SinhVien":
-                            var sinhVien = await _context.SinhViens.FirstOrDefaultAsync(sv => sv.Email == Input.Email);
-                            if (sinhVien != null)
+                        user = new ApplicationUser
+                        {
+                            UserName = sinhVien.Email,
+                            Email = sinhVien.Email,
+                            MaSinhVien = sinhVien.MaSinhVien
+                        };
+
+                        var createResult = await _userManager.CreateAsync(user, sinhVien.MaSinhVien.ToString());
+                        if (!createResult.Succeeded)
+                        {
+                            foreach (var error in createResult.Errors)
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            return Page();
+                        }
+                        await _userManager.AddToRoleAsync(user, "SinhVien");
+                    }
+                    else
+                    {
+                        var giangVien = await _context.GiangViens.FirstOrDefaultAsync(gv => gv.Email == Input.Email);
+                        if (giangVien != null)
+                        {
+                            user = new ApplicationUser
                             {
-                                user = new ApplicationUser
-                                {
-                                    UserName = sinhVien.Email,
-                                    Email = sinhVien.Email,
-                                    MaSinhVien = sinhVien.MaSinhVien
-                                };
+                                UserName = giangVien.Email,
+                                Email = giangVien.Email,
+                                MaGiangVien = giangVien.MaGiangVien
+                            };
 
-                                var createResult = await _userManager.CreateAsync(user, sinhVien.MaSinhVien.ToString());
-                                if (!createResult.Succeeded)
-                                {
-                                    foreach (var error in createResult.Errors)
-                                        ModelState.AddModelError(string.Empty, error.Description);
-                                    return Page();
-                                }
-                            }
-                            break;
-
-                        case "GiangVien":
-                            var giangVien = await _context.GiangViens.FirstOrDefaultAsync(gv => gv.Email == Input.Email);
-                            if (giangVien != null)
+                            var createResult = await _userManager.CreateAsync(user, giangVien.MaGiangVien.ToString());
+                            if (!createResult.Succeeded)
                             {
-                                user = new ApplicationUser
-                                {
-                                    UserName = giangVien.Email,
-                                    Email = giangVien.Email,
-                                    MaGiangVien = giangVien.MaGiangVien
-                                };
-
-                                var createResult = await _userManager.CreateAsync(user, giangVien.MaGiangVien.ToString());
-                                if (!createResult.Succeeded)
-                                {
-                                    foreach (var error in createResult.Errors)
-                                        ModelState.AddModelError(string.Empty, error.Description);
-                                    return Page();
-                                }
+                                foreach (var error in createResult.Errors)
+                                    ModelState.AddModelError(string.Empty, error.Description);
+                                return Page();
                             }
-                            break;
-
-                        case "NhanVien":
+                            await _userManager.AddToRoleAsync(user, "GiangVien");
+                        }
+                        else
+                        {
                             var nhanVien = await _context.NhanVienPhongDaoTaos.FirstOrDefaultAsync(nv => nv.Email == Input.Email);
                             if (nhanVien != null)
                             {
@@ -185,14 +179,14 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                                         ModelState.AddModelError(string.Empty, error.Description);
                                     return Page();
                                 }
+                                await _userManager.AddToRoleAsync(user, "NhanVien");
                             }
-                            break;
-                    }
-
-                    if (user == null)
-                    {
-                        ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại. Hãy đăng ký trước.");
-                        return Page();
+                            else
+                            {
+                                ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại. Hãy đăng ký trước.");
+                                return Page();
+                            }
+                        }
                     }
                 }
 
@@ -201,32 +195,24 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Người dùng đã đăng nhập.");
-                    if (!await _userManager.IsInRoleAsync(user, Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
-                    }
 
-
+                    // Xác định vai trò và chuyển hướng
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                     {
                         returnUrl = Url.Action("Index", "Dashboard", new { area = "Admin" });
                     }
-                    else
+                    else if (await _userManager.IsInRoleAsync(user, "SinhVien"))
                     {
-                        switch (Input.Role)
-                        {
-                            case "SinhVien":
-                                returnUrl = Url.Action("DanhSachDonPhucKhao", "PhucKhao", new { area = "SinhVien" });
-                                break;
-                            case "GiangVien":
-                                returnUrl = Url.Action("PhucKhaoDuocPhanCong", "GiangVien", new { area = "GiangVien" });
-                                break;
-                            case "NhanVien":
-                                returnUrl = Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "NhanVien" });
-                                break;
-                        }
+                        returnUrl = Url.Action("DanhSachDonPhucKhao", "PhucKhao", new { area = "SinhVien" });
                     }
-
+                    else if (await _userManager.IsInRoleAsync(user, "GiangVien"))
+                    {
+                        returnUrl = Url.Action("PhucKhaoDuocPhanCong", "GiangVien", new { area = "GiangVien" });
+                    }
+                    else if (await _userManager.IsInRoleAsync(user, "NhanVien"))
+                    {
+                        returnUrl = Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "NhanVien" });
+                    }
 
                     return LocalRedirect(returnUrl);
                 }
@@ -248,8 +234,5 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
 
             return Page();
         }
-
-
-
     }
 }

@@ -1,0 +1,252 @@
+/* Variables */
+:root {
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 80px;
+    --header-height: 70px;
+    --primary-color: #4361ee;
+    --primary-dark: #3f37c9;
+    --primary-light: #4895ef;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --body-bg: #f5f8fa;
+    --sidebar-bg: #1a1f37;
+    --sidebar-hover: #2a3147;
+    --transition-speed: 0.5s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tối ưu hiệu ứng cho sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    z-index: 1000;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.sidebar.collapsed {
+    transform: translateX(calc(-1 * (var(--sidebar-width) - var(--sidebar-collapsed-width))));
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-content {
+    width: var(--sidebar-width);
+    height: 100%;
+    position: relative;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.sidebar.collapsed .sidebar-content {
+    transform: translateX(calc(-1 * (var(--sidebar-width) - var(--sidebar-collapsed-width))));
+}
+
+/* Tối ưu hiệu ứng cho nội dung sidebar */
+.sidebar-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transform: translateZ(0);
+    will-change: transform;
+    transition: all var(--transition-speed) var(--transition-timing);
+}
+
+.sidebar-header span,
+.menu-item span,
+.menu-header {
+    display: inline-block;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: all var(--transition-speed) var(--transition-timing);
+    visibility: visible;
+    opacity: 1;
+}
+
+.sidebar.collapsed .sidebar-header span,
+.sidebar.collapsed .menu-item span,
+.sidebar.collapsed .menu-header {
+    opacity: 0;
+    transform: translateX(-20px);
+    visibility: hidden;
+}
+
+.menu-item {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    transform: translateZ(0);
+    will-change: transform;
+    transition: all var(--transition-speed) var(--transition-timing);
+    padding: 0.8rem 1.5rem;
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.menu-item i {
+    width: 20px;
+    text-align: center;
+    margin-right: 15px;
+    transition: all var(--transition-speed) var(--transition-timing);
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.sidebar.collapsed .menu-item i {
+    margin-right: 0;
+    transform: scale(1.2);
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: white;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: all var(--transition-speed) var(--transition-timing);
+    will-change: transform;
+}
+
+.menu-item:hover::before {
+    transform: scaleY(1);
+}
+
+/* Tối ưu hiệu ứng cho main content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    background-color: var(--body-bg);
+    transition: all var(--transition-speed) var(--transition-timing);
+    transform: translateZ(0);
+    will-change: transform;
+    position: relative;
+}
+
+.main-content.expanded {
+    margin-left: var(--sidebar-collapsed-width);
+    padding-left: 20px;
+}
+
+/* Tối ưu hiệu ứng cho nội dung trang */
+.page-content {
+    transition: all var(--transition-speed) var(--transition-timing);
+    transform: translateZ(0);
+    will-change: transform;
+    position: relative;
+}
+
+.main-content.expanded .page-content {
+    opacity: 0.95;
+    transform: translateX(10px);
+}
+
+/* Responsive sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.collapsed {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .main-content.expanded {
+        margin-left: var(--sidebar-width);
+    }
+}
+
+/* Tối ưu performance */
+.sidebar * {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hardware acceleration */
+.sidebar,
+.sidebar-content,
+.sidebar-header,
+.menu-item,
+.menu-item i,
+.menu-item span,
+.sidebar-header span,
+.page-content {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Animation cho nội dung */
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.page-content {
+    animation: fadeInContent var(--transition-speed) var(--transition-timing);
+}
+
+/* Thêm hiệu ứng hover cho menu items */
+.menu-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform var(--transition-speed) var(--transition-timing);
+}
+
+.menu-item:hover::after {
+    transform: translateX(100%);
+}
+
+/* Thêm hiệu ứng cho sidebar khi hover */
+.sidebar:hover {
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Thêm hiệu ứng cho main content khi sidebar thay đổi */
+.main-content {
+    transition: all var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+.main-content.expanded {
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+} 

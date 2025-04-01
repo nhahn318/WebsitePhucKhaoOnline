@@ -28,7 +28,6 @@
     <Folder Include="Areas\NhanVien\Models\" />
     <Folder Include="Areas\SinhVien\Data\" />
     <Folder Include="Areas\SinhVien\Models\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Views\BangDiem\" />
     <Folder Include="Views\GiangVien\" />
     <Folder Include="Views\HocKy\" />

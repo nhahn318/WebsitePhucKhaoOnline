@@ -1,0 +1,336 @@
+@model IEnumerable<WebsitePhucKhao.Models.DonPhucKhao>
+@using WebsitePhucKhao.Enums
+
+@{
+    ViewData["Title"] = "Quản lý đơn phúc khảo";
+}
+
+<!-- Page Header -->
+<div class="admin-page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h1 class="page-title">Quản lý đơn phúc khảo</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">Bảng điều khiển</a></li>
+                    <li class="breadcrumb-item active">Đơn phúc khảo</li>
+                </ol>
+            </nav>
+        </div>
+        <button class="btn btn-primary btn-create" data-bs-toggle="modal" data-bs-target="#formModal">
+            <i class="fas fa-plus me-2"></i>Tạo đơn mới
+        </button>
+    </div>
+</div>
+
+<!-- Search & Filter Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-md-3">
+                <label class="form-label">Tìm kiếm</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control table-search" name="searchTerm" value="@ViewBag.SearchTerm" placeholder="Nhập từ khóa...">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Trạng thái</label>
+                <select class="form-select" name="trangThai">
+                    <option value="">Tất cả</option>
+                    <option value="@((int)TrangThaiPhucKhao.ChoXacNhan)" selected="@(ViewBag.SelectedTrangThai == (int)TrangThaiPhucKhao.ChoXacNhan)">Chờ xác nhận</option>
+                    <option value="@((int)TrangThaiPhucKhao.DaDuyet)" selected="@(ViewBag.SelectedTrangThai == (int)TrangThaiPhucKhao.DaDuyet)">Đã duyệt</option>
+                    <option value="@((int)TrangThaiPhucKhao.TuChoi)" selected="@(ViewBag.SelectedTrangThai == (int)TrangThaiPhucKhao.TuChoi)">Từ chối</option>
+                    <option value="@((int)TrangThaiPhucKhao.ChoCham)" selected="@(ViewBag.SelectedTrangThai == (int)TrangThaiPhucKhao.ChoCham)">Chờ chấm</option>
+                    <option value="@((int)TrangThaiPhucKhao.DaCham)" selected="@(ViewBag.SelectedTrangThai == (int)TrangThaiPhucKhao.DaCham)">Đã chấm</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Học kỳ</label>
+                <select class="form-select" name="hocKy">
+                    <option value="">Tất cả</option>
+                    @foreach (var hocKy in ViewBag.HocKys ?? new List<HocKy>())
+                    {
+                        <option value="@hocKy.MaHocKy" selected="@(ViewBag.SelectedHocKy == hocKy.MaHocKy)">@hocKy.TenHocKy</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label">Môn học</label>
+                <select class="form-select" name="monHoc">
+                    <option value="">Tất cả</option>
+                    @foreach (var monHoc in ViewBag.MonHocs ?? new List<MonHoc>())
+                    {
+                        <option value="@monHoc.MaMonHoc" selected="@(ViewBag.SelectedMonHoc == monHoc.MaMonHoc)">@monHoc.TenMonHoc</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="fas fa-filter me-2"></i>Lọc
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th data-sortable>Mã đơn</th>
+                        <th data-sortable>Sinh viên</th>
+                        <th data-sortable>Môn học</th>
+                        <th data-sortable>Học kỳ</th>
+                        <th data-sortable>Điểm hiện tại</th>
+                        <th data-sortable>Điểm mong muốn</th>
+                        <th data-sortable>Ngày gửi</th>
+                        <th data-sortable>Trạng thái</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MaDon</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar-circle me-2" style="width: 32px; height: 32px; font-size: 1rem;">
+                                        <i class="fas fa-user-graduate"></i>
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">@item.SinhVien?.HoTen</div>
+                                        <div class="text-muted small">@item.SinhVien?.MaSinhVien</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.MonHoc?.TenMonHoc</td>
+                            <td>@item.HocKy?.TenHocKy</td>
+                            <td>@item.DiemHienTai</td>
+                            <td>@item.DiemMongMuon</td>
+                            <td>@item.NgayGui.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @switch (item.TrangThai)
+                                {
+                                    case TrangThaiPhucKhao.ChoXacNhan:
+                                        <span class="badge bg-warning">Chờ xác nhận</span>
+                                        break;
+                                    case TrangThaiPhucKhao.DaDuyet:
+                                        <span class="badge bg-success">Đã duyệt</span>
+                                        break;
+                                    case TrangThaiPhucKhao.TuChoi:
+                                        <span class="badge bg-danger">Từ chối</span>
+                                        break;
+                                    case TrangThaiPhucKhao.ChoCham:
+                                        <span class="badge bg-info">Chờ chấm</span>
+                                        break;
+                                    case TrangThaiPhucKhao.DaCham:
+                                        <span class="badge bg-primary">Đã chấm</span>
+                                        break;
+                                }
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-action btn-view" data-bs-toggle="tooltip" title="Xem chi tiết">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-action btn-edit" data-id="@item.MaDon" data-bs-toggle="tooltip" title="Chỉnh sửa">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-action btn-delete" data-id="@item.MaDon" data-bs-toggle="tooltip" title="Xóa">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Form Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModalLabel">Tạo đơn phúc khảo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="donPhucKhaoForm" method="post" data-validate>
+                    <div class="mb-3">
+                        <label class="form-label">Sinh viên</label>
+                        <select class="form-select" name="MaSinhVien" required>
+                            <option value="">Chọn sinh viên</option>
+                            @foreach (var sv in ViewBag.SinhViens ?? new List<SinhVien>())
+                            {
+                                <option value="@sv.MaSinhVien">@sv.HoTen - @sv.MaSinhVien</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Môn học</label>
+                        <select class="form-select" name="MaMonHoc" required>
+                            <option value="">Chọn môn học</option>
+                            @foreach (var mh in ViewBag.MonHocs ?? new List<MonHoc>())
+                            {
+                                <option value="@mh.MaMonHoc">@mh.TenMonHoc</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Học kỳ</label>
+                        <select class="form-select" name="MaHocKy" required>
+                            <option value="">Chọn học kỳ</option>
+                            @foreach (var hk in ViewBag.HocKys ?? new List<HocKy>())
+                            {
+                                <option value="@hk.MaHocKy">@hk.TenHocKy</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Năm học</label>
+                        <select class="form-select" name="MaNamHoc">
+                            <option value="">Chọn năm học</option>
+                            @foreach (var nh in ViewBag.NamHocs ?? new List<NamHoc>())
+                            {
+                                <option value="@nh.MaNamHoc">@nh.TenNamHoc</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Lý do phúc khảo</label>
+                        <textarea class="form-control" name="LyDo" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Điểm hiện tại</label>
+                        <input type="number" class="form-control" name="DiemHienTai" step="0.1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Điểm mong muốn</label>
+                        <input type="number" class="form-control" name="DiemMongMuon" step="0.1" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Địa điểm thi</label>
+                        <input type="text" class="form-control" name="DiaDiemThi">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phòng thi</label>
+                        <input type="text" class="form-control" name="PhongThi">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nhóm lớp</label>
+                        <input type="text" class="form-control" name="NhomLop">
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Form Submit Handler
+            $('#donPhucKhaoForm').on('submit', function(e) {
+                e.preventDefault();
+                const formData = $(this).serialize();
+                $.post('@Url.Action("Create")', formData)
+                    .done(function() {
+                        $('#formModal').modal('hide');
+                        location.reload();
+                    })
+                    .fail(function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseText);
+                    });
+            });
+
+            // Edit Button Handler
+            $('.btn-edit').on('click', function() {
+                const maDon = $(this).data('id');
+                $.get('@Url.Action("GetById")/' + maDon)
+                    .done(function(data) {
+                        $('#formModalLabel').text('Chỉnh sửa đơn phúc khảo');
+                        $('#donPhucKhaoForm').attr('action', '@Url.Action("Update")/' + maDon);
+                        Object.keys(data).forEach(key => {
+                            $(`#donPhucKhaoForm [name="${key}"]`).val(data[key]);
+                        });
+                        $('#formModal').modal('show');
+                    })
+                    .fail(function(xhr) {
+                        alert('Có lỗi xảy ra: ' + xhr.responseText);
+                    });
+            });
+
+            // Delete Button Handler
+            $('.btn-delete').on('click', function() {
+                if (confirm('Bạn có chắc chắn muốn xóa đơn phúc khảo này?')) {
+                    const maDon = $(this).data('id');
+                    $.post('@Url.Action("Delete")/' + maDon)
+                        .done(function() {
+                            location.reload();
+                        })
+                        .fail(function(xhr) {
+                            alert('Có lỗi xảy ra: ' + xhr.responseText);
+                        });
+                }
+            });
+
+            // View Button Handler
+            $('.btn-view').on('click', function() {
+                const maDon = $(this).closest('tr').find('.btn-edit').data('id');
+                window.location.href = '@Url.Action("Details")/' + maDon;
+            });
+
+            // Create Button Handler
+            $('.btn-create').on('click', function() {
+                $('#formModalLabel').text('Tạo đơn phúc khảo');
+                $('#donPhucKhaoForm').attr('action', '@Url.Action("Create")');
+                $('#donPhucKhaoForm')[0].reset();
+            });
+
+            // Initialize Tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Table Search
+            $('.table-search').on('keyup', function() {
+                const searchText = $(this).val().toLowerCase();
+                $('table tbody tr').each(function() {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.includes(searchText));
+                });
+            });
+
+            // Table Sort
+            $('th[data-sortable]').on('click', function() {
+                const table = $(this).closest('table');
+                const tbody = table.find('tbody');
+                const rows = tbody.find('tr').toArray();
+                const index = $(this).index();
+                const isAsc = $(this).hasClass('asc');
+
+                rows.sort((a, b) => {
+                    const aValue = $(a).children('td').eq(index).text().trim();
+                    const bValue = $(b).children('td').eq(index).text().trim();
+                    return isAsc ? 
+                        bValue.localeCompare(aValue) : 
+                        aValue.localeCompare(bValue);
+                });
+
+                $(this).toggleClass('asc');
+                tbody.empty().append(rows);
+            });
+        });
+    </script>
+} 

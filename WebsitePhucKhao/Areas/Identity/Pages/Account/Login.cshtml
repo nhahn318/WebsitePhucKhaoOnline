@@ -29,17 +29,6 @@
                         <label asp-for="Input.Password" class="form-label">Mật khẩu</label>
                         <span asp-validation-for="Input.Password" class="text-danger small"></span>
                     </div>
-
-                    <div class="form-floating mb-3">
-                        <select asp-for="Input.Role" class="form-select" aria-required="true">
-                            <option value="">Chọn vai trò</option>
-                            <option value="SinhVien">Sinh viên</option>
-                            <option value="GiangVien">Giảng viên</option>
-                            <option value="NhanVien">Nhân viên</option>
-                        </select>
-                        <label asp-for="Input.Role" class="form-label">Vai trò</label>
-                        <span asp-validation-for="Input.Role" class="text-danger small"></span>
-                    </div>
                     
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <div class="form-check">
