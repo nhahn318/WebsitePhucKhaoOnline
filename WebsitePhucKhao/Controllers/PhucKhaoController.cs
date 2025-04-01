@@ -6,6 +6,7 @@ using WebsitePhucKhao.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using WebsitePhucKhao.Repositories;
 using Microsoft.EntityFrameworkCore;
+using WebsitePhucKhao.Enums;
 
 
 namespace WebsitePhucKhao.Controllers {
@@ -277,5 +278,51 @@ namespace WebsitePhucKhao.Controllers {
 
             return View(daCham);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetDiemHienTai(int maMonHoc, int maHocKy, int maNamHoc, long maSinhVien)
+        {
+            var diem = await _context.BangDiems
+                .Where(b => b.MaMonHoc == maMonHoc
+                         && b.MaHocKy == maHocKy
+                         && b.MaNamHoc == maNamHoc
+                         && b.MaSinhVien == maSinhVien)
+                .Select(b => b.DiemCuoiKy)
+                .FirstOrDefaultAsync();
+
+            return Json(diem);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TimKiemDonPhucKhao(string keyword)
+        {
+            var ds = await _repository.GetDanhSachChoDuyetAsync();
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                keyword = keyword.Trim().ToLower();
+
+                ds = ds.Where(d => d.SinhVien != null &&
+                    (
+                        d.SinhVien.MaSinhVien.ToString().Contains(keyword) ||
+                        (!string.IsNullOrEmpty(d.SinhVien.HoTen) && d.SinhVien.HoTen.ToLower().Contains(keyword))
+                    )).ToList();
+            }
+
+            var ketQua = ds.Select((d, i) => new
+            {
+                stt = i + 1,
+                maDon = d.MaDon,
+                maSinhVien = d.SinhVien?.MaSinhVien,
+                tenSinhVien = d.SinhVien?.HoTen,
+                tenMonHoc = d.MonHoc?.TenMonHoc,
+                ngayGui = d.NgayGui.ToString("dd/MM/yyyy"),
+                trangThai = d.TrangThai.ToFriendlyString()
+            });
+
+            return Json(ketQua);
+        }
+
     }
 }

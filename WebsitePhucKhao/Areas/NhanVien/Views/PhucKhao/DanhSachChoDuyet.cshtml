@@ -1,0 +1,104 @@
+﻿@model List<WebsitePhucKhao.Models.DonPhucKhao>
+@using WebsitePhucKhao.Enums
+
+<h2>Danh sách đơn chờ duyệt</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Sinh viên</th>
+            <th>Môn học</th>
+            <th>Ngày gửi</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <input type="text" id="searchKeyword" class="form-control mb-3" placeholder="Nhập mã hoặc tên sinh viên..." autocomplete="off" />
+    <tbody id="table-body">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model[i].SinhVien?.HoTen</td>
+                <td>@Model[i].MonHoc?.TenMonHoc</td>
+                <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
+                <td>@Model[i].TrangThai.ToFriendlyString()</td>
+                <td>
+                    <a asp-action="ChiTietPhucKhaoChoNhanVien" asp-route-id="@Model[i].MaDon" class="btn btn-info btn-sm">Chi tiết</a>
+                    @if (Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan)
+                    {
+                        <a asp-action="Duyet" asp-route-id="@Model[i].MaDon" class="btn btn-success btn-sm">Duyệt</a>
+                    }
+                    @if (Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet)
+                    {
+                        <a asp-action="UploadBaiThi" asp-route-maDon="@Model[i].MaDon" class="btn btn-warning btn-sm">Upload bài thi</a>
+                        <a asp-action="ChiTietUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">Xem Upload</a>
+                        <a asp-action="EditUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">Sửa Upload</a>
+                    }
+                    @if (Model[i].TrangThai == TrangThaiPhucKhao.DaCham)
+                    {
+                        <a asp-area="NhanVien" asp-controller="NhanVienPhongDaoTao" asp-action="ChiTietSauPhucKhao" asp-route-maDon="@Model[i].MaDon" class="btn btn-info btn-sm">
+                            Chi tiết sau khi chấm
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#searchKeyword").on("input", function () {
+                var keyword = $(this).val();
+
+                $.ajax({
+                    url: '/NhanVien/PhucKhao/TimKiemDonPhucKhao',
+                    type: 'GET',
+                    data: { keyword: keyword },
+                    success: function (data) {
+                        $("#table-body").empty();
+
+                        if (data.length === 0) {
+                            $("#table-body").append('<tr><td colspan="7">Không tìm thấy kết quả nào.</td></tr>');
+                        } else {
+                            $.each(data, function (index, item) {
+                                let thaoTac = `<a href="/NhanVien/PhucKhao/ChiTietPhucKhaoChoNhanVien/${item.maDon}" class="btn btn-info btn-sm">Chi tiết</a>`;
+
+                                if (item.trangThai === "Chờ xác nhận") {
+                                    thaoTac += `<a href="/NhanVien/PhucKhao/Duyet/${item.maDon}" class="btn btn-success btn-sm">Duyệt</a>`;
+                                } else if (item.trangThai === "Đã duyệt") {
+                                    thaoTac += `
+                                        <a href="/NhanVien/PhucKhao/UploadBaiThi?maDon=${item.maDon}" class="btn btn-warning btn-sm">Upload bài thi</a>
+                                        <a href="/NhanVien/PhucKhao/ChiTietUpload?maDon=${item.maDon}" class="btn btn-secondary btn-sm">Xem Upload</a>
+                                        <a href="/NhanVien/PhucKhao/EditUpload?maDon=${item.maDon}" class="btn btn-secondary btn-sm">Sửa Upload</a>`;
+                                } else if (item.trangThai === "Đã chấm") {
+                                    thaoTac += `<a href="/NhanVien/NhanVienPhongDaoTao/ChiTietSauPhucKhao?maDon=${item.maDon}" class="btn btn-info btn-sm">Chi tiết sau khi chấm</a>`;
+                                }
+
+                                $("#table-body").append(`
+                                    <tr>
+                                        <td>${item.stt}</td>
+                                        <td>${item.tenSinhVien}</td>
+                                        <td>${item.tenMonHoc}</td>
+                                        <td>${item.ngayGui}</td>
+                                        <td>${item.trangThai}</td>
+                                        <td>${thaoTac}</td>
+                                    </tr>
+                                `);
+                            });
+                        }
+                    },
+                    error: function () {
+                        $("#table-body").html('<tr><td colspan="7" class="text-danger">Lỗi tải dữ liệu.</td></tr>');
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+

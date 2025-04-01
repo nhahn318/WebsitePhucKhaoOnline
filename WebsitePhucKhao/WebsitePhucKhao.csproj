@@ -20,11 +20,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\GiangVien\Data\" />
+    <Folder Include="Areas\GiangVien\Models\" />
+    <Folder Include="Areas\NhanVien\Data\" />
+    <Folder Include="Areas\NhanVien\Models\" />
+    <Folder Include="Areas\SinhVien\Data\" />
+    <Folder Include="Areas\SinhVien\Models\" />
     <Folder Include="Migrations\" />
     <Folder Include="Views\BangDiem\" />
+    <Folder Include="Views\GiangVien\" />
+    <Folder Include="Views\NhanVienPhongDaoTao\" />
+    <Folder Include="Views\PhucKhao\" />
+    <Folder Include="Views\SinhVien\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

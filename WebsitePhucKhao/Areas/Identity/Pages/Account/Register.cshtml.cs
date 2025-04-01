@@ -100,7 +100,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account {
                     // Lưu thông tin vào bảng SinhVien
                     using (var context = new ApplicationDbContext(new DbContextOptions<ApplicationDbContext>()))
                     {
-                        var sinhVien = new SinhVien
+                        var sinhVien = new WebsitePhucKhao.Models.SinhVien
                         {
                             MaSinhVien = Input.MaSinhVien,
                             HoTen = Input.HoTen,

@@ -17,7 +17,9 @@ namespace WebsitePhucKhao.Models {
         public float DiemHienTai { get; set; }
         public float DiemMongMuon { get; set; }
 
-        public int HocKy { get; set; }
+        public int MaHocKy { get; set; }
+        [ForeignKey(nameof(MaHocKy))]
+        public HocKy? HocKy { get; set; }
         public int? MaNamHoc { get; set; }
 
         [ForeignKey("MaNamHoc")]

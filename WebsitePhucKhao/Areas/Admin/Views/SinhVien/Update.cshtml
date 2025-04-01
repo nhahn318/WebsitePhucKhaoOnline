@@ -1,0 +1,104 @@
+﻿@model WebsitePhucKhao.Models.SinhVien
+
+<h2>Cập nhật thông tin sinh viên</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" asp-for="MaSinhVien" />
+
+    <div class="form-group">
+        <label asp-for="HoTen"></label>
+        <input asp-for="HoTen" class="form-control" required />
+        <span asp-validation-for="HoTen" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SoDienThoai"></label>
+        <input asp-for="SoDienThoai" class="form-control" required />
+        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Khoa -->
+    <div class="form-group">
+        <label asp-for="MaKhoa">Chọn Khoa</label>
+        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList" id="MaKhoa">
+            <option value="">-- Chọn Khoa --</option>
+        </select>
+        <span asp-validation-for="MaKhoa" class="text-danger"></span>
+    </div>
+
+    <!-- Dropdown chọn Chuyên ngành (tự động cập nhật khi chọn Khoa) -->
+    <div class="form-group">
+        <label asp-for="MaChuyenNganh">Chọn Chuyên Ngành</label>
+        <select asp-for="MaChuyenNganh" class="form-control" asp-items="ViewBag.ChuyenNganhList" id="MaChuyenNganh">
+            <option value="">-- Chọn Chuyên Ngành --</option>
+        </select>
+        <span asp-validation-for="MaChuyenNganh" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MaLop">Chọn Lớp</label>
+        <select asp-for="MaLop" class="form-control" id="MaLop">
+            <option value="">-- Chọn Lớp --</option>
+        </select>
+        <span asp-validation-for="MaLop" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+</form>
+
+<script>
+    function loadDropdowns(khoaId, selectedChuyenNganhId, selectedLopId) {
+        const chuyenNganhDropdown = document.getElementById("MaChuyenNganh");
+        const lopDropdown = document.getElementById("MaLop");
+
+        // Reset
+        chuyenNganhDropdown.innerHTML = '<option value="">-- Chọn Chuyên Ngành --</option>';
+        lopDropdown.innerHTML = '<option value="">-- Chọn Lớp --</option>';
+
+        if (khoaId) {
+            // Chuyên ngành
+            fetch('/Admin/SinhVien/GetChuyenNganhsByKhoa?maKhoa=' + khoaId)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(function (cn) {
+                        const option = new Option(cn.tenChuyenNganh, cn.maChuyenNganh);
+                        if (cn.maChuyenNganh == selectedChuyenNganhId) option.selected = true;
+                        chuyenNganhDropdown.add(option);
+                    });
+                });
+
+            // Lớp
+            fetch('/Admin/SinhVien/GetLopsByKhoa?maKhoa=' + khoaId)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(function (lop) {
+                        const option = new Option(lop.tenLop, lop.maLop);
+                        if (lop.maLop == selectedLopId) option.selected = true;
+                        lopDropdown.add(option);
+                    });
+                });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const maKhoa = document.getElementById("MaKhoa").value;
+        const selectedChuyenNganh = "@Model.MaChuyenNganh";
+        const selectedLop = "@Model.MaLop";
+
+        // Gọi khi trang tải nếu có sẵn dữ liệu
+        if (maKhoa) {
+            loadDropdowns(maKhoa, selectedChuyenNganh, selectedLop);
+        }
+
+        // Gọi lại khi người dùng đổi Khoa
+        document.getElementById("MaKhoa").addEventListener("change", function () {
+            loadDropdowns(this.value, null, null);
+        });
+    });
+</script>

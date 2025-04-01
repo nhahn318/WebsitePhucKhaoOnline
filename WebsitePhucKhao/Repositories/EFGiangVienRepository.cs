@@ -19,7 +19,9 @@ namespace WebsitePhucKhao.Repositories {
 
         public async Task<GiangVien?> GetByIdAsync(long maGiangVien)
         {
-            return await _context.GiangViens.FindAsync(maGiangVien);
+            return await _context.GiangViens
+                .Include(g => g.Khoa) // Đảm bảo load cả Khoa
+                .FirstOrDefaultAsync(g => g.MaGiangVien == maGiangVien);
         }
 
         public async Task AddAsync(GiangVien giangVien)

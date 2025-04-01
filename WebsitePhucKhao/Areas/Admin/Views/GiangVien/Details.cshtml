@@ -1,0 +1,22 @@
+﻿@model WebsitePhucKhao.Models.GiangVien
+
+<h2>Thông tin giảng viên</h2>
+
+<div>
+    <strong>Mã Giảng Viên:</strong> @Model.MaGiangVien
+</div>
+<div>
+    <strong>Họ tên:</strong> @Model.HoTen
+</div>
+<div>
+    <strong>Email:</strong> @Model.Email
+</div>
+<div>
+    <strong>Số điện thoại:</strong> @Model.SoDienThoai
+</div>
+<tr>
+    <th>Khoa</th>
+    <td>@Model.Khoa?.TenKhoa</td>
+</tr>
+
+<a asp-action="Index" class="btn btn-secondary">Trở về</a>

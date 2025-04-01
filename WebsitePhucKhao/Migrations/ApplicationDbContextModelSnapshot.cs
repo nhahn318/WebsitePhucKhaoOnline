@@ -345,15 +345,15 @@ namespace WebsitePhucKhao.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HocKy")
-                        .HasColumnType("int");
-
                     b.Property<string>("LyDo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("MaGiangVien")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("MaHocKy")
+                        .HasColumnType("int");
 
                     b.Property<int?>("MaLichThi")
                         .HasColumnType("int");
@@ -385,6 +385,8 @@ namespace WebsitePhucKhao.Migrations
                     b.HasKey("MaDon");
 
                     b.HasIndex("MaGiangVien");
+
+                    b.HasIndex("MaHocKy");
 
                     b.HasIndex("MaLichThi");
 
@@ -873,6 +875,12 @@ namespace WebsitePhucKhao.Migrations
                         .HasForeignKey("MaGiangVien")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("WebsitePhucKhao.Models.HocKy", "HocKy")
+                        .WithMany()
+                        .HasForeignKey("MaHocKy")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebsitePhucKhao.Models.LichThi", "LichThi")
                         .WithMany("DonPhucKhaos")
                         .HasForeignKey("MaLichThi")
@@ -899,6 +907,8 @@ namespace WebsitePhucKhao.Migrations
                         .IsRequired();
 
                     b.Navigation("GiangVien");
+
+                    b.Navigation("HocKy");
 
                     b.Navigation("LichThi");
 

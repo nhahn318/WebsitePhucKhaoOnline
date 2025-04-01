@@ -34,6 +34,7 @@ namespace WebsitePhucKhao.Repositories {
                 .Include(d => d.MonHoc)
                 .Include(d => d.SinhVien)
                 .Include(d => d.NamHoc)
+                .Include(d => d.HocKy)
                 .FirstOrDefaultAsync(d => d.MaDon == id);
         }
 
@@ -48,7 +49,7 @@ namespace WebsitePhucKhao.Repositories {
                 DiemHienTai = don.DiemHienTai,
                 DiemMongMuon = don.DiemMongMuon,
                 MaMonHoc = don.MaMonHoc,
-                MaHocKy = don.HocKy,
+                MaHocKy = don.MaHocKy,
                 MaNamHoc = don.MaNamHoc,
                 DiaDiemThi = don.DiaDiemThi,
                 PhongThi = don.PhongThi,
@@ -67,7 +68,7 @@ namespace WebsitePhucKhao.Repositories {
             don.DiemHienTai = model.DiemHienTai;
             don.DiemMongMuon = model.DiemMongMuon;
             don.MaMonHoc = model.MaMonHoc;
-            don.HocKy = model.MaHocKy ?? 0;
+            don.MaHocKy = model.MaHocKy ?? 0;
             don.MaNamHoc = model.MaNamHoc ?? 0;
             don.DiaDiemThi = model.DiaDiemThi;
             don.PhongThi = model.PhongThi;
@@ -169,7 +170,7 @@ namespace WebsitePhucKhao.Repositories {
                 DiemHienTai = model.DiemHienTai,
                 DiemMongMuon = model.DiemMongMuon,
                 MaMonHoc = model.MaMonHoc,
-                HocKy = model.MaHocKy ?? 0,
+                MaHocKy = model.MaHocKy ?? 0,
                 MaNamHoc = model.MaNamHoc ?? 0,
                 DiaDiemThi = model.DiaDiemThi,
                 PhongThi = model.PhongThi,

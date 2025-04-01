@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Trang quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="mb-4">Chào mừng đến với trang quản trị</h2>
+
+<div class="alert alert-info">
+    Đây là khu vực dành cho quản trị viên để quản lý hệ thống phúc khảo.
+</div>
+
+<ul class="list-group">
+    <a class="nav-link" asp-area="Admin" asp-controller="SinhVien" asp-action="Index">
+        <i class="fas fa-users me-1"></i>Quản lý sinh viên
+    </a>
+    <a class="nav-link" asp-area="Admin" asp-controller="GiangVien" asp-action="Index">
+        <i class="fas fa-users me-1"></i>Quản lý giảng viên
+    </a>
+    <a class="nav-link" asp-area="Admin" asp-controller="NhanVienPhongDaoTao" asp-action="Index">
+        <i class="fas fa-users me-1"></i>Quản lý nhân viên
+    </a>
+    <li class="list-group-item">
+        <a asp-area="Admin" asp-controller="PhucKhao" asp-action="DanhSachTatCa">Xem tất cả đơn phúc khảo</a>
+    </li>
+</ul>

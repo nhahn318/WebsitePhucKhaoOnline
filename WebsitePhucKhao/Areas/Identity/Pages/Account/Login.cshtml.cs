@@ -201,20 +201,32 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Người dùng đã đăng nhập.");
-
-                    // Điều hướng theo vai trò đã chọn
-                    switch (Input.Role)
+                    if (!await _userManager.IsInRoleAsync(user, Input.Role))
                     {
-                        case "SinhVien":
-                            returnUrl = Url.Content("~/PhucKhao/DanhSachDonPhucKhao");
-                            break;
-                        case "GiangVien":
-                            returnUrl = Url.Content("~/GiangVien/PhucKhaoDuocPhanCong");
-                            break;
-                        case "NhanVien":
-                            returnUrl = Url.Content("~/PhucKhao/DanhSachChoDuyet");
-                            break;
+                        await _userManager.AddToRoleAsync(user, Input.Role);
                     }
+
+
+                    if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        returnUrl = Url.Action("Index", "Dashboard", new { area = "Admin" });
+                    }
+                    else
+                    {
+                        switch (Input.Role)
+                        {
+                            case "SinhVien":
+                                returnUrl = Url.Action("DanhSachDonPhucKhao", "PhucKhao", new { area = "SinhVien" });
+                                break;
+                            case "GiangVien":
+                                returnUrl = Url.Action("PhucKhaoDuocPhanCong", "GiangVien", new { area = "GiangVien" });
+                                break;
+                            case "NhanVien":
+                                returnUrl = Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "NhanVien" });
+                                break;
+                        }
+                    }
+
 
                     return LocalRedirect(returnUrl);
                 }
