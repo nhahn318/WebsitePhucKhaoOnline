@@ -12,9 +12,5 @@ using WebsitePhucKhao.Enums;
 
 namespace WebsitePhucKhao.Controllers {
     public class GiangVienController : Controller {
- 
-
-    
-
     }
 }

@@ -12,7 +12,9 @@ namespace WebsitePhucKhao.Repositories {
 
         public async Task<IEnumerable<HocKy>> GetAllAsync()
         {
-            return await _context.HocKys.ToListAsync();
+            return await _context.HocKys
+            .Include(h => h.NamHoc)    
+            .ToListAsync();
         }
 
         public async Task<HocKy?> GetByIdAsync(int maHocKy)
