@@ -157,7 +157,8 @@
                                         </div>
                                     </div>
                                     <div class="dropdown-divider"></div>
-                                    <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post">
+                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+                                        @Html.AntiForgeryToken()
                                         <button type="submit" class="dropdown-item text-danger">
                                             <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
                                         </button>
@@ -182,6 +183,22 @@
     <script src="~/js/admin.js" asp-append-version="true"></script>
     <script src="~/js/stars.js" asp-append-version="true"></script>
     <script src="~/js/lazy-loading.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#logoutForm').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function() {
+                        window.location.href = '/';
+                    }
+                });
+            });
+        });
+    </script>
 
     <!-- Page Scripts -->
     @await RenderSectionAsync("Scripts", required: false)
