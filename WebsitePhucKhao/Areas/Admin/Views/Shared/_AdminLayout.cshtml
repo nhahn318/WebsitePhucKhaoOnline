@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hệ thống Phúc khảo</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+
+    <!-- Additional CSS -->
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="text-decoration-none">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Hệ thống Phúc khảo</span>
+                </a>
+            </div>
+
+            <div class="sidebar-menu">
+                <div class="menu-section">
+                    <div class="menu-header">
+                        <i class="fas fa-chart-line me-2"></i>
+                        TỔNG QUAN
+                    </div>
+                    <div class="menu-items">
+                        <a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Dashboard" ? "active" : "")">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Bảng điều khiển</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-header">
+                        <i class="fas fa-cogs me-2"></i>
+                        QUẢN LÝ
+                    </div>
+                    <div class="menu-items">
+                        <a href="@Url.Action("Index", "DonPhucKhao", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "DonPhucKhao" ? "active" : "")">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Đơn phúc khảo</span>
+                        </a>
+                        <a href="@Url.Action("Index", "SinhVien", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "SinhVien" ? "active" : "")">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>Sinh viên</span>
+                        </a>
+                        <a href="@Url.Action("Index", "GiangVien", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "GiangVien" ? "active" : "")">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>Giảng viên</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <div class="menu-header">
+                        <i class="fas fa-wrench me-2"></i>
+                        CÀI ĐẶT
+                    </div>
+                    <div class="menu-items">
+                        <a href="@Url.Action("Index", "MonHoc", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "MonHoc" ? "active" : "")">
+                            <i class="fas fa-book"></i>
+                            <span>Môn học</span>
+                        </a>
+                        <a href="@Url.Action("Index", "HocKy", new { area = "Admin" })" 
+                           class="menu-item @(ViewContext.RouteData.Values["Controller"]?.ToString() == "HocKy" ? "active" : "")">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Học kỳ</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Top Navbar -->
+            <nav class="top-navbar navbar navbar-expand-lg">
+                <div class="container-fluid px-4">
+                    <button class="btn btn-link" type="button" id="sidebarToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="navbar-right">
+                        <div class="d-flex align-items-center">
+                            <!-- Notification Bell -->
+                            <div class="dropdown me-3">
+                                <button class="btn btn-link position-relative" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-bell fa-lg"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" style="display: none;">
+                                        0
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="notificationDropdown">
+                                    <div class="notification-header p-3">
+                                        <h6 class="mb-0">Thông báo</h6>
+                                    </div>
+                                    <div class="notification-list">
+                                        <!-- Notification items will be added here dynamically -->
+                                    </div>
+                                    <div class="notification-footer p-2 text-center">
+                                        <a href="#" class="text-decoration-none">Xem tất cả thông báo</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User Dropdown -->
+                            <div class="dropdown">
+                                <button class="btn btn-link d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="avatar-circle me-2">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="user-info text-start">
+                                        <div class="user-name">@User.Identity?.Name</div>
+                                        <div class="user-role">Quản trị viên</div>
+                                    </div>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end user-dropdown-menu" aria-labelledby="userDropdown">
+                                    <div class="dropdown-header">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-circle me-3">
+                                                <i class="fas fa-user"></i>
+                                            </div>
+                                            <div>
+                                                <div class="user-name">@User.Identity?.Name</div>
+                                                <div class="user-role">Quản trị viên</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user-cog me-2"></i>Thông tin tài khoản
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cog me-2"></i>Cài đặt
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-item">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div>
+                                                <i class="fas fa-moon me-2"></i>Giao diện tối
+                                            </div>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Page Content -->
+            <div class="page-content p-4">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!-- Core JavaScript -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/admin.js" asp-append-version="true"></script>
+    <script src="~/js/stars.js" asp-append-version="true"></script>
+    <script src="~/js/lazy-loading.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#logoutForm').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function() {
+                        window.location.href = '/';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- Page Scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> 
