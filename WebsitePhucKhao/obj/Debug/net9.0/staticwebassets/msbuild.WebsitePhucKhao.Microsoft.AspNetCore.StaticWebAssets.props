@@ -120,8 +120,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>59otb1zxx7</Fingerprint>
-      <Integrity>CR9MtzzCNo9ZZeQxantWx21nZfiY+qY0b8M5KNAvkXY=</Integrity>
+      <Fingerprint>jxhg49a4rx</Fingerprint>
+      <Integrity>x6aQgv6rhLVtyxTZT5h81uSXnHb9fy023BiBcJEbKs8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\admin.css'))</OriginalItemSpec>
@@ -264,8 +264,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>rtwjgxt2la</Fingerprint>
-      <Integrity>EU+61U/ybj24fP+xHE+FWF3qFDQTEb7Lxhw8HkZynpQ=</Integrity>
+      <Fingerprint>bcfu8sclta</Fingerprint>
+      <Integrity>K6HRehBP5V42uRT5ei3/a1UFgtg4JEMTX0ixQ90wYaI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\lazy-loading.js'))</OriginalItemSpec>

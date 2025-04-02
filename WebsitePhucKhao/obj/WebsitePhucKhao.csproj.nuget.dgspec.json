@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JUO\\Source\\Repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {}
+    "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JUO\\Source\\Repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {
+    "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JUO\\Source\\Repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
+        "projectUniqueName": "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
         "projectName": "WebsitePhucKhao",
-        "projectPath": "C:\\Users\\JUO\\Source\\Repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
+        "projectPath": "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
         "packagesPath": "C:\\Users\\JUO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JUO\\Source\\Repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\",
+        "outputPath": "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
