@@ -8,7 +8,6 @@ using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 using SinhVienModel = WebsitePhucKhao.Models.SinhVien;
 
-
 namespace WebsitePhucKhao.Areas.Admin.Controllers {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -35,25 +34,83 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             return View(sinhViens);
         }
 
-        // Hiển thị form thêm sinh viên
-        public IActionResult Add()
+        // Hiển thị form thêm sinh viên mới
+        public async Task<IActionResult> Add()
         {
+            var khoaList = await _khoaRepository.GetAllAsync();
+            ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
+
+            // Chuyên ngành ban đầu rỗng, sẽ được cập nhật khi chọn Khoa
+            ViewBag.ChuyenNganhList = new List<SelectListItem>();
+
             return View();
         }
 
-        // Xử lý thêm sinh viên
         [HttpPost]
         public async Task<IActionResult> Add(SinhVienModel sinhVien)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _sinhVienRepository.AddAsync(sinhVien);
-                return RedirectToAction(nameof(Index));
+                var khoaList = await _khoaRepository.GetAllAsync();
+                ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
+                ViewBag.ChuyenNganhList = new List<SelectListItem>();
+
+                return View(sinhVien);
             }
-            return View(sinhVien);
+
+            // Kiểm tra xem mã sinh viên đã tồn tại chưa
+            var existingSinhVien = await _sinhVienRepository.GetByIdAsync(sinhVien.MaSinhVien);
+            if (existingSinhVien != null)
+            {
+                ModelState.AddModelError("MaSinhVien", "Mã sinh viên đã tồn tại!");
+                return View(sinhVien);
+            }
+
+            // Kiểm tra xem email đã tồn tại trong bảng AspNetUsers chưa
+            var existingUser = await _userManager.FindByEmailAsync(sinhVien.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("Email", "Email này đã được dùng cho một tài khoản khác!");
+                return View(sinhVien);
+            }
+
+            // Đặt mật khẩu mặc định là mã sinh viên
+            sinhVien.MatKhau = sinhVien.MaSinhVien.ToString();
+
+            // Bước 1: Thêm vào bảng SinhViens
+            await _sinhVienRepository.AddAsync(sinhVien);
+
+            // Bước 2: Tạo ApplicationUser tương ứng
+            var appUser = new ApplicationUser
+            {
+                UserName = sinhVien.Email,
+                Email = sinhVien.Email,
+                MaSinhVien = sinhVien.MaSinhVien
+            };
+
+            var createResult = await _userManager.CreateAsync(appUser, sinhVien.MaSinhVien.ToString());
+
+            if (!createResult.Succeeded)
+            {
+                foreach (var error in createResult.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(sinhVien);
+            }
+
+            // Bước 3: Gán role "SinhVien" nếu chưa có
+            if (!await _userManager.IsInRoleAsync(appUser, "SinhVien"))
+            {
+                await _userManager.AddToRoleAsync(appUser, "SinhVien");
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
-        // Hiển thị chi tiết sinh viên
+
+        // Hiển thị thông tin chi tiết sinh viên
         public async Task<IActionResult> Details(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
@@ -64,7 +121,6 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             return View(sinhVien);
         }
 
-        // Hiển thị form cập nhật sinh viên
         public async Task<IActionResult> Update(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
@@ -72,27 +128,47 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             {
                 return NotFound();
             }
+
+            // Lấy danh sách Khoa từ Database
+            var khoaList = await _khoaRepository.GetAllAsync();
+            ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa", sinhVien.MaKhoa);
+
+            // Lấy danh sách Chuyên ngành theo Khoa của sinh viên
+            var chuyenNganhList = await _chuyenNganhRepository.GetByKhoaIdAsync(sinhVien.MaKhoa);
+            ViewBag.ChuyenNganhList = new SelectList(chuyenNganhList, "MaChuyenNganh", "TenChuyenNganh", sinhVien.MaChuyenNganh);
+
             return View(sinhVien);
         }
 
-        // Xử lý cập nhật sinh viên
+
         [HttpPost]
         public async Task<IActionResult> Update(long id, SinhVienModel sinhVien)
         {
-            if (id != sinhVien.MaSinhVien)
-            {
-                return NotFound();
-            }
-
+            ModelState.Remove("MatKhau"); // bỏ qua mật khẩu khi cập nhật nếu bạn không gửi lên
             if (ModelState.IsValid)
             {
-                await _sinhVienRepository.UpdateAsync(sinhVien);
+                var existingSinhVien = await _sinhVienRepository.GetByIdAsync(id);
+                if (existingSinhVien == null)
+                {
+                    return NotFound();
+                }
+
+                existingSinhVien.HoTen = sinhVien.HoTen;
+                existingSinhVien.Email = sinhVien.Email;
+                existingSinhVien.SoDienThoai = sinhVien.SoDienThoai;
+                existingSinhVien.Khoa = sinhVien.Khoa;
+                existingSinhVien.ChuyenNganh = sinhVien.ChuyenNganh;
+                existingSinhVien.Lop = sinhVien.Lop;
+
+                await _sinhVienRepository.UpdateAsync(existingSinhVien);
                 return RedirectToAction(nameof(Index));
             }
+
+            // Nếu lỗi, hiển thị lỗi ra View
             return View(sinhVien);
         }
 
-        // Xử lý xóa sinh viên
+        // Hiển thị form xác nhận xóa sinh viên
         public async Task<IActionResult> Delete(long id)
         {
             var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
@@ -100,23 +176,56 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             {
                 return NotFound();
             }
-            await _sinhVienRepository.DeleteAsync(id);
+            return View(sinhVien);
+        }
+
+        [HttpPost, ActionName("DeleteConfirmed")]
+        public async Task<IActionResult> DeleteConfirmed(long id)
+        {
+            // Bước 1: Xóa tất cả user liên quan trong AspNetUsers trước
+            var users = _context.Users.Where(u => u.MaSinhVien == id).ToList();
+            if (users.Any())
+            {
+                _context.Users.RemoveRange(users);
+                await _context.SaveChangesAsync(); // Lưu thay đổi trước khi tiếp tục
+            }
+
+            // Bước 2: Xóa sinh viên sau khi đã xóa user
+            var sinhVien = await _sinhVienRepository.GetByIdAsync(id);
+            if (sinhVien != null)
+            {
+                await _sinhVienRepository.DeleteAsync(id);
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> GetChuyenNganhsByKhoa(int maKhoa)
+        public async Task<IActionResult> GetChuyenNganhsByKhoa(string maKhoa)
         {
-            var chuyenNganhs = await _chuyenNganhRepository.GetByKhoaIdAsync(maKhoa);
-            return Json(chuyenNganhs);
+            if (string.IsNullOrEmpty(maKhoa)) return Json(new List<object>());
+
+            var chuyenNganhs = await _chuyenNganhRepository.GetByKhoaIdAsync(int.Parse(maKhoa));
+
+            var result = chuyenNganhs.Select(cn => new {
+                maChuyenNganh = cn.MaChuyenNganh,
+                tenChuyenNganh = cn.TenChuyenNganh
+            });
+
+            return Json(result);
         }
 
 
-        public async Task<IActionResult> GetLopsByKhoa(int maKhoa)
+        public async Task<IActionResult> GetLopsByKhoa(string maKhoa)
         {
+            if (string.IsNullOrEmpty(maKhoa)) return Json(new List<object>());
+
             var lops = await _context.Lops
-                                     .Where(l => l.MaKhoa == maKhoa)
-                                     .Select(l => new { l.MaLop, l.TenLop })
-                                     .ToListAsync();
+                .Where(l => l.MaKhoa == int.Parse(maKhoa))
+                .Select(l => new {
+                    maLop = l.MaLop,
+                    tenLop = l.TenLop
+                }).ToListAsync();
+
             return Json(lops);
         }
 

@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
     <!-- Additional CSS -->
     @await RenderSectionAsync("Styles", required: false)
@@ -184,21 +187,6 @@
     <script src="~/js/stars.js" asp-append-version="true"></script>
     <script src="~/js/lazy-loading.js" asp-append-version="true"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#logoutForm').on('submit', function(e) {
-                e.preventDefault();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function() {
-                        window.location.href = '/';
-                    }
-                });
-            });
-        });
-    </script>
 
     <!-- Page Scripts -->
     @await RenderSectionAsync("Scripts", required: false)

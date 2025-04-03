@@ -14,9 +14,9 @@
         <div>
             @if (ViewData["ShowCreateButton"] as bool? ?? true)
             {
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                <a href="@Url.Action("Add", "SinhVien", new { area = "Admin" })" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Thêm mới
-                </button>
+                </a>
             }
         </div>
     </div>
