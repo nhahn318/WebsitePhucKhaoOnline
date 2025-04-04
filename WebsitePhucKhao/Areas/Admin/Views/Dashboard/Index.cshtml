@@ -1,272 +1,593 @@
 ﻿@{
-    ViewData["Title"] = "Bảng điều khiển";
+    ViewData["Title"] = "Trang chủ Admin";
+    
+    // Chuẩn bị dữ liệu cho biểu đồ
+    var subjectLabels = new List<string>();
+    var subjectData = new List<int>();
+    if (ViewBag.SubjectStats != null)
+    {
+        foreach (var stat in ViewBag.SubjectStats)
+        {
+            subjectLabels.Add(stat.Subject);
+            subjectData.Add(stat.Count);
+        }
+    }
+    
+    var teacherLabels = new List<string>();
+    var teacherData = new List<int>();
+    if (ViewBag.TeacherStats != null)
+    {
+        foreach (var stat in ViewBag.TeacherStats)
+        {
+            teacherLabels.Add(stat.TeacherName);
+            teacherData.Add(stat.Count);
+        }
+    }
 }
 
-<div class="dashboard-container">
-    <div class="page-header mb-4">
-        <div class="container-fluid px-4">
-            <h1 class="page-title">Bảng điều khiển</h1>
-            <p class="page-subtitle">Thống kê và hoạt động gần đây</p>
+@section Styles {
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+    <style>
+        /* Ghi đè các kiểu cho các ô tính tổng */
+        .stat-cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.5rem;
+        }
+        
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            margin: 0 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            background-color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .stat-card-header {
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--dark-color);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .stat-card-body {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-card-icon {
+            flex: 0 0 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.05);
+            margin-right: 1rem;
+        }
+        
+        .stat-card-number {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            line-height: 1;
+        }
+        
+        .stat-card-label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--secondary-color);
+            margin-top: 0.25rem;
+        }
+        
+        /* Màu riêng cho từng loại thẻ */
+        .stat-card-primary {
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        .stat-card-success {
+            border-top: 3px solid var(--success-color);
+        }
+        
+        .stat-card-info {
+            border-top: 3px solid var(--info-color);
+        }
+        
+        .stat-card-warning {
+            border-top: 3px solid var(--warning-color);
+        }
+        
+        .stat-card-danger {
+            border-top: 3px solid var(--danger-color);
+        }
+        
+        /* Kiểu dáng cho tiêu đề trang */
+        .dashboard-header {
+            position: relative;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .dashboard-header p {
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dashboard-header p i {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .dashboard-actions {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dashboard-action-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1;
+            transition: all 0.2s ease;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-action-btn i {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .dashboard-action-btn:hover {
+            background: var(--primary-color-dark);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <!-- Tiêu đề trang -->
+    <div class="dashboard-header">
+        <h1>Tổng quan hệ thống</h1>
+        <p class="text-muted small">
+            <i class='bx bx-calendar'></i>
+            Học kỳ hiện tại: @(ViewBag.CurrentSemester ?? "Chưa có dữ liệu")
+        </p>
+    </div>
+
+    <!-- Thống kê tổng quan - hiển thị theo hàng ngang -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary">Thống kê tổng quan</h6>
+            <span class="small text-muted">Cập nhật mới nhất: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")</span>
+        </div>
+        <div class="card-body">
+            <div class="stat-cards-container">
+                <!-- Thống kê sinh viên -->
+                <div class="stat-card stat-card-primary shadow-sm">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class='bx bxs-user-detail text-primary'></i>
+                        </div>
+                        <div>
+                            <span class="stat-card-number">@ViewBag.TotalStudents</span>
+                            <span class="stat-card-label">Tổng số sinh viên</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thống kê giảng viên -->
+                <div class="stat-card stat-card-success shadow-sm">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class='bx bxs-chalkboard text-success'></i>
+                        </div>
+                        <div>
+                            <span class="stat-card-number">@ViewBag.TotalTeachers</span>
+                            <span class="stat-card-label">Tổng số giảng viên</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thống kê đơn phúc khảo -->
+                <div class="stat-card stat-card-warning shadow-sm">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class='bx bxs-file-blank text-warning'></i>
+                        </div>
+                        <div>
+                            <span class="stat-card-number">@ViewBag.PendingAppeals</span>
+                            <span class="stat-card-label">Đơn chờ xử lý</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tổng đơn phúc khảo -->
+                <div class="stat-card stat-card-danger shadow-sm">
+                    <div class="stat-card-body">
+                        <div class="stat-card-icon">
+                            <i class='bx bx-list-check text-danger'></i>
+                        </div>
+                        <div>
+                            <span class="stat-card-number">@ViewBag.TotalAppeals</span>
+                            <span class="stat-card-label">Tổng đơn phúc khảo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="container-fluid px-4">
-        <div class="row g-4">
-            <!-- Thống kê -->
-            <div class="col-xl-3 col-md-6">
-                <div class="card h-100">
-                    <div class="stats-card">
-                        <div class="stats-icon bg-primary bg-opacity-10">
-                            <i class="fas fa-users text-primary"></i>
-                        </div>
-                        <div class="stats-info">
-                            <div class="stats-label">Tổng sinh viên</div>
-                            <div class="stats-value">@(ViewBag.TotalStudents ?? 0)</div>
-                        </div>
+    <div class="row">
+        <!-- Biểu đồ trạng thái đơn phúc khảo -->
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Thống kê trạng thái đơn phúc khảo</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="statusChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center small">
+                        <span class="mr-2"><i class='bx bxs-circle text-warning'></i> Chờ xác nhận (@ViewBag.PendingAppeals)</span>
+                        <span class="mr-2"><i class='bx bxs-circle text-success'></i> Đã duyệt (@ViewBag.ApprovedAppeals)</span>
+                        <span class="mr-2"><i class='bx bxs-circle text-info'></i> Chờ chấm (@ViewBag.WaitingForGrading)</span>
+                        <span class="mr-2"><i class='bx bxs-circle text-primary'></i> Đã chấm (@ViewBag.GradedAppeals)</span>
+                        <span class="mr-2"><i class='bx bxs-circle text-danger'></i> Từ chối (@ViewBag.RejectedAppeals)</span>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card h-100">
-                    <div class="stats-card">
-                        <div class="stats-icon bg-success bg-opacity-10">
-                            <i class="fas fa-chalkboard-teacher text-success"></i>
-                        </div>
-                        <div class="stats-info">
-                            <div class="stats-label">Tổng giảng viên</div>
-                            <div class="stats-value">@(ViewBag.TotalTeachers ?? 0)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card h-100">
-                    <div class="stats-card">
-                        <div class="stats-icon bg-info bg-opacity-10">
-                            <i class="fas fa-book text-info"></i>
-                        </div>
-                        <div class="stats-info">
-                            <div class="stats-label">Tổng môn học</div>
-                            <div class="stats-value">@(ViewBag.TotalSubjects ?? 0)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card h-100">
-                    <div class="stats-card">
-                        <div class="stats-icon bg-warning bg-opacity-10">
-                            <i class="fas fa-file-alt text-warning"></i>
-                        </div>
-                        <div class="stats-info">
-                            <div class="stats-label">Tổng đơn phúc khảo</div>
-                            <div class="stats-value">@(ViewBag.TotalAppeals ?? 0)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
 
-            <!-- Thống kê trạng thái -->
-            <div class="col-xl-8">
-                <div class="card h-100">
-                    <div class="card-header py-3">
-                        <h5 class="card-title mb-0">Trạng thái đơn phúc khảo</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0">
+        <!-- Đơn phúc khảo gần đây -->
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-success">Đơn phúc khảo gần đây</h6>
+                    <a href="#" class="small">Xem tất cả</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        @if (ViewBag.RecentActivities != null && ViewBag.RecentActivities.Count > 0)
+                        {
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="border-0">Trạng thái</th>
-                                        <th class="border-0 text-center">Số lượng</th>
-                                        <th class="border-0">Tỷ lệ</th>
+                                        <th>Thời gian</th>
+                                        <th>Sinh viên</th>
+                                        <th>Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (ViewBag.AppealsByStatus != null)
-                                    {
-                                        @foreach (var status in ViewBag.AppealsByStatus)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    <span class="badge bg-@status.Color">@status.Name</span>
-                                                </td>
-                                                <td class="text-center">@status.Count</td>
-                                                <td style="width: 40%;">
-                                                    <div class="progress" style="height: 8px;">
-                                                        <div class="progress-bar bg-@status.Color" 
-                                                             role="progressbar" 
-                                                             style="width: @status.Percentage%" 
-                                                             aria-valuenow="@status.Percentage" 
-                                                             aria-valuemin="0" 
-                                                             aria-valuemax="100"></div>
-                                                    </div>
-                                                    <small class="text-muted mt-1 d-block">@status.Percentage%</small>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                    else
+                                    @foreach (var activity in ViewBag.RecentActivities)
                                     {
                                         <tr>
-                                            <td colspan="3" class="text-center py-4">Không có dữ liệu</td>
+                                            <td>@activity.Time</td>
+                                            <td>@activity.Student</td>
+                                            <td class="text-center">
+                                                <span class="badge badge-pill" style="background-color: @activity.StatusColor; color: white;">
+                                                    @activity.StatusString
+                                                </span>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hoạt động gần đây -->
-            <div class="col-xl-4">
-                <div class="card h-100">
-                    <div class="card-header py-3">
-                        <h5 class="card-title mb-0">Hoạt động gần đây</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush">
-                            @if (ViewBag.RecentActivities != null)
-                            {
-                                @foreach (var activity in ViewBag.RecentActivities)
-                                {
-                                    <div class="list-group-item px-4 py-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-circle bg-@activity.Color bg-opacity-10 text-@activity.Color">
-                                                <i class="fas fa-@activity.Icon"></i>
-                                            </div>
-                                            <div class="ms-3">
-                                                <p class="mb-1 fw-medium">@activity.Description</p>
-                                                <small class="text-muted">@activity.Time</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <div class="text-center py-4">Không có hoạt động nào gần đây</div>
-                            }
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="no-data-message">
+                                <i class='bx bxs-file-blank bx-lg'></i>
+                                <p>Không có đơn phúc khảo nào gần đây</p>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Thống kê môn học và giảng viên -->
+    <div class="row">
+        <!-- Thống kê theo môn học -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info">Top 5 môn học có nhiều đơn phúc khảo</h6>
+                </div>
+                <div class="card-body">
+                    @if (subjectLabels.Count > 0)
+                    {
+                        <div class="chart-container">
+                            <canvas id="subjectChart"></canvas>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-data-message">
+                            <i class='bx bxs-bar-chart-alt-2 bx-lg'></i>
+                            <p>Không có dữ liệu thống kê môn học</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê theo giảng viên -->
+        <div class="col-xl-6 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-dark">Top 5 giảng viên xử lý nhiều đơn nhất</h6>
+                </div>
+                <div class="card-body">
+                    @if (teacherLabels.Count > 0)
+                    {
+                        <div class="chart-container">
+                            <canvas id="teacherChart"></canvas>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-data-message">
+                            <i class='bx bxs-bar-chart-alt-2 bx-lg'></i>
+                            <p>Không có dữ liệu thống kê giảng viên</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thống kê kết quả phúc khảo -->
+    @if (ViewBag.TotalGraded != null && ViewBag.GradesChanged != null && ViewBag.GradesChangedPercent != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Chi tiết kết quả phúc khảo</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="card border-left-secondary shadow-sm h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                                    Tổng đơn đã chấm
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.TotalGraded</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class='bx bx-task bx-lg text-gray-300'></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="card border-left-primary shadow-sm h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Số đơn thay đổi điểm
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.GradesChanged</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class='bx bx-edit bx-lg text-gray-300'></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="card border-left-info shadow-sm h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                    Tỷ lệ thay đổi điểm
+                                                </div>
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.GradesChangedPercent%</div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress progress-sm mr-2">
+                                                            <div class="progress-bar bg-info" role="progressbar" style="width: @ViewBag.GradesChangedPercent%" aria-valuenow="@ViewBag.GradesChangedPercent" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class='bx bx-line-chart bx-lg text-gray-300'></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
-<style>
-    .dashboard-container {
-        padding: 1.5rem 0;
-    }
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Biểu đồ trạng thái đơn phúc khảo
+            var statusCtx = document.getElementById('statusChart');
+            if (statusCtx) {
+                var statusChart = new Chart(statusCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Chờ xác nhận', 'Đã duyệt', 'Chờ chấm', 'Đã chấm', 'Từ chối'],
+                        datasets: [{
+                            data: [
+                                @ViewBag.PendingAppeals,
+                                @ViewBag.ApprovedAppeals,
+                                @ViewBag.WaitingForGrading,
+                                @ViewBag.GradedAppeals,
+                                @ViewBag.RejectedAppeals
+                            ],
+                            backgroundColor: [
+                                '#f6c23e', // warning
+                                '#1cc88a', // success
+                                '#36b9cc', // info
+                                '#4e73df', // primary
+                                '#e74a3b'  // danger
+                            ],
+                            borderWidth: 1,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: false
+                        },
+                        cutoutPercentage: 65,
+                        tooltips: {
+                            backgroundColor: '#fff',
+                            titleFontColor: '#5a5c69',
+                            bodyFontColor: '#858796',
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            displayColors: false
+                        }
+                    }
+                });
+            }
 
-    .page-header {
-        background-color: #fff;
-        padding: 1.5rem 0;
-        border-bottom: 1px solid rgba(0,0,0,.05);
-    }
+            // Biểu đồ môn học
+            var subjectCtx = document.getElementById('subjectChart');
+            if (subjectCtx) {
+                var subjectChart = new Chart(subjectCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(subjectLabels)),
+                        datasets: [{
+                            label: 'Số đơn phúc khảo',
+                            data: @Html.Raw(Json.Serialize(subjectData)),
+                            backgroundColor: '#36b9cc',
+                            borderColor: '#36b9cc',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    precision: 0
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            backgroundColor: '#fff',
+                            titleFontColor: '#5a5c69',
+                            bodyFontColor: '#858796',
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            displayColors: false
+                        }
+                    }
+                });
+            }
 
-    .page-title {
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: #2d3748;
-        margin: 0;
-    }
-
-    .page-subtitle {
-        color: #718096;
-        margin: 0.5rem 0 0;
-    }
-
-    .card {
-        border: 1px solid rgba(0,0,0,.05);
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,.1);
-        border-radius: 0.75rem;
-    }
-
-    .card-header {
-        background-color: transparent;
-        border-bottom: 1px solid rgba(0,0,0,.05);
-    }
-
-    .card-title {
-        color: #2d3748;
-        font-weight: 600;
-    }
-
-    .stats-card {
-        padding: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .stats-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-    }
-
-    .stats-info {
-        flex: 1;
-    }
-
-    .stats-label {
-        color: #718096;
-        font-size: 0.875rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .stats-value {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #2d3748;
-    }
-
-    .avatar-circle {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-    }
-
-    .progress {
-        background-color: #f0f0f0;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .progress-bar {
-        border-radius: 10px;
-    }
-
-    .table > :not(caption) > * > * {
-        padding: 1rem;
-    }
-
-    .badge {
-        padding: 0.5em 1em;
-        font-weight: 500;
-    }
-
-    .list-group-item {
-        border-left: 0;
-        border-right: 0;
-    }
-
-    .list-group-item:first-child {
-        border-top: 0;
-    }
-
-    .list-group-item:last-child {
-        border-bottom: 0;
-    }
-</style>
+            // Biểu đồ giảng viên
+            var teacherCtx = document.getElementById('teacherChart');
+            if (teacherCtx) {
+                var teacherChart = new Chart(teacherCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: @Html.Raw(Json.Serialize(teacherLabels)),
+                        datasets: [{
+                            label: 'Số đơn đã xử lý',
+                            data: @Html.Raw(Json.Serialize(teacherData)),
+                            backgroundColor: '#5a5c69',
+                            borderColor: '#5a5c69',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                    precision: 0
+                                }
+                            }]
+                        },
+                        tooltips: {
+                            backgroundColor: '#fff',
+                            titleFontColor: '#5a5c69',
+                            bodyFontColor: '#858796',
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            displayColors: false
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    
+    <!-- Lazy Loading Script -->
+    <script src="~/js/lazy-loading.js"></script>
+}

@@ -5,6 +5,7 @@ using WebsitePhucKhao.Repositories;
 using Microsoft.AspNetCore.Identity;
 using GiangVienModel = WebsitePhucKhao.Models.GiangVien;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace WebsitePhucKhao.Areas.Admin.Controllers {
     [Area("Admin")]
@@ -17,8 +18,6 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-
-
         public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _giangVienRepository = giangVienRepository;
@@ -28,18 +27,14 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             _context = context;
         }
 
-        // Hiển thị danh sách giảng viên
         public async Task<IActionResult> Index()
         {
-            var giangViens = await _giangVienRepository.GetAllWithDetailsAsync();
+            var giangViens = await _giangVienRepository.GetAllAsync();
             return View(giangViens);
         }
 
-        // Hiển thị form thêm giảng viên mới
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
-            var khoaList = await _khoaRepository.GetAllAsync();
-            ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
             return View();
         }
 
@@ -48,18 +43,6 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
         {
             if (!ModelState.IsValid)
             {
-                var khoaList = await _khoaRepository.GetAllAsync();
-                ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
-                return View(giangVien);
-            }
-
-            // Kiểm tra xem email đã tồn tại chưa
-            var existingUser = await _userManager.FindByEmailAsync(giangVien.Email);
-            if (existingUser != null)
-            {
-                ModelState.AddModelError("Email", "Email đã tồn tại!");
-                var khoaList = await _khoaRepository.GetAllAsync();
-                ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
                 return View(giangVien);
             }
 
@@ -121,6 +104,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(long id, GiangVienModel giangVien)
         {
             if (ModelState.IsValid)
@@ -154,7 +138,9 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             return View(giangVien);
         }
 
-        [HttpPost, ActionName("DeleteConfirmed")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(long id)
         {
             var giangVien = await _giangVienRepository.GetByIdAsync(id);

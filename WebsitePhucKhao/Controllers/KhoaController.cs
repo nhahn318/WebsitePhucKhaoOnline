@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 
 namespace WebsitePhucKhao.Controllers {
+    [Authorize(Roles = "Admin")]
     public class KhoaController : Controller {
         private readonly IKhoaRepository _khoaRepository;
 

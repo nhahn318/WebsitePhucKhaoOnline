@@ -95,7 +95,8 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                         .Take(5)
                         .ToList();
 
-                    ViewBag.SubjectStats = subjectStats;
+                    ViewBag.SubjectLabels = subjectStats.Select(s => s.Subject).ToArray();
+                    ViewBag.SubjectData = subjectStats.Select(s => s.Count).ToArray();
                 }
 
                 // Thống kê theo giảng viên
@@ -120,7 +121,8 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                         .Take(5)
                         .ToList();
 
-                    ViewBag.TeacherStats = teacherStats;
+                    ViewBag.TeacherLabels = teacherStats.Select(t => t.TeacherName).ToArray();
+                    ViewBag.TeacherData = teacherStats.Select(t => t.Count).ToArray();
                 }
 
                 // Thống kê điểm phúc khảo

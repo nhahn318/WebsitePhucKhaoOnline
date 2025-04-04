@@ -1,0 +1,134 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebsitePhucKhao.Models.Khoa
+
+@{
+    ViewData["Title"] = "Chi tiết Khoa";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/css/admin/details-khoa.css" />
+}
+
+<div class="content-wrapper page-content">
+    <div class="page-header animate__animated animate__fadeIn">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Chi tiết Khoa</h1>
+                <p class="text-muted mb-0">Thông tin chi tiết về khoa @Model.TenKhoa</p>
+            </div>
+            <div class="page-actions">
+                <a href="@Url.Action("Index", "Khoa")" class="btn btn-back">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4 animate__animated animate__fadeInUp">
+        <div class="card-header py-3">
+            <div class="row align-items-center g-0">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
+                            <i class="fas fa-university text-primary"></i>
+                        </div>
+                        <h4 class="m-0 fw-bold text-primary fs-4">
+                            Thông tin Khoa
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
+                            <i class="fas fa-id-card text-success"></i>
+                        </div>
+                        <span class="badge bg-success rounded-pill small px-3 py-2">
+                            Mã: @Model.MaKhoa
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details-container">
+            <div class="details-row">
+                <div class="details-label">
+                    <i class="fas fa-id-card me-2 text-primary"></i> Mã Khoa
+                </div>
+                <div class="details-value">
+                    @Model.MaKhoa
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">
+                    <i class="fas fa-university me-2 text-primary"></i> Tên Khoa
+                </div>
+                <div class="details-value">
+                    @Model.TenKhoa
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">
+                    <i class="fas fa-graduation-cap me-2 text-primary"></i> Số Chuyên ngành
+                </div>
+                <div class="details-value">
+                    @(Model.ChuyenNganhs?.Count ?? 0)
+                </div>
+            </div>
+            <div class="details-row">
+                <div class="details-label">
+                    <i class="fas fa-users me-2 text-primary"></i> Số Lớp
+                </div>
+                <div class="details-value">
+                    @(Model.Lops?.Count ?? 0)
+                </div>
+            </div>
+            
+            <div class="details-actions">
+                <a href="@Url.Action("Update", "Khoa", new { id = Model.MaKhoa })" class="btn-action btn-edit">
+                    <i class="fas fa-edit"></i> Chỉnh sửa
+                </a>
+                <form asp-action="Delete" asp-route-id="@Model.MaKhoa" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-action btn-delete" id="btnDelete">
+                        <i class="fas fa-trash-alt"></i> Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            // Xử lý sự kiện xóa
+            $('#btnDelete').click(function(e) {
+                e.preventDefault();
+                var form = $(this).closest('form');
+                var khoaName = '@Model.TenKhoa';
+                
+                Swal.fire({
+                    title: 'Xác nhận xóa?',
+                    text: `Bạn có chắc chắn muốn xóa khoa "${khoaName}"?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

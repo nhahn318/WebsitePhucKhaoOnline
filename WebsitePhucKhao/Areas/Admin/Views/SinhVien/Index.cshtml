@@ -1,69 +1,193 @@
 ﻿@model IEnumerable<WebsitePhucKhao.Models.SinhVien>
+
 @{
-    ViewData["Title"] = "Quản lý sinh viên";
+    ViewData["Title"] = "Danh sách sinh viên";
 }
 
-<!-- Page Header -->
-<div class="admin-page-header mb-4">
-    <div class="d-flex justify-content-between align-items-center">
-        <div>
-            <h1 class="page-title">Quản lý sinh viên</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })">Bảng điều khiển</a></li>
-                    <li class="breadcrumb-item active">Sinh viên</li>
-                </ol>
-            </nav>
+@section Styles {
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/admin/index-listuser.css" />
+}
+
+<div class="content-wrapper">
+    <div class="page-header animate__animated animate__fadeIn">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách giảng viên</h1>
+                <p class="text-muted mb-0">Quản lý thông tin các sinh viên trong hệ thống</p>
+            </div>
+            <div class="page-actions">
+                <a href="@Url.Action("Add", "SinhVien", new { area = "Admin" })" class="btn btn-add">
+                    <i class="fas fa-plus"></i> Thêm sinh viên
+                </a>
+            </div>
         </div>
-        <a class="btn btn-primary" href="@Url.Action("Add", "SinhVien", new { area = "Admin" })">
-            <i class="fas fa-plus me-2"></i>Thêm sinh viên
-        </a>
+    </div>
+
+    <div class="card shadow mb-4 animate__animated animate__fadeInUp">
+        <div class="card-header py-3">
+            <div class="row align-items-center g-0">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
+                            <i class="fas fa-user-tie text-primary"></i>
+                        </div>
+                        <h4 class="m-0 fw-bold text-primary fs-4">
+                            Thông tin sinh viên
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
+                            <i class="fas fa-users text-success"></i>
+                        </div>
+                        <span class="badge bg-success rounded-pill small px-3 py-2">
+                            Tổng: @Model.Count()
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-id-card me-1"></i> Mã số</th>
+                            <th style="width: 30%"><i class="fas fa-user me-1"></i> Họ tên</th>
+                            <th style="width: 30%"><i class="fas fa-envelope me-1"></i> Email</th>
+                            <th style="width: 20%"><i class="fas fa-building me-1"></i> Khoa</th>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model)
+                        {
+                            <tr>
+                                <td class="text-center fw-bold">@student.MaSinhVien</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="lecturer-info ms-3">
+                                            <span class="lecturer-name" title="@student.HoTen">@student.HoTen</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-decoration-none">
+                                        <i class="fas fa-envelope me-1 text-muted"></i> @student.Email
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info text-white">@student.Khoa?.TenKhoa</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-actions">
+                                        <a href="@Url.Action("Details", "SinhVien", new { id = student.MaSinhVien, area = "Admin" })"
+                                           class="btn-action btn-view" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <a href="@Url.Action("Update", "SinhVien", new { id = student.MaSinhVien, area = "Admin" })"
+                                           class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <form asp-action="Delete" asp-route-id="@student.MaSinhVien" asp-area="Admin" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Main Content -->
-<div class="card">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>Mã SV</th>
-                        <th>Họ tên</th>
-                        <th>Email</th>
-                        <th>SĐT</th>
-                        <th>Khoa</th>
-                        <th>Chuyên ngành</th>
-                        <th>Lớp</th>
-                        <th class="text-center">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.MaSinhVien</td>
-                            <td>@item.HoTen</td>
-                            <td>@item.Email</td>
-                            <td>@item.SoDienThoai</td>
-                            <td>@item.Khoa</td>
-                            <td>@item.ChuyenNganh</td>
-                            <td>@item.Lop</td>
-                            <td class="text-center">
-                                <a class="btn btn-sm btn-info" href="@Url.Action("Details", "SinhVien", new { area = "Admin", id = item.MaSinhVien })">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="btn btn-sm btn-warning" href="@Url.Action("Update", "SinhVien", new { area = "Admin", id = item.MaSinhVien })">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "SinhVien", new { area = "Admin", id = item.MaSinhVien })">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable with improved options
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
+                    "paginate": {
+                        "previous": "<i class='bi bi-chevron-left'></i>",
+                        "next": "<i class='bi bi-chevron-right'></i>"
                     }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                },
+                "pageLength": 10,
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                "order": [[1, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 4 },
+                    { "className": "text-center", "targets": [0, 4] }
+                ],
+                "autoWidth": false,
+                "responsive": true,
+                "dom": '<"top"lf>rt<"bottom"ip>',
+                "pagingType": "simple_numbers",
+                "initComplete": function() {
+                    $('.dataTables_length select').addClass('form-select');
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+
+            // Confirm delete and submit
+            $('.btn-delete').click(function() {
+                var id = $(this).data('id');
+                var lecturerName = $(this).closest('tr').find('td:nth-child(2)').text().trim();
+
+                Swal.fire({
+                    title: 'Xác nhận xóa?',
+                    text: `Bạn có chắc chắn muốn xóa sinh viên "${lecturerName}"?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.post('@Url.Action("Delete", "SinhVien", new { area = "Admin" })', { id: id })
+                            .done(function() {
+                                Swal.fire(
+                                    'Đã xóa!',
+                                    'Sinh viên đã được xóa thành công.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                });
+                            })
+                            .fail(function() {
+                                Swal.fire(
+                                    'Lỗi!',
+                                    'Có lỗi xảy ra khi xóa sinh viên.',
+                                    'error'
+                                );
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+} 
