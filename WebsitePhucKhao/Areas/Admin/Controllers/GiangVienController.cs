@@ -33,8 +33,10 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             return View(giangViens);
         }
 
-        public IActionResult Add()
+        public async Task<IActionResult> Add()
         {
+            var khoaList = await _khoaRepository.GetAllAsync();
+            ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
             return View();
         }
 

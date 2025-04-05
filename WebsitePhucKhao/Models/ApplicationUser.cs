@@ -19,5 +19,6 @@ namespace WebsitePhucKhao.Models {
 
         public long? MaNhanVienPhongDaoTao { get; set; }
         public NhanVienPhongDaoTao? NhanVienPhongDaoTao { get; set; }
+
     }
 }

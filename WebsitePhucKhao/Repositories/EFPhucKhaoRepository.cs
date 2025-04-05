@@ -97,16 +97,21 @@ namespace WebsitePhucKhao.Repositories {
         public async Task<YeuCauPhucKhaoViewModel?> GetYeuCauPhucKhaoViewModelAsync(string email)
         {
             var sinhVien = await GetSinhVienByEmailAsync(email);
-            if (sinhVien == null) return null;
-
-            var hocKy = await _context.HocKys.OrderByDescending(hk => hk.NgayBatDauPhucKhao).FirstOrDefaultAsync();
-            if (hocKy == null) return null;
-
-            var today = DateTime.Now;
-            if (today < hocKy.NgayBatDauPhucKhao || today > hocKy.NgayKetThucPhucKhao)
+            if (sinhVien == null)
                 return null;
 
-            //Lấy danh sách môn sinh viên đã thi (theo HK + NH)
+            var today = DateTime.Now;
+
+            // Chỉ lấy học kỳ đang trong thời gian phúc khảo
+            var hocKy = await _context.HocKys
+                .Where(hk => today >= hk.NgayBatDauPhucKhao && today <= hk.NgayKetThucPhucKhao)
+                .OrderByDescending(hk => hk.NgayBatDauPhucKhao)
+                .FirstOrDefaultAsync();
+
+            if (hocKy == null)
+                return null;
+
+            // Lấy danh sách môn học đã thi trong học kỳ đó
             var monDaThi = await _context.BangDiems
                 .Where(b => b.MaSinhVien == sinhVien.MaSinhVien
                             && b.MaHocKy == hocKy.MaHocKy
@@ -115,24 +120,29 @@ namespace WebsitePhucKhao.Repositories {
                 .Select(b => b.MonHoc)
                 .Distinct()
                 .ToListAsync();
+
             var monHocDauTien = monDaThi.FirstOrDefault();
+            LichThi? lichThiDauTien = null;
 
-            // Tìm lịch thi tương ứng với môn học đầu tiên
-            var lichThiDauTien = await _context.LichThis
-                .Where(l => l.MaMonHoc == monHocDauTien.MaMonHoc
-                         && l.MaHocKy == hocKy.MaHocKy
-                         && l.MaNamHoc == hocKy.MaNamHoc)
-                .FirstOrDefaultAsync();
+            if (monHocDauTien != null)
+            {
+                // Lấy lịch thi tương ứng với môn học đầu tiên (nếu có)
+                lichThiDauTien = await _context.LichThis
+                    .FirstOrDefaultAsync(l => l.MaMonHoc == monHocDauTien.MaMonHoc
+                                           && l.MaHocKy == hocKy.MaHocKy
+                                           && l.MaNamHoc == hocKy.MaNamHoc);
+            }
 
-            var model = new YeuCauPhucKhaoViewModel
+            return new YeuCauPhucKhaoViewModel
             {
                 MaSinhVien = sinhVien.MaSinhVien,
                 HoTen = sinhVien.HoTen,
                 Email = sinhVien.Email,
                 SoDienThoai = sinhVien.SoDienThoai,
                 Lop = sinhVien.Lop?.TenLop ?? "Không có lớp",
-                DanhSachMonHoc = new SelectList(monDaThi, "MaMonHoc", "TenMonHoc"),
+                DiemHienTai = 0,
 
+                DanhSachMonHoc = new SelectList(monDaThi, "MaMonHoc", "TenMonHoc"),
                 DanhSachHocKy = new SelectList(await _context.HocKys.ToListAsync(), "MaHocKy", "TenHocKy"),
                 DanhSachNamHoc = new SelectList(await _context.NamHocs.ToListAsync(), "MaNamHoc", "TenNamHoc"),
 
@@ -143,10 +153,23 @@ namespace WebsitePhucKhao.Repositories {
                 CaThi = lichThiDauTien?.CaThi,
                 PhongThi = lichThiDauTien?.PhongThi,
                 DiaDiemThi = lichThiDauTien?.DiaDiemThi
-
             };
-            return model;
+
         }
+
+        public async Task<double?> GetDiemHienTaiAsync(long maSinhVien, int maMonHoc, int maHocKy, int maNamHoc)
+        {
+            var diem = await _context.BangDiems
+                .Where(b => b.MaSinhVien == maSinhVien &&
+                            b.MaMonHoc == maMonHoc &&
+                            b.MaHocKy == maHocKy &&
+                            b.MaNamHoc == maNamHoc)
+                .Select(b => b.DiemTongKet)
+                .FirstOrDefaultAsync();
+
+            return diem;
+        }
+
 
         public async Task<bool> TaoDonPhucKhaoAsync(YeuCauPhucKhaoViewModel model)
         {
@@ -382,6 +405,10 @@ namespace WebsitePhucKhao.Repositories {
                 })
                 .ToList();
         }
+
+      
+
+
         public void Update(DonPhucKhao don)
         {
             _context.Update(don); // hoặc _context.DonPhucKhaos.Update(don);

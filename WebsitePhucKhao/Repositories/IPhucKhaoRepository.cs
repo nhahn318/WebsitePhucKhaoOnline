@@ -25,6 +25,7 @@ namespace WebsitePhucKhao.Repositories {
         Task<List<GiangVien>> GetGiangVienListAsync();
 
         Task<List<DonPhucKhaoSauKhiChamViewModel>> GetDanhSachPhucKhaoViewModelAsync(long maSinhVien);
+        Task<double?> GetDiemHienTaiAsync(long maSinhVien, int maMonHoc, int maHocKy, int maNamHoc);
 
 
 

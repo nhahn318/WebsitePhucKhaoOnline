@@ -57,6 +57,10 @@ namespace WebsitePhucKhao.Areas.SinhVien.Controllers
                 return View("OutsidePhucKhao");
             }
 
+            vm.DanhSachMonHoc = new SelectList(await _repository.GetMonHocListAsync(), "MaMonHoc", "TenMonHoc");
+            vm.DanhSachHocKy = new SelectList(await _repository.GetHocKyListAsync(), "MaHocKy", "TenHocKy");
+            vm.DanhSachNamHoc = new SelectList(await _repository.GetNamHocListAsync(), "MaNamHoc", "TenNamHoc");
+
             return View(vm);
         }
 
