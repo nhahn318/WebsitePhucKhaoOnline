@@ -14,6 +14,6 @@
     <WebStackScaffolding_DependencyDialogWidth>650</WebStackScaffolding_DependencyDialogWidth>
     <WebStackScaffolding_DbContextDialogWidth>650.4</WebStackScaffolding_DbContextDialogWidth>
     <WebStackScaffolding_IdentityDialogWidth>650.4</WebStackScaffolding_IdentityDialogWidth>
-    <WebStackScaffolding_LayoutPageFile>~/Areas/Identity/Pages/Account/_ViewImports.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_LayoutPageFile>~/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml</WebStackScaffolding_LayoutPageFile>
   </PropertyGroup>
 </Project>
