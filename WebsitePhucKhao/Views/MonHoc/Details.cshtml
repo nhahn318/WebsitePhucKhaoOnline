@@ -1,18 +1,66 @@
 ﻿@model WebsitePhucKhao.Models.MonHoc
 
-<h2>Thông tin Môn Học</h2>
+@{
+    ViewData["Title"] = "Chi tiết Môn học";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
-<div>
-    <strong>Mã Môn Học:</strong> @Model.MaMonHoc
-</div>
-<div>
-    <strong>Tên Môn Học:</strong> @Model.TenMonHoc
-</div>
-<div>
-    <strong>Học Kỳ:</strong> @(Model.HocKy != null ? Model.HocKy.TenHocKy : "Chưa có")
-</div>
-<div>
-    <strong>Giảng Viên:</strong> @(Model.GiangVien != null ? Model.GiangVien.HoTen : "Chưa có")
-</div>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
 
-<a asp-action="Index">Trở về</a>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Chi tiết Môn học</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-book me-2"></i>Thông tin Môn học
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th><i class="fas fa-id-card me-2"></i>Mã Môn học:</th>
+                            <td><span class="badge badge-info">@Model.MaMonHoc</span></td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-book me-2"></i>Tên Môn học:</th>
+                            <td>@Model.TenMonHoc</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-calendar me-2"></i>Học Kỳ:</th>
+                            <td>@(Model.HocKy != null ? Model.HocKy.TenHocKy : "Chưa có")</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-user-tie me-2"></i>Giảng Viên:</th>
+                            <td>@(Model.GiangVien != null ? Model.GiangVien.HoTen : "Chưa có")</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Update", "MonHoc", new { id = Model.MaMonHoc, area = "Admin" })" class="btn btn-info">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                    </a>
+                    <a href="@Url.Action("Delete", "MonHoc", new { id = Model.MaMonHoc, area = "Admin" })" class="btn btn-outline-secondary ms-2" onclick="return confirm('Bạn có chắc chắn muốn xóa môn học này?');">
+                        <i class="fas fa-trash me-2"></i>Xóa
+                    </a>
+                    <a href="@Url.Action("Index", "MonHoc", new { area = "Admin" })" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-arrow-left me-2"></i>Trở về
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

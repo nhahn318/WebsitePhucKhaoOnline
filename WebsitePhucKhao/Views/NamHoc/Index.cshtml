@@ -1,29 +1,162 @@
 ﻿@model IEnumerable<WebsitePhucKhao.Models.NamHoc>
 
-<h2>Danh sách Năm Học</h2>
+@{
+    ViewData["Title"] = "Danh sách năm học";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Mã Năm Học</th>
-            <th>Tên Năm Học</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var namHoc in Model)
-        {
-            <tr>
-                <td>@namHoc.MaNamHoc</td>
-                <td>@namHoc.TenNamHoc</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@namHoc.MaNamHoc">Xem</a> |
-                    <a asp-action="Update" asp-route-id="@namHoc.MaNamHoc">Sửa</a> |
-                    <a asp-action="Delete" asp-route-id="@namHoc.MaNamHoc">Xóa</a>
-                </td>
-            </tr>
+@section Styles {
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/admin/index-listuser.css" />
+}
+
+<div class="content-wrapper">
+    <div class="page-header animate__animated animate__fadeIn">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách năm học</h1>
+                <p class="text-muted mb-0">Quản lý thông tin các năm học trong hệ thống</p>
+            </div>
+            <div class="page-actions">
+                <a href="@Url.Action("Add", "NamHoc")" class="btn btn-add">
+                    <i class="fas fa-plus"></i> Thêm năm học
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4 animate__animated animate__fadeInUp">
+        <div class="card-header py-3">
+            <div class="row align-items-center g-0">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
+                            <i class="fas fa-calendar-alt text-primary"></i>
+                        </div>
+                        <h4 class="m-0 fw-bold text-primary fs-4">
+                            Thông tin năm học
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
+                            <i class="fas fa-calendar-check text-success"></i>
+                        </div>
+                        <span class="badge bg-success rounded-pill small px-3 py-2">
+                            Tổng: @Model.Count()
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 20%"><i class="fas fa-id-card me-1"></i> Mã năm học</th>
+                            <th style="width: 60%"><i class="fas fa-calendar me-1"></i> Tên năm học</th>
+                            <th class="text-center" style="width: 20%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var namHoc in Model)
+                        {
+                            <tr>
+                                <td class="text-center fw-bold">@namHoc.MaNamHoc</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="lecturer-info ms-3">
+                                            <span class="lecturer-name" title="@namHoc.TenNamHoc">@namHoc.TenNamHoc</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-actions">
+                                        <a href="@Url.Action("Details", "NamHoc", new { id = namHoc.MaNamHoc })"
+                                           class="btn-action btn-view" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        <a href="@Url.Action("Update", "NamHoc", new { id = namHoc.MaNamHoc })"
+                                           class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <form asp-action="Delete" asp-route-id="@namHoc.MaNamHoc" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa" onclick="return confirmDelete('@namHoc.TenNamHoc');">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable with improved options
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
+                    "paginate": {
+                        "previous": "<i class='bi bi-chevron-left'></i>",
+                        "next": "<i class='bi bi-chevron-right'></i>"
+                    }
+                },
+                "pageLength": 10,
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                "order": [[0, 'asc']],
+                "columnDefs": [
+                    { "orderable": false, "targets": 2 },
+                    { "className": "text-center", "targets": [0, 2] }
+                ],
+                "autoWidth": false,
+                "responsive": true,
+                "dom": '<"top"lf>rt<"bottom"ip>',
+                "pagingType": "simple_numbers",
+                "initComplete": function() {
+                    $('.dataTables_length select').addClass('form-select');
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+        
+        function confirmDelete(tenNamHoc) {
+            return Swal.fire({
+                title: 'Xác nhận xóa?',
+                text: `Bạn có chắc chắn muốn xóa năm học "${tenNamHoc}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                return result.isConfirmed;
+            });
         }
-    </tbody>
-</table>
-
-<a asp-action="Add" class="btn btn-primary">Thêm Năm Học</a>
+    </script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}

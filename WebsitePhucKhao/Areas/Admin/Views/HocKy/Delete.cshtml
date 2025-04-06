@@ -1,10 +1,185 @@
 ﻿<!-- Delete.cshtml -->
 @model WebsitePhucKhao.Models.HocKy
 
-<h2>Xóa Học Kỳ</h2>
-<p>Bạn có chắc chắn muốn xóa học kỳ <strong>@Model.TenHocKy</strong> không?</p>
-<form asp-action="DeleteConfirmed" asp-route-id="@Model.MaHocKy" method="post">
-    <input type="hidden" asp-for="MaHocKy" />
-    <button type="submit" class="btn btn-danger">Xóa</button>
-    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
-</form>
+@{
+    ViewData["Title"] = "Xóa Học Kỳ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .hk-content-wrapper {
+            padding: 1.5rem;
+        }
+        .hk-content-header {
+            margin-bottom: 1.5rem;
+        }
+        .hk-container-fluid {
+            width: 100%;
+            padding-right: 0.75rem;
+            padding-left: 0.75rem;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .hk-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -0.75rem;
+            margin-left: -0.75rem;
+        }
+        .hk-col {
+            flex: 1 0 0%;
+            max-width: 100%;
+            padding-right: 0.75rem;
+            padding-left: 0.75rem;
+        }
+        .hk-mb-2 {
+            margin-bottom: 0.5rem !important;
+        }
+        .hk-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #e3e6f0;
+            border-radius: 0.35rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            margin-bottom: 1.5rem;
+        }
+        .hk-card-header {
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 0;
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+        }
+        .hk-bg-gradient-danger {
+            background: linear-gradient(180deg, #e74a3b 10%, #be2617 100%);
+        }
+        .hk-text-white {
+            color: #fff !important;
+        }
+        .hk-card-title {
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        .hk-card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1.25rem;
+        }
+        .hk-card-footer {
+            padding: 0.75rem 1.25rem;
+            background-color: #f8f9fc;
+            border-top: 1px solid #e3e6f0;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .hk-text-danger {
+            color: #e74a3b !important;
+        }
+        .hk-btn-danger {
+            color: #fff;
+            background-color: #e74a3b;
+            border-color: #e74a3b;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.35rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .hk-btn-danger:hover {
+            color: #fff;
+            background-color: #be2617;
+            border-color: #be2617;
+        }
+        .hk-btn-outline-secondary {
+            color: #858796;
+            border-color: #858796;
+            background-color: transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.35rem;
+            border: 1px solid currentColor;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        .hk-btn-outline-secondary:hover {
+            color: #fff;
+            background-color: #858796;
+            border-color: #858796;
+        }
+        .hk-ms-2 {
+            margin-left: 0.5rem !important;
+        }
+        .hk-me-2 {
+            margin-right: 0.5rem !important;
+        }
+        .hk-shadow-sm {
+            box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
+        }
+        .hk-fw-bold {
+            font-weight: 700 !important;
+        }
+        .hk-alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.35rem;
+        }
+        .hk-alert-warning {
+            color: #806520;
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+        }
+    </style>
+}
+
+<div class="hk-content-wrapper">
+    <div class="hk-content-header">
+        <div class="hk-container-fluid">
+            <div class="hk-row hk-mb-2">
+                <div class="hk-col">
+                    <h1 class="hk-text-danger">Xóa Học Kỳ</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="hk-content">
+        <div class="hk-container-fluid">
+            <div class="hk-card hk-shadow-sm">
+                <div class="hk-card-header hk-bg-gradient-danger hk-text-white">
+                    <h3 class="hk-card-title">
+                        <i class="fas fa-exclamation-triangle hk-me-2"></i>Xác nhận xóa
+                    </h3>
+                </div>
+                <div class="hk-card-body">
+                    <div class="hk-alert hk-alert-warning">
+                        <p>Bạn có chắc chắn muốn xóa học kỳ <span class="hk-fw-bold">@Model.TenHocKy</span> không?</p>
+                        <p>Hành động này không thể hoàn tác và có thể ảnh hưởng đến dữ liệu liên quan.</p>
+                    </div>
+                    <form asp-action="DeleteConfirmed" asp-route-id="@Model.MaHocKy" method="post">
+                        <input type="hidden" asp-for="MaHocKy" />
+                        <div class="hk-card-footer">
+                            <button type="submit" class="hk-btn-danger">
+                                <i class="fas fa-trash hk-me-2"></i>Xác nhận xóa
+                            </button>
+                            <a asp-action="Index" asp-area="Admin" class="hk-btn-outline-secondary hk-ms-2">
+                                <i class="fas fa-arrow-left hk-me-2"></i>Hủy
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

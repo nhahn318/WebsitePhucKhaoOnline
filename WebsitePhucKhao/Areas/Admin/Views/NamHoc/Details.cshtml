@@ -1,0 +1,62 @@
+@model WebsitePhucKhao.Models.NamHoc
+
+@{
+    ViewData["Title"] = "Chi tiết Năm học";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Chi tiết Năm học</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-check me-2"></i>Thông tin Năm học
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th><i class="fas fa-id-card me-2"></i>Mã Năm học:</th>
+                            <td><span class="badge badge-info">@Model.MaNamHoc</span></td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-calendar-alt me-2"></i>Tên Năm học:</th>
+                            <td>@Model.TenNamHoc</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-list me-2"></i>Số Học kỳ:</th>
+                            <td>@Model.HocKys?.Count</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Update", "NamHoc", new { id = Model.MaNamHoc, area = "Admin" })" class="btn btn-info">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                    </a>
+                    <a href="@Url.Action("Delete", "NamHoc", new { id = Model.MaNamHoc, area = "Admin" })" class="btn btn-outline-secondary ms-2" onclick="return confirm('Bạn có chắc chắn muốn xóa năm học này?');">
+                        <i class="fas fa-trash me-2"></i>Xóa
+                    </a>
+                    <a href="@Url.Action("Index", "NamHoc", new { area = "Admin" })" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-arrow-left me-2"></i>Trở về
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> 

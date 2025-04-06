@@ -1,0 +1,352 @@
+/* Dashboard CSS */
+.d-content-wrapper {
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 60px);
+}
+
+.d-container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Header */
+.d-header {
+    position: relative;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.d-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.d-header p {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.d-header p i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.d-actions {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 0.5rem;
+}
+
+.d-action-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: all 0.2s ease;
+    background: #4e73df;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.d-action-btn i {
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.d-action-btn:hover {
+    background: #224abe;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+/* Cards */
+.d-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.d-shadow {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+
+.d-card-header {
+    padding: 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-card-title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #4e73df;
+}
+
+.d-card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+/* Stat Cards */
+.d-stat-cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.5rem;
+}
+
+.d-stat-card {
+    flex: 1;
+    min-width: 200px;
+    margin: 0 0.5rem 1rem;
+    border-radius: 0.25rem;
+    background-color: #fff;
+    position: relative;
+    padding-bottom: 10px;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+.d-stat-card-header {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #333;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.d-stat-card-body {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.d-stat-card-icon {
+    flex: 0 0 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.05);
+    margin-right: 1rem;
+}
+
+.d-stat-card-number {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1;
+}
+
+.d-stat-card-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+/* Stat Card Colors */
+.d-stat-card-primary {
+    border-top: 3px solid #4e73df;
+}
+
+.d-stat-card-success {
+    border-top: 3px solid #1cc88a;
+}
+
+.d-stat-card-info {
+    border-top: 3px solid #36b9cc;
+}
+
+.d-stat-card-warning {
+    border-top: 3px solid #f6c23e;
+}
+
+.d-stat-card-danger {
+    border-top: 3px solid #e74a3b;
+}
+
+/* Table */
+.d-table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.d-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #858796;
+    border-collapse: collapse;
+}
+
+.d-table th,
+.d-table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #e3e6f0;
+}
+
+.d-table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #e3e6f0;
+    background-color: #f8f9fc;
+    color: #4e73df;
+    font-weight: 600;
+}
+
+.d-table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+.d-table-bordered {
+    border: 1px solid #e3e6f0;
+}
+
+.d-table-bordered th,
+.d-table-bordered td {
+    border: 1px solid #e3e6f0;
+}
+
+/* Badge */
+.d-badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.d-badge-pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+
+/* Progress */
+.d-progress {
+    display: flex;
+    height: 0.5rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #eaecf4;
+    border-radius: 0.25rem;
+}
+
+.d-progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #4e73df;
+    transition: width 0.6s ease;
+}
+
+.d-progress-sm {
+    height: 0.25rem;
+}
+
+/* No Data Message */
+.d-no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.d-no-data i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.d-no-data p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Chart Container */
+.d-chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Chart Legend */
+.d-chart-legend {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.d-chart-legend span {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.d-chart-legend i {
+    margin-right: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .d-stat-card {
+        min-width: 100%;
+    }
+    
+    .d-header {
+        padding: 1rem 0;
+    }
+    
+    .d-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .d-actions {
+        position: static;
+        transform: none;
+        margin-top: 1rem;
+        justify-content: flex-end;
+    }
+} 

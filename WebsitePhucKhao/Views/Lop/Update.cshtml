@@ -1,35 +1,81 @@
 ﻿@model WebsitePhucKhao.Models.Lop
 
 @{
-    ViewData["Title"] = "Cập Nhật Lớp";
+    ViewData["Title"] = "Cập nhật Lớp";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Cập Nhật Lớp</h2>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/update-page.css" rel="stylesheet">
+}
 
-<form asp-action="Update" method="post">
-    <div class="form-group">
-        <label asp-for="MaLop">Mã Lớp</label>
-        <input asp-for="MaLop" class="form-control" readonly />
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Cập nhật Lớp</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="TenLop">Tên Lớp</label>
-        <input asp-for="TenLop" class="form-control" />
-        <span asp-validation-for="TenLop" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="MaKhoa">Khoa</label>
-        <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
-            <option value="">-- Chọn Khoa --</option>
-        </select>
-        <span asp-validation-for="MaKhoa" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-success">Lưu Thay Đổi</button>
-    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-</form>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-users me-2"></i>Thông tin Lớp
+                    </h3>
+                </div>
+                <form asp-action="Update" method="post">
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-id-card me-2"></i>Mã Lớp:
+                                    </label>
+                                    <input asp-for="MaLop" class="form-control" readonly />
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-users me-2"></i>Tên Lớp:
+                                    </label>
+                                    <input asp-for="TenLop" class="form-control" required />
+                                    <span asp-validation-for="TenLop" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-university me-2"></i>Khoa:
+                                    </label>
+                                    <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
+                                        <option value="">-- Chọn khoa --</option>
+                                    </select>
+                                    <span asp-validation-for="MaKhoa" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Trở về
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 }

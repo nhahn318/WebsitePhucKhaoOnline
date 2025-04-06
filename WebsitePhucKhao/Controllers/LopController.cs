@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 
 namespace WebsitePhucKhao.Controllers {
+    [Authorize(Roles = "Admin")]
     public class LopController : Controller {
         private readonly ILopRepository _lopRepository;
         private readonly IKhoaRepository _khoaRepository;
