@@ -14,7 +14,9 @@ namespace WebsitePhucKhao.Repositories {
 
         public async Task<IEnumerable<GiangVien>> GetAllAsync()
         {
-            return await _context.GiangViens.ToListAsync();
+            return await _context.GiangViens
+                .Include(g => g.Khoa) // Include navigation property Khoa
+                .ToListAsync();
         }
 
         public async Task<GiangVien?> GetByIdAsync(long maGiangVien)
