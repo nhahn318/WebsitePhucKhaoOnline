@@ -1,31 +1,104 @@
 ﻿@model WebsitePhucKhao.Models.MonHoc
 
-<h2>Thêm Môn Học Mới</h2>
+@{
+    ViewData["Title"] = "Thêm Môn Học Mới";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
-<form asp-action="Add" method="post">
-    <div class="form-group">
-        <label asp-for="TenMonHoc"></label>
-        <input asp-for="TenMonHoc" class="form-control" required />
-        <span asp-validation-for="TenMonHoc" class="text-danger"></span>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin/add-page.css" />
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Thêm Môn Học Mới</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Dropdown chọn Học Kỳ -->
-    <div class="form-group">
-        <label asp-for="MaHocKy">Chọn Học Kỳ</label>
-        <select asp-for="MaHocKy" class="form-control" asp-items="ViewBag.HocKyList">
-            <option value="">-- Chọn Học Kỳ --</option>
-        </select>
-        <span asp-validation-for="MaHocKy" class="text-danger"></span>
-    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-book me-2"></i>Thông tin Môn Học
+                    </h3>
+                </div>
+                <form asp-action="Add" method="post">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-id-card me-2"></i>Mã Môn Học:
+                                    </label>
+                                    <input asp-for="MaMonHoc" class="form-control" required />
+                                    <span asp-validation-for="MaMonHoc" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-book me-2"></i>Tên Môn Học:
+                                    </label>
+                                    <input asp-for="TenMonHoc" class="form-control" required />
+                                    <span asp-validation-for="TenMonHoc" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-calendar me-2"></i>Học Kỳ:
+                                    </label>
+                                    <select asp-for="MaHocKy" class="form-control" asp-items="ViewBag.HocKyList">
+                                        <option value="">-- Chọn Học Kỳ --</option>
+                                    </select>
+                                    <span asp-validation-for="MaHocKy" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col">
+                                <div class="info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-user-tie me-2"></i>Giảng Viên:
+                                    </label>
+                                    <select asp-for="MaGiangVien" class="form-control" asp-items="ViewBag.GiangVienList">
+                                        <option value="">-- Chọn Giảng Viên --</option>
+                                    </select>
+                                    <span asp-validation-for="MaGiangVien" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save me-2"></i>Thêm môn học
+                        </button>
+                        <a asp-action="Index" class="btn-outline-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Trở về
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
-    <!-- Dropdown chọn Giảng Viên -->
-    <div class="form-group">
-        <label asp-for="MaGiangVien">Chọn Giảng Viên</label>
-        <select asp-for="MaGiangVien" class="form-control" asp-items="ViewBag.GiangVienList">
-            <option value="">-- Chọn Giảng Viên --</option>
-        </select>
-        <span asp-validation-for="MaGiangVien" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-success">Thêm</button>
-</form>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

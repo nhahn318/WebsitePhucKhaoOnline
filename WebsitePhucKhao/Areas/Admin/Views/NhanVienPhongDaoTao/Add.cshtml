@@ -1,41 +1,94 @@
 ﻿@model WebsitePhucKhao.Models.NhanVienPhongDaoTao
 
 @{
-    ViewData["Title"] = "Thêm Nhân Viên Phòng Đào Tạo";
+    ViewData["Title"] = "Thêm Nhân Viên";
 }
 
-<h2>Thêm Nhân Viên</h2>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/add-page.css" />
+}
 
-<form asp-action="Add" method="post">
-    <div class="form-group">
-        <label asp-for="HoTen"></label>
-        <input asp-for="HoTen" class="form-control" required />
-        <span asp-validation-for="HoTen" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Mã nhân viên</label>
-        <input asp-for="MaNhanVienPhongDaoTao" class="form-control" required />
-        <span asp-validation-for="MaNhanVienPhongDaoTao" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" required />
-        <span asp-validation-for="Email" class="text-danger"></span>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-primary">Thêm nhân viên mới</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="SoDienThoai"></label>
-        <input asp-for="SoDienThoai" class="form-control" />
-        <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-user-plus me-2"></i>Thông tin nhân viên
+                    </h3>
+                </div>
+                <form asp-action="Add" method="post">
+                    <div class="card-body">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-id-card me-2"></i>Mã nhân viên:
+                                    </label>
+                                    <input asp-for="MaNhanVienPhongDaoTao" class="form-control" required />
+                                    <span asp-validation-for="MaNhanVienPhongDaoTao" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-user me-2"></i>Họ tên:
+                                    </label>
+                                    <input asp-for="HoTen" class="form-control" required />
+                                    <span asp-validation-for="HoTen" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-envelope me-2"></i>Email:
+                                    </label>
+                                    <input asp-for="Email" class="form-control" required />
+                                    <span asp-validation-for="Email" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-phone me-2"></i>Số điện thoại:
+                                    </label>
+                                    <input asp-for="SoDienThoai" class="form-control" required />
+                                    <span asp-validation-for="SoDienThoai" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-briefcase me-2"></i>Chức vụ:
+                                    </label>
+                                    <input asp-for="ChucVu" class="form-control" required />
+                                    <span asp-validation-for="ChucVu" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Thêm nhân viên
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Trở về
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
-    <div class="form-group">
-        <label asp-for="ChucVu"></label>
-        <input asp-for="ChucVu" class="form-control" />
-        <span asp-validation-for="ChucVu" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-success">Thêm</button>
-    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
-</form>
+@section Scripts {
+    <script src="~/js/admin/add-page.js"></script>
+}

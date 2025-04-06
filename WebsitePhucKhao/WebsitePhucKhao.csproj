@@ -29,11 +29,9 @@
     <Folder Include="Areas\SinhVien\Data\" />
     <Folder Include="Areas\SinhVien\Models\" />
     <Folder Include="Views\BangDiem\" />
-    <Folder Include="Views\GiangVien\" />
     <Folder Include="Views\HocKy\" />
     <Folder Include="Views\NhanVienPhongDaoTao\" />
     <Folder Include="Views\PhucKhao\" />
-    <Folder Include="Views\SinhVien\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

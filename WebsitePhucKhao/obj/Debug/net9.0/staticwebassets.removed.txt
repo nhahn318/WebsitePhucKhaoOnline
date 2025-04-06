@@ -1,0 +1,5 @@
+C:\Users\JUO\source\repos\Test\WebsitePhucKhao\wwwroot\css\admin\giangvien.css
+C:\Users\JUO\source\repos\Test\WebsitePhucKhao\wwwroot\css\admin\sinhvien.css
+C:\Users\JUO\source\repos\Test\WebsitePhucKhao\wwwroot\css\admin\nhanvienphongdaotao.css
+C:\Users\JUO\source\repos\Test\WebsitePhucKhao\wwwroot\css\admin\details-khoa.css
+C:\Users\JUO\source\repos\Test\WebsitePhucKhao\wwwroot\css\admin\monhoc.css

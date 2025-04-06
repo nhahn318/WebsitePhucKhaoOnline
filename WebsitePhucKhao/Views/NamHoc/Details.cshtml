@@ -1,16 +1,55 @@
 ﻿@model WebsitePhucKhao.Models.NamHoc
 
-<h2>Chi tiết Năm Học</h2>
+@{
+    ViewData["Title"] = "Chi tiết Năm Học";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
 
-<table class="table">
-    <tr>
-        <th>Mã Năm Học:</th>
-        <td>@Model.MaNamHoc</td>
-    </tr>
-    <tr>
-        <th>Tên Năm Học:</th>
-        <td>@Model.TenNamHoc</td>
-    </tr>
-</table>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
 
-<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Chi tiết Năm Học</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar-check me-2"></i>Thông tin Năm Học
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th><i class="fas fa-id-card me-2"></i>Mã Năm Học:</th>
+                            <td><span class="badge badge-info">@Model.MaNamHoc</span></td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-calendar me-2"></i>Tên Năm Học:</th>
+                            <td>@Model.TenNamHoc</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("Update", "NamHoc", new { id = Model.MaNamHoc })" class="btn btn-info">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                    </a>
+                    <a href="@Url.Action("Index", "NamHoc")" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-arrow-left me-2"></i>Quay lại
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

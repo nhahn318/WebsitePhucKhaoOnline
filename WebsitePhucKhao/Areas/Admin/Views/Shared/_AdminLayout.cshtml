@@ -9,35 +9,53 @@
 	@await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand"><i class='bx bxs-graduation icon'></i>Admin</a>
 		<ul class="side-menu">
-			<li><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="active lazy-load"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li class="divider" data-text="main">Quản lý</li>
+			<li><a href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" class="lazy-load"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+			<li class="divider" data-text="Quản lý người dùng">Quản lý người dùng</li>
 			<li>
-				<a href="#"><i class='bx bxs-inbox icon'></i> Danh sách người dùng <i class='bx bx-chevron-right icon-right'></i></a>
+				<a href="#" class="dropdown-toggle"><i class='bx bxs-user-detail icon'></i> Người dùng <i class='bx bx-chevron-right icon-right'></i></a>
 				<ul class="side-dropdown">
-					<li><a href="@Url.Action("Index", "GiangVien", new { area = "Admin" })" class="lazy-load">Danh sách giảng viên</a></li>
-					<li><a href="@Url.Action("Index", "NhanVienPhongDaoTao", new { area = "Admin" })" class="lazy-load">Danh sách nhân viên</a></li>
-					<li><a href="@Url.Action("Index", "SinhVien", new { area = "Admin" })" class="lazy-load">Danh sách sinh viên</a></li>
-					<li><a href="#">Button</a></li>
+					<li><a href="@Url.Action("Index", "GiangVien", new { area = "Admin" })" class="lazy-load"><i class='bx bxs-user-detail icon'></i> Giảng viên</a></li>
+					<li><a href="@Url.Action("Index", "NhanVienPhongDaoTao", new { area = "Admin" })" class="lazy-load"><i class='bx bxs-user-detail icon'></i> Nhân viên phòng đào tạo</a></li>
+					<li><a href="@Url.Action("Index", "SinhVien", new { area = "Admin" })" class="lazy-load"><i class='bx bxs-user-detail icon'></i> Sinh viên</a></li>
 				</ul>
 			</li>
-			<li><a href="@Url.Action("Index", "Khoa", new { area = "" })"><i class='bx bxs-chart icon'></i> Khoa</a></li>
-			<li><a href="@Url.Action("Index", "HocKy", new { area = "" })"><i class='bx bxs-widget icon'></i> Học kỳ</a></li>
-			<li class="divider" data-text="table and forms">Table and forms</li>
-			<li><a href="#"><i class='bx bx-table icon'></i> Tables</a></li>
+			<li class="divider" data-text="Quản lý dữ liệu">Quản lý dữ liệu</li>
 			<li>
-				<a href="#"><i class='bx bxs-notepad icon'></i> Forms <i class='bx bx-chevron-right icon-right'></i></a>
+				<a href="#" class="dropdown-toggle"><i class='bx bxs-school icon'></i> Thông tin cơ bản <i class='bx bx-chevron-right icon-right'></i></a>
 				<ul class="side-dropdown">
-					<li><a href="#">Basic</a></li>
-					<li><a href="#">Select</a></li>
-					<li><a href="#">Checkbox</a></li>
-					<li><a href="#">Radio</a></li>
+					<li><a href="@Url.Action("Index", "Khoa", new { area = "" })" class="lazy-load">Khoa</a></li>
+					<li><a href="@Url.Action("Index", "Lop", new { area = "" })" class="lazy-load">Lớp</a></li>
+					<li><a href="@Url.Action("Index", "ChuyenNganh", new { area = "" })" class="lazy-load">Chuyên ngành</a></li>
 				</ul>
 			</li>
+			<li>
+				<a href="#" class="dropdown-toggle"><i class='bx bxs-calendar icon'></i> Thời gian <i class='bx bx-chevron-right icon-right'></i></a>
+				<ul class="side-dropdown">
+					<li><a href="@Url.Action("Index", "NamHoc", new { area = "" })" class="lazy-load">Năm học</a></li>
+					<li><a href="@Url.Action("Index", "HocKy", new { area = "Admin" })" class="lazy-load">Học kỳ</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#" class="dropdown-toggle"><i class='bx bxs-book-open icon'></i> Môn học <i class='bx bx-chevron-right icon-right'></i></a>
+				<ul class="side-dropdown">
+					<li><a href="@Url.Action("Index", "MonHoc", new { area = "" })" class="lazy-load">Danh sách môn học</a></li>
+				</ul>
+			</li>
+			<li class="divider" data-text="Quản lý phúc khảo">Quản lý phúc khảo</li>
+			<li>
+				<a href="#" class="dropdown-toggle"><i class='bx bxs-file-doc icon'></i> Đơn phúc khảo <i class='bx bx-chevron-right icon-right'></i></a>
+				<ul class="side-dropdown">
+					<li><a href="@Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "" })" class="lazy-load"><i class='bx bxs-bell icon'></i> Đơn chờ duyệt</a></li>
+					<li><a href="@Url.Action("Index", "DonPhucKhao", new { area = "Admin" })" class="lazy-load">Danh sách đơn</a></li>
+					<li><a href="@Url.Action("Index", "KetQuaPhucKhao", new { area = "" })" class="lazy-load">Kết quả phúc khảo</a></li>
+				</ul>
+			</li>
+			<li class="divider" data-text="Cài đặt">Cài đặt</li>
+			<li><a href="@Url.Action("Index", "Settings", new { area = "Admin" })" class="lazy-load"><i class='bx bxs-cog icon'></i> Cài đặt hệ thống</a></li>
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
@@ -48,18 +66,46 @@
 			<i class='bx bx-menu toggle-sidebar'></i>
 			<a href="#" class="nav-link" style="margin-left: auto;">
 				<i class='bx bxs-bell icon'></i>
-				<span class="badge">5</span>
-			</a>
-			<a href="#" class="nav-link">
-				<i class='bx bxs-message-square-dots icon'></i>
-				<span class="badge">8</span>
+				@if (ViewBag.PendingAppeals > 0)
+				{
+					<span class="badge">@ViewBag.PendingAppeals</span>
+				}
+				<div class="notification-dropdown">
+					<div class="notification-header">
+						<h6>Thông báo</h6>
+						<a href="@Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "" })">Xem tất cả</a>
+					</div>
+					<div class="notification-body">
+						@if (ViewBag.PendingAppeals > 0 && ViewBag.RecentAppeals != null)
+						{
+							foreach (var appeal in ViewBag.RecentAppeals)
+							{
+								<div class="notification-item">
+									<div class="notification-icon">
+										<i class='bx bxs-file-doc'></i>
+									</div>
+									<div class="notification-content">
+										<p class="notification-text">Đơn phúc khảo mới từ sinh viên @appeal.Student</p>
+										<p class="notification-time">@appeal.Time</p>
+									</div>
+								</div>
+							}
+						}
+						else
+						{
+							<div class="notification-empty">
+								<p>Không có thông báo nào</p>
+							</div>
+						}
+					</div>
+				</div>
 			</a>
 			<span class="divider"></span>
 			<div class="profile">
 				<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
 				<ul class="profile-link">
-					<li><a href="#"><i class='bx bxs-user-circle icon'></i> Profile</a></li>
-					<li><a href="#"><i class='bx bxs-cog'></i> Settings</a></li>
+					<li><a href="#"><i class='bx bxs-user-circle icon'></i> Thông tin cá nhân</a></li>
+					<li><a href="#"><i class='bx bxs-cog'></i> Cài đặt</a></li>
 					<li>
 						<form class="form-inline" id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/" method="post">
 							@Html.AntiForgeryToken()
@@ -84,6 +130,44 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	<script src="~/js/admin.js"></script>
+	<script src="~/js/lazy-loading.js"></script>
+	<script>
+		// Khởi tạo các event listeners
+		function initializeEventListeners() {
+			// Khởi tạo tooltips
+			const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+			tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+				new bootstrap.Tooltip(tooltipTriggerEl);
+			});
+
+			// Khởi tạo DataTables
+			if ($.fn.DataTable) {
+				$('.datatable').DataTable({
+					"language": {
+						"url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+					}
+				});
+			}
+
+			// Xử lý dropdown menu
+			document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+				toggle.addEventListener('click', (e) => {
+					e.preventDefault();
+					const parent = toggle.parentElement;
+					const dropdown = parent.querySelector('.side-dropdown');
+					if (dropdown) {
+						dropdown.classList.toggle('show');
+						toggle.querySelector('.icon-right').classList.toggle('rotate');
+					}
+				});
+			});
+		}
+
+		// Khởi tạo khi trang đã tải xong
+		document.addEventListener('DOMContentLoaded', function() {
+			initializeEventListeners();
+		});
+	</script>
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

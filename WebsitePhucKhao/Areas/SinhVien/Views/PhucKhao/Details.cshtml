@@ -1,26 +1,91 @@
 ﻿@model WebsitePhucKhao.Models.DonPhucKhao
+@using WebsitePhucKhao.Enums
+
 @{
-    ViewData["Title"] = "Chi tiết đơn phúc khảo";
+    ViewData["Title"] = "Chi tiết Phiếu Phúc khảo";
+    Layout = "~/Areas/SinhVien/Views/Shared/_SinhVienLayout.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
 
-<div class="table-responsive">
-    <table class="table">
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Chi tiết Phiếu Phúc khảo</h1>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <tr><th>Mã đơn</th><td>@Model.MaDon</td></tr>
-        <tr><th>Họ tên sinh viên</th><td>@Model.SinhVien?.HoTen</td></tr>
-        <tr><th>Môn học</th><td>@Model.MonHoc?.TenMonHoc</td></tr>
-        <tr><th>Điểm hiện tại</th><td>@Model.DiemHienTai</td></tr>
-        <tr><th>Điểm mong muốn</th><td>@Model.DiemMongMuon</td></tr>
-        <tr><th>Học kỳ</th><td>@Model.HocKy</td></tr>
-        <tr><th>Năm học</th><td>@Model.NamHoc?.TenNamHoc</td></tr>
-        <tr><th>Ngày gửi</th><td>@Model.NgayGui.ToString("dd/MM/yyyy")</td></tr>
-        <tr><th>Phòng thi</th><td>@Model.PhongThi</td></tr>
-        <tr><th>Địa điểm thi</th><td>@Model.DiaDiemThi</td></tr>
-        <tr><th>Lý do</th><td>@Model.LyDo</td></tr>
-        <tr><th>Trạng thái</th><td>@Model.TrangThai</td></tr>
-    </table>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-alt me-2"></i>Thông tin Phiếu Phúc khảo
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th><i class="fas fa-id-card me-2"></i>Mã Phiếu:</th>
+                            <td><span class="badge badge-info">@Model.MaDon</span></td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-user me-2"></i>Sinh viên:</th>
+                            <td>@Model.SinhVien?.HoTen</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-book me-2"></i>Môn học:</th>
+                            <td>@Model.MonHoc?.TenMonHoc</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-calendar me-2"></i>Học kỳ:</th>
+                            <td>@Model.HocKy?.TenHocKy</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-star me-2"></i>Điểm hiện tại:</th>
+                            <td>@Model.DiemHienTai</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-comment me-2"></i>Lý do:</th>
+                            <td>@Model.LyDo</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-clock me-2"></i>Ngày tạo:</th>
+                            <td>@Model.NgayGui.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-check-circle me-2"></i>Trạng thái:</th>
+                            <td>
+                                @{
+                                    var statusClass = Model.TrangThai switch
+                                    {
+                                        TrangThaiPhucKhao.ChoXacNhan => "badge-warning",
+                                        TrangThaiPhucKhao.DaDuyet => "badge-info",
+                                        TrangThaiPhucKhao.ChoCham => "badge-primary",
+                                        TrangThaiPhucKhao.DaCham => "badge-success",
+                                        TrangThaiPhucKhao.TuChoi => "badge-danger",
+                                        _ => "badge-secondary"
+                                    };
+                                }
+                                <span class="badge @statusClass">@Model.TrangThai.ToFriendlyString()</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("DanhSachDonPhucKhao", "PhucKhao", new { area = "SinhVien" })" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Trở về
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<a asp-action="DanhSachDonPhucKhao" class="btn btn-secondary">Quay lại</a>

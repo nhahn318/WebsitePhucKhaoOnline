@@ -26,6 +26,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                 // Dữ liệu thống kê
                 ViewBag.TotalStudents = _context.SinhViens?.Count() ?? 0;
                 ViewBag.TotalTeachers = _context.GiangViens?.Count() ?? 0;
+                ViewBag.TotalStaff = _context.NhanVienPhongDaoTaos?.Count() ?? 0;
                 ViewBag.TotalSubjects = _context.MonHocs?.Count() ?? 0;
                 ViewBag.TotalAppeals = _context.DonPhucKhaos?.Count() ?? 0;
 
@@ -35,6 +36,24 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                 ViewBag.WaitingForGrading = _context.DonPhucKhaos?.Count(d => d.TrangThai == TrangThaiPhucKhao.ChoCham) ?? 0;
                 ViewBag.GradedAppeals = _context.DonPhucKhaos?.Count(d => d.TrangThai == TrangThaiPhucKhao.DaCham) ?? 0;
                 ViewBag.RejectedAppeals = _context.DonPhucKhaos?.Count(d => d.TrangThai == TrangThaiPhucKhao.TuChoi) ?? 0;
+
+                // Lấy danh sách các đơn phúc khảo chờ duyệt gần đây nhất
+                if (_context.DonPhucKhaos != null)
+                {
+                    var recentPendingAppeals = _context.DonPhucKhaos
+                        .Include(d => d.SinhVien)
+                        .Where(d => d.TrangThai == TrangThaiPhucKhao.ChoXacNhan)
+                        .OrderByDescending(d => d.NgayGui)
+                        .Take(5)
+                        .Select(d => new
+                        {
+                            Student = d.SinhVien != null ? d.SinhVien.HoTen : "N/A",
+                            Time = GetTimeAgo(d.NgayGui)
+                        })
+                        .ToList();
+
+                    ViewBag.RecentAppeals = recentPendingAppeals;
+                }
 
                 // Thống kê đơn phúc khảo theo học kỳ hiện tại
                 var currentSemester = _context.HocKys?
@@ -150,6 +169,23 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
             }
 
             return View();
+        }
+
+        private string GetTimeAgo(DateTime dateTime)
+        {
+            var timeSpan = DateTime.Now - dateTime;
+
+            if (timeSpan.TotalMinutes < 1)
+                return "Vừa xong";
+            if (timeSpan.TotalMinutes < 60)
+                return $"{(int)timeSpan.TotalMinutes} phút trước";
+            if (timeSpan.TotalHours < 24)
+                return $"{(int)timeSpan.TotalHours} giờ trước";
+            if (timeSpan.TotalDays < 30)
+                return $"{(int)timeSpan.TotalDays} ngày trước";
+            if (timeSpan.TotalDays < 365)
+                return $"{(int)(timeSpan.TotalDays / 30)} tháng trước";
+            return $"{(int)(timeSpan.TotalDays / 365)} năm trước";
         }
     }
 

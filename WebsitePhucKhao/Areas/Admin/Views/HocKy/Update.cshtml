@@ -2,38 +2,98 @@
 
 @{
     ViewData["Title"] = "Cập nhật Học Kỳ";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Cập nhật Học Kỳ</h2>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/update-page.css" rel="stylesheet" />
+}
 
-<form asp-action="Update" method="post">
-    <input type="hidden" asp-for="MaHocKy" />
-
-    <div class="form-group">
-        <label asp-for="TenHocKy"></label>
-        <input asp-for="TenHocKy" class="form-control" required />
-        <span asp-validation-for="TenHocKy" class="text-danger"></span>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">Cập nhật Học Kỳ</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="MaNamHoc">Chọn Năm Học</label>
-        <select asp-for="MaNamHoc" class="form-control" asp-items="ViewBag.NamHocList">
-            <option value="">-- Chọn Năm Học --</option>
-        </select>
-        <span asp-validation-for="MaNamHoc" class="text-danger"></span>
-    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-calendar me-2"></i>Thông tin Học Kỳ
+                    </h3>
+                </div>
+                <form asp-action="Update" method="post">
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="MaHocKy" />
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-id-card me-2"></i>Mã Học Kỳ:
+                                    </label>
+                                    <input asp-for="MaHocKy" class="form-control" readonly />
+                                    <span asp-validation-for="MaHocKy" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-calendar me-2"></i>Tên Học Kỳ:
+                                    </label>
+                                    <input asp-for="TenHocKy" class="form-control" required />
+                                    <span asp-validation-for="TenHocKy" class="text-danger small"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-calendar-alt me-2"></i>Ngày Bắt Đầu Phúc Khảo:
+                                    </label>
+                                    <input asp-for="NgayBatDauPhucKhao" class="form-control" type="date" required />
+                                    <span asp-validation-for="NgayBatDauPhucKhao" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-calendar-check me-2"></i>Ngày Kết Thúc Phúc Khảo:
+                                    </label>
+                                    <input asp-for="NgayKetThucPhucKhao" class="form-control" type="date" required />
+                                    <span asp-validation-for="NgayKetThucPhucKhao" class="text-danger small"></span>
+                                </div>
+                                <div class="mb-3 info-item">
+                                    <label class="text-primary small fw-semibold">
+                                        <i class="fas fa-calendar-week me-2"></i>Năm Học:
+                                    </label>
+                                    <select asp-for="MaNamHoc" class="form-control" asp-items="ViewBag.MaNamHoc">
+                                        <option value="">-- Chọn Năm Học --</option>
+                                    </select>
+                                    <span asp-validation-for="MaNamHoc" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary ms-2">
+                            <i class="fas fa-arrow-left me-2"></i>Trở về
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
-    <div class="form-group">
-        <label asp-for="NgayBatDauPhucKhao"></label>
-        <input asp-for="NgayBatDauPhucKhao" type="date" class="form-control" required />
-        <span asp-validation-for="NgayBatDauPhucKhao" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="NgayKetThucPhucKhao"></label>
-        <input asp-for="NgayKetThucPhucKhao" type="date" class="form-control" required />
-        <span asp-validation-for="NgayKetThucPhucKhao" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Lưu</button>
-</form>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

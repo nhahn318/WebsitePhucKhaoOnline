@@ -1,44 +1,184 @@
 ﻿@model IEnumerable<WebsitePhucKhao.Models.Lop>
 
-<h2>Danh sách Lớp</h2>
-
-<a asp-action="Add" class="btn btn-primary">Thêm Lớp</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Mã Lớp</th>
-            <th>Tên Lớp</th>
-            <th>Khoa</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var lop in Model)
-        {
-            <tr>
-                <td>@lop.MaLop</td>
-                <td>@lop.TenLop</td>
-                <td>@lop.Khoa?.TenKhoa</td>
-                <td>
-                    <a asp-action="Update" asp-route-id="@lop.MaLop" class="btn btn-warning">Sửa</a>
-                    <a asp-action="Delete" asp-route-id="@lop.MaLop" class="btn btn-danger">Xóa</a>
-                </td>
-            </tr>
-        }
-
-    </tbody>
-
-</table>
-@if (TempData["Error"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["Error"]
-    </div>
+@{
+    ViewData["Title"] = "Danh sách Lớp";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Message"]
+
+@section Styles {
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/admin/index-listuser.css" />
+}
+
+<div class="content-wrapper">
+    <div class="page-header animate__animated animate__fadeIn">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách lớp</h1>
+                <p class="text-muted mb-0">Quản lý thông tin các lớp trong hệ thống</p>
+            </div>
+            <div class="page-actions">
+                <a href="@Url.Action("Add", "Lop")" class="btn btn-add">
+                    <i class="fas fa-plus"></i> Thêm lớp
+                </a>
+            </div>
+        </div>
     </div>
+
+    <div class="card shadow mb-4 animate__animated animate__fadeInUp">
+        <div class="card-header py-3">
+            <div class="row align-items-center g-0">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
+                            <i class="fas fa-graduation-cap text-primary"></i>
+                        </div>
+                        <h4 class="m-0 fw-bold text-primary fs-4">
+                            Thông tin lớp
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
+                            <i class="fas fa-users text-success"></i>
+                        </div>
+                        <span class="badge bg-success rounded-pill small px-3 py-2">
+                            Tổng: @Model.Count()
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-id-card me-1"></i> Mã lớp</th>
+                            <th style="width: 40%"><i class="fas fa-graduation-cap me-1"></i> Tên lớp</th>
+                            <th style="width: 30%"><i class="fas fa-building me-1"></i> Khoa</th>
+                            <th class="text-center" style="width: 20%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var lop in Model)
+                        {
+                            <tr>
+                                <td class="text-center fw-bold">@lop.MaLop</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="class-info ms-3">
+                                            <span class="class-name" title="@lop.TenLop">@lop.TenLop</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info text-white">@lop.Khoa?.TenKhoa</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-actions">
+                                        <a href="@Url.Action("Update", "Lop", new { id = lop.MaLop })" 
+                                           class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <form asp-action="Delete" asp-route-id="@lop.MaLop" method="post" style="display: inline;">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable with improved options
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
+                    "paginate": {
+                        "previous": "<i class='bi bi-chevron-left'></i>",
+                        "next": "<i class='bi bi-chevron-right'></i>"
+                    }
+                },
+                "pageLength": 10,
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                "order": [[1, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 3 },
+                    { "className": "text-center", "targets": [0, 3] }
+                ],
+                "autoWidth": false,
+                "responsive": true,
+                "dom": '<"top"lf>rt<"bottom"ip>',
+                "pagingType": "simple_numbers",
+                "initComplete": function() {
+                    $('.dataTables_length select').addClass('form-select');
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+            
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+            
+            // Confirm delete and submit
+            $('.btn-delete').click(function() {
+                var id = $(this).data('id');
+                var className = $(this).closest('tr').find('td:nth-child(2)').text().trim();
+                
+                Swal.fire({
+                    title: 'Xác nhận xóa?',
+                    text: `Bạn có chắc chắn muốn xóa lớp "${className}"?`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Xóa',
+                    cancelButtonText: 'Hủy'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.post('@Url.Action("Delete", "Lop")', { id: id })
+                            .done(function() {
+                                Swal.fire(
+                                    'Đã xóa!',
+                                    'Lớp đã được xóa thành công.',
+                                    'success'
+                                ).then(() => {
+                                    location.reload();
+                                });
+                            })
+                            .fail(function() {
+                                Swal.fire(
+                                    'Lỗi!',
+                                    'Có lỗi xảy ra khi xóa lớp.',
+                                    'error'
+                                );
+                            });
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
