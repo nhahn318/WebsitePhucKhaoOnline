@@ -171,5 +171,6 @@ wwwroot\uploads\image.jpg
 wwwroot\uploads\phapluatdaicuong.png
 wwwroot\uploads\Playerflip.gif
 wwwroot\uploads\tamlyhocudung.png
+wwwroot\uploads\TranThienNhan_NguyenHuynhNam_Tuan4.jpg
 wwwroot\uploads\tuduythietkedua.png
 wwwroot\uploads\z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg

@@ -1,0 +1,108 @@
+﻿@model List<WebsitePhucKhao.Models.DonPhucKhao>
+@using WebsitePhucKhao.Enums
+
+@{
+    ViewData["Title"] = "Tất cả đơn phúc khảo";
+    Layout = "~/Areas/NhanVien/Views/Shared/_LayoutNhanVien.cshtml";
+}
+
+<div class="content-wrapper">
+    <div class="container-fluid mt-4">
+        <h3 class="text-primary mb-3"><i class="fas fa-list-alt me-2"></i>Tất cả đơn phúc khảo</h3>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+            <input type="text" id="searchKeyword" class="form-control" placeholder="Nhập tên hoặc mã sinh viên..." autocomplete="off">
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>STT</th>
+                        <th>Sinh viên</th>
+                        <th>Môn học</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].SinhVien?.HoTen</td>
+                            <td>@Model[i].MonHoc?.TenMonHoc</td>
+                            <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="badge bg-@(Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan ? "warning" :
+                                                        Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet ? "success" :
+                                                        Model[i].TrangThai == TrangThaiPhucKhao.DaCham ? "info" : "secondary")">
+                                    @Model[i].TrangThai.ToFriendlyString()
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-action="ChiTietPhucKhaoChoNhanVien" asp-route-id="@Model[i].MaDon" class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#searchKeyword").on("input", function () {
+                const keyword = $(this).val();
+
+                $.ajax({
+                    url: '/NhanVien/PhucKhao/TimKiemTatCaDon',
+                    type: 'GET',
+                    data: { keyword: keyword },
+                    success: function (data) {
+                        $("#table-body").empty();
+
+                        if (!data || data.length === 0) {
+                            $("#table-body").append('<tr><td colspan="6" class="text-center">Không tìm thấy kết quả.</td></tr>');
+                            return;
+                        }
+
+                        data.forEach((item, index) => {
+                            const badgeClass = item.trangThai === "Chờ xác nhận" ? "warning" :
+                                               item.trangThai === "Đã duyệt" ? "success" :
+                                               item.trangThai === "Đã chấm" ? "info" : "secondary";
+
+                            const thaoTac = `
+                                <div class="btn-group">
+                                    <a href="/NhanVien/PhucKhao/ChiTietPhucKhaoChoNhanVien/${item.maDon}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </div>`;
+
+                            $("#table-body").append(`
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${item.tenSinhVien}</td>
+                                    <td>${item.tenMonHoc}</td>
+                                    <td>${item.ngayGui}</td>
+                                    <td><span class="badge bg-${badgeClass}">${item.trangThai}</span></td>
+                                    <td>${thaoTac}</td>
+                                </tr>`);
+                        });
+                    },
+                    error: function () {
+                        $("#table-body").html('<tr><td colspan="6" class="text-center text-danger">Lỗi tải dữ liệu.</td></tr>');
+                    }
+                });
+            });
+        });
+    </script>
+}

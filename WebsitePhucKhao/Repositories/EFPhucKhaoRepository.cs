@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Enums;
 using WebsitePhucKhao.Models;
@@ -37,6 +38,36 @@ namespace WebsitePhucKhao.Repositories {
                 .Include(d => d.HocKy)
                 .FirstOrDefaultAsync(d => d.MaDon == id);
         }
+
+        public async Task<List<DonPhucKhao>> GetDonChoXacNhanAsync()
+        {
+            return await _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .Where(d => d.TrangThai == TrangThaiPhucKhao.ChoXacNhan)
+                .ToListAsync();
+        }
+
+        public async Task<List<DonPhucKhao>> GetDonDaDuyetAsync()
+        {
+            return await _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .Where(d => d.TrangThai == TrangThaiPhucKhao.DaDuyet)
+                .ToListAsync();
+        }
+
+        public async Task<List<DonPhucKhao>> GetDonDaChamAsync()
+        {
+            return await _context.DonPhucKhaos
+                .Include(d => d.SinhVien)
+                .Include(d => d.MonHoc)
+                .Where(d => d.TrangThai == TrangThaiPhucKhao.DaCham)
+                .ToListAsync();
+        }
+
+
+
 
         public async Task<SuaPhucKhaoViewModel?> GetSuaPhucKhaoViewModelAsync(int id)
         {
@@ -208,7 +239,7 @@ namespace WebsitePhucKhao.Repositories {
             return true;
         }
 
-        public async Task<List<DonPhucKhao>> GetDanhSachChoDuyetAsync()
+        public async Task<List<DonPhucKhao>> GetDanhSachDonAsync()
         {
             return await _context.DonPhucKhaos
                 .Include(d => d.SinhVien)

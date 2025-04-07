@@ -133,7 +133,7 @@ namespace WebsitePhucKhao.Controllers {
         // Nhân viên: danh sách đơn
         public async Task<IActionResult> DanhSachChoDuyet()
         {
-            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            var ds = await _repository.GetDanhSachDonAsync();
             return View(ds);
         }
         [HttpGet]
@@ -297,7 +297,7 @@ namespace WebsitePhucKhao.Controllers {
         [HttpGet]
         public async Task<IActionResult> TimKiemDonPhucKhao(string keyword)
         {
-            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            var ds = await _repository.GetDanhSachDonAsync();
 
             if (!string.IsNullOrEmpty(keyword))
             {

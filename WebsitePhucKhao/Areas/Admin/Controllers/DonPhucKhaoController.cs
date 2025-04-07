@@ -23,7 +23,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(string searchTerm, int? trangThai, int? hocKy, int? monHoc)
         {
-            var donPhucKhaos = await _phucKhaoRepository.GetDanhSachChoDuyetAsync();
+            var donPhucKhaos = await _phucKhaoRepository.GetDanhSachDonAsync();
 
             // Lọc theo trạng thái
             if (trangThai.HasValue)
@@ -161,7 +161,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> GetNewNotifications()
         {
-            var donPhucKhaos = await _phucKhaoRepository.GetDanhSachChoDuyetAsync();
+            var donPhucKhaos = await _phucKhaoRepository.GetDanhSachDonAsync();
             return Json(new { 
                 count = donPhucKhaos.Count,
                 notifications = donPhucKhaos.Select(n => new {
@@ -175,7 +175,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
 
         public async Task<IActionResult> DanhSachChoDuyet()
         {
-            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            var ds = await _repository.GetDanhSachDonAsync();
             return View(ds);
         }
 

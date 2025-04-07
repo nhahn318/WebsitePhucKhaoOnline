@@ -30,13 +30,23 @@
         <div class="container">
             <ul class="nav nav-pills py-2">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachChoDuyet">
+                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachDon">
+                        <i class="fas fa-check-circle me-1"></i>Tất cả các đơn
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoChoDuyet">
                         <i class="fas fa-clock me-1"></i>Đơn chờ duyệt
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaDuyet">
+                        <i class="fas fa-check-circle me-1"></i>Đơn đã duyệt
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaCham">
-                        <i class="fas fa-check-circle me-1"></i>Đã chấm
+                        <i class="fas fa-check-circle me-1"></i>Đơn đã chấm
                     </a>
                 </li>
                 <li class="nav-item ms-auto">

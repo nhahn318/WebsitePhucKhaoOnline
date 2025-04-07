@@ -1,18 +1,28 @@
-﻿using WebsitePhucKhao.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebsitePhucKhao.Models;
 using WebsitePhucKhao.ViewModels;
 
 namespace WebsitePhucKhao.Repositories {
     public interface IPhucKhaoRepository {
         Task<SinhVien?> GetSinhVienByEmailAsync(string email);
         Task<List<DonPhucKhao>> GetDanhSachPhucKhaoSinhVienAsync(long maSinhVien);
+        
+
+
         Task<DonPhucKhao?> GetDonPhucKhaoAsync(int id);
+        Task<List<DonPhucKhao>> GetDonChoXacNhanAsync();
+        Task<List<DonPhucKhao>> GetDonDaDuyetAsync();
+        Task<List<DonPhucKhao>> GetDonDaChamAsync();
+
+
+
         Task<SuaPhucKhaoViewModel?> GetSuaPhucKhaoViewModelAsync(int id);
         Task<bool> CapNhatDonPhucKhaoAsync(SuaPhucKhaoViewModel model);
         Task<bool> XacNhanXoaDonAsync(int id);
         Task<bool> XoaDonAsync(int id);
         Task<YeuCauPhucKhaoViewModel?> GetYeuCauPhucKhaoViewModelAsync(string email);
         Task<bool> TaoDonPhucKhaoAsync(YeuCauPhucKhaoViewModel model);
-        Task<List<DonPhucKhao>> GetDanhSachChoDuyetAsync();
+        Task<List<DonPhucKhao>> GetDanhSachDonAsync();
         Task<bool> DuyetDonAsync(int id, long? maNV);
         Task<UploadBaiThiViewModel?> GetUploadViewModelAsync(int maDon);
         Task<bool> LuuUploadAsync(UploadBaiThiViewModel model, List<IFormFile> files, long? maNV);

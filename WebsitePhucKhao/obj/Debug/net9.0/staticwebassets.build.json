@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Hooj8wwvM6eA61u2EcjGSrx0aVTM9Vrk82NFbsG2Z2g=",
+  "Hash": "MVtugSCKS+LE43/v1jfh3G2sj+bV4l8z8EtGDExRMhw=",
   "Source": "WebsitePhucKhao",
   "BasePath": "_content/WebsitePhucKhao",
   "Mode": "Default",
@@ -6357,6 +6357,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\tamlyhocudung.png"
+    },
+    {
+      "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\TranThienNhan_NguyenHuynhNam_Tuan4.jpg",
+      "SourceId": "WebsitePhucKhao",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\",
+      "BasePath": "_content/WebsitePhucKhao",
+      "RelativePath": "uploads/TranThienNhan_NguyenHuynhNam_Tuan4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kflichsdod",
+      "Integrity": "AK1AfCl+9l5hedPpqmYNtUI8/XcK+S0zuOx6ozU2VmY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\TranThienNhan_NguyenHuynhNam_Tuan4.jpg"
     },
     {
       "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\tuduythietkedua.png",
@@ -41765,6 +41786,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-uulhJeMEHOEBWNWYP0TeMFfVdp70h+F/QeajBl+E0Cw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/TranThienNhan_NguyenHuynhNam_Tuan4.jpg",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\TranThienNhan_NguyenHuynhNam_Tuan4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "454751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AK1AfCl+9l5hedPpqmYNtUI8/XcK+S0zuOx6ozU2VmY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 07 Apr 2025 03:06:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-AK1AfCl+9l5hedPpqmYNtUI8/XcK+S0zuOx6ozU2VmY="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/TranThienNhan_NguyenHuynhNam_Tuan4.kflichsdod.jpg",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\TranThienNhan_NguyenHuynhNam_Tuan4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "454751"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"AK1AfCl+9l5hedPpqmYNtUI8/XcK+S0zuOx6ozU2VmY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 07 Apr 2025 03:06:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kflichsdod"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/TranThienNhan_NguyenHuynhNam_Tuan4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-AK1AfCl+9l5hedPpqmYNtUI8/XcK+S0zuOx6ozU2VmY="
         }
       ]
     },

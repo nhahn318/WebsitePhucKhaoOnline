@@ -248,8 +248,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cQ2hpVGlldFVwbG9hZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachChoDuyet.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hDaG9EdXlldC5jc2h0bWw=
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachDon.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hEb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachPhucKhaoChoDuyet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hQaHVjS2hhb0Nob0R1eWV0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachPhucKhaoDaCham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hQaHVjS2hhb0RhQ2hhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachPhucKhaoDaDuyet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hQaHVjS2hhb0RhRHV5ZXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/EditUpload.cshtml]

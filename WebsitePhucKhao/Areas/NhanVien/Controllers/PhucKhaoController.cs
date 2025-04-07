@@ -27,11 +27,29 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             _emailSen = emailSen;
         }
 
-        public async Task<IActionResult> DanhSachChoDuyet()
+        public async Task<IActionResult> DanhSachDon()
         {
-            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            var ds = await _repository.GetDanhSachDonAsync();
             return View(ds);
         }
+        public async Task<IActionResult> DanhSachPhucKhaoDaCham()
+        {
+            var ds = await _repository.GetDonDaChamAsync();
+            return View("DanhSachPhucKhaoDaCham", ds);
+        }
+
+        public async Task<IActionResult> DanhSachPhucKhaoChoDuyet()
+        {
+            var ds = await _repository.GetDonChoXacNhanAsync();
+            return View("DanhSachPhucKhaoChoDuyet", ds);
+        }
+
+        public async Task<IActionResult> DanhSachPhucKhaoDaDuyet()
+        {
+            var ds = await _repository.GetDonDaDuyetAsync();
+            return View("DanhSachPhucKhaoDaDuyet", ds);
+        }
+
         public async Task<IActionResult> ChiTietPhucKhaoChoNhanVien(int id)
         {
             var don = await _repository.GetDonPhucKhaoAsync(id);
@@ -75,7 +93,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
                 }
 
             }
-            return RedirectToAction("DanhSachChoDuyet");
+            return RedirectToAction("DanhSachDon");
         }
 
         // Upload bài thi
@@ -100,7 +118,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             }
 
             await _repository.LuuUploadAsync(model, files, user?.MaNhanVienPhongDaoTao);
-            return RedirectToAction("DanhSachChoDuyet");
+            return RedirectToAction("DanhSachDon");
         }
 
         public async Task<IActionResult> ChiTietUpload(int maDon)
@@ -132,7 +150,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             return RedirectToAction("ChiTietUpload", new { maDon = model.MaDon });
         }
 
-        public async Task<IActionResult> DanhSachPhucKhaoSauKhiCham()
+     /*   public async Task<IActionResult> DanhSachPhucKhaoSauKhiCham()
         {
             var email = User.Identity?.Name;
             if (string.IsNullOrEmpty(email)) return Unauthorized();
@@ -145,12 +163,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             var daCham = danhSach.Where(d => d.TrangThai == "Đã chấm").ToList();
 
             return View(daCham);
-        }
-
-
-
-
-
+        }*/
 
         [HttpGet]
         public async Task<IActionResult> GetDiemHienTai(int maMonHoc, int maHocKy, int maNamHoc, long maSinhVien)
@@ -167,14 +180,93 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> TimKiemDonPhucKhao(string keyword)
+        public async Task<IActionResult> TimKiemDonChoDuyet(string keyword)
         {
-            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            var ds = await _repository.GetDonChoXacNhanAsync(); 
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                keyword = keyword.Trim().ToLower();
+                ds = ds.Where(d =>
+                    d.SinhVien != null &&
+                    (d.SinhVien.MaSinhVien.ToString().Contains(keyword) ||
+                     d.SinhVien.HoTen.ToLower().Contains(keyword))
+                ).ToList();
+            }
+
+            var ketQua = ds.Select((d, i) => new
+            {
+                stt = i + 1,
+                maDon = d.MaDon,
+                tenSinhVien = d.SinhVien?.HoTen,
+                tenMonHoc = d.MonHoc?.TenMonHoc,
+                ngayGui = d.NgayGui.ToString("dd/MM/yyyy"),
+                trangThai = d.TrangThai.ToFriendlyString()
+            });
+
+            return Json(ketQua);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TimKiemDonDaDuyet(string keyword)
+        {
+            var ds = await _repository.GetDonDaDuyetAsync();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                keyword = keyword.Trim().ToLower();
+                ds = ds.Where(d =>
+                    d.SinhVien != null &&
+                    (d.SinhVien.MaSinhVien.ToString().Contains(keyword) ||
+                     d.SinhVien.HoTen.ToLower().Contains(keyword))
+                ).ToList();
+            }
+
+            var ketQua = ds.Select((d, i) => new
+            {
+                stt = i + 1,
+                maDon = d.MaDon,
+                tenSinhVien = d.SinhVien?.HoTen,
+                tenMonHoc = d.MonHoc?.TenMonHoc,
+                ngayGui = d.NgayGui.ToString("dd/MM/yyyy"),
+                trangThai = d.TrangThai.ToFriendlyString()
+            });
+
+            return Json(ketQua);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> TimKiemDonDaCham(string keyword)
+        {
+            var ds = await _repository.GetDonDaChamAsync();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                keyword = keyword.Trim().ToLower();
+                ds = ds.Where(d =>
+                    d.SinhVien != null &&
+                    (d.SinhVien.MaSinhVien.ToString().Contains(keyword) ||
+                     d.SinhVien.HoTen.ToLower().Contains(keyword))
+                ).ToList();
+            }
+
+            var ketQua = ds.Select((d, i) => new
+            {
+                stt = i + 1,
+                maDon = d.MaDon,
+                tenSinhVien = d.SinhVien?.HoTen,
+                tenMonHoc = d.MonHoc?.TenMonHoc,
+                ngayGui = d.NgayGui.ToString("dd/MM/yyyy"),
+                trangThai = d.TrangThai.ToFriendlyString()
+            });
+
+            return Json(ketQua);
+        }
+        [HttpGet]
+        public async Task<IActionResult> TimKiemTatCaDon(string keyword)
+        {
+            var ds = await _repository.GetDanhSachDonAsync();
 
             if (!string.IsNullOrEmpty(keyword))
             {
                 keyword = keyword.Trim().ToLower();
-
                 ds = ds.Where(d => d.SinhVien != null &&
                     (
                         d.SinhVien.MaSinhVien.ToString().Contains(keyword) ||
@@ -186,7 +278,6 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             {
                 stt = i + 1,
                 maDon = d.MaDon,
-                maSinhVien = d.SinhVien?.MaSinhVien,
                 tenSinhVien = d.SinhVien?.HoTen,
                 tenMonHoc = d.MonHoc?.TenMonHoc,
                 ngayGui = d.NgayGui.ToString("dd/MM/yyyy"),
@@ -195,6 +286,8 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
 
             return Json(ketQua);
         }
+
+
     }
 }
 

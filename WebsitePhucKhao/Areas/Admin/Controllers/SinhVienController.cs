@@ -43,6 +43,9 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             // Chuyên ngành ban đầu rỗng, sẽ được cập nhật khi chọn Khoa
             ViewBag.ChuyenNganhList = new List<SelectListItem>();
 
+            var lopList = await _context.Lops.ToListAsync(); // load tất cả lớp
+            ViewBag.LopList = new SelectList(lopList, "MaLop", "TenLop");
+
             return View();
         }
 

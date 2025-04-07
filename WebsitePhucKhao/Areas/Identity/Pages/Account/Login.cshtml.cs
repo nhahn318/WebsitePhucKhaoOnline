@@ -211,7 +211,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                     }
                     else if (await _userManager.IsInRoleAsync(user, "NhanVien"))
                     {
-                        returnUrl = Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "NhanVien" });
+                        returnUrl = Url.Action("DanhSachDon", "PhucKhao", new { area = "NhanVien" });
                     }
 
                     return LocalRedirect(returnUrl);

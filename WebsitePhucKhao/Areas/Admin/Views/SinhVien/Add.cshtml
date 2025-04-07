@@ -6,18 +6,14 @@
 }
 
 @section Styles {
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/admin/add-page.css" />
 }
 
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col">
-                    <h1 class="text-primary">Thêm Sinh Viên Mới</h1>
-                </div>
-            </div>
+            <h1 class="text-primary">Thêm Sinh Viên Mới</h1>
         </div>
     </div>
 
@@ -31,73 +27,59 @@
                 </div>
                 <form asp-action="Add" method="post">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-item">
-                                    <label class="text-primary small fw-semibold">
-                                        <i class="fas fa-id-card me-2"></i>Mã Sinh Viên:
-                                    </label>
-                                    <input asp-for="MaSinhVien" class="form-control" required />
-                                    <span asp-validation-for="MaSinhVien" class="text-danger small"></span>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label>Mã Sinh Viên</label>
+                            <input asp-for="MaSinhVien" class="form-control" required />
+                            <span asp-validation-for="MaSinhVien" class="text-danger small"></span>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-item">
-                                    <label class="text-primary small fw-semibold">
-                                        <i class="fas fa-user me-2"></i>Họ và Tên:
-                                    </label>
-                                    <input asp-for="HoTen" class="form-control" required />
-                                    <span asp-validation-for="HoTen" class="text-danger small"></span>
-                                </div>
-                            </div>
+
+                        <div class="mb-3">
+                            <label>Họ và Tên</label>
+                            <input asp-for="HoTen" class="form-control" required />
+                            <span asp-validation-for="HoTen" class="text-danger small"></span>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-item">
-                                    <label class="text-primary small fw-semibold">
-                                        <i class="fas fa-envelope me-2"></i>Email:
-                                    </label>
-                                    <input asp-for="Email" type="email" class="form-control" required />
-                                    <span asp-validation-for="Email" class="text-danger small"></span>
-                                </div>
-                            </div>
+
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input asp-for="Email" type="email" class="form-control" required />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-item">
-                                    <label class="text-primary small fw-semibold">
-                                        <i class="fas fa-phone me-2"></i>Số Điện Thoại:
-                                    </label>
-                                    <input asp-for="SoDienThoai" class="form-control" required />
-                                    <span asp-validation-for="SoDienThoai" class="text-danger small"></span>
-                                </div>
-                            </div>
+
+                        <div class="mb-3">
+                            <label>Số điện thoại</label>
+                            <input asp-for="SoDienThoai" class="form-control" required />
+                            <span asp-validation-for="SoDienThoai" class="text-danger small"></span>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="info-item">
-                                    <label class="text-primary small fw-semibold">
-                                        <i class="fas fa-users me-2"></i>Lớp:
-                                    </label>
-                                    <select asp-for="MaLop" class="form-control" asp-items="ViewBag.LopList">
-                                        <option value="">-- Chọn Lớp --</option>
-                                    </select>
-                                    <span asp-validation-for="MaLop" class="text-danger small"></span>
-                                </div>
-                            </div>
+
+                        <div class="mb-3">
+                            <label>Khoa</label>
+                            <select id="khoaSelect" name="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList">
+                                <option value="">-- Chọn Khoa --</option>
+                            </select>
+                            <span asp-validation-for="MaKhoa" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Chuyên ngành</label>
+                            <select asp-for="MaChuyenNganh" class="form-control" id="chuyenNganhSelect">
+                                <option value="">-- Chọn Chuyên ngành --</option>
+                            </select>
+                            <span asp-validation-for="MaChuyenNganh" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label>Lớp</label>
+                            <select asp-for="MaLop" class="form-control" id="lopSelect">
+                                <option value="">-- Chọn Lớp --</option>
+                            </select>
+                            <span asp-validation-for="MaLop" class="text-danger small"></span>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-2"></i>Thêm sinh viên
                         </button>
-                        <a asp-action="Index" class="btn-outline-secondary ms-2">
+                        <a asp-action="Index" class="btn btn-outline-secondary ms-2">
                             <i class="fas fa-arrow-left me-2"></i>Trở về
                         </a>
                     </div>
@@ -109,7 +91,29 @@
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
-}
+    <script>
+        $(document).ready(function () {
+            $("#khoaSelect").change(function () {
+                const maKhoa = $(this).val();
 
+                // Reset dropdown
+                $("#chuyenNganhSelect").html('<option value="">-- Chọn Chuyên ngành --</option>');
+                $("#lopSelect").html('<option value="">-- Chọn Lớp --</option>');
+
+                if (maKhoa) {
+                    $.get(`/Admin/SinhVien/GetChuyenNganhsByKhoa?maKhoa=${maKhoa}`, function (data) {
+                        data.forEach(item => {
+                            $("#chuyenNganhSelect").append(`<option value="${item.maChuyenNganh}">${item.tenChuyenNganh}</option>`);
+                        });
+                    });
+
+                    $.get(`/Admin/SinhVien/GetLopsByKhoa?maKhoa=${maKhoa}`, function (data) {
+                        data.forEach(item => {
+                            $("#lopSelect").append(`<option value="${item.maLop}">${item.tenLop}</option>`);
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}
