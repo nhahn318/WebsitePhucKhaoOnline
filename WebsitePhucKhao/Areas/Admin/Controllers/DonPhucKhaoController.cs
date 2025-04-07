@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 using WebsitePhucKhao.Enums;
+using NuGet.Protocol.Core.Types;
 
 namespace WebsitePhucKhao.Areas.Admin.Controllers
 {
@@ -12,10 +13,12 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
     public class DonPhucKhaoController : Controller
     {
         private readonly IPhucKhaoRepository _phucKhaoRepository;
+        private readonly IPhucKhaoRepository _repository;
 
-        public DonPhucKhaoController(IPhucKhaoRepository phucKhaoRepository)
+        public DonPhucKhaoController(IPhucKhaoRepository phucKhaoRepository, IPhucKhaoRepository repository)
         {
             _phucKhaoRepository = phucKhaoRepository;
+            _repository = repository;
         }
 
         public async Task<IActionResult> Index(string searchTerm, int? trangThai, int? hocKy, int? monHoc)
@@ -167,5 +170,23 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                 })
             });
         }
+
+
+
+        public async Task<IActionResult> DanhSachChoDuyet()
+        {
+            var ds = await _repository.GetDanhSachChoDuyetAsync();
+            return View(ds);
+        }
+
+        public async Task<IActionResult> ChiTietPhucKhao(int id)
+        {
+            var don = await _repository.GetDonPhucKhaoAsync(id);
+            if (don == null) return NotFound();
+
+            return View("ChiTietPhucKhao", don);
+        }
+
+ 
     }
 } 
