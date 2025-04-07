@@ -65,41 +65,10 @@
 		<nav>
 			<i class='bx bx-menu toggle-sidebar'></i>
 			<a href="#" class="nav-link" style="margin-left: auto;">
-				<i class='bx bxs-bell icon'></i>
-				@if (ViewBag.PendingAppeals > 0)
-				{
-					<span class="badge">@ViewBag.PendingAppeals</span>
-				}
-				<div class="notification-dropdown">
-					<div class="notification-header">
-						<h6>Thông báo</h6>
-						<a href="@Url.Action("DanhSachChoDuyet", "PhucKhao", new { area = "" })">Xem tất cả</a>
-					</div>
-					<div class="notification-body">
-						@if (ViewBag.PendingAppeals > 0 && ViewBag.RecentAppeals != null)
-						{
-							foreach (var appeal in ViewBag.RecentAppeals)
-							{
-								<div class="notification-item">
-									<div class="notification-icon">
-										<i class='bx bxs-file-doc'></i>
-									</div>
-									<div class="notification-content">
-										<p class="notification-text">Đơn phúc khảo mới từ sinh viên @appeal.Student</p>
-										<p class="notification-time">@appeal.Time</p>
-									</div>
-								</div>
-							}
-						}
-						else
-						{
-							<div class="notification-empty">
-								<p>Không có thông báo nào</p>
-							</div>
-						}
-					</div>
-				</div>
+				
 			</a>
+
+
 			<span class="divider"></span>
 			<div class="profile">
 				<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8cGVvcGxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="">
