@@ -20,7 +20,6 @@ C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\css\admi
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\css\admin\add-page.css
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
-C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\css\sinhvien\sinhvienlayout.css
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
 C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
@@ -92,7 +91,6 @@ wwwroot\css\admin\index-listuser.css
 wwwroot\css\admin\update-page.css
 wwwroot\css\dashboard.css
 wwwroot\css\home.css
-wwwroot\css\sinhvien\sinhvienlayout.css
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\images\Logo.jpg

@@ -192,18 +192,6 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-jcQBIk0DK\u002Bl/RFgtkuXOlck0d5h9PQEhGxAdfraxIuw="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"4903"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022jcQBIk0DK\u002Bl/RFgtkuXOlck0d5h9PQEhGxAdfraxIuw=\u0022"},{"Name":"Last-Modified","Value":"Mon, 07 Apr 2025 03:32:34 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/WebsitePhucKhao/css/sinhvien/sinhvienlayout.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\sinhvien\sinhvienlayout.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-1UgErJFiHj8Q6fxiUouYVEceYw47XlCJRFyFrgIgGTI="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"11833"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00221UgErJFiHj8Q6fxiUouYVEceYw47XlCJRFyFrgIgGTI=\u0022"},{"Name":"Last-Modified","Value":"Sat, 29 Mar 2025 21:28:53 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/WebsitePhucKhao/css/sinhvien/sinhvienlayout.lcxwc7h3o7.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\sinhvien\sinhvienlayout.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"lcxwc7h3o7"},{"Name":"integrity","Value":"sha256-1UgErJFiHj8Q6fxiUouYVEceYw47XlCJRFyFrgIgGTI="},{"Name":"label","Value":"_content/WebsitePhucKhao/css/sinhvien/sinhvienlayout.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"11833"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00221UgErJFiHj8Q6fxiUouYVEceYw47XlCJRFyFrgIgGTI=\u0022"},{"Name":"Last-Modified","Value":"Sat, 29 Mar 2025 21:28:53 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/WebsitePhucKhao/css/site.39r3pfqev7.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

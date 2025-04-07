@@ -69,10 +69,6 @@
       "PackagePath": "staticwebassets\\css\\home.css"
     },
     {
-      "Id": "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\css\\sinhvien\\sinhvienlayout.css",
-      "PackagePath": "staticwebassets\\css\\sinhvien\\sinhvienlayout.css"
-    },
-    {
       "Id": "C:\\Users\\JUO\\source\\repos\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

@@ -33,7 +33,7 @@
                             </a>
                             @if (User.Identity.IsAuthenticated)
                             {
-                                <a asp-controller="ReviewRequest" asp-action="Create" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                                <a asp-area="SinhVien" asp-controller="PhucKhao" asp-action="Create" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
                                     <i class="fas fa-plus-circle me-2"></i>Nộp yêu cầu
                                 </a>
                             }
