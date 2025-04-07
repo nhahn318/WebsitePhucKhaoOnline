@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using WebsitePhucKhao.Enums;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 using SinhVienModel = WebsitePhucKhao.Models.SinhVien;
@@ -26,6 +28,78 @@ namespace WebsitePhucKhao.Areas.SinhVien.Controllers {
             _khoaRepository = khoaRepository;
             _chuyenNganhRepository = chuyenNganhRepository;
             _context = context;
+        }
+
+        public async Task<IActionResult> Dashboard()
+        {
+            try
+            {
+                // Lấy username đang đăng nhập
+                var userName = User.Identity?.Name;
+
+                if (string.IsNullOrEmpty(userName))
+                {
+                    return Unauthorized("Không xác định được người dùng.");
+                }
+
+                // Truy vấn ApplicationUser
+                var appUser = await _context.Users
+                    .FirstOrDefaultAsync(u => u.UserName == userName);
+
+                if (appUser == null || appUser.MaSinhVien == null)
+                {
+                    return NotFound("Không tìm thấy thông tin sinh viên.");
+                }
+
+                // Truy vấn sinh viên theo MaSinhVien
+                var student = await _context.SinhViens
+                    .FirstOrDefaultAsync(s => s.MaSinhVien == appUser.MaSinhVien);
+
+                if (student == null)
+                {
+                    return NotFound("Không tìm thấy hồ sơ sinh viên.");
+                }
+
+
+                // Lấy tất cả đơn phúc khảo của sinh viên
+                var requests = await _context.DonPhucKhaos
+                    .Where(r => r.MaSinhVien == student.MaSinhVien)
+                    .OrderByDescending(r => r.NgayGui)
+                    .ToListAsync();
+
+
+                // Thống kê đơn theo enum
+                ViewBag.TotalRequests = requests.Count;
+
+                ViewBag.PendingRequests = requests.Count(r =>
+                    r.TrangThai == TrangThaiPhucKhao.ChoXacNhan ||
+                    r.TrangThai == TrangThaiPhucKhao.ChoCham);
+
+                ViewBag.ProcessedRequests = requests.Count(r =>
+                    r.TrangThai == TrangThaiPhucKhao.DaDuyet ||
+                    r.TrangThai == TrangThaiPhucKhao.DaCham ||
+                    r.TrangThai == TrangThaiPhucKhao.TuChoi);
+
+                // Lấy 5 đơn mới nhất
+                ViewBag.RecentRequests = requests.Take(5).ToList();
+
+
+
+                // Thêm ViewBag.TenHocKy nếu có
+                var hocKyHienTai = await _context.HocKys
+                    .OrderByDescending(h => h.NgayBatDauPhucKhao)
+                    .FirstOrDefaultAsync();
+
+                ViewBag.TenHocKy = hocKyHienTai?.TenHocKy;
+
+                return View(student);
+            }
+            catch (Exception ex)
+            {
+                // Log lỗi nếu cần
+                Console.WriteLine("Lỗi khi load dashboard: " + ex.Message);
+                return View("Error");
+            }
         }
 
         public async Task<IActionResult> CapNhatThongTin()
