@@ -14,7 +14,7 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
 
         private readonly IGiangVienRepository _giangVienRepository;
         private readonly IKhoaRepository _khoaRepository;
-        private readonly IDonPhucKhaoChiTietRepository _DonPhucKhaoChiTietRepository;
+        private readonly IDonPhucKhaoChiTietRepository _donPhucKhaoChiTietRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
@@ -22,7 +22,7 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
         {
             _giangVienRepository = giangVienRepository;
             _khoaRepository = khoaRepository;
-            _DonPhucKhaoChiTietRepository = donPhucKhaoChiTietRepository;
+            _donPhucKhaoChiTietRepository = donPhucKhaoChiTietRepository;
             _userManager = userManager;
             _context = context;
         }
@@ -34,7 +34,7 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             var giangVien = await _giangVienRepository.GetByEmailAsync(user.Email);
             if (giangVien == null) return RedirectToAction("AccessDenied", "Account");
 
-            var danhSachDon = await _DonPhucKhaoChiTietRepository.GetPhucKhaoByGiangVienAsync(giangVien.MaGiangVien);
+            var danhSachDon = await _donPhucKhaoChiTietRepository.GetPhucKhaoByGiangVienAsync(giangVien.MaGiangVien);
 
             // Chuyển đổi danh sách DonPhucKhaoChiTiet thành ViewModel
             var danhSachViewModel = danhSachDon.Select(d => new PhucKhaoDuocPhanCongViewModel
@@ -52,6 +52,30 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
 
             return View(danhSachViewModel);
         }
+
+        public async Task<IActionResult> PhucKhaoDaCham()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var gv = await _giangVienRepository.GetByEmailAsync(user.Email);
+
+            var ds = await _donPhucKhaoChiTietRepository.GetDaChamByGiangVienAsync(gv.MaGiangVien);
+
+            var vm = ds.Select((d, i) => new PhucKhaoDuocPhanCongViewModel
+            {
+                MaDon = d.MaDon,
+                DiemTruocPhucKhao = d.DonPhucKhao?.DiemHienTai ?? 0,
+                DiemMongMuon = d.DonPhucKhao?.DiemMongMuon ?? 0,
+                LyDo = d.DonPhucKhao?.LyDo ?? "Không có lý do",
+                TenMonHoc = d.MonHoc?.TenMonHoc ?? "Không rõ",
+                DiemSauPhucKhao = d.DiemSauPhucKhao,
+                TrangThaiPhucKhao = d.DonPhucKhao?.TrangThai ?? TrangThaiPhucKhao.DaCham,
+                NgayChamLai = d.NgayChamLai,
+                NguoiDuyet = d.NhanVienDuyet?.HoTen ?? "Chưa duyệt"
+            }).ToList();
+
+            return View(vm);
+        }
+
 
         public async Task<IActionResult> ChamDiem(int maDon)
         {

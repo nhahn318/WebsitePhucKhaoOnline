@@ -160,6 +160,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxFZGl0Q2hhbURpZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/PhucKhaoDaCham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxQaHVjS2hhb0RhQ2hhbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/User/source/repos/WebsitePhucKhao/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/PhucKhaoDuocPhanCong.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxQaHVjS2hhb0R1b2NQaGFuQ29uZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

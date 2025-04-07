@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WebsitePhucKhao.Enums;
 using WebsitePhucKhao.Models;
 
 namespace WebsitePhucKhao.Repositories {
@@ -27,6 +28,17 @@ namespace WebsitePhucKhao.Repositories {
                 Console.WriteLine($"DEBUG: Đơn {don.MaDon} - Sinh viên ID: {don.MaSinhVien}, Tên: {don.SinhVien?.HoTen}");
             }
             return danhSach;
+        }
+
+        public async Task<List<DonPhucKhaoChiTiet>> GetDaChamByGiangVienAsync(long maGiangVien)
+        {
+            return await _context.DonPhucKhaoChiTiets
+                .Include(ct => ct.DonPhucKhao)
+                .ThenInclude(d => d.SinhVien)
+                .Include(ct => ct.MonHoc)
+                .Include(ct => ct.NhanVienDuyet)
+                .Where(ct => ct.MaGiangVien == maGiangVien && ct.DonPhucKhao.TrangThai == TrangThaiPhucKhao.DaCham)
+                .ToListAsync();
         }
 
     }

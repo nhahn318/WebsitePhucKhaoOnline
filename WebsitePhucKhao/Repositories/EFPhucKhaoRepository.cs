@@ -66,6 +66,17 @@ namespace WebsitePhucKhao.Repositories {
                 .ToListAsync();
         }
 
+        public async Task<List<DonPhucKhaoChiTiet>> GetDaChamByGiangVienAsync(long maGiangVien)
+        {
+            return await _context.DonPhucKhaoChiTiets
+                .Include(ct => ct.DonPhucKhao)
+                .ThenInclude(d => d.SinhVien)
+                .Include(ct => ct.MonHoc)
+                .Include(ct => ct.NhanVienDuyet)
+                .Where(ct => ct.MaGiangVien == maGiangVien && ct.DonPhucKhao.TrangThai == TrangThaiPhucKhao.DaCham)
+                .ToListAsync();
+        }
+
 
 
 
