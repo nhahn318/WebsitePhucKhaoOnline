@@ -17,437 +17,437 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebsitePhucKhao
 build_property.RootNamespace = WebsitePhucKhao
-build_property.ProjectDir = C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao\
+build_property.ProjectDir = C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\JUO\source\repos\WebsitePhucKhaoOnline\WebsitePhucKhao
+build_property.MSBuildProjectDirectory = C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/Dashboard/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/Dashboard/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/ChiTietPhucKhao.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/ChiTietPhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRG9uUGh1Y0toYW9cQ2hpVGlldFBodWNLaGFvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/DanhSachChoDuyet.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/DanhSachChoDuyet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRG9uUGh1Y0toYW9cRGFuaFNhY2hDaG9EdXlldC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/DonPhucKhao/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRG9uUGh1Y0toYW9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR2lhbmdWaWVuXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR2lhbmdWaWVuXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR2lhbmdWaWVuXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR2lhbmdWaWVuXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/GiangVien/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR2lhbmdWaWVuXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9jS3lcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9jS3lcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9jS3lcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/HocKy/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9jS3lcVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NamHoc/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NamHoc/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmFtSG9jXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NamHoc/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NamHoc/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmFtSG9jXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/ChiTietSauPhucKhao.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/ChiTietSauPhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xDaGlUaWV0U2F1UGh1Y0toYW8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/NhanVienPhongDaoTao/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/Shared/_AdminLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9BZG1pbkxheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/CapNhatThongTin.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/CapNhatThongTin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cQ2FwTmhhdFRob25nVGluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/SinhVien/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2luaFZpZW5cVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/ChamDiem.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/ChamDiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxDaGFtRGllbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/DetailChamDiem.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/DetailChamDiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxEZXRhaWxDaGFtRGllbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/EditChamDiem.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/EditChamDiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxFZGl0Q2hhbURpZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/PhucKhaoDuocPhanCong.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/GiangVien/PhucKhaoDuocPhanCong.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXEdpYW5nVmllblxQaHVjS2hhb0R1b2NQaGFuQ29uZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/Shared/_LayoutGiangVien.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/Shared/_LayoutGiangVien.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXFNoYXJlZFxfTGF5b3V0R2lhbmdWaWVuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXF9WaWV3SW1wb3J0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/GiangVien/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcR2lhbmdWaWVuXFZpZXdzXF9WaWV3U3RhcnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Logout.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/PersonalData.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/PersonalData.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcUGVyc29uYWxEYXRhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_LoginPartial.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xvZ2luUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/_LoginPartial.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfTG9naW5QYXJ0aWFsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/NhanVienPhongDaoTao/ChiTietSauPhucKhao.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/NhanVienPhongDaoTao/ChiTietSauPhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcTmhhblZpZW5QaG9uZ0Rhb1Rhb1xDaGlUaWV0U2F1UGh1Y0toYW8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/ChiTietPhucKhaoChoNhanVien.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/ChiTietPhucKhaoChoNhanVien.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cQ2hpVGlldFBodWNLaGFvQ2hvTmhhblZpZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/ChiTietUpload.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/ChiTietUpload.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cQ2hpVGlldFVwbG9hZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachChoDuyet.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/DanhSachChoDuyet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hDaG9EdXlldC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/EditUpload.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/EditUpload.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cRWRpdFVwbG9hZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/UploadBaiThi.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/PhucKhao/UploadBaiThi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcUGh1Y0toYW9cVXBsb2FkQmFpVGhpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/Shared/_LayoutNhanVien.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/Shared/_LayoutNhanVien.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcU2hhcmVkXF9MYXlvdXROaGFuVmllbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/NhanVien/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTmhhblZpZW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Create.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/CreateSuccess.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/CreateSuccess.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cQ3JlYXRlU3VjY2Vzcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/DanhSachDonPhucKhao.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/DanhSachDonPhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hEb25QaHVjS2hhby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/DanhSachPhucKhaoSauKhiCham.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/DanhSachPhucKhaoSauKhiCham.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cRGFuaFNhY2hQaHVjS2hhb1NhdUtoaUNoYW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Edit.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/OutsidePhucKhao.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/PhucKhao/OutsidePhucKhao.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcUGh1Y0toYW9cT3V0c2lkZVBodWNLaGFvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/Shared/_LayoutSinhVien.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/Shared/_LayoutSinhVien.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcU2hhcmVkXF9MYXlvdXRTaW5oVmllbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/SinhVien/CapNhatThongTin.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/SinhVien/CapNhatThongTin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcU2luaFZpZW5cQ2FwTmhhdFRob25nVGluLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/SinhVien/Dashboard.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/SinhVien/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcU2luaFZpZW5cRGFzaGJvYXJkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Areas/SinhVien/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcU2luaFZpZW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuTmdhbmhcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuTmdhbmhcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuTmdhbmhcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/ChuyenNganh/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuTmdhbmhcVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Home/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Home/Privacy.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYVxBZGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Khoa/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Lop/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9wXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/MonHoc/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW9uSG9jXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Add.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFtSG9jXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Delete.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFtSG9jXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Details.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFtSG9jXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Index.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFtSG9jXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Update.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/NamHoc/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFtSG9jXFVwZGF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/Error.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_LoginLogo.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_LoginLogo.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpbkxvZ28uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/_ViewImports.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/_ViewStart.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/JUO/source/repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_Layout.cshtml]
+[C:/Users/JUO/Source/Repos/WebsitePhucKhaoOnline/WebsitePhucKhao/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-7psrizb9y7
