@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "MVtugSCKS+LE43/v1jfh3G2sj+bV4l8z8EtGDExRMhw=",
+  "Hash": "ohmAfvuhwSYDJhXTZfrxEvsq41qKQanAHRtpe6YWm/Q=",
   "Source": "WebsitePhucKhao",
   "BasePath": "_content/WebsitePhucKhao",
   "Mode": "Default",
@@ -3818,12 +3818,12 @@
       "OriginalItemSpec": "C:\\Users\\User\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\9.0.2\\staticwebassets\\V5\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-pfckufcbn9.gz",
+      "Identity": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-nst56p37dm.gz",
       "SourceId": "WebsitePhucKhao",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/WebsitePhucKhao",
-      "RelativePath": "js/admin#[.{fingerprint=pfckufcbn9}]?.js.gz",
+      "RelativePath": "js/admin#[.{fingerprint=nst56p37dm}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -3832,8 +3832,8 @@
       "RelatedAsset": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "fcs2oh1oio",
-      "Integrity": "/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8=",
+      "Fingerprint": "5hz9v17xlq",
+      "Integrity": "JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin.js"
@@ -4756,8 +4756,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "pfckufcbn9",
-      "Integrity": "C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE=",
+      "Fingerprint": "nst56p37dm",
+      "Integrity": "6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\admin.js"
@@ -18748,12 +18748,12 @@
     },
     {
       "Route": "js/admin.js",
-      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-pfckufcbn9.gz",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-nst56p37dm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000772797527"
+          "Quality": "0.000754147813"
         }
       ],
       "ResponseHeaders": [
@@ -18763,15 +18763,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1293"
+          "Value": "1325"
         },
         {
           "Name": "ETag",
-          "Value": "\"/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8=\""
+          "Value": "\"JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18791,13 +18791,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE=\""
+          "Value": "W/\"6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE="
+          "Value": "sha256-6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE="
         }
       ]
     },
@@ -18812,7 +18812,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4886"
+          "Value": "5853"
         },
         {
           "Name": "Content-Type",
@@ -18820,11 +18820,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE=\""
+          "Value": "\"6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18834,13 +18834,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE="
+          "Value": "sha256-6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE="
         }
       ]
     },
     {
       "Route": "js/admin.js.gz",
-      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-pfckufcbn9.gz",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-nst56p37dm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -18849,7 +18849,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1293"
+          "Value": "1325"
         },
         {
           "Name": "Content-Type",
@@ -18857,11 +18857,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8=\""
+          "Value": "\"JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18879,18 +18879,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8="
+          "Value": "sha256-JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8="
         }
       ]
     },
     {
-      "Route": "js/admin.pfckufcbn9.js",
-      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-pfckufcbn9.gz",
+      "Route": "js/admin.nst56p37dm.js",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-nst56p37dm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000772797527"
+          "Quality": "0.000754147813"
         }
       ],
       "ResponseHeaders": [
@@ -18900,15 +18900,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1293"
+          "Value": "1325"
         },
         {
           "Name": "ETag",
-          "Value": "\"/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8=\""
+          "Value": "\"JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18928,13 +18928,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE=\""
+          "Value": "W/\"6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pfckufcbn9"
+          "Value": "nst56p37dm"
         },
         {
           "Name": "label",
@@ -18942,12 +18942,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE="
+          "Value": "sha256-6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE="
         }
       ]
     },
     {
-      "Route": "js/admin.pfckufcbn9.js",
+      "Route": "js/admin.nst56p37dm.js",
       "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -18957,7 +18957,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4886"
+          "Value": "5853"
         },
         {
           "Name": "Content-Type",
@@ -18965,11 +18965,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE=\""
+          "Value": "\"6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18979,7 +18979,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pfckufcbn9"
+          "Value": "nst56p37dm"
         },
         {
           "Name": "label",
@@ -18987,13 +18987,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-C4qUWB+eMx68onMYT3WlCEjPl2esbjLs9KVrnXtDeWE="
+          "Value": "sha256-6R9yu1IMgVCjfGMrs3LUXo21YfwMHOZbxsUFX9cnTzE="
         }
       ]
     },
     {
-      "Route": "js/admin.pfckufcbn9.js.gz",
-      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-pfckufcbn9.gz",
+      "Route": "js/admin.nst56p37dm.js.gz",
+      "AssetFile": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\Debug\\net9.0\\compressed\\u497twgrxm-nst56p37dm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19002,7 +19002,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1293"
+          "Value": "1325"
         },
         {
           "Name": "Content-Type",
@@ -19010,11 +19010,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8=\""
+          "Value": "\"JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Apr 2025 01:59:20 GMT"
+          "Value": "Mon, 07 Apr 2025 04:10:41 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19032,7 +19032,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pfckufcbn9"
+          "Value": "nst56p37dm"
         },
         {
           "Name": "label",
@@ -19040,7 +19040,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/wcFH3LwTGRXqUiSHKgLGjuCGoBKIwB9uyR3mPnuYm8="
+          "Value": "sha256-JxG3yT2LigLIY/dBSktGmVOQkpro7qn2me76OTOfsp8="
         }
       ]
     },
