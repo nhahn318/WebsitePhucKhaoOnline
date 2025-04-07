@@ -7,6 +7,8 @@ using WebsitePhucKhao.Repositories;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace WebsitePhucKhao.Areas.NhanVien.Controllers
 {
@@ -96,7 +98,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             return RedirectToAction("DanhSachDon");
         }
 
-        // Upload bài thi
+        // Upload bài thi - Khi bấm nút LƯU sẽ upload bài thi và gửi mail cho giảng viên
         public async Task<IActionResult> UploadBaiThi(int maDon)
         {
             var vm = await _repository.GetUploadViewModelAsync(maDon);
@@ -118,7 +120,28 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             }
 
             await _repository.LuuUploadAsync(model, files, user?.MaNhanVienPhongDaoTao);
-            return RedirectToAction("DanhSachDon");
+
+            //Lấy thông tin giảng viên(để gửi email)
+            var giangVien = await _context.GiangViens.FindAsync(model.MaGiangVien);
+            var don = await _context.DonPhucKhaos.FindAsync(model.MaDon);
+
+            if (giangVien != null && !string.IsNullOrEmpty(giangVien.Email))
+            {
+                string subject = "Thông báo chấm phúc khảo";
+                string message = $@"
+                Xin chào thầy/cô {giangVien.HoTen},
+
+                Thầy/cô được phân công chấm đơn phúc khảo của sinh viên.
+
+                Vui lòng đăng nhập vào hệ thống để xem và chấm lại bài thi.
+
+                Trân trọng,
+                Phòng đào tạo";
+
+                // Bước 3: Gửi email
+                await _emailSen.SendEmailAsync(giangVien.Email, subject, message);
+            }
+                return RedirectToAction("DanhSachDon");
         }
 
         public async Task<IActionResult> ChiTietUpload(int maDon)

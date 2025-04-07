@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebsitePhucKhao.Enums;
@@ -17,14 +18,16 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
         private readonly IDonPhucKhaoChiTietRepository _donPhucKhaoChiTietRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
+        private readonly ICustomEmailSender _emailSender;
 
-        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context)
+        public GiangVienController(IGiangVienRepository giangVienRepository, IKhoaRepository khoaRepository, IDonPhucKhaoChiTietRepository donPhucKhaoChiTietRepository, UserManager<ApplicationUser> userManager, ApplicationDbContext context, ICustomEmailSender emailSender)
         {
             _giangVienRepository = giangVienRepository;
             _khoaRepository = khoaRepository;
             _donPhucKhaoChiTietRepository = donPhucKhaoChiTietRepository;
             _userManager = userManager;
             _context = context;
+            _emailSender = emailSender;
         }
         public async Task<IActionResult> PhucKhaoDuocPhanCong()
         {
@@ -76,7 +79,7 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             return View(vm);
         }
 
-
+        //khi giảng viên chấm điểm và bấm nút "Lưu điểm" sẽ lưu lại và gửi mail cho sinh viên
         public async Task<IActionResult> ChamDiem(int maDon)
         {
             var don = await _context.DonPhucKhaos
@@ -139,18 +142,23 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             }
 
             var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == MaDon);
-            if (don != null)
+            if (don != null && don.EmailSinhVien != null)
             {
-                don.TrangThai = TrangThaiPhucKhao.DaCham;
-                var bangDiem = await _context.BangDiems.FirstOrDefaultAsync(bd =>
-                bd.MaSinhVien == don.MaSinhVien && bd.MaMonHoc == don.MaMonHoc
-                && bd.MaHocKy == don.MaHocKy && bd.MaNamHoc == don.MaNamHoc);
+                string subject = "Thông báo kết quả phúc khảo";
+                string body = $@"
+                    Xin chào {don.SinhVien?.HoTen},
 
-                if (bangDiem != null)
-                {
-                    bangDiem.DiemCuoiKy = DiemSauPhucKhao;
-                    bangDiem.TrangThaiPhucKhao = true; // tùy chọn
-                }
+                    Đơn phúc khảo của bạn đối với môn học {don.MonHoc?.TenMonHoc} đã được chấm lại.
+
+                    👉 Điểm sau phúc khảo: {DiemSauPhucKhao}
+
+                    Vui lòng đăng nhập hệ thống để xem chi tiết.
+
+                    Trân trọng,
+                    Phòng đào tạo
+                ";
+
+                await _emailSender.SendEmailAsync(don.EmailSinhVien, subject, body);
             }
 
             await _context.SaveChangesAsync();
