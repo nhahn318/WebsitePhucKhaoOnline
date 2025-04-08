@@ -3,273 +3,154 @@
 
 @{
     ViewData["Title"] = "Danh sách đơn chờ duyệt";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!-- Thêm Bootstrap 5 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Thêm Font Awesome -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+@section Styles {
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/admin/index-listuser.css" />
+}
 
 <div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-primary">Danh sách đơn chờ duyệt</h1>
-                </div>
+    <div class="page-header animate__animated animate__fadeIn">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="page-title">
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách đơn chờ duyệt</h1>
+                <p class="text-muted mb-0">Quản lý các đơn phúc khảo trong hệ thống</p>
             </div>
         </div>
     </div>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="card shadow-sm">
-                <div class="card-header bg-gradient-primary text-white">
-                    <h3 class="card-title">Danh sách đơn phúc khảo</h3>
-                </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                            <input type="text" id="searchKeyword" class="form-control" placeholder="Nhập mã hoặc tên sinh viên..." autocomplete="off">
+    <div class="card shadow mb-4 animate__animated animate__fadeInUp">
+        <div class="card-header py-3">
+            <div class="row align-items-center g-0">
+                <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
+                            <i class="fas fa-file-invoice text-primary"></i>
                         </div>
+                        <h4 class="m-0 fw-bold text-primary fs-4">
+                            Thông tin đơn phúc khảo
+                        </h4>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Sinh viên</th>
-                                    <th>Môn học</th>
-                                    <th>Ngày gửi</th>
-                                    <th>Trạng thái</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body">
-                                @for (int i = 0; i < Model.Count; i++)
-                                {
-                                    <tr>
-                                        <td>@(i + 1)</td>
-                                        <td>@Model[i].SinhVien?.HoTen</td>
-                                        <td>@Model[i].MonHoc?.TenMonHoc</td>
-                                        <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
-                                        <td>
-                                            <span class="badge bg-@(Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan ? "warning" :
-                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet ? "success" :
-                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaCham ? "info" : "secondary")">
-                                                @Model[i].TrangThai.ToFriendlyString()
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <a asp-action="ChiTietPhucKhao" asp-route-id="@Model[i].MaDon" class="btn btn-info btn-sm">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                @if (Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan)
-                                                {
-                                                    <a asp-action="Duyet" asp-route-id="@Model[i].MaDon" class="btn btn-success btn-sm">
-                                                        <i class="fas fa-check"></i>
-                                                    </a>
-                                                }
-                                                @if (Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet)
-                                                {
-                                                    <a asp-action="UploadBaiThi" asp-route-maDon="@Model[i].MaDon" class="btn btn-warning btn-sm">
-                                                        <i class="fas fa-upload"></i>
-                                                    </a>
-                                                    <a asp-action="ChiTietUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">
-                                                        <i class="fas fa-file-alt"></i>
-                                                    </a>
-                                                    <a asp-action="EditUpload" asp-route-maDon="@Model[i].MaDon" class="btn btn-secondary btn-sm">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                }
-                                                @if (Model[i].TrangThai == TrangThaiPhucKhao.DaCham)
-                                                {
-                                                    <a asp-area="Admin" asp-controller="NhanVienPhongDaoTao" asp-action="ChiTietSauPhucKhao" asp-route-maDon="@Model[i].MaDon" class="btn btn-info btn-sm">
-                                                        <i class="fas fa-clipboard-check"></i>
-                                                    </a>
-                                                }
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
+                            <i class="fas fa-paperclip text-success"></i>
+                        </div>
+                        <span class="badge bg-success rounded-pill small px-3 py-2">
+                            Tổng: @Model.Count()
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-borderless table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-id-card me-1"></i> STT</th>
+                            <th style="width: 30%"><i class="fas fa-user me-1"></i> Sinh viên</th>
+                            <th style="width: 30%"><i class="fas fa-book me-1"></i> Môn học</th>
+                            <th style="width: 20%"><i class="fas fa-calendar-alt me-1"></i> Ngày gửi</th>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-check-circle me-1"></i> Trạng thái</th>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <td class="text-center fw-bold">@Model[i].MaDon</td>
+                                <td>@Model[i].SinhVien?.HoTen</td>
+                                <td>@Model[i].MonHoc?.TenMonHoc</td>
+                                <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <span class="badge bg-@(Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan ? "warning" :
+                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet ? "success" :
+                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaCham ? "info" : "secondary")">
+                                        @Model[i].TrangThai.ToFriendlyString()
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-actions">
+                                        <a href="@Url.Action("ChiTietPhucKhao", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })"
+                                           class="btn-action btn-view" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết">
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                        @if (Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan)
+                                        {
+                                            <a href="@Url.Action("Duyet", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })"
+                                               class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Duyệt">
+                                                <i class="bi bi-check-circle"></i>
+                                            </a>
+                                        }
+                                        @if (Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet)
+                                        {
+                                            <a href="@Url.Action("UploadBaiThi", "DonPhucKhao", new { maDon = Model[i].MaDon, area = "Admin" })"
+                                               class="btn-action btn-upload" data-bs-toggle="tooltip" data-bs-placement="top" title="Tải bài thi">
+                                                <i class="bi bi-upload"></i>
+                                            </a>
+                                        }
+                                        @if (Model[i].TrangThai == TrangThaiPhucKhao.DaCham)
+                                        {
+                                            <a href="@Url.Action("ChiTietSauPhucKhao", "NhanVienPhongDaoTao", new { maDon = Model[i].MaDon, area = "Admin" })"
+                                               class="btn-action btn-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết sau phúc khảo">
+                                                <i class="bi bi-clipboard-check"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- Thêm Bootstrap 5 JS Bundle (bao gồm Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Thêm jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<style>
-    :root {
-        --primary-color: #4361ee;
-        --primary-light: #4895ef;
-        --primary-dark: #3f37c9;
-        --secondary-color: #f72585;
-        --light-color: #f8f9fa;
-        --dark-color: #212529;
-    }
-
-    .content-wrapper {
-        background-color: #f0f2f5;
-    }
-
-    .card {
-        border: none;
-        border-radius: 0.5rem;
-        overflow: hidden;
-    }
-
-    .bg-gradient-primary {
-        background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    }
-
-    .card-header {
-        border-bottom: none;
-        padding: 1.25rem;
-    }
-
-    .card-title {
-        color: white;
-        font-size: 1.25rem;
-        font-weight: 500;
-        margin: 0;
-    }
-
-    .card-body {
-        padding: 1.5rem;
-    }
-
-    .table {
-        margin-bottom: 0;
-    }
-
-        .table th {
-            font-weight: 600;
-            background-color: #f8f9fa;
-            border-bottom: 2px solid #dee2e6;
-        }
-
-        .table td {
-            vertical-align: middle;
-        }
-
-    .btn-group {
-        display: flex;
-        gap: 0.25rem;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-    }
-
-    .badge {
-        padding: 0.5em 0.75em;
-        font-weight: 500;
-    }
-
-    .input-group-text {
-        background-color: #f8f9fa;
-        border-right: none;
-    }
-
-    .form-control:focus {
-        border-color: var(--primary-light);
-        box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
-    }
-
-    .table-hover tbody tr:hover {
-        background-color: rgba(67, 97, 238, 0.05);
-    }
-</style>
-
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
-        $(document).ready(function () {
-            $("#searchKeyword").on("input", function () {
-                var keyword = $(this).val();
-
-                $.ajax({
-                    url: '/NhanVien/PhucKhao/TimKiemDonPhucKhao',
-                    type: 'GET',
-                    data: { keyword: keyword },
-                    success: function (data) {
-                        $("#table-body").empty();
-
-                        if (data.length === 0) {
-                            $("#table-body").append('<tr><td colspan="6" class="text-center">Không tìm thấy kết quả nào.</td></tr>');
-                        } else {
-                            $.each(data, function (index, item) {
-                                let thaoTac = `
-                                    <div class="btn-group">
-                                        <a href="/NhanVien/DonPhucKhao/ChiTietPhucKhao/${item.maDon}" class="btn btn-info btn-sm">
-                                            <i class="fas fa-eye"></i>
-                                        </a>`;
-
-                                if (item.trangThai === "Chờ xác nhận") {
-                                    thaoTac += `
-                                        <a href="/NhanVien/PhucKhao/Duyet/${item.maDon}" class="btn btn-success btn-sm">
-                                            <i class="fas fa-check"></i>
-                                        </a>`;
-                                } else if (item.trangThai === "Đã duyệt") {
-                                    thaoTac += `
-                                        <a href="/NhanVien/PhucKhao/UploadBaiThi?maDon=${item.maDon}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-upload"></i>
-                                        </a>
-                                        <a href="/NhanVien/PhucKhao/ChiTietUpload?maDon=${item.maDon}" class="btn btn-secondary btn-sm">
-                                            <i class="fas fa-file-alt"></i>
-                                        </a>
-                                        <a href="/NhanVien/PhucKhao/EditUpload?maDon=${item.maDon}" class="btn btn-secondary btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>`;
-                                } else if (item.trangThai === "Đã chấm") {
-                                    thaoTac += `
-                                        <a href="/NhanVien/NhanVienPhongDaoTao/ChiTietSauPhucKhao?maDon=${item.maDon}" class="btn btn-info btn-sm">
-                                            <i class="fas fa-clipboard-check"></i>
-                                        </a>`;
-                                }
-
-                                thaoTac += '</div>';
-
-                                let badgeClass = item.trangThai === "Chờ xác nhận" ? "warning" :
-                                                item.trangThai === "Đã duyệt" ? "success" :
-                                                item.trangThai === "Đã chấm" ? "info" : "secondary";
-
-                                $("#table-body").append(`
-                                    <tr>
-                                        <td>${item.stt}</td>
-                                        <td>${item.tenSinhVien}</td>
-                                        <td>${item.tenMonHoc}</td>
-                                        <td>${item.ngayGui}</td>
-                                        <td>
-                                            <span class="badge bg-${badgeClass}">
-                                                ${item.trangThai}
-                                            </span>
-                                        </td>
-                                        <td>${thaoTac}</td>
-                                    </tr>
-                                `);
-                            });
-                        }
-                    },
-                    error: function () {
-                        $("#table-body").html('<tr><td colspan="6" class="text-center text-danger">Lỗi tải dữ liệu.</td></tr>');
+        $(document).ready(function() {
+            // Initialize DataTable with improved options
+            $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
+                    "paginate": {
+                        "previous": "<i class='bi bi-chevron-left'></i>",
+                        "next": "<i class='bi bi-chevron-right'></i>"
                     }
-                });
+                },
+                "pageLength": 10,
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                "order": [[1, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 5 },
+                    { "className": "text-center", "targets": [0, 5] }
+                ],
+                "autoWidth": false,
+                "responsive": true,
+                "dom": '<"top"lf>rt<"bottom"ip>',
+                "pagingType": "simple_numbers",
+                "initComplete": function() {
+                    $('.dataTables_length select').addClass('form-select');
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
             });
         });
     </script>
 }
-
-
-

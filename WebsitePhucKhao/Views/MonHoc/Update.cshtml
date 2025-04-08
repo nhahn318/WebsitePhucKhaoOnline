@@ -29,7 +29,7 @@
                         <i class="fas fa-book me-2"></i>Thông tin Môn học
                     </h3>
                 </div>
-                <form asp-action="Update" asp-area="Admin" method="post">
+                <form asp-action="Update" asp-area="" method="post">
                     <div class="card-body">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="MaMonHoc" />
@@ -77,7 +77,7 @@
                         <button type="submit" class="btn btn-primary">
                             <i class="fas fa-save me-2"></i>Lưu thay đổi
                         </button>
-                        <a asp-action="Index" asp-area="Admin" class="btn btn-outline-secondary ms-2">
+                        <a asp-action="Index" asp-area="" class="btn btn-outline-secondary ms-2">
                             <i class="fas fa-arrow-left me-2"></i>Trở về
                         </a>
                     </div>

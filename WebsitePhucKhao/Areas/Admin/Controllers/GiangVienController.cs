@@ -47,6 +47,27 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers {
             {
                 return View(giangVien);
             }
+            // Kiểm tra trùng Mã Giảng Viên
+            var existingMaGV = await _giangVienRepository.GetByIdAsync(giangVien.MaGiangVien);
+            if (existingMaGV != null)
+            {
+                ModelState.AddModelError("MaGiangVien", "Mã giảng viên đã tồn tại.");
+            }
+
+            // Kiểm tra trùng Email
+            var existingEmail = await _giangVienRepository.GetByEmailAsync(giangVien.Email);
+            if (existingEmail != null)
+            {
+                ModelState.AddModelError("Email", "Email đã được sử dụng.");
+            }
+
+            // Nếu có lỗi, quay lại form với thông báo
+            if (!ModelState.IsValid)
+            {
+                var khoaList = await _khoaRepository.GetAllAsync();
+                ViewBag.KhoaList = new SelectList(khoaList, "MaKhoa", "TenKhoa");
+                return View(giangVien);
+            }
 
             // Thêm vào bảng GiangVien
             await _giangVienRepository.AddAsync(giangVien);

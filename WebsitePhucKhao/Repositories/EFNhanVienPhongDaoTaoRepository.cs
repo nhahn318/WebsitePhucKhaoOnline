@@ -47,5 +47,10 @@ namespace WebsitePhucKhao.Repositories {
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<NhanVienPhongDaoTao?> GetByGmailAsync(string email)
+        {
+            return await _context.NhanVienPhongDaoTaos.FirstOrDefaultAsync(nv => nv.Email == email);
+        }
     }
 }

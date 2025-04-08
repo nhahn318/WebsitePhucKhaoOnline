@@ -4,7 +4,7 @@
     ViewData["Title"] = "Cập Nhật Thông Tin Cá Nhân";
 }
 
-<h2>Cập Nhật Thông Tin Cá Nhân</h2>
+<h2 class="text-center text-primary mb-4">Cập Nhật Thông Tin Cá Nhân</h2>
 
 @if (TempData["Message"] != null)
 {
@@ -15,52 +15,87 @@
 
 <form asp-action="CapNhatThongTin" method="post">
     <div class="form-group">
-        <label asp-for="MaSinhVien">Mã Sinh Viên</label>
+        <label asp-for="MaSinhVien" class="fw-semibold text-primary">Mã Sinh Viên</label>
         <input asp-for="MaSinhVien" class="form-control" readonly />
     </div>
 
     <div class="form-group">
-        <label asp-for="HoTen">Họ và Tên</label>
+        <label asp-for="HoTen" class="fw-semibold text-primary">Họ và Tên</label>
         <input asp-for="HoTen" class="form-control" />
         <span asp-validation-for="HoTen" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Email">Email</label>
+        <label asp-for="Email" class="fw-semibold text-primary">Email</label>
         <input asp-for="Email" class="form-control" readonly />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="SoDienThoai">Số Điện Thoại</label>
+        <label asp-for="SoDienThoai" class="fw-semibold text-primary">Số Điện Thoại</label>
         <input asp-for="SoDienThoai" class="form-control" />
         <span asp-validation-for="SoDienThoai" class="text-danger"></span>
     </div>
 
     <!-- Dropdown chọn Khoa -->
     <div class="form-group">
-        <label asp-for="MaKhoa">Khoa</label>
+        <label asp-for="MaKhoa" class="fw-semibold text-primary">Khoa</label>
         <select asp-for="MaKhoa" class="form-control" asp-items="ViewBag.KhoaList" id="selectKhoa"></select>
         <span asp-validation-for="MaKhoa" class="text-danger"></span>
     </div>
 
     <!-- Dropdown chọn Chuyên ngành -->
     <div class="form-group">
-        <label asp-for="MaChuyenNganh">Chuyên Ngành</label>
+        <label asp-for="MaChuyenNganh" class="fw-semibold text-primary">Chuyên Ngành</label>
         <select asp-for="MaChuyenNganh" class="form-control" asp-items="ViewBag.ChuyenNganhList" id="selectChuyenNganh"></select>
         <span asp-validation-for="MaChuyenNganh" class="text-danger"></span>
     </div>
 
     <!-- Dropdown chọn Lớp -->
     <div class="form-group">
-        <label asp-for="MaLop">Lớp</label>
+        <label asp-for="MaLop" class="fw-semibold text-primary">Lớp</label>
         <select asp-for="MaLop" class="form-control" asp-items="ViewBag.LopList" id="selectLop"></select>
         <span asp-validation-for="MaLop" class="text-danger"></span>
     </div>
 
-
-    <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+    <button type="submit" class="btn btn-success w-100 mt-4">Lưu Thay Đổi</button>
 </form>
+
+@section Styles {
+    <style>
+        /* Custom styling for the form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #3f6ad8;
+        }
+
+        input, select {
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 1.2rem;
+        }
+
+            .btn-success:hover {
+                background-color: #218838;
+            }
+
+        .text-danger {
+            font-size: 0.875rem;
+        }
+    </style>
+}
 
 @section Scripts {
     <script>

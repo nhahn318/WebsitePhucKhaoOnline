@@ -1,0 +1,120 @@
+﻿:root {
+    --primary-color: #4e73df;
+    --secondary-color: #858796;
+    --success-color: #1cc88a;
+    --info-color: #36b9cc;
+    --warning-color: #f6c23e;
+    --danger-color: #e74a3b;
+    --light-color: #f8f9fc;
+    --dark-color: #5a5c69;
+}
+
+/* Tổng quan */
+.content-wrapper {
+    padding: 1.5rem;
+    background-color: var(--light-color);
+}
+
+/* Card */
+.card {
+    background-color: #fff;
+    border: 1px solid #e3e6f0;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem rgba(58, 59, 69, 0.15);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), #224abe);
+    color: #fff;
+    border-bottom: 1px solid #e3e6f0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+
+.card-body {
+    padding: 1.25rem;
+}
+
+.card-footer {
+    padding: 0.75rem 1.25rem;
+    background-color: var(--light-color);
+    border-top: 1px solid #e3e6f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/* Buttons */
+.btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.35rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn-danger {
+    color: #fff;
+    background: linear-gradient(to right, var(--danger-color), #d52a1a);
+}
+
+    .btn-danger:hover {
+        background: linear-gradient(to right, #d52a1a, var(--danger-color));
+        transform: translateY(-2px);
+    }
+
+.btn-secondary {
+    color: #fff;
+    background: linear-gradient(to right, var(--secondary-color), #6b6d7b);
+}
+
+    .btn-secondary:hover {
+        background: linear-gradient(to right, #6b6d7b, var(--secondary-color));
+        transform: translateY(-2px);
+    }
+
+/* Bảng chi tiết */
+.detail-table {
+    width: 100%;
+    color: var(--dark-color);
+    border-spacing: 0;
+}
+
+    .detail-table th {
+        padding: 1rem;
+        text-align: left;
+        color: var(--primary-color);
+        background-color: var(--light-color);
+        border-bottom: 2px solid #e3e6f0;
+    }
+
+    .detail-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #e3e6f0;
+    }
+
+/* Đáp ứng (Responsive) */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1rem;
+    }
+
+    .card-footer {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+        .btn:last-child {
+            margin-bottom: 0;
+        }
+}

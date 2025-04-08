@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebsitePhucKhao.Models;
 using WebsitePhucKhao.Repositories;
 
 namespace WebsitePhucKhao.Controllers {
-    public class MonHocController : Controller {
+    [Authorize(Roles = "Admin")]
+    public class MonHocController : Controller
+    {
         private readonly IMonHocRepository _monHocRepository;
         private readonly IHocKyRepository _hocKyRepository;
         private readonly IGiangVienRepository _giangVienRepository;
@@ -41,6 +44,16 @@ namespace WebsitePhucKhao.Controllers {
 
             await _monHocRepository.AddAsync(monHoc);
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var monHoc = await _monHocRepository.GetByIdAsync(id);
+            if (monHoc == null)
+            {
+                return NotFound();
+            }
+            return View(monHoc);
         }
 
         public async Task<IActionResult> Update(int id)

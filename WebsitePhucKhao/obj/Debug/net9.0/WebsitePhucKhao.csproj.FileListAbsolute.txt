@@ -770,7 +770,6 @@ C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\jtovf58eqs-39r3pfqev7.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\rg8hm3tnzp-61n19gt1b8.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\uxb930yrzj-00hyqqaxj3.gz
-C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ff22m7c5xi-fr7q2aak1r.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\4v4jv417ge-bqjiyaj88i.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ehjcpg4s8w-c2jlpeoesf.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\7275d4twki-erw9l3u2r3.gz
@@ -848,14 +847,10 @@ C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\WebsitePhucKhao.pdb
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\WebsitePhucKhao.genruntimeconfig.cache
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\ref\WebsitePhucKhao.dll
-C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\u497twgrxm-wgkco2hx6x.gz
-C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ouhi4xfdcq-df617agdst.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\1ibio0lkgd-if0nhzcge2.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\kfq48nz0y4-9zydz2z2vx.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\knkfz8bi5u-eggcnnsxqs.gz
-C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\iu9jgcs6gb-9n64sp55ej.gz
 C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ym45pw3ah9-w774gk39tj.gz
-C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\w2bhf02m5t-xpojp2rtz2.gz
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\bin\Debug\net9.0\appsettings.json
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\bin\Debug\net9.0\WebsitePhucKhao.staticwebassets.runtime.json
@@ -2600,3 +2595,14 @@ C:\Users\Admin\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKha
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ouhi4xfdcq-eb25ciii8o.gz
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\u497twgrxm-kehm4q2iy3.gz
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ff22m7c5xi-1ja0ksn5uw.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ouhi4xfdcq-p2fj7fbreq.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\8htjc9yfa3-89cpvhpp2l.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\7pokiegoyx-t42mrecyba.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\lpodgbwryu-ft1gyrauaa.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\uc71k1z44u-8g0ugu3wwx.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\u497twgrxm-ilkn7qreff.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\qi6ou2hujq-knhq3j6n2m.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\m6yyr5l3mo-9d2u41w8qh.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\iu9jgcs6gb-7tmwme3dtm.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\ff22m7c5xi-xzj95wcab9.gz
+C:\Users\JUO\Source\Repos\WebsitePhucKhaoOnline\WebsitePhucKhao\obj\Debug\net9.0\compressed\m2fwt2zg07-dtfhmxvog8.gz

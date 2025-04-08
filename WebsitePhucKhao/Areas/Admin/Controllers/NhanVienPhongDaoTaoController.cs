@@ -42,8 +42,13 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Bước 1: Thêm nhân viên vào bảng NhanVienPhongDaoTao
-                await _nhanVienRepository.AddAsync(nhanVien);
+
+                var existingGmail = await _nhanVienRepository.GetByGmailAsync(nhanVien.Email);
+                if (existingGmail != null)
+                {
+                    ModelState.AddModelError("Email", "Email này đã được dùng cho một tài khoản khác!");
+                    return View(nhanVien);
+                }
 
                 // Bước 2: Tạo tài khoản ứng với nhân viên
                 var user = new ApplicationUser

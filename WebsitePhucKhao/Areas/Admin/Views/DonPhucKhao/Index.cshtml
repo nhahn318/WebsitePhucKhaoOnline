@@ -1,8 +1,8 @@
-@model IEnumerable<WebsitePhucKhao.Models.DonPhucKhao>
+@model List<WebsitePhucKhao.Models.DonPhucKhao>
 @using WebsitePhucKhao.Enums
 
 @{
-    ViewData["Title"] = "Danh sách đơn phúc khảo";
+    ViewData["Title"] = "Danh sách đơn";
 }
 
 @section Styles {
@@ -16,7 +16,7 @@
     <div class="page-header animate__animated animate__fadeIn">
         <div class="d-flex align-items-center justify-content-between">
             <div class="page-title">
-                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách đơn phúc khảo</h1>
+                <h1 class="h3 mb-1 text-gray-800 fw-bold">Danh sách đơn </h1>
                 <p class="text-muted mb-0">Quản lý các đơn phúc khảo trong hệ thống</p>
             </div>
         </div>
@@ -28,7 +28,7 @@
                 <div class="col">
                     <div class="d-flex align-items-center">
                         <div class="icon-wrapper bg-primary bg-opacity-10 rounded-3 me-3">
-                            <i class="fas fa-file-alt text-primary"></i>
+                            <i class="fas fa-file-invoice text-primary"></i>
                         </div>
                         <h4 class="m-0 fw-bold text-primary fs-4">
                             Thông tin đơn phúc khảo
@@ -38,7 +38,7 @@
                 <div class="col-auto">
                     <div class="d-flex align-items-center">
                         <div class="icon-wrapper bg-success bg-opacity-10 rounded-3 me-2">
-                            <i class="fas fa-clipboard-list text-success"></i>
+                            <i class="fas fa-paperclip text-success"></i>
                         </div>
                         <span class="badge bg-success rounded-pill small px-3 py-2">
                             Tổng: @Model.Count()
@@ -52,87 +52,35 @@
                 <table class="table table-borderless table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 10%"><i class="fas fa-hashtag me-1"></i> Mã đơn</th>
-                            <th style="width: 20%"><i class="fas fa-user me-1"></i> Sinh viên</th>
-                            <th style="width: 20%"><i class="fas fa-book me-1"></i> Môn học</th>
-                            <th style="width: 15%"><i class="fas fa-calendar me-1"></i> Học kỳ</th>
-                            <th style="width: 15%"><i class="fas fa-star me-1"></i> Điểm hiện tại</th>
-                            <th style="width: 15%"><i class="fas fa-star-half-alt me-1"></i> Điểm mong muốn</th>
-                            <th style="width: 15%"><i class="fas fa-clock me-1"></i> Ngày gửi</th>
-                            <th style="width: 15%"><i class="fas fa-info-circle me-1"></i> Trạng thái</th>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-id-card me-1"></i> STT</th>
+                            <th style="width: 30%"><i class="fas fa-user me-1"></i> Sinh viên</th>
+                            <th style="width: 30%"><i class="fas fa-book me-1"></i> Môn học</th>
+                            <th style="width: 20%"><i class="fas fa-calendar-alt me-1"></i> Ngày gửi</th>
+                            <th class="text-center" style="width: 10%"><i class="fas fa-check-circle me-1"></i> Trạng thái</th>
                             <th class="text-center" style="width: 10%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @for (int i = 0; i < Model.Count; i++)
                         {
                             <tr>
-                                <td class="text-center fw-bold">@item.MaDon</td>
+                                <td class="text-center fw-bold">@Model[i].MaDon</td>
+                                <td>@Model[i].SinhVien?.HoTen</td>
+                                <td>@Model[i].MonHoc?.TenMonHoc</td>
+                                <td>@Model[i].NgayGui.ToString("dd/MM/yyyy")</td>
                                 <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="student-info ms-3">
-                                            <span class="student-name" title="@item.SinhVien?.HoTen">@item.SinhVien?.HoTen</span>
-                                            <small class="text-muted d-block">@item.SinhVien?.MaSinhVien</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="badge bg-info text-white">@item.MonHoc?.TenMonHoc</span>
-                                </td>
-                                <td>@item.HocKy?.TenHocKy</td>
-                                <td class="text-center fw-bold">@item.DiemHienTai</td>
-                                <td class="text-center fw-bold">@item.DiemMongMuon</td>
-                                <td>@item.NgayGui.ToString("dd/MM/yyyy")</td>
-                                <td>
-                                    @{
-                                        string statusClass = "";
-                                        string statusText = "";
-                                        switch (item.TrangThai)
-                                        {
-                                            case TrangThaiPhucKhao.ChoXacNhan:
-                                                statusClass = "bg-warning";
-                                                statusText = "Chờ xác nhận";
-                                                break;
-                                            case TrangThaiPhucKhao.DaDuyet:
-                                                statusClass = "bg-info";
-                                                statusText = "Đã duyệt";
-                                                break;
-                                            case TrangThaiPhucKhao.TuChoi:
-                                                statusClass = "bg-danger";
-                                                statusText = "Từ chối";
-                                                break;
-                                            case TrangThaiPhucKhao.ChoCham:
-                                                statusClass = "bg-primary";
-                                                statusText = "Chờ chấm";
-                                                break;
-                                            case TrangThaiPhucKhao.DaCham:
-                                                statusClass = "bg-success";
-                                                statusText = "Đã chấm";
-                                                break;
-                                            default:
-                                                statusClass = "bg-secondary";
-                                                statusText = "Không xác định";
-                                                break;
-                                        }
-                                    }
-                                    <span class="badge @statusClass text-white">@statusText</span>
+                                    <span class="badge bg-@(Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan ? "warning" :
+                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet ? "success" :
+                                                                Model[i].TrangThai == TrangThaiPhucKhao.DaCham ? "info" : "secondary")">
+                                        @Model[i].TrangThai.ToFriendlyString()
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-actions">
-                                        <a href="@Url.Action("Details", "DonPhucKhao", new { id = item.MaDon, area = "Admin" })" 
+                                        <a href="@Url.Action("ChiTietPhucKhao", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })"
                                            class="btn-action btn-view" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
-                                        <a href="@Url.Action("Update", "DonPhucKhao", new { id = item.MaDon, area = "Admin" })" 
-                                           class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        <form asp-action="Delete" asp-route-id="@item.MaDon" asp-area="Admin" method="post" style="display: inline;">
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </button>
-                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -145,46 +93,43 @@
 </div>
 
 @section Scripts {
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
     <script>
-        $(document).ready(function () {
-            // Khởi tạo DataTable
+        $(document).ready(function() {
+            // Initialize DataTable with improved options
             $('#dataTable').DataTable({
                 "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
-                },
-                "order": [[6, "desc"]], // Sắp xếp theo ngày gửi giảm dần
-                "pageLength": 10,
-                "responsive": true
-            });
-
-            // Khởi tạo tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-
-            // Xử lý nút xóa
-            $('.btn-delete').on('click', function (e) {
-                e.preventDefault();
-                var form = $(this).closest('form');
-                
-                Swal.fire({
-                    title: 'Xác nhận xóa?',
-                    text: "Bạn có chắc chắn muốn xóa đơn phúc khảo này?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Đồng ý',
-                    cancelButtonText: 'Hủy'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
+                    "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
+                    "paginate": {
+                        "previous": "<i class='bi bi-chevron-left'></i>",
+                        "next": "<i class='bi bi-chevron-right'></i>"
                     }
-                });
+                },
+                "pageLength": 10,
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Tất cả"]],
+                "order": [[1, "asc"]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 5 },
+                    { "className": "text-center", "targets": [0, 5] }
+                ],
+                "autoWidth": false,
+                "responsive": true,
+                "dom": '<"top"lf>rt<"bottom"ip>',
+                "pagingType": "simple_numbers",
+                "initComplete": function() {
+                    $('.dataTables_length select').addClass('form-select');
+                    $('.dataTables_filter input').addClass('form-control');
+                }
+            });
+
+            // Initialize tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
             });
         });
     </script>
-} 
+}

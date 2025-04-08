@@ -83,15 +83,15 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-actions">
-                                        <a href="@Url.Action("Details", "MonHoc", new { id = mh.MaMonHoc, area = "Admin" })"
+                                        <a href="@Url.Action("Details", "MonHoc", new { id = mh.MaMonHoc, area = "" })"
                                            class="btn-action btn-view" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem chi tiết">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
-                                        <a href="@Url.Action("Update", "MonHoc", new { id = mh.MaMonHoc, area = "Admin" })"
+                                        <a href="@Url.Action("Update", "MonHoc", new { id = mh.MaMonHoc, area = "" })"
                                            class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <form asp-action="Delete" asp-route-id="@mh.MaMonHoc" asp-area="Admin" method="post" style="display: inline;">
+                                        <form asp-action="Delete" asp-route-id="@mh.MaMonHoc" asp-area="" method="post" style="display: inline;">
                                             @Html.AntiForgeryToken()
                                             <button type="submit" class="btn-action btn-delete" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
                                                 <i class="bi bi-trash-fill"></i>

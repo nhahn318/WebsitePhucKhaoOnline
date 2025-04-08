@@ -3,25 +3,106 @@
 
 @{
     ViewData["Title"] = "Chi tiết đơn phúc khảo (Admin)";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
 
-<div class="table-responsive">
-    <table class="table">
-        <tr><th>Mã đơn</th><td>@Model.MaDon</td></tr>
-        <tr><th>Sinh viên</th><td>@Model.SinhVien?.HoTen</td></tr>
-        <tr><th>Môn học</th><td>@Model.MonHoc?.TenMonHoc</td></tr>
-        <tr><th>Điểm hiện tại</th><td>@Model.DiemHienTai</td></tr>
-        <tr><th>Điểm mong muốn</th><td>@Model.DiemMongMuon</td></tr>
-        <tr><th>Học kỳ</th><td>@Model.HocKy?.TenHocKy</td></tr>
-        <tr><th>Năm học</th><td>@Model.NamHoc?.TenNamHoc</td></tr>
-        <tr><th>Phòng thi</th><td>@Model.PhongThi</td></tr>
-        <tr><th>Địa điểm thi</th><td>@Model.DiaDiemThi</td></tr>
-        <tr><th>Lý do</th><td>@Model.LyDo</td></tr>
-        <tr><th>Trạng thái</th><td>@Model.TrangThai.ToFriendlyString()</td></tr>
-        <tr><th>Ngày gửi</th><td>@Model.NgayGui.ToString("dd/MM/yyyy")</td></tr>
-    </table>
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">@ViewData["Title"]</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-alt me-2"></i>Thông tin đơn phúc khảo
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th style="width: 25%;"><i class="fas fa-id-card me-2"></i>Mã đơn:</th>
+                            <td>@Model.MaDon</td>
+
+                            <th style="width: 25%;"><i class="fas fa-user me-2"></i>Sinh viên:</th>
+                            <td>@Model.SinhVien?.HoTen</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-book me-2"></i>Môn học:</th>
+                            <td>@Model.MonHoc?.TenMonHoc</td>
+
+                            <th><i class="fas fa-chart-line me-2"></i>Điểm hiện tại:</th>
+                            <td>@Model.DiemHienTai</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-chart-line me-2"></i>Điểm mong muốn:</th>
+                            <td>@Model.DiemMongMuon</td>
+
+                            <th><i class="fas fa-calendar-alt me-2"></i>Học kỳ:</th>
+                            <td>@Model.HocKy?.TenHocKy</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-calendar me-2"></i>Năm học:</th>
+                            <td>@Model.NamHoc?.TenNamHoc</td>
+
+                            <th><i class="fas fa-chalkboard me-2"></i>Phòng thi:</th>
+                            <td>@Model.PhongThi</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-map-marker-alt me-2"></i>Địa điểm thi:</th>
+                            <td>@Model.DiaDiemThi</td>
+
+                            <th><i class="fas fa-exclamation-circle me-2"></i>Lý do:</th>
+                            <td>@Model.LyDo</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-check-circle me-2"></i>Trạng thái:</th>
+                            <td>@Model.TrangThai.ToFriendlyString()</td>
+
+                            <th><i class="fas fa-calendar-check me-2"></i>Ngày gửi:</th>
+                            <td>@Model.NgayGui.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-footer">
+                    <a href="@Url.Action("DanhSachChoDuyet", "DonPhucKhao", new { area = "Admin" })" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i> Quay lại danh sách chờ duyệt
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
-<a asp-action="DanhSachChoDuyet" class="btn btn-secondary">← Quay lại danh sách chờ duyệt</a>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete() {
+            return Swal.fire({
+                title: 'Xác nhận xóa?',
+                text: "Bạn có chắc chắn muốn xóa đơn phúc khảo này?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                return result.isConfirmed;
+            });
+        }
+    </script>
+}
