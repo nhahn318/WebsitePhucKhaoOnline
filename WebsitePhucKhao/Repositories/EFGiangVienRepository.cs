@@ -62,6 +62,7 @@ namespace WebsitePhucKhao.Repositories {
         public async Task<GiangVien> GetByEmailAsync(string email)
         {
             return await _context.GiangViens
+                 .Include(g => g.Khoa)
                 .FirstOrDefaultAsync(g => g.Email == email);
         }
      

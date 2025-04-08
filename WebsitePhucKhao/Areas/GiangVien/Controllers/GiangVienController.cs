@@ -29,6 +29,17 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             _context = context;
             _emailSender = emailSender;
         }
+
+        public async Task<IActionResult> ThongTinCaNhan()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var gv = await _giangVienRepository.GetByEmailAsync(user.Email);
+
+            if (gv == null) return NotFound();
+
+            return View(gv);
+        }
+
         public async Task<IActionResult> PhucKhaoDuocPhanCong()
         {
             var user = await _userManager.GetUserAsync(User);
