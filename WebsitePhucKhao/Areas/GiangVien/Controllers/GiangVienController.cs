@@ -40,6 +40,50 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             return View(gv);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditThongTinCaNhan()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
+
+            var gv = await _giangVienRepository.GetByEmailAsync(user.Email);
+            if (gv == null) return NotFound();
+
+            var model = new GiangVienEditViewModel
+            {
+                MaGiangVien = gv.MaGiangVien,
+                HoTen = gv.HoTen,
+                SoDienThoai = user.PhoneNumber
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditThongTinCaNhan(GiangVienEditViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var giangVien = await _giangVienRepository.GetByIdAsync(model.MaGiangVien);
+            if (giangVien == null) return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return NotFound();
+
+            giangVien.HoTen = model.HoTen;
+            user.PhoneNumber = model.SoDienThoai;
+
+            await _giangVienRepository.UpdateAsync(giangVien);
+            await _userManager.UpdateAsync(user);
+
+            TempData["SuccessMessage"] = "Cập nhật thông tin thành công.";
+            return RedirectToAction("ThongTinCaNhan");
+        }
+
+
+
         public async Task<IActionResult> PhucKhaoDuocPhanCong()
         {
             var user = await _userManager.GetUserAsync(User);
