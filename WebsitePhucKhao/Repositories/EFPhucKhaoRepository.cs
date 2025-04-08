@@ -453,12 +453,20 @@ namespace WebsitePhucKhao.Repositories {
 
         public void Update(DonPhucKhao don)
         {
-            _context.Update(don); // hoặc _context.DonPhucKhaos.Update(don);
+            _context.Update(don);
         }
 
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
         }
+
+        public async Task<SinhVien?> GetSinhVienByMaAsync(long maSinhVien)
+        {
+            return await _context.SinhViens
+                .Include(sv => sv.Lop)
+                .FirstOrDefaultAsync(sv => sv.MaSinhVien == maSinhVien);
+        }
+
     }
 }

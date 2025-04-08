@@ -73,14 +73,30 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             if (user == null) return NotFound();
 
             giangVien.HoTen = model.HoTen;
-            user.PhoneNumber = model.SoDienThoai;
+            giangVien.SoDienThoai = model.SoDienThoai; 
+
+            var phoneResult = await _userManager.SetPhoneNumberAsync(user, model.SoDienThoai);
+            if (!phoneResult.Succeeded)
+            {
+                foreach (var error in phoneResult.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+                return View(model);
+            }
+
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError(string.Empty, error.Description);
+                return View(model);
+            }
 
             await _giangVienRepository.UpdateAsync(giangVien);
-            await _userManager.UpdateAsync(user);
 
             TempData["SuccessMessage"] = "Cập nhật thông tin thành công.";
             return RedirectToAction("ThongTinCaNhan");
         }
+
 
 
 

@@ -5,5 +5,6 @@
         public string HoTen { get; set; }
 
         public string SoDienThoai { get; set; }
+
     }
 }

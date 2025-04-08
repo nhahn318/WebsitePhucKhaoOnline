@@ -15,6 +15,8 @@ namespace WebsitePhucKhao.Repositories {
         Task<List<DonPhucKhao>> GetDonDaChamAsync();
 
 
+        Task<SinhVien?> GetSinhVienByMaAsync(long maSinhVien);
+
 
 
         Task<SuaPhucKhaoViewModel?> GetSuaPhucKhaoViewModelAsync(int id);

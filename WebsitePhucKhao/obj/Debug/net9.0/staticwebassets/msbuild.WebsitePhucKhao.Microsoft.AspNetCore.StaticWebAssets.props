@@ -174,8 +174,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>1d76kggx1n</Fingerprint>
-      <Integrity>xX4D9a63L7h1/sOU+otxmFGlPtI7MUwpRvHL8qcJgSc=</Integrity>
+      <Fingerprint>gkpo05isew</Fingerprint>
+      <Integrity>cOsSTSxGKvB1BAxUAtennZOKIF0Sn9enlrZ1Z39Dbk4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\bai-giai-tay\4_image.jpg'))</OriginalItemSpec>

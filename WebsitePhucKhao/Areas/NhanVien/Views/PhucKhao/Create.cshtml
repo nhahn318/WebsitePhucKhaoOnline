@@ -1,0 +1,211 @@
+﻿@model WebsitePhucKhao.ViewModels.YeuCauPhucKhaoViewModel
+
+@{
+    ViewData["Title"] = "Yêu cầu phúc khảo bài thi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/admin/add-page.css" />
+}
+
+<h2 class="text-primary">Thông tin yêu cầu phúc khảo của sinh viên: @Model?.HoTen</h2>
+<h3>@ViewData["Title"]</h3>
+
+<form asp-action="Create" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Thông tin sinh viên -->
+            <div class="form-group">
+                <label asp-for="MaSinhVien"></label>
+                <!-- Cho phép nhập mã sinh viên để tìm kiếm thông tin -->
+                <input asp-for="MaSinhVien" class="form-control" id="MaSinhVien" />
+                <span asp-validation-for="MaSinhVien" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HoTen"></label>
+                <input asp-for="HoTen" class="form-control" id="HoTen" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" id="Email" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SoDienThoai"></label>
+                <input asp-for="SoDienThoai" class="form-control" id="SoDienThoai" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lop"></label>
+                <input asp-for="Lop" class="form-control" id="Lop" readonly />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiemHienTai"></label>
+                <input asp-for="DiemHienTai" class="form-control" step="0.01" id="DiemHienTai" />
+                <span asp-validation-for="DiemHienTai" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiemMongMuon"></label>
+                <input asp-for="DiemMongMuon" class="form-control" step="0.01" />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Chọn học phần -->
+            <div class="form-group">
+                <label asp-for="MaNamHoc"></label>
+                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-control" id="MaNamHoc">
+                    <option value="">-- Chọn năm học --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaHocKy"></label>
+                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control" id="MaHocKy">
+                    <option value="">-- Chọn học kỳ --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaMonHoc"></label>
+                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control" id="MaMonHoc">
+                    <option value="">-- Chọn môn học --</option>
+                </select>
+                <span asp-validation-for="MaMonHoc" class="text-danger"></span>
+            </div>
+
+            <!-- Thông tin lịch thi -->
+            <div class="form-group">
+                <label asp-for="NgayThi"></label>
+                <input asp-for="NgayThi" type="date" class="form-control" id="NgayThi" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CaThi"></label>
+                <input asp-for="CaThi" class="form-control" id="CaThi" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DiaDiemThi"></label>
+                <input asp-for="DiaDiemThi" class="form-control" id="DiaDiemThi" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PhongThi"></label>
+                <input asp-for="PhongThi" class="form-control" id="PhongThi" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Lý do phúc khảo -->
+    <div class="form-group">
+        <label asp-for="LyDo"></label>
+        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="LyDo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tạo đơn phúc khảo</button>
+    </div>
+    <a asp-action="DanhSachDon" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Quay về danh sách đơn
+    </a>
+    <!-- Thông báo thời gian phúc khảo -->
+    <div class="alert alert-info">
+        <strong>Thời gian phúc khảo:</strong>
+        từ <span class="text-primary">@Model.NgayBatDauPhucKhao.ToString("dd/MM/yyyy")</span>
+        đến <span class="text-primary">@Model.NgayKetThucPhucKhao.ToString("dd/MM/yyyy")</span>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            // Khi nhập Mã sinh viên, tự động tìm kiếm và điền thông tin
+            $('#MaSinhVien').on('change', function () {
+                var maSinhVien = $(this).val();
+                if (maSinhVien) {
+                    $.ajax({
+                        url: '/NhanVien/PhucKhao/GetSinhVienInfo',
+                        type: 'GET',
+                        data: { maSinhVien: maSinhVien },
+                        success: function (data) {
+                            if (data) {
+                                $('#HoTen').val(data.hoTen);
+                                $('#Email').val(data.email);
+                                $('#SoDienThoai').val(data.soDienThoai);
+                                $('#Lop').val(data.lop);
+                                // Nếu cần cập nhật điểm hiện tại tự động (nếu API hỗ trợ) thì gọi hàm update điểm tại đây
+                            } else {
+                                alert('Không tìm thấy sinh viên với mã này!');
+                                $('#HoTen, #Email, #SoDienThoai, #Lop').val('');
+                            }
+                        },
+                        error: function () {
+                            alert('Không tìm thấy sinh viên với mã này!');
+                            $('#HoTen, #Email, #SoDienThoai, #Lop').val('');
+                        }
+                    });
+                }
+            });
+
+            // Hàm cập nhật lịch thi khi thay đổi học phần
+            function updateLichThi() {
+                const maMonHoc = $('#MaMonHoc').val();
+                const maHocKy = $('#MaHocKy').val();
+                const maNamHoc = $('#MaNamHoc').val();
+                if (maMonHoc && maHocKy && maNamHoc) {
+                    $.get('/PhucKhao/GetLichThiInfo', {
+                        maMonHoc: maMonHoc,
+                        maHocKy: maHocKy,
+                        maNamHoc: maNamHoc
+                    }, function (data) {
+                        if (data) {
+                            $('#NgayThi').val(data.ngayThi);
+                            $('#CaThi').val(data.caThi);
+                            $('#PhongThi').val(data.phongThi);
+                            $('#DiaDiemThi').val(data.diaDiemThi);
+                        } else {
+                            $('#NgayThi, #CaThi, #PhongThi, #DiaDiemThi').val('');
+                        }
+                    });
+                }
+            }
+
+            // Hàm cập nhật điểm hiện tại
+            function updateDiemHienTai() {
+                const maMonHoc = $('#MaMonHoc').val();
+                const maHocKy = $('#MaHocKy').val();
+                const maNamHoc = $('#MaNamHoc').val();
+                const maSinhVien = $('#MaSinhVien').val();
+                if (maMonHoc && maHocKy && maNamHoc && maSinhVien) {
+                    $.get('/PhucKhao/GetDiemHienTai', {
+                        maMonHoc: maMonHoc,
+                        maHocKy: maHocKy,
+                        maNamHoc: maNamHoc,
+                        maSinhVien: maSinhVien
+                    }, function (data) {
+                        $('#DiemHienTai').val(data ?? 'Không có');
+                    });
+                } else {
+                    $('#DiemHienTai').val('');
+                }
+            }
+
+            // Gọi hàm cập nhật lịch thi và điểm khi thay đổi lựa chọn học phần
+            $('#MaMonHoc, #MaHocKy, #MaNamHoc').change(function () {
+                updateLichThi();
+                updateDiemHienTai();
+            });
+        });
+    </script>
+}

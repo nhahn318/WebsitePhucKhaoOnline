@@ -1,48 +1,60 @@
 ﻿@model IEnumerable<WebsitePhucKhao.ViewModels.PhucKhaoDuocPhanCongViewModel>
 @using WebsitePhucKhao.Enums
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Mã Đơn</th>
-            <th>Môn Học</th>
-            <th>Điểm Trước Phúc Khảo</th>
-            <th>Điểm Mong Muốn</th>
-            <th>Lý Do</th>
-            <th>Ngày Chấm Lại</th>
-            <th>Người Duyệt</th>
-            <th>Thao tác</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.MaDon</td>
-                <td>@item.TenMonHoc</td>
-                <td>@item.DiemTruocPhucKhao</td>
-                <td>@item.DiemMongMuon</td>
-                <td>@item.LyDo</td>
-                <td>@item.NgayChamLai?.ToString("dd/MM/yyyy")</td>
-                <td>@item.NguoiDuyet</td>
-                <td>
-                    @if (item.DiemSauPhucKhao != null || item.TrangThaiPhucKhao == TrangThaiPhucKhao.DaCham)
-                    {
-                        <a asp-controller="GiangVien" asp-action="DetailChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-success">
-                            Xem chi tiết
-                        </a>
-                        <a asp-action="EditChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-warning btn-sm">
-                            Sửa chấm điểm
-                        </a>
-                    }
-                    else
-                    {
-                        <a asp-controller="GiangVien" asp-action="ChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-primary">
-                            Chấm điểm
-                        </a>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+@{
+    ViewData["Title"] = "Đơn phúc khảo được phân công";
+}
+
+<div class="card shadow-sm p-4 mb-4">
+    <h3 class="text-primary mb-4">
+        <i class="fas fa-list-check me-2"></i>Danh sách đơn được phân công
+    </h3>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle text-center">
+            <thead class="table-light">
+                <tr>
+                    <th>Mã Đơn</th>
+                    <th>Môn Học</th>
+                    <th>Điểm Trước</th>
+                    <th>Mong Muốn</th>
+                    <th>Lý Do</th>
+                    <th>Ngày Chấm</th>
+                    <th>Người Duyệt</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><span class="badge bg-secondary">@item.MaDon</span></td>
+                        <td>@item.TenMonHoc</td>
+                        <td><span class="badge bg-info">@item.DiemTruocPhucKhao</span></td>
+                        <td>@item.DiemMongMuon</td>
+                        <td class="text-start">@item.LyDo</td>
+                        <td>@(item.NgayChamLai?.ToString("dd/MM/yyyy") ?? "<i class='text-muted'>Chưa chấm</i>")</td>
+                        <td>@item.NguoiDuyet</td>
+                        <td>
+                            @if (item.DiemSauPhucKhao != null || item.TrangThaiPhucKhao == TrangThaiPhucKhao.DaCham)
+                            {
+                                <a asp-action="DetailChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-outline-success me-1">
+                                    <i class="fas fa-eye"></i> Xem
+                                </a>
+                                <a asp-action="EditChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-outline-warning">
+                                    <i class="fas fa-edit"></i> Sửa
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="ChamDiem" asp-route-maDon="@item.MaDon" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-pen"></i> Chấm điểm
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

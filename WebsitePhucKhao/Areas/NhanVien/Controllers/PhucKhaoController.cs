@@ -311,6 +311,64 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            var vm = new YeuCauPhucKhaoViewModel
+            {
+                DanhSachMonHoc = new SelectList(await _repository.GetMonHocListAsync(), "MaMonHoc", "TenMonHoc"),
+                DanhSachHocKy = new SelectList(await _repository.GetHocKyListAsync(), "MaHocKy", "TenHocKy"),
+                DanhSachNamHoc = new SelectList(await _repository.GetNamHocListAsync(), "MaNamHoc", "TenNamHoc")
+            };
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(YeuCauPhucKhaoViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.DanhSachMonHoc = new SelectList(await _repository.GetMonHocListAsync(), "MaMonHoc", "TenMonHoc");
+                model.DanhSachHocKy = new SelectList(await _repository.GetHocKyListAsync(), "MaHocKy", "TenHocKy");
+                model.DanhSachNamHoc = new SelectList(await _repository.GetNamHocListAsync(), "MaNamHoc", "TenNamHoc");
+                return View(model);
+            }
+
+            var sinhVien = await _repository.GetSinhVienByMaAsync(model.MaSinhVien);
+            if (sinhVien == null)
+            {
+                ModelState.AddModelError("MaSinhVien", "Không tìm thấy sinh viên.");
+                return View(model);
+            }
+
+            // Gán lại thông tin từ hệ thống để đảm bảo độ chính xác
+            model.HoTen = sinhVien.HoTen;
+            model.Email = sinhVien.Email;
+            model.SoDienThoai = sinhVien.SoDienThoai;
+            model.Lop = sinhVien.Lop?.TenLop ?? "Không rõ";
+
+            await _repository.TaoDonPhucKhaoAsync(model);
+
+            TempData["Message"] = "Tạo đơn phúc khảo thành công!";
+            return RedirectToAction("DanhSachDon");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSinhVienInfo(long maSinhVien)
+        {
+            var sv = await _repository.GetSinhVienByMaAsync(maSinhVien);
+            if (sv == null) return NotFound();
+
+            return Json(new
+            {
+                hoTen = sv.HoTen,
+                email = sv.Email,
+                soDienThoai = sv.SoDienThoai,
+                lop = sv.Lop?.TenLop
+            });
+        }
     }
 }
 
