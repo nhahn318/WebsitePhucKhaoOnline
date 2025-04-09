@@ -5,65 +5,87 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewData["Title"]</h2>
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+}
 
-<form asp-action="Edit" method="post">
-    <input asp-for="MaDon" type="hidden" />
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="DiemHienTai"></label>
-                <input asp-for="DiemHienTai" class="form-control" />
-                <span asp-validation-for="DiemHienTai" class="text-danger"></span>
+<div class="content-wrapper">
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h3 class="card-title"><i class="fas fa-edit me-2"></i>@ViewData["Title"]</h3>
             </div>
-            <div class="form-group">
-                <label asp-for="DiemMongMuon"></label>
-                <input asp-for="DiemMongMuon" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="DiaDiemThi"></label>
-                <input asp-for="DiaDiemThi" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="PhongThi"></label>
-                <input asp-for="PhongThi" class="form-control" />
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input asp-for="MaDon" type="hidden" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="DiemHienTai" class="form-label"></label>
+                                <input asp-for="DiemHienTai" class="form-control" />
+                                <span asp-validation-for="DiemHienTai" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="DiemMongMuon" class="form-label"></label>
+                                <input asp-for="DiemMongMuon" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="DiaDiemThi" class="form-label"></label>
+                                <input asp-for="DiaDiemThi" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="PhongThi" class="form-label"></label>
+                                <input asp-for="PhongThi" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label asp-for="MaMonHoc" class="form-label"></label>
+                                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-select">
+                                    <option value="">-- Chọn môn học --</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="MaHocKy" class="form-label"></label>
+                                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-select">
+                                    <option value="">-- Chọn học kỳ --</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="MaNamHoc" class="form-label"></label>
+                                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-select">
+                                    <option value="">-- Chọn năm học --</option>
+                                </select>
+                                <span asp-validation-for="MaNamHoc" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="LyDo" class="form-label"></label>
+                        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-1"></i>Lưu thay đổi
+                        </button>
+                        <a asp-action="DanhSachDonPhucKhao" class="btn btn-secondary ms-2">
+                            <i class="fas fa-times me-1"></i>Hủy
+                        </a>
+                    </div>
+                </form>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="form-group">
-                <label asp-for="MaMonHoc"></label>
-                <select asp-for="MaMonHoc" asp-items="Model.DanhSachMonHoc" class="form-control">
-                    <option value="">-- Chọn môn học --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaHocKy"></label>
-                <select asp-for="MaHocKy" asp-items="Model.DanhSachHocKy" class="form-control">
-                    <option value="">-- Chọn học kỳ --</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaNamHoc"></label>
-                <select asp-for="MaNamHoc" asp-items="Model.DanhSachNamHoc" class="form-control">
-                    <option value="">-- Chọn năm học --</option>
-                </select>
-                <span asp-validation-for="MaNamHoc" class="text-danger"></span>
-            </div>
-
-        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="LyDo"></label>
-        <textarea asp-for="LyDo" class="form-control" rows="4"></textarea>
-    </div>
-
-    <div class="form-group mt-3">
-        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
-        <a asp-action="DanhSachDonPhucKhao" class="btn btn-secondary">Hủy</a>
-    </div>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
