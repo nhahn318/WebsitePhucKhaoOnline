@@ -162,11 +162,15 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
         public async Task<IActionResult> GetNewNotifications()
         {
             var donPhucKhaos = await _phucKhaoRepository.GetDanhSachDonAsync();
+            // Lọc chỉ những đơn chưa duyệt
+            var donChuaDuyet = donPhucKhaos.Where(d => d.TrangThai == TrangThaiPhucKhao.ChoXacNhan).ToList();
             return Json(new { 
-                count = donPhucKhaos.Count,
-                notifications = donPhucKhaos.Select(n => new {
+                count = donChuaDuyet.Count,
+                notifications = donChuaDuyet.Select(n => new {
                     message = $"Có đơn phúc khảo mới từ sinh viên {n.SinhVien?.HoTen}",
-                    time = n.NgayGui.ToString("dd/MM/yyyy HH:mm")
+                    time = n.NgayGui.ToString("dd/MM/yyyy HH:mm"),
+                    maDon = n.MaDon,
+                    maMonHoc = n.MaMonHoc
                 })
             });
         }
@@ -179,7 +183,7 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
             return View(ds);
         }
 
-        public async Task<IActionResult> ChiTietPhucKhao(int id)
+        public async Task<IActionResult> ChiTietPhucKhao(int id, int maMonHoc)
         {
             var don = await _repository.GetDonPhucKhaoAsync(id);
             if (don == null) return NotFound();

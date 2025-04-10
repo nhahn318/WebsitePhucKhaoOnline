@@ -83,7 +83,7 @@
                                         </a>
                                         @if (Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan)
                                         {
-                                            <a href="@Url.Action("Duyet", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })"
+                                            <a href="@Url.Action("Duyet", "PhucKhao", new { id = Model[i].MaDon, area = "NhanVien" })"
                                                class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Duyệt">
                                                 <i class="bi bi-check-circle"></i>
                                             </a>

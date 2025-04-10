@@ -119,3 +119,21 @@ $(document).ready(function () {
     // Tooltip initialization
     $('[data-toggle="tooltip"]').tooltip();
 });
+
+// Xử lý thông báo chào mừng
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeAlert = document.querySelector('.alert-info');
+    if (welcomeAlert) {
+        // Hiển thị thông báo
+        welcomeAlert.classList.add('show');
+        
+        // Tự động ẩn sau 5 giây
+        setTimeout(() => {
+            welcomeAlert.classList.remove('show');
+            welcomeAlert.classList.add('fade');
+            setTimeout(() => {
+                welcomeAlert.style.display = 'none';
+            }, 500); // Thời gian fade out
+        }, 5000); // Hiển thị trong 5 giây
+    }
+});

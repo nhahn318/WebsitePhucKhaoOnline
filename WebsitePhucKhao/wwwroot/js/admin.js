@@ -172,5 +172,124 @@ if (typeof chartInitialized === 'undefined') {
     }
 }
 
+// Xử lý thao tác xóa
+function initializeDeleteActions() {
+    // Kiểm tra và xóa toast cũ nếu có
+    const existingToast = document.querySelector('.alert-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // Tạo toast thông báo mới
+    const toastHtml = `
+        <div class="alert-toast">
+            <i class="bi"></i>
+            <span class="toast-message"></span>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', toastHtml);
+
+    const toast = document.querySelector('.alert-toast');
+
+    // Xử lý click nút xóa
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        // Loại bỏ tất cả event listeners cũ
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        
+        newBtn.addEventListener('click', function(e) {
+            // Ngăn chặn hành vi mặc định
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const deleteUrl = this.getAttribute('data-delete-url');
+            const itemName = this.getAttribute('data-item-name') || 'mục này';
+
+            // Hiển thị thông báo xác nhận
+            showToast('confirm', `Bạn có chắc chắn muốn xóa ${itemName} không?`, async () => {
+                try {
+                    // Thêm class loading
+                    this.classList.add('loading');
+
+                    // Gọi API xóa
+                    const response = await fetch(deleteUrl, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Hiển thị thông báo thành công
+                        showToast('success', 'Xóa thành công!');
+                        
+                        // Reload trang sau 1.5s
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1500);
+                    } else {
+                        throw new Error('Xóa thất bại');
+                    }
+                } catch (error) {
+                    // Hiển thị thông báo lỗi
+                    showToast('error', 'Xóa thất bại. Vui lòng thử lại.');
+                    this.classList.remove('loading');
+                }
+            });
+
+            // Ngăn chặn sự kiện nổi bọt
+            return false;
+        });
+    });
+
+    // Hàm hiển thị toast
+    function showToast(type, message, onConfirm = null) {
+        // Xóa toast cũ nếu có
+        const oldConfirmBtn = toast.querySelector('.toast-confirm-btn');
+        if (oldConfirmBtn) {
+            oldConfirmBtn.remove();
+        }
+        
+        const toastIcon = toast.querySelector('i');
+        const toastMessage = toast.querySelector('.toast-message');
+        
+        // Ẩn toast trước khi thay đổi nội dung
+        toast.classList.remove('show');
+        
+        // Đợi animation kết thúc
+        setTimeout(() => {
+            toast.className = `alert-toast ${type}`;
+            toastIcon.className = `bi ${type === 'success' ? 'bi-check-circle' : type === 'error' ? 'bi-x-circle' : 'bi-question-circle'}`;
+            toastMessage.textContent = message;
+            
+            // Thêm nút xác nhận nếu là thông báo confirm
+            if (type === 'confirm') {
+                const confirmBtn = document.createElement('button');
+                confirmBtn.className = 'toast-confirm-btn';
+                confirmBtn.textContent = 'Xác nhận';
+                confirmBtn.onclick = () => {
+                    toast.classList.remove('show');
+                    if (onConfirm) onConfirm();
+                };
+                toast.appendChild(confirmBtn);
+            }
+            
+            toast.classList.add('show');
+            
+            // Tự động ẩn sau 3s nếu không phải là thông báo confirm
+            if (type !== 'confirm') {
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }, 300); // Đợi 300ms cho animation ẩn hoàn tất
+    }
+}
+
+// Khởi tạo khi DOM đã tải xong
+document.addEventListener('DOMContentLoaded', function() {
+    initializeDeleteActions();
+});
+
 
 

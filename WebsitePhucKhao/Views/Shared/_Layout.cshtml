@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <a class="navbar-brand lazy-load" asp-area="" asp-controller="Home" asp-action="Index">
                     <i class="fas fa-graduation-cap me-2"></i>Hệ thống phúc khảo
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -25,13 +25,13 @@
                         <li class="nav-item">
                             @if (User.IsInRole("Admin"))
                             {
-                                <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                                <a class="nav-link lazy-load" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
                                     <i class="fas fa-home me-1"></i>Trang chủ
                                 </a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <a class="nav-link lazy-load" asp-area="" asp-controller="Home" asp-action="Index">
                                     <i class="fas fa-home me-1"></i>Trang chủ
                                 </a>
                             }
@@ -39,7 +39,7 @@
                         @if (User.IsInRole("GiangVien"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="ReviewRequests">
+                                <a class="nav-link lazy-load" asp-area="Admin" asp-controller="Dashboard" asp-action="ReviewRequests">
                                     <i class="fas fa-file-alt me-1"></i>Yêu cầu phúc khảo
                                 </a>
                             </li>
@@ -47,17 +47,17 @@
                         @if (User.IsInRole("SinhVien"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="SinhVien" asp-controller="SinhVien" asp-action="Dashboard">
+                                <a class="nav-link lazy-load" asp-area="SinhVien" asp-controller="SinhVien" asp-action="Dashboard">
                                     <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="SinhVien" asp-controller="PhucKhao" asp-action="Create">
+                                <a class="nav-link lazy-load" asp-area="SinhVien" asp-controller="PhucKhao" asp-action="Create">
                                     <i class="fas fa-file-alt me-1"></i>Yêu cầu phúc khảo
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="SinhVien" asp-controller="SinhVien" asp-action="CapNhatThongTin">
+                                <a class="nav-link lazy-load" asp-area="SinhVien" asp-controller="SinhVien" asp-action="CapNhatThongTin">
                                     <i class="fas fa-user me-1"></i>Thông tin tài khoản
                                 </a>
                             </li>
@@ -72,13 +72,13 @@
     <div class="container">
         @if (User.Identity.IsAuthenticated)
         {
-            <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-info alert-dismissible fade mt-3" role="alert" style="display: none;">
                 <i class="fas fa-user-circle me-2"></i>
                 Xin chào, @User.Identity.Name!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         }
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" id="main-content">
             @RenderBody()
         </main>
     </div>
@@ -113,6 +113,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/lazy-loading.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

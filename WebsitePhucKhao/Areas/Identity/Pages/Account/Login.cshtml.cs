@@ -203,7 +203,7 @@ namespace WebsitePhucKhao.Areas.Identity.Pages.Account
                     }
                     else if (await _userManager.IsInRoleAsync(user, "SinhVien"))
                     {
-                        returnUrl = Url.Action("DanhSachDonPhucKhao", "PhucKhao", new { area = "SinhVien" });
+                        returnUrl = Url.Action("Dashboard", "SinhVien", new { area = "SinhVien" });
                     }
                     else if (await _userManager.IsInRoleAsync(user, "GiangVien"))
                     {

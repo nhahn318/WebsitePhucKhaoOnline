@@ -9,8 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Nhân viên | Hệ thống phúc khảo</title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WebsitePhucKhao.styles.css" asp-append-version="true" />
     <link href="~/css/nhanvien/layoutnhanvien.css" rel="stylesheet" />
@@ -19,43 +22,43 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
 
-    <header class="text-white py-3">
+    <header class="text-white py-3" style="background: #1976d2; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
         <div class="container d-flex justify-content-between align-items-center">
             <h1 class="h5 m-0">
                 <i class="fas fa-user-tie me-2"></i>Phúc khảo - Nhân viên đào tạo
             </h1>
-            <a class="btn btn-outline-light btn-sm" asp-area="" asp-controller="Home" asp-action="Index">
+            <a class="btn btn-outline-light btn-sm lazy-load" asp-area="" asp-controller="Home" asp-action="Index" style="transition: all 0.3s ease;">
                 <i class="fas fa-home me-1"></i>Trang chủ
             </a>
         </div>
     </header>
 
-    <nav class="bg-white border-bottom">
+    <nav class="bg-white border-bottom shadow-sm">
         <div class="container">
             <ul class="nav nav-pills py-2">
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachDon">
-                        <i class="fas fa-list me-1"></i>Tất cả các đơn
+                    <a class="nav-link lazy-load" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachDon" style="transition: all 0.3s ease;">
+                        <i class="bi bi-list-ul me-1"></i>Tất cả các đơn
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoChoDuyet">
-                        <i class="fas fa-hourglass-half me-1"></i>Đơn chờ duyệt
+                    <a class="nav-link lazy-load" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoChoDuyet" style="transition: all 0.3s ease;">
+                        <i class="bi bi-hourglass-split me-1"></i>Đơn chờ duyệt
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaDuyet">
-                        <i class="fas fa-check me-1"></i>Đơn đã duyệt
+                    <a class="nav-link lazy-load" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaDuyet" style="transition: all 0.3s ease;">
+                        <i class="bi bi-check-circle me-1"></i>Đơn đã duyệt
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaCham">
-                        <i class="fas fa-pen me-1"></i>Đơn đã chấm
+                    <a class="nav-link lazy-load" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="DanhSachPhucKhaoDaCham" style="transition: all 0.3s ease;">
+                        <i class="bi bi-pencil-square me-1"></i>Đơn đã chấm
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="Create">
-                        <i class="fas fa-pen me-1"></i>Tạo đơn phúc khảo cho sinh viên
+                    <a class="nav-link lazy-load" asp-area="NhanVien" asp-controller="PhucKhao" asp-action="Create" style="transition: all 0.3s ease;">
+                        <i class="bi bi-plus-circle me-1"></i>Tạo đơn phúc khảo cho sinh viên
                     </a>
                 </li>
                 <li class="nav-item ms-auto">
@@ -65,20 +68,73 @@
         </div>
     </nav>
 
-    <main class="flex-grow-1 py-4">
+    <main class="flex-grow-1 py-4" id="main-content">
         <div class="container">
             @RenderBody()
         </div>
     </main>
 
-    <footer class="text-center p-3 bg-dark text-white mt-auto">
+    <footer class="text-center p-3 text-white mt-auto" style="background: #1976d2;">
         <div class="container">
-            &copy; @DateTime.Now.Year - Hệ thống phúc khảo | Nhân viên
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-2">
+                        <i class="bi bi-building me-2"></i>Hệ thống phúc khảo
+                    </h5>
+                    <p class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Phần mềm quản lý phúc khảo dành cho nhân viên đào tạo
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mb-2">
+                        <i class="bi bi-telephone me-2"></i>Liên hệ
+                    </h5>
+                    <p class="mb-0">
+                        <i class="bi bi-envelope me-2"></i>support@phuckhao.edu.vn<br>
+                        <i class="bi bi-phone me-2"></i>(+84) 123 456 789
+                    </p>
+                </div>
+            </div>
+            <hr class="my-3" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <i class="bi bi-c-circle me-1"></i>@DateTime.Now.Year - Hệ thống phúc khảo | Nhân viên
+            </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="~/js/lazy-loading.js"></script>
+
+    <!-- DataTables Configuration -->
+    <script>
+        $(document).ready(function() {
+            // Cấu hình chung cho tất cả các bảng DataTables
+            $.extend(true, $.fn.dataTable.defaults, {
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/vi.json'
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf', 'print'
+                ],
+                pageLength: 10,
+                responsive: true,
+                order: [[0, 'desc']]
+            });
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
