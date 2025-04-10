@@ -215,6 +215,8 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
             var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == MaDon);
             if (don != null && don.EmailSinhVien != null)
             {
+
+                don.TrangThai = TrangThaiPhucKhao.DaCham;
                 string subject = "Thông báo kết quả phúc khảo";
                 string body = $@"
                     Xin chào {don.SinhVien?.HoTen},
@@ -326,6 +328,12 @@ namespace WebsitePhucKhao.Areas.GiangVien.Controllers {
                 await model.BaiGiaiTay.CopyToAsync(stream);
 
                 chiTiet.BaiGiaiTayUrl = "/bai-giai-tay/" + fileName;
+            }
+
+            var don = await _context.DonPhucKhaos.FirstOrDefaultAsync(d => d.MaDon == model.MaDon);
+            if (don != null)
+            {
+                don.TrangThai = TrangThaiPhucKhao.DaCham;
             }
 
             await _context.SaveChangesAsync();

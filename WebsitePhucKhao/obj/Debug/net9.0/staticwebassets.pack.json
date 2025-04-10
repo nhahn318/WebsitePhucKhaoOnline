@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\bai-giai-tay\\1_doimsstkn.png"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\1_matsau.jpg",
+      "PackagePath": "staticwebassets\\bai-giai-tay\\1_matsau.jpg"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\1_z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg",
       "PackagePath": "staticwebassets\\bai-giai-tay\\1_z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg"
     },
@@ -423,6 +427,14 @@
     {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\images (3).jpg",
       "PackagePath": "staticwebassets\\uploads\\images (3).jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\matsau.jpg",
+      "PackagePath": "staticwebassets\\uploads\\matsau.jpg"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\mattrc.jpg",
+      "PackagePath": "staticwebassets\\uploads\\mattrc.jpg"
     },
     {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\uploads\\phapluatdaicuong.png",
