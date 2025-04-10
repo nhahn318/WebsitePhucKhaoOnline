@@ -1,4 +1,4 @@
-.content-wrapper {
+﻿.content-wrapper {
     padding: 1.5rem 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -374,4 +374,60 @@ tr:hover .avatar-sm {
     font-size: 0.75rem;
     color: #6c757d;
     white-space: nowrap;
-} 
+}
+
+/* Tùy chỉnh các nút DataTable */
+.dt-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.dt-button {
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .dt-button:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .dt-button:active {
+        background-color: #0056b3;
+        color: white;
+    }
+
+    /* Tùy chỉnh màu sắc cho từng nút */
+    .dt-button.buttons-copy {
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        color: white;
+    }
+
+    .dt-button.buttons-excel {
+        background-color: #ffc107;
+        border: 1px solid #ffc107;
+        color: white;
+    }
+
+    .dt-button.buttons-csv {
+        background-color: #17a2b8;
+        border: 1px solid #17a2b8;
+        color: white;
+    }
+
+    .dt-button.buttons-pdf {
+        background-color: #dc3545;
+        border: 1px solid #dc3545;
+        color: white;
+    }
+
+    .dt-button.buttons-print {
+        background-color: #007bff;
+        border: 1px solid #007bff;
+        color: white;
+    }

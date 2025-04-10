@@ -9,6 +9,7 @@
     <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css"> <!-- CSS cho Buttons Plugin -->
     <link rel="stylesheet" href="~/css/admin/index-listuser.css" />
 }
 
@@ -97,9 +98,17 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
+    <!-- Thêm thư viện DataTables Buttons và các phụ thuộc cần thiết -->
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            // Initialize DataTable with improved options
+            // Initialize DataTable with options for copy, print, and export
             $('#dataTable').DataTable({
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json",
@@ -113,22 +122,26 @@
                 "order": [[1, "asc"]],
                 "columnDefs": [
                     { "orderable": false, "targets": 5 },
-                    { "className": "text-center", "targets": [0, 5] }
+                    { "className": "text-center", "targets": [0, 5] },
                 ],
                 "autoWidth": false,
                 "responsive": true,
-                "dom": '<"top"lf>rt<"bottom"ip>',
-                "pagingType": "simple_numbers",
-                "initComplete": function() {
-                    $('.dataTables_length select').addClass('form-select');
-                    $('.dataTables_filter input').addClass('form-control');
-                }
-            });
-
-            // Initialize tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
+                "dom": 'Bfrtip', // Bật các nút (copy, excel, csv, pdf, print)
+                "buttons": [
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Loại bỏ cột "Thao tác" khi xuất Excel
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        exportOptions: {
+                            columns: ':not(:last-child)' // Loại bỏ cột "Thao tác" khi xuất CSV
+                        }
+                    },
+                    'copy', 'pdf', 'print'
+                ]
             });
         });
     </script>

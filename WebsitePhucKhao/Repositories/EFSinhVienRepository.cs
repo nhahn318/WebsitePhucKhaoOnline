@@ -20,8 +20,10 @@ namespace WebsitePhucKhao.Repositories {
         public async Task<SinhVien?> GetByIdAsync(long maSinhVien)
         {
             return await _context.SinhViens
-                .Include(sv => sv.DonPhucKhaos)
-                .FirstOrDefaultAsync(sv => sv.MaSinhVien == maSinhVien);
+                .Include(s => s.Khoa)
+                .Include(s => s.ChuyenNganh)
+                .Include(s => s.Lop)
+                .FirstOrDefaultAsync(s => s.MaSinhVien == maSinhVien);
         }
 
 
