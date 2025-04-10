@@ -70,12 +70,21 @@ namespace WebsitePhucKhao.Areas.SinhVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _repository.TaoDonPhucKhaoAsync(model);
-                return RedirectToAction("CreateSuccess");
+                var thanhCong = await _repository.TaoDonPhucKhaoAsync(model);
+                if (thanhCong)
+                {
+                    return RedirectToAction("CreateSuccess");
+                }
+                else
+                {
+                    //Thông báo lỗi nếu đã gửi đơn phúc khảo cho môn học này
+                    ModelState.AddModelError(string.Empty, "Bạn đã gửi đơn phúc khảo cho môn học này rồi.");
+                }
             }
 
             model.DanhSachMonHoc = new SelectList(await _repository.GetMonHocListAsync(), "MaMonHoc", "TenMonHoc");
             model.DanhSachHocKy = new SelectList(await _repository.GetHocKyListAsync(), "MaHocKy", "TenHocKy");
+            model.DanhSachNamHoc = new SelectList(await _repository.GetNamHocListAsync(), "MaNamHoc", "TenNamHoc");
             return View(model);
         }
 

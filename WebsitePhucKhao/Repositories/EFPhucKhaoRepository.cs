@@ -224,9 +224,21 @@ namespace WebsitePhucKhao.Repositories {
                     HoTen = model.HoTen,
                     Email = model.Email,
                     SoDienThoai = model.SoDienThoai,
-                    MatKhau = "default123"
+                    MatKhau = null
                 };
                 _context.SinhViens.Add(sinhVien);
+            }
+
+            // Kiểm tra xem sinh viên đã có đơn cho môn học này chưa
+            var daTonTai = await _context.DonPhucKhaos.AnyAsync(d =>
+                d.MaSinhVien == model.MaSinhVien &&
+                d.MaMonHoc == model.MaMonHoc &&
+                d.MaHocKy == model.MaHocKy &&
+                d.MaNamHoc == model.MaNamHoc);
+
+            if (daTonTai)
+            {
+                return false; // hoặc throw exception hoặc return trạng thái khác nếu cần
             }
 
             var don = new DonPhucKhao
@@ -249,6 +261,7 @@ namespace WebsitePhucKhao.Repositories {
             await _context.SaveChangesAsync();
             return true;
         }
+
 
         public async Task<List<DonPhucKhao>> GetDanhSachDonAsync()
         {

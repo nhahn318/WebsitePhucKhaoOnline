@@ -13,6 +13,19 @@
 
 <h3>@ViewData["Title"]</h3>
 
+
+@* KTra xem đã tạo phúc khảo môn học này chưa  *@
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
 <form asp-action="Create" method="post">
     <div class="row">
         <div class="col-md-6">
@@ -51,6 +64,7 @@
             <div class="form-group">
                 <label asp-for="DiemMongMuon"></label>
                 <input asp-for="DiemMongMuon" class="form-control" step="0.01" />
+                <span asp-validation-for="DiemMongMuon" class="text-danger"></span>
             </div>
         </div>
 
@@ -121,8 +135,8 @@
 </form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
 
