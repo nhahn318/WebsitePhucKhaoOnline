@@ -343,6 +343,23 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
                 return View(model);
             }
 
+            // Kiểm tra đã có đơn cho môn học này chưa
+            var daTonTai = await _repository.CheckDonPhucKhaoTonTaiAsync(
+                model.MaSinhVien,
+                model.MaMonHoc ?? 0,
+                model.MaHocKy ?? 0,
+                model.MaNamHoc ?? 0
+            );
+
+            if (daTonTai)
+            {
+                ModelState.AddModelError(string.Empty, "Sinh viên này đã gửi đơn phúc khảo cho môn học này rồi.");
+                model.DanhSachMonHoc = new SelectList(await _repository.GetMonHocListAsync(), "MaMonHoc", "TenMonHoc");
+                model.DanhSachHocKy = new SelectList(await _repository.GetHocKyListAsync(), "MaHocKy", "TenHocKy");
+                model.DanhSachNamHoc = new SelectList(await _repository.GetNamHocListAsync(), "MaNamHoc", "TenNamHoc");
+                return View(model);
+            }
+
             // Gán lại thông tin từ hệ thống để đảm bảo độ chính xác
             model.HoTen = sinhVien.HoTen;
             model.Email = sinhVien.Email;
@@ -354,6 +371,7 @@ namespace WebsitePhucKhao.Areas.NhanVien.Controllers
             TempData["Message"] = "Tạo đơn phúc khảo thành công!";
             return RedirectToAction("DanhSachDon");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetSinhVienInfo(long maSinhVien)

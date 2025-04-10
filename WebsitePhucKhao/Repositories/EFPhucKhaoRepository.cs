@@ -480,6 +480,15 @@ namespace WebsitePhucKhao.Repositories {
                 .Include(sv => sv.Lop)
                 .FirstOrDefaultAsync(sv => sv.MaSinhVien == maSinhVien);
         }
+        public async Task<bool> CheckDonPhucKhaoTonTaiAsync(long maSinhVien, int maMonHoc, int maHocKy, int maNamHoc)
+        {
+            return await _context.DonPhucKhaos.AnyAsync(d =>
+                d.MaSinhVien == maSinhVien &&
+                d.MaMonHoc == maMonHoc &&
+                d.MaHocKy == maHocKy &&
+                d.MaNamHoc == maNamHoc);
+        }
+
 
     }
 }

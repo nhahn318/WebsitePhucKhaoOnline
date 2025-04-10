@@ -13,6 +13,17 @@
 <h2 class="text-primary">Thông tin yêu cầu phúc khảo của sinh viên: @Model?.HoTen</h2>
 <h3>@ViewData["Title"]</h3>
 
+
+@if (ViewData.ModelState[string.Empty]?.Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
 <form asp-action="Create" method="post">
     <div class="row">
         <div class="col-md-6">

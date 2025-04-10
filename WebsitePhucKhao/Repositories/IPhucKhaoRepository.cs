@@ -15,6 +15,9 @@ namespace WebsitePhucKhao.Repositories {
         Task<List<DonPhucKhao>> GetDonDaChamAsync();
 
 
+        Task<bool> CheckDonPhucKhaoTonTaiAsync(long maSinhVien, int maMonHoc, int maHocKy, int maNamHoc);
+
+
         Task<SinhVien?> GetSinhVienByMaAsync(long maSinhVien);
 
 
