@@ -94,131 +94,132 @@
         </div>
 
         <!-- Thống kê phúc khảo -->
-        <div class="d-card d-shadow">
+        <div class="d-card d-shadow" id="phucKhaoStats">
             <div class="d-card-header">
                 <h5 class="d-card-title"><i class="fas fa-chart-pie me-2"></i> Thống kê phúc khảo</h5>
             </div>
             <div class="d-card-body">
-                <div class="d-table-responsive">
-                    <table class="d-table d-table-striped d-table-bordered">
-                        <thead>
-                            <tr>
-                                <th><i class="fas fa-info-circle me-1"></i> Trạng thái</th>
-                                <th><i class="fas fa-hashtag me-1"></i> Số lượng</th>
-                                <th><i class="fas fa-percentage me-1"></i> Tỷ lệ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <span class="d-badge d-badge-pill" style="background-color: #f6c23e; color: white;">
-                                        <i class="fas fa-clock me-1"></i> Chờ xử lý
-                                    </span>
-                                </td>
-                                <td>@ViewBag.PhucKhaoChoXuLy</td>
-                                <td>
-                                    <div class="d-progress">
-                                        <div class="d-progress-bar" role="progressbar" style="width: @(ViewBag.TyLeChoXuLy)%">
-                                            @(ViewBag.TyLeChoXuLy)%
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="d-badge d-badge-pill" style="background-color: #4e73df; color: white;">
-                                        <i class="fas fa-spinner me-1"></i> Đang xử lý
-                                    </span>
-                                </td>
-                                <td>@ViewBag.PhucKhaoDangXuLy</td>
-                                <td>
-                                    <div class="d-progress">
-                                        <div class="d-progress-bar" role="progressbar" style="width: @(ViewBag.TyLeDangXuLy)%">
-                                            @(ViewBag.TyLeDangXuLy)%
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="d-badge d-badge-pill" style="background-color: #1cc88a; color: white;">
-                                        <i class="fas fa-check-circle me-1"></i> Hoàn thành
-                                    </span>
-                                </td>
-                                <td>@ViewBag.PhucKhaoHoanThanh</td>
-                                <td>
-                                    <div class="d-progress">
-                                        <div class="d-progress-bar" role="progressbar" style="width: @(ViewBag.TyLeHoanThanh)%">
-                                            @(ViewBag.TyLeHoanThanh)%
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="d-badge d-badge-pill" style="background-color: #e74a3b; color: white;">
-                                        <i class="fas fa-times-circle me-1"></i> Từ chối
-                                    </span>
-                                </td>
-                                <td>@ViewBag.PhucKhaoTuChoi</td>
-                                <td>
-                                    <div class="d-progress">
-                                        <div class="d-progress-bar" role="progressbar" style="width: @(ViewBag.TyLeTuChoi)%">
-                                            @(ViewBag.TyLeTuChoi)%
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="d-table-responsive">
+                            <table class="d-table d-table-striped d-table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-info-circle me-1"></i> Trạng thái</th>
+                                        <th><i class="fas fa-hashtag me-1"></i> Số lượng</th>
+                                        <th><i class="fas fa-percentage me-1"></i> Tỷ lệ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int choXuLy = ViewBag.PendingAppeals ?? 0;
+                                        int dangXuLy = ViewBag.ApprovedAppeals ?? 0;
+                                        int choCham = ViewBag.WaitingForGrading ?? 0;
+                                        int daCham = ViewBag.GradedAppeals ?? 0;
+                                        int tuChoi = ViewBag.RejectedAppeals ?? 0;
+                                        
+                                        int total = choXuLy + dangXuLy + choCham + daCham + tuChoi;
+                                        double tyLeChoXuLy = total > 0 ? Math.Round((choXuLy * 100.0) / total, 1) : 0;
+                                        double tyLeDangXuLy = total > 0 ? Math.Round((dangXuLy * 100.0) / total, 1) : 0;
+                                        double tyLeChoCham = total > 0 ? Math.Round((choCham * 100.0) / total, 1) : 0;
+                                        double tyLeDaCham = total > 0 ? Math.Round((daCham * 100.0) / total, 1) : 0;
+                                        double tyLeTuChoi = total > 0 ? Math.Round((tuChoi * 100.0) / total, 1) : 0;
+                                    }
+                                    <tr>
+                                        <td>
+                                            <span class="d-badge d-badge-pill" style="background-color: #f6c23e; color: white;">
+                                                <i class="fas fa-clock me-1"></i> Chờ xác nhận
+                                            </span>
+                                        </td>
+                                        <td>@choXuLy</td>
+                                        <td>
+                                            <div class="d-progress">
+                                                <div class="d-progress-bar" role="progressbar" style="width: @(tyLeChoXuLy)%">
+                                                    @(tyLeChoXuLy)%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="d-badge d-badge-pill" style="background-color: #4e73df; color: white;">
+                                                <i class="fas fa-check me-1"></i> Đã duyệt
+                                            </span>
+                                        </td>
+                                        <td>@dangXuLy</td>
+                                        <td>
+                                            <div class="d-progress">
+                                                <div class="d-progress-bar" role="progressbar" style="width: @(tyLeDangXuLy)%">
+                                                    @(tyLeDangXuLy)%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="d-badge d-badge-pill" style="background-color: #36b9cc; color: white;">
+                                                <i class="fas fa-hourglass-half me-1"></i> Chờ chấm
+                                            </span>
+                                        </td>
+                                        <td>@choCham</td>
+                                        <td>
+                                            <div class="d-progress">
+                                                <div class="d-progress-bar" role="progressbar" style="width: @(tyLeChoCham)%">
+                                                    @(tyLeChoCham)%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="d-badge d-badge-pill" style="background-color: #1cc88a; color: white;">
+                                                <i class="fas fa-check-double me-1"></i> Đã chấm
+                                            </span>
+                                        </td>
+                                        <td>@daCham</td>
+                                        <td>
+                                            <div class="d-progress">
+                                                <div class="d-progress-bar" role="progressbar" style="width: @(tyLeDaCham)%">
+                                                    @(tyLeDaCham)%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span class="d-badge d-badge-pill" style="background-color: #e74a3b; color: white;">
+                                                <i class="fas fa-times-circle me-1"></i> Từ chối
+                                            </span>
+                                        </td>
+                                        <td>@tuChoi</td>
+                                        <td>
+                                            <div class="d-progress">
+                                                <div class="d-progress-bar" role="progressbar" style="width: @(tyLeTuChoi)%">
+                                                    @(tyLeTuChoi)%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-chart-container" style="height: 300px;">
+                            <canvas id="phucKhaoChart" loading="lazy"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Hoạt động gần đây -->
-        <div class="d-card d-shadow">
-            <div class="d-card-header">
-                <h5 class="d-card-title"><i class="fas fa-history me-2"></i> Hoạt động gần đây</h5>
-            </div>
-            <div class="d-card-body">
-                @if (ViewBag.HoatDongGanDay != null && ViewBag.HoatDongGanDay.Count > 0)
-                {
-                    <div class="d-table-responsive">
-                        <table class="d-table d-table-striped d-table-bordered">
-                            <thead>
-                                <tr>
-                                    <th><i class="fas fa-calendar-alt me-1"></i> Thời gian</th>
-                                    <th><i class="fas fa-user me-1"></i> Người dùng</th>
-                                    <th><i class="fas fa-tasks me-1"></i> Hành động</th>
-                                    <th><i class="fas fa-info-circle me-1"></i> Chi tiết</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var hoatDong in ViewBag.HoatDongGanDay)
-                                {
-                                    <tr>
-                                        <td>@hoatDong.ThoiGian.ToString("dd/MM/yyyy HH:mm")</td>
-                                        <td>@hoatDong.NguoiDung</td>
-                                        <td>@hoatDong.HanhDong</td>
-                                        <td>@hoatDong.ChiTiet</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="d-alert d-alert-info">
-                        <i class="fas fa-info-circle me-2"></i> Không có hoạt động nào gần đây.
-                    </div>
-                }
-            </div>
-        </div>
+        
     </div>
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <script>
         // Hiển thị thời gian thực
         function updateCurrentTime() {
@@ -240,5 +241,104 @@
         // Cập nhật thời gian mỗi giây
         updateCurrentTime();
         setInterval(updateCurrentTime, 1000);
+
+        // Khởi tạo biểu đồ khi trang load
+        let phucKhaoChart = null;
+        
+        // Sử dụng window.onload thay vì DOMContentLoaded để đảm bảo tất cả tài nguyên đã tải xong
+        window.onload = function() {
+            // Hiển thị loading indicator
+            const chartContainer = document.querySelector('.d-chart-container');
+            chartContainer.innerHTML = '<div class="d-flex justify-content-center align-items-center" style="height: 300px;"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+            
+            // Tạo canvas sau khi tải xong
+            setTimeout(() => {
+                chartContainer.innerHTML = '<canvas id="phucKhaoChart"></canvas>';
+                initPhucKhaoChart();
+            }, 500);
+        };
+
+        function initPhucKhaoChart() {
+            const ctx = document.getElementById('phucKhaoChart').getContext('2d');
+            
+            // Lấy dữ liệu từ ViewBag
+            const data = {
+                choXuLy: @choXuLy,
+                dangXuLy: @dangXuLy,
+                choCham: @choCham,
+                daCham: @daCham,
+                tuChoi: @tuChoi
+            };
+
+            // Kiểm tra console để debug
+            console.log('Dữ liệu phúc khảo:', data);
+
+            // Đăng ký plugin
+            Chart.register(ChartDataLabels);
+
+            phucKhaoChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Chờ xác nhận', 'Đã duyệt', 'Chờ chấm', 'Đã chấm', 'Từ chối'],
+                    datasets: [{
+                        data: [
+                            data.choXuLy,
+                            data.dangXuLy,
+                            data.choCham,
+                            data.daCham,
+                            data.tuChoi
+                        ],
+                        backgroundColor: [
+                            '#f6c23e',
+                            '#4e73df',
+                            '#36b9cc',
+                            '#1cc88a',
+                            '#e74a3b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeInOutQuart'
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Phân bố trạng thái phúc khảo'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = total > 0 ? Math.round((value * 100) / total) : 0;
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        },
+                        datalabels: {
+                            formatter: function(value, context) {
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = total > 0 ? Math.round((value * 100) / total) : 0;
+                                return percentage + '%';
+                            },
+                            color: '#fff',
+                            font: {
+                                weight: 'bold',
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+        }
     </script>
 }
