@@ -187,6 +187,32 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
             return View("ChiTietPhucKhao", don);
         }
 
- 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Duyet(int id)
+        {
+            var don = await _repository.GetDonPhucKhaoAsync(id);
+            if (don == null) return NotFound();
+
+            don.TrangThai = TrangThaiPhucKhao.DaDuyet;
+            _repository.Update(don);
+            await _repository.SaveAsync();
+
+            return RedirectToAction(nameof(DanhSachChoDuyet));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TuChoi(int id)
+        {
+            var don = await _repository.GetDonPhucKhaoAsync(id);
+            if (don == null) return NotFound();
+
+            don.TrangThai = TrangThaiPhucKhao.TuChoi;
+            _repository.Update(don);
+            await _repository.SaveAsync();
+
+            return RedirectToAction(nameof(DanhSachChoDuyet));
+        }
     }
 } 

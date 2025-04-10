@@ -53,11 +53,11 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 10%"><i class="fas fa-id-card me-1"></i> STT</th>
-                            <th style="width: 30%"><i class="fas fa-user me-1"></i> Sinh viên</th>
-                            <th style="width: 30%"><i class="fas fa-book me-1"></i> Môn học</th>
+                            <th style="width: 20%"><i class="fas fa-user me-1"></i> Sinh viên</th>
+                            <th style="width: 20%"><i class="fas fa-book me-1"></i> Môn học</th>
                             <th style="width: 20%"><i class="fas fa-calendar-alt me-1"></i> Ngày gửi</th>
                             <th class="text-center" style="width: 10%"><i class="fas fa-check-circle me-1"></i> Trạng thái</th>
-                            <th class="text-center" style="width: 10%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
+                            <th class="text-center" style="width: 20%"><i class="fas fa-cogs me-1"></i> Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -83,17 +83,18 @@
                                         </a>
                                         @if (Model[i].TrangThai == TrangThaiPhucKhao.ChoXacNhan)
                                         {
-                                            <a href="@Url.Action("Duyet", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })"
-                                               class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Duyệt">
-                                                <i class="bi bi-check-circle"></i>
-                                            </a>
-                                        }
-                                        @if (Model[i].TrangThai == TrangThaiPhucKhao.DaDuyet)
-                                        {
-                                            <a href="@Url.Action("UploadBaiThi", "DonPhucKhao", new { maDon = Model[i].MaDon, area = "Admin" })"
-                                               class="btn-action btn-upload" data-bs-toggle="tooltip" data-bs-placement="top" title="Tải bài thi">
-                                                <i class="bi bi-upload"></i>
-                                            </a>
+                                            <form method="post" action="@Url.Action("Duyet", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })" style="display: inline;">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn-action btn-edit" data-bs-toggle="tooltip" data-bs-placement="top" title="Duyệt">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </button>
+                                            </form>
+                                            <form method="post" action="@Url.Action("TuChoi", "DonPhucKhao", new { id = Model[i].MaDon, area = "Admin" })" style="display: inline;">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn-action btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Từ chối">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </button>
+                                            </form>
                                         }
                                         @if (Model[i].TrangThai == TrangThaiPhucKhao.DaCham)
                                         {

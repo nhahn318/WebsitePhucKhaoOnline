@@ -1,60 +1,131 @@
 ﻿@model WebsitePhucKhao.ViewModels.DonPhucKhaoSauKhiChamViewModel
+@using WebsitePhucKhao.Enums
 
-<h2>Chi tiết đơn phúc khảo</h2>
-
-<table class="table table-bordered mt-4">
-    <tr>
-        <th>Mã đơn</th>
-        <td>@Model.MaDon</td>
-    </tr>
-    <tr>
-        <th>Ngày gửi</th>
-        <td>@Model.NgayGui.ToString("dd/MM/yyyy")</td>
-    </tr>
-    <tr>
-        <th>Trạng thái</th>
-        <td>@Model.TrangThai</td>
-    </tr>
-    <tr>
-        <th>Điểm trước phúc khảo</th>
-        <td>@Model.DiemHienTai</td>
-    </tr>
-    <tr>
-        <th>Điểm sau phúc khảo</th>
-        <td>@(Model.DiemSauPhucKhao.HasValue ? Model.DiemSauPhucKhao.ToString() : "Chưa có")</td>
-    </tr>
-    <tr>
-        <th>Nhận xét của giảng viên</th>
-        <td>@(string.IsNullOrWhiteSpace(Model.NhanXet) ? "Chưa có nhận xét" : Model.NhanXet)</td>
-    </tr>
-    <tr>
-        <th>Bài giải tay</th>
-        <td>
-            @if (!string.IsNullOrEmpty(Model.BaiGiaiTayUrl))
-            {
-                <a href="@Model.BaiGiaiTayUrl" target="_blank" class="btn btn-sm btn-primary">Xem bài</a>
-            }
-            else
-            {
-                <span>Chưa có bài giải tay</span>
-            }
-        </td>
-    </tr>
-</table>
-
-<h4>Ảnh bài thi của sinh viên:</h4>
-@if (Model.DanhSachAnh.Any())
-{
-    <div class="row">
-        @foreach (var anh in Model.DanhSachAnh)
-        {
-            <div class="col-md-4 mb-3">
-                <img src="@anh.DuongDanFile" class="img-fluid border" alt="Ảnh bài thi" />
-            </div>
-        }
-    </div>
+@{
+    ViewData["Title"] = "Chi tiết đơn phúc khảo sau khi chấm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-else
-{
-    <p>Không có ảnh bài thi được đính kèm.</p>
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="~/css/admin/details-page.css" rel="stylesheet" />
+}
+
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col">
+                    <h1 class="text-primary">@ViewData["Title"]</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card shadow-sm">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-file-alt me-2"></i>Thông tin đơn phúc khảo
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="detail-table">
+                        <tr>
+                            <th style="width: 25%;"><i class="fas fa-id-card me-2"></i>Mã đơn:</th>
+                            <td>@Model.MaDon</td>
+
+                            <th style="width: 25%;"><i class="fas fa-calendar-check me-2"></i>Ngày gửi:</th>
+                            <td>@Model.NgayGui.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-check-circle me-2"></i>Trạng thái:</th>
+                            <td>
+                                <span class="badge bg-@(Model.TrangThai == "Đã chấm" ? "success" : "warning")">
+                                    @Model.TrangThai
+                                </span>
+                            </td>
+
+                            <th><i class="fas fa-chart-line me-2"></i>Điểm trước phúc khảo:</th>
+                            <td>@Model.DiemHienTai</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-chart-line me-2"></i>Điểm sau phúc khảo:</th>
+                            <td class="@(Model.DiemSauPhucKhao.HasValue && Model.DiemSauPhucKhao > Model.DiemHienTai ? "text-success fw-bold" : "")">
+                                @(Model.DiemSauPhucKhao.HasValue ? Model.DiemSauPhucKhao.ToString() : "Chưa có")
+                            </td>
+
+                            <th><i class="fas fa-comment me-2"></i>Nhận xét của giảng viên:</th>
+                            <td>@(string.IsNullOrWhiteSpace(Model.NhanXet) ? "Chưa có nhận xét" : Model.NhanXet)</td>
+                        </tr>
+                        <tr>
+                            <th><i class="fas fa-file-pdf me-2"></i>Bài giải tay:</th>
+                            <td colspan="3">
+                                @if (!string.IsNullOrEmpty(Model.BaiGiaiTayUrl))
+                                {
+                                    <a href="@Model.BaiGiaiTayUrl" target="_blank" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-file-pdf me-1"></i> Xem bài
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Chưa có bài giải tay</span>
+                                }
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-gradient-info text-white">
+                    <h3 class="card-title">
+                        <i class="fas fa-images me-2"></i>Ảnh bài thi của sinh viên
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.DanhSachAnh.Any())
+                    {
+                        <div class="row g-4">
+                            @foreach (var anh in Model.DanhSachAnh)
+                            {
+                                <div class="col-md-4">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body p-0">
+                                            <img src="@anh.DuongDanFile" class="img-fluid rounded-top" alt="Ảnh bài thi" />
+                                            <div class="p-3">
+                                                <p class="text-muted mb-0">
+                                                    <i class="far fa-clock me-1"></i>
+                                                    @anh.NgayTaiLen.ToString("dd/MM/yyyy HH:mm")
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-5">
+                            <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                            <p class="text-muted mb-0">Không có ảnh bài thi được đính kèm</p>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <a href="@Url.Action("DanhSachChoDuyet", "DonPhucKhao", new { area = "Admin" })" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-2"></i> Quay lại danh sách chờ duyệt
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 }
