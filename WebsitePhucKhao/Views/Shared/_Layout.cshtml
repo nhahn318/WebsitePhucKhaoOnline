@@ -26,13 +26,7 @@
                             @if (User.IsInRole("Admin"))
                             {
                                 <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                                    <i class="fas fa-home me-1"></i>Trang chủ
-                                </a>
-                            }
-                            else
-                            {
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                    <i class="fas fa-home me-1"></i>Trang chủ
+                                    <i class="fas fa-home me-1"></i>Dashboard
                                 </a>
                             }
                         </li>
