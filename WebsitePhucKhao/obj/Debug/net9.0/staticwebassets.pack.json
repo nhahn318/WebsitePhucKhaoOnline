@@ -37,6 +37,10 @@
       "PackagePath": "staticwebassets\\bai-giai-tay\\2_image.jpg"
     },
     {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\2_mattrc.jpg",
+      "PackagePath": "staticwebassets\\bai-giai-tay\\2_mattrc.jpg"
+    },
+    {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\bai-giai-tay\\3_39_7r5ho.jpg",
       "PackagePath": "staticwebassets\\bai-giai-tay\\3_39_7r5ho.jpg"
     },
@@ -111,6 +115,10 @@
     {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin.js",
       "PackagePath": "staticwebassets\\js\\admin.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin\\add-page.js",
+      "PackagePath": "staticwebassets\\js\\admin\\add-page.js"
     },
     {
       "Id": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\wwwroot\\js\\admin\\dashboard.js",

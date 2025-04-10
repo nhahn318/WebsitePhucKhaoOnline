@@ -50,6 +50,8 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                     return View(nhanVien);
                 }
 
+                await _nhanVienRepository.AddAsync(nhanVien);
+
                 // Bước 2: Tạo tài khoản ứng với nhân viên
                 var user = new ApplicationUser
                 {
@@ -77,10 +79,8 @@ namespace WebsitePhucKhao.Areas.Admin.Controllers
                     await _userManager.AddToRoleAsync(user, "NhanVien");
                 }
 
-                return RedirectToAction(nameof(Index));
             }
-
-            return View(nhanVien);
+            return RedirectToAction(nameof(Index));
         }
 
 

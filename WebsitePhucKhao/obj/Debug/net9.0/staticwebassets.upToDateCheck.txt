@@ -22,6 +22,7 @@ C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\js\admin\add-page.js
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
 C:\Users\User\source\repos\WebsitePhucKhao\WebsitePhucKhaoOnline\WebsitePhucKhao\wwwroot\lib\jquery\dist\jquery.js
@@ -84,6 +85,7 @@ wwwroot\bai-giai-tay\1_matsau.jpg
 wwwroot\bai-giai-tay\1_z6434684645634_08a95d37e73fbaeda307cb036c89cde4.jpg
 wwwroot\bai-giai-tay\2_39_7r5ho.jpg
 wwwroot\bai-giai-tay\2_image.jpg
+wwwroot\bai-giai-tay\2_mattrc.jpg
 wwwroot\bai-giai-tay\2_TranThienNhan_2280602189_Diem.docx
 wwwroot\bai-giai-tay\3_39_7r5ho.jpg
 wwwroot\bai-giai-tay\3_tuduythietkedua.png
@@ -104,6 +106,7 @@ wwwroot\favicon.ico
 wwwroot\images\Logo.jpg
 wwwroot\images\Logo2.png
 wwwroot\js\admin.js
+wwwroot\js\admin\add-page.js
 wwwroot\js\admin\dashboard.js
 wwwroot\js\admin\index-khoa.js
 wwwroot\js\admin\index-listuser.js

@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nguyenhuynhnam/RiderProjects/WebsitePhucKhaoOnline/WebsitePhucKhao/WebsitePhucKhao.csproj": {}
+    "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {}
   },
   "projects": {
-    "/Users/nguyenhuynhnam/RiderProjects/WebsitePhucKhaoOnline/WebsitePhucKhao/WebsitePhucKhao.csproj": {
+    "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nguyenhuynhnam/RiderProjects/WebsitePhucKhaoOnline/WebsitePhucKhao/WebsitePhucKhao.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
         "projectName": "WebsitePhucKhao",
-        "projectPath": "/Users/nguyenhuynhnam/RiderProjects/WebsitePhucKhaoOnline/WebsitePhucKhao/WebsitePhucKhao.csproj",
-        "packagesPath": "/Users/nguyenhuynhnam/.nuget/packages/",
-        "outputPath": "/Users/nguyenhuynhnam/RiderProjects/WebsitePhucKhaoOnline/WebsitePhucKhao/obj/",
+        "projectPath": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\WebsitePhucKhao.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\WebsitePhucKhao\\WebsitePhucKhaoOnline\\WebsitePhucKhao\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/nguyenhuynhnam/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -94,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
